@@ -1,5 +1,7 @@
 from ast import Mod
+from django.http import HttpResponse
 from pyexpat import model
+from django.template import loader
 from django.shortcuts import render
 
 # Create your views here.
@@ -11,3 +13,27 @@ class MovieList (ListView):
     
 class MovieDetailView (DetailView):
     model = Movie
+
+def Home(request):
+  template = loader.get_template('.\Home\Home.html')
+  return HttpResponse(template.render())
+
+def Loading_Circle(request):
+  template = loader.get_template('.\Loading_Screen_Logo\loading_screen.html')
+  return HttpResponse(template.render())
+
+def Loading_Logo(request):
+  template = loader.get_template('.\Loading_Screen_Logo\sign_up.html')
+  return HttpResponse(template.render())
+
+def SignUp(request):
+  template = loader.get_template('.\SignUp_LogIn\SignUpFilm.html')
+  return HttpResponse(template.render())
+
+def LogIn(request):
+  template = loader.get_template('.\SignUp_LogIn\LogInFilm.html')
+  return HttpResponse(template.render())
+
+def Movies(request):
+  template = loader.get_template('.\Movies\movies.html')
+  return HttpResponse(template.render())

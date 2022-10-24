@@ -1,0 +1,43 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&display=swap");
+* {
+  box-sizing: border-box;
+  margin: 0; 
+  padding: 0;
+  font-family: Montserrat;
+  font-weight: 600;
+  font-size: 20px;
+}
+  body {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(18, 0, 0)
+  }
+  
+  .loader {
+    border: 5px solid #f3f3f3;
+    position:fixed;
+    left:46%;
+    border-radius: 50%;
+    border-top: 4px solid #3DD2CC;
+    width: 110px;
+    height: 110px;
+    animation: spin 2s linear infinite;
+  }
+  
+  .sign_up{
+    position:fixed;
+    width: 120px;
+    Height: 120px;
+    left: 45%;
+    right: 45.51%;
+    top: 40%;
+    bottom: 46%;
+    animation: spin 2s linear infinite;
+  }
+  /* tao animation */
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }

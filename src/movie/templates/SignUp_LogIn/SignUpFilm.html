@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+
+<html lang="en">
+    {% load static %}
+    <head>
+        <meta charset="UTF-8">
+        <title>SignUp | LTWFlix</title>
+        <link rel="stylesheet" href="{% static 'css/SignUp_LogIn/styleFilm.css' %}">
+    </head>
+
+    <body>
+        <div class="SignUp">
+            <div class="Left_SignUp">
+                <div class="BrandName">
+                    <img style="width: 150%;" src="{% static 'css/SignUp_LogIn/BrandName.png' %}">
+                </div>
+                <div class="Logo">
+                    <img style="width: 150%;" src="{% static 'css/SignUp_LogIn/Logo.png' %}">
+                </div>
+                <div class="Intro">
+                    <div class="Title">
+                        <p>Benefits of your free LTWFlix account</p>
+                    </div>
+                    <div class="Subtitle">
+                        <p style="text-transform:capitalize;">Personalized Recommandations</p>
+                    </div>
+                    <div class="Text">
+                        <p>Discover shows you'll love.</p>
+                    </div>
+                    <div class="Subtitle">
+                        <p style="text-transform:capitalize;">Your Ratings</p>
+                    </div>
+                    <div class="Text">
+                        <p>Rate and remember every thing you've seen.</p>
+                    </div>
+                    <div class="Subtitle">
+                        <p style="text-transform:capitalize;">Contribute to LTWFlix</p>
+                    </div>
+                    <div class="Text">
+                        <p>Add data that will be seen by millions of people and get cool badges.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="Right_SignUp">
+                <div class="Title">
+                    <p>Create an account</p>
+                </div>
+                <div class="Subtitle1">
+                    <p style="color: #BABABAB2;">Let's get started with your 30 days free trial</p>
+                </div>
+                <div class="Input">
+                    <p>
+                        <Label class="bold" style="margin-right: 3cm;">Name:</Label>
+                        <input class="Input_box" type="name" name="name" id="id_name" placeholder="Your Name">
+                    </p>
+                    <p>
+                        <Label class="bold" style="margin-right: 3.1cm;">Email:</Label>
+                        <input class="Input_box" type="email" name="email" id="id_email" placeholder="Your Email">
+                    </p>
+                    <p>
+                        <Label class="bold" style="margin-right: 2.5cm;">Password:</Label>
+                        <input class="Input_box" type="password" name="password1" id="id_password1" placeholder="Password"></li>
+                    </p>
+                    <p>
+                        <Label class="bold" style="margin-right: 1cm;">Confirm password:</Label>
+                        <input class="Input_box" type="password" name="password2" id="id_password2" placeholder="Comfirm Password"></li>
+                    </p>
+                </div>
+                <div class="Button">
+                    <button class="CreateButton">Create account</button>
+                    <button class="SignUpWithGoogleButton">Sign up with Google</button>
+                </div>
+                <div class="Subtitle2">
+                    <p style="color: #BABABAD9;">
+                        Already have an account? <a href="{% url 'log_in' %}" style="color:#FEFEFE"> Log In</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

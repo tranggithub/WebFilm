@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Trailer_Detail | LTWFlix</title>
+        <link rel="stylesheet" href="Trailer_Detail.css">
+        
+    </head>
+    <body>
+        <div class="Container">
+            <div class="left">
+                <img id="brandname" src="./image/icon/BrandNameLogin.png" >
+                <div class="button">
+                    <ul>
+                        <li><a href="Home.html"><img src="./image/icon/icons8-home-48.png" alt="home"><label>Home</label></a></li>
+                        <li><a id="main" href="Movies.html"><img src="./image/icon/icons8-movie-projector-48.png" alt="movies"><label>Movies</label></a></li>
+                        <li><a href="Series.html"><img src="./image/icon/icons8-tv-show-48.png" alt="series"><label>TV Series</label></a></li>
+                        <li><a href="Upcoming.html"><img src="./image/icon/icons8-calendar-48.png" alt="upcoming"><label>Upcoming</label></a></li>
+
+                    </ul>
+                </div>
+                <div class="logout">
+                    <a href="SignUp+LogIn/LoginFilm.html"><img src="./image/icon/icons8-logout-48.png" alt="logout"><label>Logout</label></a>
+                </div>
+            </div>
+            <div class="center">
+                <div class="top">
+                    <button class="bell" type="button" onclick="notification()">
+                        <img src="./image/icon/icons8-bell-30.png">
+                    </button>
+                    <button class="user" type="button" onclick="user()">
+                        <img src="./image/user.png">
+                    </button>
+                    <div class="top_left">
+                        <form method="GET" id="from-search" action="https://movie.HD/search/" style="width:auto">
+                            <div class="search">
+                                <img src="./image/icon/icons8-search-30.png">
+                                <input class="keyword" type="text" name="keyword" placeholder="Search for movies, TV show..." value >
+                            </div>
+                            <div style="display: none;" id="suggestions" class="top-search-box"></div>
+                        </form>
+                    </div>
+                </div>
+                <div class="trailer_vid" >
+                    <div class="vid">
+                        <div class="play">
+                            <button class="playbt" type="button" onclick="playPause()">
+                                <img src="./image/icon/icons8-play-48.png">
+                            </button>
+                            <img class="play_img" src="./image/trailer.jfif" alt="play">
+                        </div>
+                        <br><br>
+                        <!--<video id="video" width="600px" controls>
+                            <source src="./vid/vid.mp4" type="video/mp4">
+                            Your browser doesn't support html video.
+                        </video>-->
+                        
+                    </div>
+                    <script>
+                            var myVideo=document.getElementById("video");
+
+                            function playPause(){
+                                if(myVideo.paused)
+                                    myVideo.play();
+                                else myVideo.pause();
+                                
+                            }
+                    </script>
+                </div>
+                <div class="body_center">
+                    <div class="Detail_movies">
+                        <div class="title_movies">
+                            <h5>
+                                <ul>
+                                    <li id="first_ele">Top Gun: Maverick</li>
+                                    <li>2022</li>
+                                    <li>PG-13</li>
+                                    <li>2h10m</li>
+                                </ul>
+                            </h5>
+                            <h6 style="font-size:10px;color:aliceblue">
+                                <label>Action</label>
+                                <label>Drama</label>
+                           </h6>
+                           <p style="font-size:12px; margin-bottom:10px;">
+                               <br>After thrity years, Maverick is still pushing the envelope as a top naval aviator,
+                               but must confront<br> ghosts of his past when he leads TOP GUN's elite graduates
+                               on a mission that demands the<br> ultimate sacrifice from those chosen to fly it.
+                           </p>
+                        </div>
+                        <div class="info">  <!--Thông tin đạo diễn, diễn viên-->
+                            <hr>
+                            <p>Director : Joseph Kosinski</p>
+                            <hr>
+                            <p>Writers : Jim Cash, Jack Epps Jr, Peter Craig</p>
+                            <hr>
+                            <p>Stars : Tom Cruise, Jennifer Connelly, Miles Teller</p>
+                            <hr>
+                            <button class="rate_button" type="button" onclick="topRate()">Top rated movie #65</button>
+                            <select>
+                                <option>Awards 9 nominations</option>
+                                <option>hi</option>
+                                <option>top 3</option>
+                                <option>Top 1</option>
+                            </select>
+                        </div>
+                        <div class="info_characters">  <!--Thôgn tin chi tiết dv-->
+                            <h4>Top Cast</h4>
+                            <ul>
+                                <li><img src="./image/tomcruise.webp" alt="Tom Cruise">
+                                    <b><br>Tom Cruise</b><br>Capt. Pete Mitchell<br> (Maverick)
+                                </li>
+                                <li><img src="./image/jennifer.jpg" alt="Jennifer Connelly">
+                                    <b><br>Jennifer Connelly</b><br>Penny Benjamin
+                                </li>
+                                <li><img src="./image/miliies.webp" alt="Millies Teller">
+                                    <b><br>Millies Teller</b><br>Lt. Bradley Bradshow<br>(Rooster)
+                                </li>
+                                <li><img src="./image/vai.jpg" alt="Vai Kilmer">
+                                    <b><br>Vai Kilmer</b><br>Adm. Tom Kazansky<br>(Iceman)
+                                </li>
+                            </ul>
+                            <br>
+                        </div>
+                        <div class="info_movies">
+                            <hr>
+                            <h4>
+                                All cast & crew
+                            </h4>
+                            <hr>
+                            <img src="./image/movie.jpg" alt="movie" >
+                            <h4 style="margin-top:15px;">
+                                    'Top Gun' Trivia, Facts, and Figures
+                            </h4>
+                            <p>
+                                How exensive was Top Gun to make? In this <br>epsoide of 'By the Numbers', we
+                                break down<br> all the statistics you need to know (and<br> some you don't) of the
+                                original '80s classic<br> 'Top Gun.'
+                            </p>
+                            <a href="moreinfo">Learn more</a>
+                        </div>
+                        <div class="similar_movies">
+                            <h4>Similar Movies</h4>
+                            <a href="similars_movies.html">See all</a>
+                            <div class="similar">
+                                <ul>
+                                    <li>
+                                        <button class="movie_button" type="button" onclick="Top_Gun2()">
+                                            <img src="./image/Top_Gun2.jpg" alt="Top Gun 2">
+                                        </button>
+                                    </li>
+                                    <li>
+                                        <button class="movie_button" type="button" onclick="Bat_Man()">
+                                            <img src="./image/batman.jpg" alt="Bat Man">
+                                        </button>
+                                    </li>
+                                    <li>
+                                        <button class="movie_button" type="button" onclick="Spiderman()">
+                                            <img src="./image/spiderman.jpg" alt="Spiderman">
+                                        </button>
+                                    </li>
+                                    <li>
+                                        <button class="movie_button" type="button" onclick="Docter_Strange()">
+                                            <img src="./image/docter_strange.jpg" alt="Docter Strange">
+                                        </button>
+                                    </li>
+                                </ul>
+                                
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="body_right">
+                    <div class="fav">
+                        <ul>
+                            <li><button class="favbt" id="heart"type="button" onclick="favMovies()">
+                                <img src="./image/icon/icons8-heart-24.png">
+                            </button>
+                            </li>
+                            <li>
+                                <button class="favbt" type="button" onclick="share()">
+                                    <img src="./image/icon/icons8-share-24.png">
+                                </button>
+                            </li>
+                            <li>
+                                <button class="favbt" type="button" onclick="bookmark()">
+                                    <img src="./image/icon/icons8-bookmark-24.png">
+                                </button>
+                            </li>
+                            <li>
+                                <button class="favbt" type="button">
+                                    <img src="./image/icon/icons8-star-24.png">
+                                    
+                                </button>
+                            </li>
+                            <li>
+                                <label >8.5 | <span style="color:#534d4d;font-size:12px;">350k</span></label>
+                            </li>
+                        </ul>
+                        
+                    </div>
+                    <div class="more_options">
+                        <ul>
+                            <li id="more">
+                                <a  href="Movies.html">
+                                    <img src="./image/icon/more_option.png">
+                                    <label>More watch options</label></a>
+                            </li>
+                            <li>
+                                <button class="morebt" type="button" onclick="bestMovie()">
+                                    <img class="button_img" src="./image/best_movies.jpg" alt="best movie">
+                                    <div class="best-div">
+                                        <img src="./image/icon/more_option.png">
+                                        <label>The Best Movies and Shows in September</label>
+                                    </div>
+                                </button>
+                            </li>
+                            <li id="news">
+                                <a href="News.html">
+                                    <div>
+                                        <img src="./image/news.jpg" alt="news" >
+                                        <label>The Billion-Dollar Film Club: 50 Movies to Reach $1 Billion Worldwide</label>
+                                    </div>
+                                    <p>Updated 1 week ago </p>
+                                </a>
+                            </li>
+                            <li id="news">
+                                <a href="NewMovies.html">
+                                    <div style="margin-bottom:40px;">
+                                        <img src="./image/news-movies.jpg" alt="news movie" style="margin-left:55px">
+                                        <label>2022 Summer Move Guide</label>
+                                    </div>
+                                    <p>Updated 1 month ago </p>
+                                </a>
+                            </li>
+                            <li id="news">
+                                <a href="Upcoming.html">
+                                    <div style="margin-bottom:20px;">
+                                        <img src="./image/upcoming.jpg" alt="upcoming action" style="margin-left:18px;">
+                                        <label>Upcoming Action and Adventure<br> Movies and TV</label>
+                                    </div>
+                                    <p>Updated 3 months ago</p>
+                                </a>
+                            </li>
+                            <li id="top50">
+                                <button class="morebt" type="button" onclick="top50()">
+                                    <img class="button_img" src="./image/top50.jpg" alt="Top 50 TV Dramas"">
+                                    <div class="best-div">
+                                        <img src="./image/icon/more_option.png">
+                                        <label>Top 50 TV Dramas</label>
+                                    </div>
+                                </button>
+                            </li>
+                            <li id>
+                                <button class="morebt" type="button" onclick="newupcoming()">
+                                    <img class="button_img" src="./image/new-upcoming.jpg" alt="new and upcoming">
+                                    <div class="best-div">
+                                        <img src="./image/icon/more_option.png">
+                                        <label>New & Upcoming Sequels, Requels</label>
+                                    </div>
+                                </button>
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    
+                </div>
+                
+            </div>
+        </div>
+    </body>
+</html>
+

@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="utf-8" />
+ <link rel="stylesheet" href="css/style.css" />
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
+ <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700&display=swap" rel="stylesheet">
+ <title>Movie | LTWFlix</title>
+ </head>
+ <body>
+    <div class="app__container">
+        <div class="grid">
+          <div class="grid__row">
+            <div class="grid__column-2">
+                <nav class="category">
+                    <h3 class="category__heading_Movibies">
+                        <img src="css/Logo/Vector.png" alt="" />
+                 
+                    </h3>
+                </nav>
+                <!-- <nav class="category">
+                    <h3 class="category__heading">
+                        <i class="fas fa-home fa-icon"></i> Home
+                    </h3>
+                </nav>
+                <nav class="category">
+                    <h3 class="category__heading category__heading__active ">
+                        <i class="fas fa-video fa-icon "></i> Movies
+                    </h3>
+                </nav>
+                <nav class="category">
+                    <h3 class="category__heading">
+                        <i class="fab fa-youtube fa-icon "></i> TV Series
+                    </h3>
+                </nav>
+                <nav class="category">
+                    <h3 class="category__heading">
+                        <i class="fas fa-calendar-alt fa-icon"></i> Upcoming
+                    </h3>
+                </nav> -->
+                <div class="button">
+                    <ul>
+                        <li><a href="Home.html"><i class="fas fa-home fa-icon"></i><label>Home</label></a></li>
+                        <li><a id="main" href="Movies.html"> <i class="fas fa-video fa-icon "></i><label>Movies</label></a></li>
+                        <li><a href="Series.html"><i class="fas fa-tv fa-icon"></i><label>TV Series</label></a></li>
+                        <li><a href="Upcoming.html"><i class="fas fa-calendar-alt fa-icon"></i><label>Upcoming</label></a></li>
+
+                    </ul>
+                </div>
+               
+                <!-- <div class="container_quiz">
+                    <div class="quiz_heading">Play movie quizes
+                        and earn
+                        free tickets</div>
+                    <div class="quiz__note"> 50k people are playing now
+                          </div>
+                    <button class="button__start" >Start playing</button>
+                </div> -->
+                <!-- <div class="log__out">
+                    <i class="fas fa-sign-out-alt"></i> Log out
+                </div> -->
+                <div class="logout">
+                    <a href="SignUp+LogIn/LoginFilm.html"><i class="fas fa-sign-out-alt fa-icon"></i><label>Logout</label></a>
+                </div>
+
+            </div>
+            <div class="grid__column-8">        
+                <div class="container__search">                    
+                    <div class="text__search">
+                        <i class="fas fa-search"></i>
+                        <input class="keyword" type="text" name="keyword" placeholder="Search for movies, TV show..." value ></div>
+                        <div style="display: none;" id="suggestions" class="top-search-box"></div>
+                </div>
+                <div class="grid__row-4">
+                    <button class="column__movie">   
+                        <img src="css/Logo/Rectangle 17.png" alt="" />                 
+                    </button>
+                    <button class="column__movie">
+                    <img src="css/Logo/Rectangle 18.png" alt="" />  
+                    </button> 
+                    <button class="column__movie">
+                        <img src="css/Logo/Rectangle 19.png" alt="" />  
+                    </button>
+                    <button class="column__movie">
+                        <img src="css/Logo/Rectangle 20.png" alt="" />  
+                    </button>
+                </div>
+                <div class="grid__row-4-Body">
+                    <div class="Head__Up">Upcoming</div>
+                    <a class="Head__See" href="Upcoming.html">See all</a>
+                </div>  
+                <div class="grid__row-4">
+                    <button class="column__movie">   
+                        <img src="css/Logo/Rectangle 21.png" alt="" />                 
+                    </button>
+                    <button class="column__movie">
+                    <img src="css/Logo/Rectangle 22.png" alt="" />  
+                    </button> 
+                    <button class="column__movie">
+                        <img src="css/Logo/Rectangle 24.png" alt="" />  
+                    </button>
+                    <button class="column__movie">
+                        <img src="css/Logo/Rectangle 25.png" alt="" />  
+                    </button>
+                </div>   
+                <div class="grid__row-4-Body">
+                    <div class="Head__Up">TV Series</div>
+                    <a class="Head__See" href="TVSeries.html">See all</a>
+                </div>  
+                <div class="grid__row-4">
+                    <button class="column__movie">   
+                        <img src="css/Logo/Rectangle 17.png" alt="" />                 
+                    </button>
+                    <button class="column__movie">
+                    <img src="css/Logo/Rectangle 18.png" alt="" />  
+                    </button> 
+                    <button class="column__movie">
+                        <img src="css/Logo/Rectangle 19.png" alt="" />  
+                    </button>
+                    <button class="column__movie">
+                        <img src="css/Logo/Rectangle 20.png" alt="" />  
+                    </button>
+                </div>   
+                <div class="grid__row-4-Body">
+                    <div class="Head__Poplular">Popular movies on september</div>
+                    <a class="Head__See" href="Popular.html">See all</a>
+                </div>  
+                <div class="grid__row-4">
+                    <button class="column__movie">   
+                        <img src="css/Logo/Rectangle 21.png" alt="" />                 
+                    </button>
+                    <button class="column__movie">
+                    <img src="css/Logo/Rectangle 22.png" alt="" />  
+                    </button> 
+                    <button class="column__movie">
+                        <img src="css/Logo/Rectangle 24.png" alt="" />  
+                    </button>
+                    <button class="column__movie">
+                        <img src="css/Logo/Rectangle 25.png" alt="" />  
+                    </button>
+                </div>   
+            </div>
+            <div class="grid__column-2-right">
+                <div class="grid__row-4">
+                    <button class="button__Notifi"type="button" onclick="user()"><i class="far fa-bell"></i></button>
+                    <button class="button__User" type="button" onclick="user()"><img src="./css//Logo/User.jpg"></button>
+                </div>
+                <div class="grid__row-4__grid-Check">
+                    <div class="grid__column-List">Categories</div>  
+                    <div class="grid__column-Check">Uncheck all</div>                    
+                </div>
+                <div class="container__Check">      
+                    <div class="Check">          
+                        <div class="text__Check"> Action</div>
+                        <input type="checkbox" name="vehicle1" value="Action">
+                    </div>    
+                       
+                        <hr class="hr_h">
+                        <div class="Check">          
+                            <div class="text__Check"> Adventure</div>
+                            <input type="checkbox" name="vehicle1" value="Action">
+                        </div>
+                        <hr class="hr_h">
+                        <div class="Check">          
+                            <div class="text__Check"> Animated</div>
+                            <input type="checkbox" name="vehicle1" value="Action">
+                        </div>
+                        <hr class="hr_h">
+                        <div class="Check">          
+                            <div class="text__Check"> Comedy</div>
+                            <input type="checkbox" name="vehicle1" value="Action">
+                        </div>
+                            <hr class="hr_h">
+                            <div class="Check">          
+                                <div class="text__Check"> Crime</div>
+                                <input type="checkbox" name="vehicle1" value="Action">
+                            </div>
+                            <hr class="hr_h">
+                            <div class="Check">          
+                                <div class="text__Check"> Fantasy</div>
+                                <input type="checkbox" name="vehicle1" value="Action">
+                            </div>
+                            <hr class="hr_h">
+                            <div class="text__More">See more</div>
+
+                </div>
+                <div class="grid__row-4__grid-Check">
+                    <div class="grid__column-List">Services</div>  
+                    <div class="grid__column-Check">Uncheck all</div>                    
+                </div>
+                <div class="container__Check">      
+                    <div class="Check">          
+                        <div class="text__Check"> Netflix</div>
+                        <input type="checkbox" name="vehicle1" value="Action">
+                    </div>    
+                       
+                        <hr class="hr_h">
+                        <div class="Check">          
+                            <div class="text__Check"> Prime video</div>
+                            <input type="checkbox" name="vehicle1" value="Action">
+                        </div>
+                        <hr class="hr_h">
+                        <div class="Check">          
+                            <div class="text__Check"> Disney +</div>
+                            <input type="checkbox" name="vehicle1" value="Action">
+                        </div>
+                        <hr class="hr_h">
+                        <div class="Check">          
+                            <div class="text__Check"> HBO max</div>
+                            <input type="checkbox" name="vehicle1" value="Action">
+                        </div>
+                            <hr class="hr_h">
+                            <div class="Check">          
+                                <div class="text__Check"> Hulu</div>
+                                <input type="checkbox" name="vehicle1" value="Action">
+                            </div>
+                            <hr class="hr_h">
+                            <div class="Check">          
+                                <div class="text__Check"> Starz</div>
+                                <input type="checkbox" name="vehicle1" value="Action">
+                            </div>
+                            <hr class="hr_h">
+                            <div class="text__More">See more</div>
+
+                </div>
+               
+               
+
+                
+
+            </div>
+        </div>
+    </div>
+    </div>
+ </body>
+</html>

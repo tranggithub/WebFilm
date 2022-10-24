@@ -1,0 +1,605 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&display=swap");
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Montserrat', sans-serif;
+    background: none;
+}
+.Title
+{
+    padding-bottom: 5%;
+}
+.Subtitle
+{
+    font-weight: 600;
+    font-size: 80%;
+    line-height: 48px;
+}
+.Text
+{
+    font-weight: 500;
+    font-size: 50%;
+    line-height: 0;
+    margin-bottom: 30px;
+}
+
+/*Sign Up Left*/
+
+.SignUp .Left_SignUp
+{
+    position: absolute;
+    left: 0%;
+    right: 34.13%;
+    top: 0%;
+    bottom: 0%;
+    
+    background: url("{% static 'css/SignUp_LogIn/avatar.jpg' %}");
+    background-size:cover;
+    background-repeat: no-repeat;
+    backdrop-filter: blur(3px);
+
+}
+
+
+.SignUp .Left_SignUp .Intro
+{
+    position: absolute;
+    width: 100%;
+    height: 313px;
+    left: 57px;
+    top: 40%;
+
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 24px;
+    line-height: 48px;
+
+    color: #FEFEFE;
+
+    text-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
+}
+
+.SignUp .Left_SignUp .Logo
+{
+    position: absolute;
+    left: 4.36%;
+    right: 93.15%;
+    top: 4.85%;
+    bottom: 91.55%;
+
+    
+    filter: drop-shadow(0px 2px 6px rgba(25, 25, 25, 0.25));
+}
+.SignUp .Left_SignUp .BrandName
+{
+    position: absolute;
+    left: 8.44%;
+    right: 86.78%;
+    top: 5.65%;
+    bottom: 91.44%;
+}
+
+/*Sign Up Right*/
+
+.SignUp .Right_SignUp
+{
+    position: absolute;
+    left: 65.87%;
+    right: 0%;
+    top: 0%;
+    bottom: 0%;
+
+    object-fit: fill;
+    background: black;
+    backdrop-filter: blur(3px);
+}
+
+.Right_SignUp .Title
+{
+    position: absolute;
+    left: 0%;
+    right: 0%;
+    top: 12%;
+    bottom: 77.19%;
+
+    font-family: Montserrat;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 150%;
+    line-height: 52px;
+    /* identical to box height */
+
+    text-align: center;
+    color: #FEFEFE;
+}
+
+.Right_SignUp .Subtitle1
+{
+    /* Let’s get started with your 30 days free trial. */
+    position: absolute;
+    left: 0%;
+    right: 0%;
+    top: 21%;
+    bottom: 74.24%;
+
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 90%;
+    line-height: 28px;
+    /* identical to box height */
+
+    color: rgba(186, 186, 186, 0.7);
+
+    text-align: center;
+}
+
+.Right_SignUp .Input
+{
+    position: absolute;
+
+    left: 1%;
+    right: 1%;
+    top: 30%;
+
+    text-align: center;
+    /* identical to box height */
+
+    color: #BABABA;
+}
+
+
+input
+{
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 80%;
+    line-height: 30px;
+}
+
+.Input .bold
+{
+    font-weight: 500;
+    font-size: 80%;
+}
+
+.Right_SignUp .CreateButton
+{
+    position: absolute;
+    height: 8%;
+    left: 21%;
+    top: 65%;
+
+    background: rgba(254, 254, 254, 0.96);
+    border-radius: 15px;
+
+    width: 60%;
+    font-weight: 600;
+    font-size: 90%;
+
+    object-position: center;
+}
+.Right_SignUp .CreateButton:hover
+{
+    background-color: black;
+    color: white;
+    border-color: white;
+}
+.Right_SignUp .SignUpWithGoogleButton
+{
+    box-sizing: border-box;
+
+    position: absolute;
+    width: 60%;
+    height: 8%;
+    left: 21%;
+    top: 75%;
+    color: rgba(186, 186, 186, 0.85);
+    border: 1px solid #4D4B4B;
+    border-radius: 15px;
+
+    font-weight: 600;
+    font-size: 90%;
+}
+.Right_SignUp .SignUpWithGoogleButton:hover
+{
+    background-color: white;
+    color: black;
+    border: 2px solid #4D4B4B;
+}
+.Right_SignUp .Subtitle2
+{
+    /* Already have an account ? Log in */
+    position: absolute;
+    width: fit-content;
+    height: 21px;
+    top: 85%;
+    left: 28%;
+
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 21px;
+    /* identical to box height */
+}
+
+.Input_box
+{
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    font-family:'Montserrat';
+    margin-bottom: 0.5cm;
+    color: #BABABA;
+}
+
+/*Login Left*/
+.Login .Login_Left
+{
+    background: black;
+    position: absolute;
+    left: 0%;
+    right: 50%;
+    top: 0%;
+    bottom: 0%;
+
+    background: black;
+}
+.Login .Logo_Login
+{
+    position: absolute;
+    left: 4.1%;
+    right: 93.56%;
+    top: 5%;
+    bottom: 91.55%;
+
+
+    filter: drop-shadow(0px 2px 6px rgba(61, 210, 204, 0.45));
+}
+
+.Login .BrandName_Login
+{
+    position: absolute;
+    left: 10%;
+    right: 86.7%;
+    top: 6%;
+    bottom: 91.44%;
+}
+
+.Login .Login_Left .Title
+{
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 15%;
+    bottom: 72.3%;
+    text-align: center;
+    
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 150%;
+    line-height: 52px;
+    /* identical to box height */
+
+
+    color: #FEFEFE;
+}
+
+.Login .Login_Left .Subtitle
+{
+    /* Welcome back! Please enter your details. */
+    position: absolute;
+    left: 0;
+    right: 0;
+    text-align: center;
+    top: 21.62%;
+    bottom: 68.43%;
+
+    margin: 5px;
+
+    font-family: Montserrat;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 90%;
+    line-height: 28px;
+    /* identical to box height */
+
+    color: rgba(186, 186, 186, 0.7);
+    }
+
+.Login .Login_Left .LoginWithGoogle
+{
+    /* Rectangle 3 */
+    box-sizing: border-box;
+    
+    position: absolute;
+    width: 45%;
+    height: 8%;
+
+    border: 1px solid #4D4B4B;
+    border-radius: 20px;
+    
+    /* Log in with Google */
+
+    left: 28%;
+    top: 32%;
+
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 100%;
+    line-height: 30px;
+    /* identical to box height */
+    color: #FEFEFE;
+
+    cursor:pointer;
+}
+.Login .Login_Left .LoginWithGoogle:hover
+{
+    color: black;
+    background-color: #4D4B4B;
+}
+.Login .Login_Left .line-1
+{
+    position: absolute;
+    width: 15%;
+    height: 0px;
+    top: 45%;
+
+    border: 1px solid #4D4B4B;
+}
+
+.Login .Login_Left .or
+{
+    /* or */
+    position: absolute;
+    width: 21px;
+    height: 30px;
+    left: 49.85%;
+    top: 42%;
+
+    font-family: Montserrat;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 80%;
+    line-height: 30px;
+    /* identical to box height */
+
+    color: #BABABA;
+}
+
+.Login .Login_Left .Input
+{
+    position: absolute;
+    width: 500px;
+    height: 0px;
+    left: 29%;
+    top: 50%;
+}
+
+.Login .Login_Left .bold
+{
+    color: #BABABA;
+}
+
+.Login .Login_Left .Checkbox_content
+{
+    box-sizing:border-box;
+
+    position: absolute;
+    width: 14px;
+    height: 16px;
+    left: 29%;
+    top: 66%;
+    
+    border-radius: 4px;
+}
+
+.Checkbox_content .content
+{
+    position: absolute;
+    width: 187px;
+    height: 21px;
+    left: 20px;
+    top: 0px;
+
+    font-family: Montserrat;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 60%;
+    line-height: 21px;
+    /* identical to box height */
+
+
+    color: rgba(254, 254, 254, 0.5);
+}
+
+.Login .Login_Left .Forgot_password
+{
+    /* Forgot password */
+    position: absolute;
+    width: 118px;
+    height: 21px;
+    left: 57.7%;
+    top: 66%;
+
+    font-family: Montserrat;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 10px;
+    line-height: 21px;
+    /* identical to box height */
+
+    text-decoration-line: underline;
+
+    color: #FEFEFE;
+}
+
+.Login .Login_Left .LoginButton
+{
+    position: absolute;
+    width: 40%;
+    height: 8%;
+    left: 30%;
+    top: 70%;
+
+    background: rgba(254, 254, 254, 0.96);
+    border-radius: 15px;
+
+    font-family: Montserrat;
+    font-weight: 600;
+    font-size: 15px;
+
+    cursor: pointer;
+}
+
+.Login .Login_Left .LoginButton:hover
+{
+    background: #4D4B4B;
+    color: white;
+}
+.Login .Login_Left .NoAccount
+{
+    /* Don’t have an account ? Sign up for free */
+    position: absolute;
+    width: 285px;
+    height: 21px;
+    left: 33.5%;
+    top: 80%;
+
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 10px;
+    line-height: 21px;
+    /* identical to box height */
+
+
+    color: rgba(186, 186, 186, 0.85);
+}
+
+/*Login right*/
+
+.Login .Login_Right
+{
+    position: absolute;
+    left: 50%;
+    right: 0%;
+    top: 0%;
+    bottom: 0%;
+
+    background: url(TopGun.jpg);
+    background-size: cover;
+}
+
+.Login .Login_Right .Title
+{
+    /* Top Gun: Maverick */
+    position: absolute;
+    width: 400px;
+    height: 60px;
+    left: 1%;
+    top: 75%;
+
+    font-family: 'Monterrat';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 25px;
+    line-height: 60px;
+    /* identical to box height */
+
+    color: #FEFEFE;
+
+    text-shadow: 0px 1px 4px rgba(0, 0, 0, 0.25);
+
+}
+
+.Login .Login_Right .Subtitle
+{
+    position: absolute;
+    width: 300px;
+    height: 36px;
+    left: 1%;
+    top: 85%;
+
+    font-family: 'Monterrat';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 15px;
+    line-height: 10px;
+    /* identical to box height */
+
+    color: #FEFEFE;
+
+    text-shadow: 0px 1px 4px rgba(0, 0, 0, 0.25);
+
+}
+.Login .Login_Right .star
+{
+    position: absolute;
+    width: 5px;
+    height: 5px;
+    left: 80%;
+    top: 80%;
+
+    background: url(Star.png);
+    filter: drop-shadow(0px 1px 4px rgba(0, 0, 0, 0.25));
+}
+.Login .Login_Right .Rating
+{
+    position: absolute;
+    width: 100px;
+    height: 27px;
+    left: 85%;
+    top: 80%;
+
+    font-family: Monterrat;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 13px;
+    line-height: 27px;
+    /* identical to box height */
+
+
+    color: #FEFEFE;
+
+    text-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
+}
+
+.Login .Login_Right .Navigation_Left
+{
+    position: absolute;
+    width: 80px;
+    height: 70px;
+    left: 75%;
+    top: 85%;
+
+    cursor: pointer;
+
+    background: url(LeftArrow.png);
+    filter: drop-shadow(0px 1px 4px rgba(0, 0, 0, 0.25));
+    border-color: transparent;
+    
+}
+
+.Login .Login_Right .Navigation_Right
+{
+    position: absolute;
+    width: 80px;
+    height: 70px;
+    left: 85%;
+    top: 85%;
+
+    cursor: pointer;
+
+    background: url(RightArrow.png);
+    filter: drop-shadow(0px 1px 4px rgba(0, 0, 0, 0.25));
+    border-color: transparent;
+    
+}

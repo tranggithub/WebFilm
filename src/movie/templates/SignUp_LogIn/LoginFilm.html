@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+    {% load static %}
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>LogIn | LTWFlix</title>
+        <link rel="stylesheet" href="{% static 'css/SignUp_LogIn/styleFilm.css' %}">
+    </head>
+    <body>
+        <div class="Login">
+            <div class="Login_Left">
+                <div class="Logo_Login">
+                    <img  style="width: 39px;" src="{% static 'css/SignUp_LogIn/LogoLogIn.png' %}">
+                </div>
+                <div class="BrandName_Login">
+                    <img style="width: 75px;" src="{% static 'css/SignUp_LogIn/BrandNameLogin.png' %}">
+                </div>
+                <div class="Title">
+                    <p>Welcome back</p>
+                </div>
+                <div class="Subtitle">
+                    <p>Welcome back! Please enter your details.</p>
+                </div>
+                <button class="LoginWithGoogle">Login with Google</button>
+                <div class="line-1" style="left: 29%;"></div>
+                <div class="line-1" style="left: 57%;"></div>
+                <div class="or">or</div>
+                <div class="Input">
+                    <p>
+                        <Label class="bold" style="margin-right: 1.86cm;">Email:</Label>
+                        <input class="Input_box" type="email" name="email" id="id_email" placeholder="Your Email">
+                    </p>
+                    <p>
+                        <Label class="bold" style="margin-right: 1.19cm;">Password:</Label>
+                        <input class="Input_box" type="password" name="password1" id="id_password1" placeholder="Password"></li>
+                    </p>
+                </div>
+                <div class="Checkbox_content">
+                    <input type="checkbox" class="Checkbox">
+                    <p class="content">Remember me for 30 days</p>
+                </div>
+                <div class="Forgot_password">
+                    <a href="">Forgot password</a>
+                </div>
+                <button class="LoginButton">Log in</button>
+                <div class="NoAccount">
+                    <p>Don’t have an account ? <a href="{% url 'sign_up' %}" class="hyperlink">Sign up for free</a></p>
+                </div>
+            </div>
+
+            <div class="Login_Right">
+                <div class="Title">
+                    <p>Top Gun: Maverick</p>
+                </div>
+                <div class="Subtitle">
+                    <p>2022 | PG-13 | 2h 10m</p>
+                    <p style="margin-top: 1cm;">Genres : Action , Drama</p>
+                </div>
+                <div  class="star"><img src="{% static 'css/SignUp_LogIn/Star.png' %}"> </div>
+                <div class="Rating">
+                    <p>8.5 / 10</p>
+                </div>
+                <div class="Navigation">
+                    <button class="Navigation_Left"><a href=""></a></button>
+                    <button class="Navigation_Right"><a href=""></a></button>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
