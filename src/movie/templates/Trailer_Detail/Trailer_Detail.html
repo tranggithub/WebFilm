@@ -13,8 +13,8 @@
                 <img id="brandname" src="{% static 'css/Trailer_Detail/image/icon/BrandNameLogin.png'%}" >
                 <div class="button">
                     <ul>
-                        <li><a href="Home.html"><img src="{% static 'css/Trailer_Detail/image/icon/icons8-home-page-48.png'%}" alt="home"><label><b style="background:none;">Home</b></label></a></li>
-                        <li><a id="main" href="Movies.html"><img src="{% static 'css/Trailer_Detail/image/icon/icons8-video-call-48.png'%}" alt="movies"><label><b style="background:none;">Movies</b></label></a></li>
+                        <li><a href="{% url 'home' %}"><img src="{% static 'css/Trailer_Detail/image/icon/icons8-home-page-48.png'%}" alt="home"><label><b style="background:none;">Home</b></label></a></li>
+                        <li><a id="main" href="{% url 'movies' %}"><img src="{% static 'css/Trailer_Detail/image/icon/icons8-video-call-48.png'%}" alt="movies"><label><b style="background:none;">Movies</b></label></a></li>
                         <li><a href="Series.html"><img id="series" src="{% static 'css/Trailer_Detail/image/icon/icons8-tv-48.png'%}" alt="series"><label><b style="background:none;">TV Series</b></label></a></li>
                         <li><a href="Upcoming.html"><img src="{% static 'css/Trailer_Detail/image/icon/icons8-calendar-48.png'%}" alt="upcoming"><label><b style="background:none;">Upcoming</b></label></a></li>
 
@@ -101,7 +101,7 @@
                                 <hr>
                                 <p>Stars : <span style="color:cadetblue">Tom Cruise, Jennifer Connelly, Miles Teller</span></p>
                                 <hr>
-                                <a href="Watch.html">Watch movie</a>
+                                <a href="{% url 'watch' %}">Watch movie</a>
                                     <button class="rate_button" type="button" onclick="topRate()">Top rated movie #65</button>
                                     <select>
                                         <option>Awards 9 nominations</option>
@@ -210,7 +210,7 @@
                         <div class="more_options">
                             <ul>
                                 <li id="more">
-                                    <a  href="Movies.html">
+                                    <a  href="{% url 'movies' %}">
                                         <img src="{% static 'css/Trailer_Detail/image/icon/more_option.png'%}">
                                         <label>More watch options</label></a>
                                 </li>
