@@ -35,7 +35,7 @@
     top: 0%;
     bottom: 0%;
     
-    background: url("{% static 'css/SignUp_LogIn/avatar.jpg' %}");
+    background: url(avatar.jpg);
     background-size:cover;
     background-repeat: no-repeat;
     backdrop-filter: blur(3px);

@@ -1,42 +1,42 @@
 <!DOCTYPE html>
 <html>
     <head>
+        {% load static %}
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Trailer_Detail | LTWFlix</title>
-        <link rel="stylesheet" href="Trailer_Detail.css">
-        
+        <link rel="stylesheet" href="{% static 'css/Trailer_Detail/Trailer_Detail.css'%}">
     </head>
     <body>
         <div class="Container">
             <div class="left">
-                <img id="brandname" src="./image/icon/BrandNameLogin.png" >
+                <img id="brandname" src="{% static 'css/Trailer_Detail/image/icon/BrandNameLogin.png'%}" >
                 <div class="button">
                     <ul>
-                        <li><a href="Home.html"><img src="./image/icon/icons8-home-48.png" alt="home"><label>Home</label></a></li>
-                        <li><a id="main" href="Movies.html"><img src="./image/icon/icons8-movie-projector-48.png" alt="movies"><label>Movies</label></a></li>
-                        <li><a href="Series.html"><img src="./image/icon/icons8-tv-show-48.png" alt="series"><label>TV Series</label></a></li>
-                        <li><a href="Upcoming.html"><img src="./image/icon/icons8-calendar-48.png" alt="upcoming"><label>Upcoming</label></a></li>
+                        <li><a href="Home.html"><img src="{% static 'css/Trailer_Detail/image/icon/icons8-home-page-48.png'%}" alt="home"><label><b style="background:none;">Home</b></label></a></li>
+                        <li><a id="main" href="Movies.html"><img src="{% static 'css/Trailer_Detail/image/icon/icons8-video-call-48.png'%}" alt="movies"><label><b style="background:none;">Movies</b></label></a></li>
+                        <li><a href="Series.html"><img id="series" src="{% static 'css/Trailer_Detail/image/icon/icons8-tv-48.png'%}" alt="series"><label><b style="background:none;">TV Series</b></label></a></li>
+                        <li><a href="Upcoming.html"><img src="{% static 'css/Trailer_Detail/image/icon/icons8-calendar-48.png'%}" alt="upcoming"><label><b style="background:none;">Upcoming</b></label></a></li>
 
                     </ul>
                 </div>
                 <div class="logout">
-                    <a href="SignUp+LogIn/LoginFilm.html"><img src="./image/icon/icons8-logout-48.png" alt="logout"><label>Logout</label></a>
+                    <a href="{% url 'log_in' %}"><img src="{% static 'css/Trailer_Detail/image/icon/icons8-logout-acc-48.png'%}" alt="logout"><label><b style="background:none;">Logout</b></label></a>
                 </div>
             </div>
             <div class="center">
                 <div class="top">
                     <button class="bell" type="button" onclick="notification()">
-                        <img src="./image/icon/icons8-bell-30.png">
+                        <img src="{% static 'css/Trailer_Detail/image/icon/icons8-notification-30.png'%}">
                     </button>
                     <button class="user" type="button" onclick="user()">
-                        <img src="./image/user.png">
+                        <img src="{% static 'css/Trailer_Detail/image/user.png'%}">
                     </button>
                     <div class="top_left">
                         <form method="GET" id="from-search" action="https://movie.HD/search/" style="width:auto">
                             <div class="search">
-                                <img src="./image/icon/icons8-search-30.png">
-                                <input class="keyword" type="text" name="keyword" placeholder="Search for movies, TV show..." value >
+                                <img src="{% static 'css/Trailer_Detail/image/icon/icons8-search-30 (1).png'%}">
+                                <input class="keyword" type="text" name="keyword" placeholder="Search for movies, TV show,..." value >
                             </div>
                             <div style="display: none;" id="suggestions" class="top-search-box"></div>
                         </form>
@@ -45,227 +45,232 @@
                 <div class="trailer_vid" >
                     <div class="vid">
                         <div class="play">
-                            <button class="playbt" type="button" onclick="playPause()">
-                                <img src="./image/icon/icons8-play-48.png">
+                            <video id="vid" width="945px"  poster="{% static 'css/Trailer_Detail/image/trailer.jfif'%}" >
+                                <source src="{% static 'css/Trailer_Detail/vid/vid.mp4'%}" type="video/mp4">
+                                Your browser doesn't support html video.
+                            </video>
+                            <button id="playbt" onclick="playPause()">
+                                <img src="{% static 'css/Trailer_Detail/image/icon/icons8-play-48.png'%}">
                             </button>
-                            <img class="play_img" src="./image/trailer.jfif" alt="play">
                         </div>
-                        <br><br>
-                        <!--<video id="video" width="600px" controls>
-                            <source src="./vid/vid.mp4" type="video/mp4">
-                            Your browser doesn't support html video.
-                        </video>-->
-                        
                     </div>
                     <script>
-                            var myVideo=document.getElementById("video");
-
-                            function playPause(){
-                                if(myVideo.paused)
-                                    myVideo.play();
-                                else myVideo.pause();
-                                
+                        var myVideo=document.getElementById("vid");
+                        const button=document.getElementById("playbt");
+                        button.addEventListener("click",()=>{
+                            button.style.visibility="hidden";
+                            playPause();        
+                        })
+                        function playPause(){
+                            if(myVideo.paused)
+                            {
+                                myVideo.play();
+                                vid.controls="true";
                             }
+                        }
+                        
                     </script>
                 </div>
                 <div class="body_center">
-                    <div class="Detail_movies">
-                        <div class="title_movies">
-                            <h5>
+                    <div class="body_left">
+                        <div class="Detail_movies">
+                            <div class="title_movies">
+                                <h5>
+                                    <ul>
+                                        <li id="first_ele">Top Gun: Maverick</li>
+                                        <li>2022</li>
+                                        <li>PG-13</li>
+                                        <li>2h10m</li>
+                                    </ul>
+                                </h5>
+                                <h6 style="font-size:10px;color:aliceblue">
+                                    <label>Action</label>
+                                    <label>Drama</label>
+                               </h6>
+                               <p style="font-size:12px; margin-bottom:10px;">
+                                   <br>After thrity years, Maverick is still pushing the envelope as a top naval aviator,
+                                   but must confront<br> ghosts of his past when he leads TOP GUN's elite graduates
+                                   on a mission that demands the<br> ultimate sacrifice from those chosen to fly it.
+                               </p>
+                            </div>
+                            <div class="info">  <!--Thông tin đạo diễn, diễn viên-->
+                                <hr>
+                                <p>Director :  <span style="color:cadetblue">Joseph Kosinski</span></p>
+                                <hr>
+                                <p>Writers : <span style="color:cadetblue">Jim Cash, Jack Epps Jr, Peter Craig</span></p>
+                                <hr>
+                                <p>Stars : <span style="color:cadetblue">Tom Cruise, Jennifer Connelly, Miles Teller</span></p>
+                                <hr>
+                                <a href="Watch.html">Watch movie</a>
+                                    <button class="rate_button" type="button" onclick="topRate()">Top rated movie #65</button>
+                                    <select>
+                                        <option>Awards 9 nominations</option>
+                                        <option>Best movie</option>
+                                        <option>Top 3 Healing movie</option>
+                                        <option>Top 1 Action movie</option>
+                                    </select>
+                            </div>
+                            <div class="info_characters">  <!--Thôgn tin chi tiết dv-->
+                                <h4>Top Cast</h4>
                                 <ul>
-                                    <li id="first_ele">Top Gun: Maverick</li>
-                                    <li>2022</li>
-                                    <li>PG-13</li>
-                                    <li>2h10m</li>
+                                    <li><img src="{% static 'css/Trailer_Detail/image/tomcruise.webp'%}" alt="Tom Cruise">
+                                        <b><br>Tom Cruise</b><br>Capt. Pete Mitchell<br> (Maverick)
+                                    </li>
+                                    <li><img src="{% static 'css/Trailer_Detail/image/jennifer.jpg'%}" alt="Jennifer Connelly">
+                                        <b><br>Jennifer Connelly</b><br>Penny Benjamin
+                                    </li>
+                                    <li><img src="{% static 'css/Trailer_Detail/image/miliies.webp'%}" alt="Millies Teller">
+                                        <b><br>Millies Teller</b><br>Lt. Bradley Bradshow<br>(Rooster)
+                                    </li>
+                                    <li><img src="{% static 'css/Trailer_Detail/image/vai.jpg'%}" alt="Vai Kilmer">
+                                        <b><br>Vai Kilmer</b><br>Adm. Tom Kazansky<br>(Iceman)
+                                    </li>
                                 </ul>
-                            </h5>
-                            <h6 style="font-size:10px;color:aliceblue">
-                                <label>Action</label>
-                                <label>Drama</label>
-                           </h6>
-                           <p style="font-size:12px; margin-bottom:10px;">
-                               <br>After thrity years, Maverick is still pushing the envelope as a top naval aviator,
-                               but must confront<br> ghosts of his past when he leads TOP GUN's elite graduates
-                               on a mission that demands the<br> ultimate sacrifice from those chosen to fly it.
-                           </p>
+                                <br>
+                            </div>
+                            <div class="info_movies">
+                                <hr>
+                                <h4>
+                                    All cast & crew
+                                </h4>
+                                <hr>
+                                <img src="{% static 'css/Trailer_Detail/image/movie.jpg'%}" alt="movie" >
+                                <h4 style="margin-top:15px;">
+                                        'Top Gun' Trivia, Facts, and Figures
+                                </h4>
+                                <p>
+                                    How exensive was Top Gun to make? In this <br>epsoide of 'By the Numbers', we
+                                    break down<br> all the statistics you need to know (and<br> some you don't) of the
+                                    original '80s classic<br> 'Top Gun.'
+                                </p>
+                                <a href="moreinfo">Learn more</a>
+                            </div>
+                            <div class="similar_movies">
+                                <h4>Similar Movies</h4>
+                                <a href="similars_movies.html">See all</a>
+                                <div class="similar">
+                                    <ul>
+                                        <li>
+                                            <button class="movie_button" type="button" onclick="Top_Gun2()">
+                                                
+                                                <img src="{% static 'css/Trailer_Detail/image/Top_Gun2.jpg'%}" alt="Top Gun 2">
+                                            </button>
+                                        </li>
+                                        <li>
+                                            <button class="movie_button" type="button" onclick="Bat_Man()">
+                                                <img src="{% static 'css/Trailer_Detail/image/batman.jpg'%}" alt="Bat Man">
+                                            </button>
+                                        </li>
+                                        <li>
+                                            <button class="movie_button" type="button" onclick="Spiderman()">
+                                                <img src="{% static 'css/Trailer_Detail/image/spiderman.jpg'%}" alt="Spiderman">
+                                            </button>
+                                        </li>
+                                        <li>
+                                            <button class="movie_button" type="button" onclick="Docter_Strange()">
+                                                <img src="{% static 'css/Trailer_Detail/image/docter_strange.jpg'%}" alt="Docter Strange">
+                                            </button>
+                                        </li>
+                                    </ul>
+                                    
+                                </div>
+    
+                            </div>
                         </div>
-                        <div class="info">  <!--Thông tin đạo diễn, diễn viên-->
-                            <hr>
-                            <p>Director : Joseph Kosinski</p>
-                            <hr>
-                            <p>Writers : Jim Cash, Jack Epps Jr, Peter Craig</p>
-                            <hr>
-                            <p>Stars : Tom Cruise, Jennifer Connelly, Miles Teller</p>
-                            <hr>
-                            <button class="rate_button" type="button" onclick="topRate()">Top rated movie #65</button>
-                            <select>
-                                <option>Awards 9 nominations</option>
-                                <option>hi</option>
-                                <option>top 3</option>
-                                <option>Top 1</option>
-                            </select>
-                        </div>
-                        <div class="info_characters">  <!--Thôgn tin chi tiết dv-->
-                            <h4>Top Cast</h4>
+                    </div>
+                    <div class="body_right">
+                        <div class="fav">
                             <ul>
-                                <li><img src="./image/tomcruise.webp" alt="Tom Cruise">
-                                    <b><br>Tom Cruise</b><br>Capt. Pete Mitchell<br> (Maverick)
+                                <li><button class="favbt" type="button" onclick="favMovies()">
+                                    <img class="heart" src="{% static 'css/Trailer_Detail/image/icon/icons8-heart-24.png'%}">
+                                </button>
                                 </li>
-                                <li><img src="./image/jennifer.jpg" alt="Jennifer Connelly">
-                                    <b><br>Jennifer Connelly</b><br>Penny Benjamin
+                                <li>
+                                    <button class="favbt" type="button" onclick="share()">
+                                        <img class="share" src="{% static 'css/Trailer_Detail/image/icon/icons8-share-24.png'%}">
+                                    </button>
                                 </li>
-                                <li><img src="./image/miliies.webp" alt="Millies Teller">
-                                    <b><br>Millies Teller</b><br>Lt. Bradley Bradshow<br>(Rooster)
+                                <li>
+                                    <button class="favbt" type="button" onclick="bookmark()">
+                                        <img class="bookmark"src="{% static 'css/Trailer_Detail/image/icon/icons8-bookmark-24.png'%}">
+                                    </button>
                                 </li>
-                                <li><img src="./image/vai.jpg" alt="Vai Kilmer">
-                                    <b><br>Vai Kilmer</b><br>Adm. Tom Kazansky<br>(Iceman)
+                                <li>
+                                    <button class="favbt" type="button">
+                                        <img src="{% static 'css/Trailer_Detail/image/icon/icons8-star-24.png'%}">
+                                        
+                                    </button>
+                                </li>
+                                <li>
+                                    <label >8.5 | <span style="color:#534d4d;font-size:12px;">350k</span></label>
                                 </li>
                             </ul>
-                            <br>
+                            
                         </div>
-                        <div class="info_movies">
-                            <hr>
-                            <h4>
-                                All cast & crew
-                            </h4>
-                            <hr>
-                            <img src="./image/movie.jpg" alt="movie" >
-                            <h4 style="margin-top:15px;">
-                                    'Top Gun' Trivia, Facts, and Figures
-                            </h4>
-                            <p>
-                                How exensive was Top Gun to make? In this <br>epsoide of 'By the Numbers', we
-                                break down<br> all the statistics you need to know (and<br> some you don't) of the
-                                original '80s classic<br> 'Top Gun.'
-                            </p>
-                            <a href="moreinfo">Learn more</a>
-                        </div>
-                        <div class="similar_movies">
-                            <h4>Similar Movies</h4>
-                            <a href="similars_movies.html">See all</a>
-                            <div class="similar">
-                                <ul>
-                                    <li>
-                                        <button class="movie_button" type="button" onclick="Top_Gun2()">
-                                            <img src="./image/Top_Gun2.jpg" alt="Top Gun 2">
-                                        </button>
-                                    </li>
-                                    <li>
-                                        <button class="movie_button" type="button" onclick="Bat_Man()">
-                                            <img src="./image/batman.jpg" alt="Bat Man">
-                                        </button>
-                                    </li>
-                                    <li>
-                                        <button class="movie_button" type="button" onclick="Spiderman()">
-                                            <img src="./image/spiderman.jpg" alt="Spiderman">
-                                        </button>
-                                    </li>
-                                    <li>
-                                        <button class="movie_button" type="button" onclick="Docter_Strange()">
-                                            <img src="./image/docter_strange.jpg" alt="Docter Strange">
-                                        </button>
-                                    </li>
-                                </ul>
-                                
-                            </div>
-
+                        <div class="more_options">
+                            <ul>
+                                <li id="more">
+                                    <a  href="Movies.html">
+                                        <img src="{% static 'css/Trailer_Detail/image/icon/more_option.png'%}">
+                                        <label>More watch options</label></a>
+                                </li>
+                                <li>
+                                    <button class="morebt" type="button" onclick="bestMovie()">
+                                        <img class="button_img" src="./image/best_movies.jpg" alt="best movie">
+                                        <div class="best-div">
+                                            <img src="{% static 'css/Trailer_Detail/image/icon/more_option.png'%}">
+                                            <label>The Best Movies and Shows in September</label>
+                                        </div>
+                                    </button>
+                                </li>
+                                <li id="news">
+                                    <a href="News.html">
+                                        <div>
+                                            <img src="{% static 'css/Trailer_Detail/image/news.jpg'%}" alt="news" >
+                                            <label>The Billion-Dollar Film Club: 50 Movies to Reach $1 Billion Worldwide</label>
+                                        </div>
+                                        <p>Updated 1 week ago </p>
+                                    </a>
+                                </li>
+                                <li id="news">
+                                    <a href="NewMovies.html">
+                                        <div style="margin-bottom:40px;">
+                                            <img src="{% static 'css/Trailer_Detail/image/news-movies.jpg'%}" alt="news movie" style="margin-left:55px">
+                                            <label>2022 Summer Move Guide</label>
+                                        </div>
+                                        <p>Updated 1 month ago </p>
+                                    </a>
+                                </li>
+                                <li id="news">
+                                    <a href="Upcoming.html">
+                                        <div style="margin-bottom:20px;">
+                                            <img src="{% static 'css/Trailer_Detail/image/upcoming.jpg'%}" alt="upcoming action" style="margin-left:18px;">
+                                            <label>Upcoming Action and Adventure<br> Movies and TV</label>
+                                        </div>
+                                        <p>Updated 3 months ago</p>
+                                    </a>
+                                </li>
+                                <li id="top50">
+                                    <button class="morebt" type="button" onclick="top50()">
+                                        <img class="button_img" src="./image/top50.jpg" alt="Top 50 TV Dramas"">
+                                        <div class="best-div">
+                                            <img src="{% static 'css/Trailer_Detail/image/icon/more_option.png'%}">
+                                            <label>Top 50 TV Dramas</label>
+                                        </div>
+                                    </button>
+                                </li>
+                                <li id>
+                                    <button class="morebt" type="button" onclick="newupcoming()">
+                                        <img class="button_img" src="{% static 'css/Trailer_Detail/image/new-upcoming.jpg'%}" alt="new and upcoming">
+                                        <div class="best-div">
+                                            <img src="{% static 'css/Trailer_Detail/image/icon/more_option.png'%}">
+                                            <label>New & Upcoming Sequels, Requels</label>
+                                        </div>
+                                    </button>
+                                </li>
+                            </ul>
                         </div>
                     </div>
-                </div>
-                <div class="body_right">
-                    <div class="fav">
-                        <ul>
-                            <li><button class="favbt" id="heart"type="button" onclick="favMovies()">
-                                <img src="./image/icon/icons8-heart-24.png">
-                            </button>
-                            </li>
-                            <li>
-                                <button class="favbt" type="button" onclick="share()">
-                                    <img src="./image/icon/icons8-share-24.png">
-                                </button>
-                            </li>
-                            <li>
-                                <button class="favbt" type="button" onclick="bookmark()">
-                                    <img src="./image/icon/icons8-bookmark-24.png">
-                                </button>
-                            </li>
-                            <li>
-                                <button class="favbt" type="button">
-                                    <img src="./image/icon/icons8-star-24.png">
-                                    
-                                </button>
-                            </li>
-                            <li>
-                                <label >8.5 | <span style="color:#534d4d;font-size:12px;">350k</span></label>
-                            </li>
-                        </ul>
-                        
-                    </div>
-                    <div class="more_options">
-                        <ul>
-                            <li id="more">
-                                <a  href="Movies.html">
-                                    <img src="./image/icon/more_option.png">
-                                    <label>More watch options</label></a>
-                            </li>
-                            <li>
-                                <button class="morebt" type="button" onclick="bestMovie()">
-                                    <img class="button_img" src="./image/best_movies.jpg" alt="best movie">
-                                    <div class="best-div">
-                                        <img src="./image/icon/more_option.png">
-                                        <label>The Best Movies and Shows in September</label>
-                                    </div>
-                                </button>
-                            </li>
-                            <li id="news">
-                                <a href="News.html">
-                                    <div>
-                                        <img src="./image/news.jpg" alt="news" >
-                                        <label>The Billion-Dollar Film Club: 50 Movies to Reach $1 Billion Worldwide</label>
-                                    </div>
-                                    <p>Updated 1 week ago </p>
-                                </a>
-                            </li>
-                            <li id="news">
-                                <a href="NewMovies.html">
-                                    <div style="margin-bottom:40px;">
-                                        <img src="./image/news-movies.jpg" alt="news movie" style="margin-left:55px">
-                                        <label>2022 Summer Move Guide</label>
-                                    </div>
-                                    <p>Updated 1 month ago </p>
-                                </a>
-                            </li>
-                            <li id="news">
-                                <a href="Upcoming.html">
-                                    <div style="margin-bottom:20px;">
-                                        <img src="./image/upcoming.jpg" alt="upcoming action" style="margin-left:18px;">
-                                        <label>Upcoming Action and Adventure<br> Movies and TV</label>
-                                    </div>
-                                    <p>Updated 3 months ago</p>
-                                </a>
-                            </li>
-                            <li id="top50">
-                                <button class="morebt" type="button" onclick="top50()">
-                                    <img class="button_img" src="./image/top50.jpg" alt="Top 50 TV Dramas"">
-                                    <div class="best-div">
-                                        <img src="./image/icon/more_option.png">
-                                        <label>Top 50 TV Dramas</label>
-                                    </div>
-                                </button>
-                            </li>
-                            <li id>
-                                <button class="morebt" type="button" onclick="newupcoming()">
-                                    <img class="button_img" src="./image/new-upcoming.jpg" alt="new and upcoming">
-                                    <div class="best-div">
-                                        <img src="./image/icon/more_option.png">
-                                        <label>New & Upcoming Sequels, Requels</label>
-                                    </div>
-                                </button>
-                            </li>
-                        </ul>
-                    </div>
-                    
-                    
                 </div>
                 
             </div>

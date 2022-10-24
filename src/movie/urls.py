@@ -11,5 +11,6 @@ urlpatterns = [
     path('log_in/',views.LogIn, name='log_in'),
     path('sign_up/',views.SignUp, name='sign_up'),
     path('movies/',views.Movies, name='movies'),
-
+    path('watch/',views.WatchFilm, name='watch'),
+    path('detail/',views.Detail, name='detail'),
 ]

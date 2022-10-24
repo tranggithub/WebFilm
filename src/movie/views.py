@@ -37,3 +37,11 @@ def LogIn(request):
 def Movies(request):
   template = loader.get_template('.\Movies\movies.html')
   return HttpResponse(template.render())
+
+def WatchFilm(request):
+  template = loader.get_template('.\Trailer_Detail\Watch.html')
+  return HttpResponse(template.render())
+
+def Detail(request):
+  template = loader.get_template('.\Trailer_Detail\Trailer_Detail.html')
+  return HttpResponse(template.render())

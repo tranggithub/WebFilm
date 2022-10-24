@@ -1,8 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
+    {% load static %}
 <head>
  <meta charset="utf-8" />
- <link rel="stylesheet" href="css/style.css" />
+ <link rel="stylesheet" href="{% static 'css/Movies/css/style.css' %}" />
  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700&display=swap" rel="stylesheet">
  <title>Movie | LTWFlix</title>
@@ -14,7 +15,7 @@
             <div class="grid__column-2">
                 <nav class="category">
                     <h3 class="category__heading_Movibies">
-                        <img src="css/Logo/Vector.png" alt="" />
+                        <img src="{% static 'css/Movies/css/Logo/Vector.png' %}" alt="" />
                  
                     </h3>
                 </nav>
@@ -60,7 +61,7 @@
                     <i class="fas fa-sign-out-alt"></i> Log out
                 </div> -->
                 <div class="logout">
-                    <a href="SignUp+LogIn/LoginFilm.html"><i class="fas fa-sign-out-alt fa-icon"></i><label>Logout</label></a>
+                    <a href="{% url 'log_in' %}"><i class="fas fa-sign-out-alt fa-icon"></i><label>Logout</label></a>
                 </div>
 
             </div>
@@ -73,16 +74,16 @@
                 </div>
                 <div class="grid__row-4">
                     <button class="column__movie">   
-                        <img src="css/Logo/Rectangle 17.png" alt="" />                 
+                        <img src="{% static 'css/Movies/css/Logo/Rectangle 17.png' %}" alt="" />                 
                     </button>
                     <button class="column__movie">
-                    <img src="css/Logo/Rectangle 18.png" alt="" />  
+                    <img src="{% static 'css/Movies/css/Logo/Rectangle 18.png' %}" alt="" />  
                     </button> 
                     <button class="column__movie">
-                        <img src="css/Logo/Rectangle 19.png" alt="" />  
+                        <img src="{% static 'css/Movies/css/Logo/Rectangle 19.png' %}" alt="" />  
                     </button>
                     <button class="column__movie">
-                        <img src="css/Logo/Rectangle 20.png" alt="" />  
+                        <img src="{% static 'css/Movies/css/Logo/Rectangle 20.png' %}" alt="" />  
                     </button>
                 </div>
                 <div class="grid__row-4-Body">
@@ -91,16 +92,16 @@
                 </div>  
                 <div class="grid__row-4">
                     <button class="column__movie">   
-                        <img src="css/Logo/Rectangle 21.png" alt="" />                 
+                        <img src="{% static 'css/Movies/css/Logo/Rectangle 21.png' %}" alt="" />                 
                     </button>
                     <button class="column__movie">
-                    <img src="css/Logo/Rectangle 22.png" alt="" />  
+                    <img src="{% static 'css/Movies/css/Logo/Rectangle 22.png' %}" alt="" />  
                     </button> 
                     <button class="column__movie">
-                        <img src="css/Logo/Rectangle 24.png" alt="" />  
+                        <img src="{% static 'css/Movies/css/Logo/Rectangle 24.png' %}" alt="" />  
                     </button>
                     <button class="column__movie">
-                        <img src="css/Logo/Rectangle 25.png" alt="" />  
+                        <img src="{% static 'css/Movies/css/Logo/Rectangle 25.png' %}" alt="" />  
                     </button>
                 </div>   
                 <div class="grid__row-4-Body">
@@ -109,16 +110,16 @@
                 </div>  
                 <div class="grid__row-4">
                     <button class="column__movie">   
-                        <img src="css/Logo/Rectangle 17.png" alt="" />                 
+                        <img src="{% static 'css/Movies/css/Logo/Rectangle 17.png' %}" alt="" />                 
                     </button>
                     <button class="column__movie">
-                    <img src="css/Logo/Rectangle 18.png" alt="" />  
+                    <img src="{% static 'css/Movies/css/Logo/Rectangle 18.png' %}" alt="" />  
                     </button> 
                     <button class="column__movie">
-                        <img src="css/Logo/Rectangle 19.png" alt="" />  
+                        <img src="{% static 'css/Movies/css/Logo/Rectangle 19.png' %}" alt="" />  
                     </button>
                     <button class="column__movie">
-                        <img src="css/Logo/Rectangle 20.png" alt="" />  
+                        <img src="{% static 'css/Movies/css/Logo/Rectangle 20.png' %}" alt="" />  
                     </button>
                 </div>   
                 <div class="grid__row-4-Body">
@@ -127,23 +128,23 @@
                 </div>  
                 <div class="grid__row-4">
                     <button class="column__movie">   
-                        <img src="css/Logo/Rectangle 21.png" alt="" />                 
+                        <img src="{% static 'css/Movies/css/Logo/Rectangle 21.png' %}" alt="" />                 
                     </button>
                     <button class="column__movie">
-                    <img src="css/Logo/Rectangle 22.png" alt="" />  
+                    <img src="{% static 'css/Movies/css/Logo/Rectangle 22.png' %}" alt="" />  
                     </button> 
                     <button class="column__movie">
-                        <img src="css/Logo/Rectangle 24.png" alt="" />  
+                        <img src="{% static 'css/Movies/css/Logo/Rectangle 24.png' %}" alt="" />  
                     </button>
                     <button class="column__movie">
-                        <img src="css/Logo/Rectangle 25.png" alt="" />  
+                        <img src="{% static 'css/Movies/css/Logo/Rectangle 25.png' %}" alt="" />  
                     </button>
                 </div>   
             </div>
             <div class="grid__column-2-right">
                 <div class="grid__row-4">
                     <button class="button__Notifi"type="button" onclick="user()"><i class="far fa-bell"></i></button>
-                    <button class="button__User" type="button" onclick="user()"><img src="./css//Logo/User.jpg"></button>
+                    <button class="button__User" type="button" onclick="user()"><img src="{% static 'css/Movies/css/Logo/User.jpg' %}"></button>
                 </div>
                 <div class="grid__row-4__grid-Check">
                     <div class="grid__column-List">Categories</div>  
