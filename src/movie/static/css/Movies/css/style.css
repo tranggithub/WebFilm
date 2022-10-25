@@ -71,7 +71,7 @@
     background-color: #50c5c1a2;
     border-right: 5px solid #3DD2CC;
 }
-.button li a, .logout a{
+.button li a{
     font-size: 15px;
     color:#CCCCCC;
     display:flex;
@@ -80,21 +80,17 @@
     text-decoration: none;
 
 }
-.logout{    /*button logout*/
-    background-color:#212121;
-    margin-top:30%;
-}
-.button a:hover, .logout a:hover{  /*ree chuọt*/
+.button a:hover{  /*ree chuọt*/
     background-color: #50c5c1a2;
     color:aliceblue;
 }
-.button  label, .logout label{
+.button  label{
     background:none;
     padding-left:12px;
     cursor: pointer;
   
 }
-.button img, .logout img{    /*icon*/
+.button img{    /*icon*/
     width:20px;
     height:20px;
    background: none;
@@ -207,13 +203,14 @@
    margin-right:8px;
    background: none;
    cursor:pointer;
- 
+    
     filter: drop-shadow(0px 2px 4px rgba(0, 0, 0, 0.25));
     border-radius: 20px;
 }
 .column__movie img{
     width:160px;
 }
+
 
 .Head__Up{    
    

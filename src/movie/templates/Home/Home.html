@@ -45,16 +45,12 @@
                     <ul>
                         <li><a id="main" href="{% url 'home' %}"><i class="fas fa-home fa-icon"></i><label>Home</label></a></li>
                         <li><a href="{% url 'movies' %}"> <i class="fas fa-video fa-icon "></i><label>Movies</label></a></li>
-                        <li><a href="Series.html"><i class="fas fa-tv fa-icon"></i><label>TV Series</label></a></li>
-                        <li><a href="Upcoming.html"><i class="fas fa-calendar-alt fa-icon"></i><label>Upcoming</label></a></li>
-
+                        <li><a href="{% url 'home' %}#TVseries"><i class="fas fa-tv fa-icon"></i><label>TV Series</label></a></li>
+                        <li><a href="{% url 'home' %}#Upcoming"><i class="fas fa-calendar-alt fa-icon"></i><label>Upcoming</label></a></li>
+                        <li><a href="{% url 'log_in' %}" style="margin-top:30%;"><i class="fas fa-sign-out-alt fa-icon"></i><label>Logout</label></a></li>
                     </ul>
                 </div>
-               
-                <div class="logout">
-                    <a href="{% url 'log_in' %}"><i class="fas fa-sign-out-alt fa-icon"></i><label>Logout</label></a>
-                </div>
-
+            
             </div>
             <div class="grid__column-8">        
                 <div class="container__search">                    
@@ -87,7 +83,9 @@
                         <img src="{% static 'css/Home/Logo/Rectangle 17.png' %}" alt="" />                 
                     </button>
                     <button class="column__movie">
-                    <img src="{% static 'css/Home/Logo/Rectangle 18.png' %}" alt="" />  
+                        <a href="{% url 'detail' %}">
+                            <img class="img-movie" src="{% static 'css/Movies/css/Logo/Rectangle 18.png' %}" alt="" />
+                        </a>
                     </button> 
                     <button class="column__movie">
                         <img src="{% static 'css/Home/Logo/Rectangle 19.png' %}" alt="" />  
@@ -97,7 +95,9 @@
                     </button>
                 </div>
                 <div class="grid__row-4-Body">
-                    <div class="Head__Up">Upcoming</div>
+                    <div class="Head__Up">
+                        <a name="Upcoming">Upcoming</a>
+                    </div>
                     <a class="Head__See" href="Upcoming.html">See all</a>
                 </div>  
                 <div class="grid__row-4">
@@ -115,7 +115,9 @@
                     </button>
                 </div>   
                 <div class="grid__row-4-Body">
-                    <div class="Head__Up">TV Series</div>
+                    <div class="Head__Up">
+                        <a name="TVseries">TV Series</a>
+                    </div>
                     <a class="Head__See" href="TVSeries.html">See all</a>
                 </div>  
                 <div class="grid__row-4">
@@ -123,8 +125,10 @@
                         <img src="{% static 'css/Home/Logo/Rectangle 17.png' %}" alt="" />                 
                     </button>
                     <button class="column__movie">
-                    <img src="{% static 'css/Home/Logo/Rectangle 18.png' %}" alt="" />  
-                    </button> 
+                        <a href="{% url 'detail' %}">
+                            <img class="img-movie" src="{% static 'css/Movies/css/Logo/Rectangle 18.png' %}" alt="" />
+                        </a>
+                    </button>  
                     <button class="column__movie">
                         <img src="{% static 'css/Home/Logo/Rectangle 19.png' %}" alt="" />  
                     </button>
@@ -133,7 +137,9 @@
                     </button>
                 </div>   
                 <div class="grid__row-4-Body">
-                    <div class="Head__Poplular">Popular movies on september</div>
+                    <div class="Head__Poplular">
+                        <a name="onSeptember">Popular movies on september</a>
+                    </div>
                     <a class="Head__See" href="Popular.html">See all</a>
                 </div>  
                 <div class="grid__row-4">

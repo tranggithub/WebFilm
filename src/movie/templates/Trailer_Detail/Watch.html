@@ -15,8 +15,8 @@
                     <ul>
                         <li><a href="{% url 'home' %}"><img src="{% static 'css/Trailer_Detail/image/icon/icons8-home-page-48.png'%}" alt="home"><label><b style="background:none;">Home</b></label></a></li>
                         <li><a id="main" href="{% url 'movies' %}"><img src="{% static 'css/Trailer_Detail/image/icon/icons8-video-call-48.png'%}" alt="movies"><label><b style="background:none;">Movies</b></label></a></li>
-                        <li><a href="Series.html"><img id="series" src="{% static 'css/Trailer_Detail/image/icon/icons8-tv-48.png'%}" alt="series"><label><b style="background:none;">TV Series</b></label></a></li>
-                        <li><a href="Upcoming.html"><img src="{% static 'css/Trailer_Detail/image/icon/icons8-calendar-48.png'%}" alt="upcoming"><label><b style="background:none;">Upcoming</b></label></a></li>
+                        <li><a href="{% url 'movies'%}#TVseries"><img id="series" src="{% static 'css/Trailer_Detail/image/icon/icons8-tv-48.png'%}" alt="series"><label><b style="background:none;">TV Series</b></label></a></li>
+                        <li><a href="{%url 'movies'%}#Upcoming"><img src="{% static 'css/Trailer_Detail/image/icon/icons8-calendar-48.png'%}" alt="upcoming"><label><b style="background:none;">Upcoming</b></label></a></li>
 
                     </ul>
                 </div>
@@ -83,9 +83,9 @@
                                 <button id="bt-ep" onclick="ep4()">Epsoide 4</button>
                                 <button id="bt-ep" onclick="ep5()">Epsoide 5</button>
                                 <button id="bt-ep" onclick="ep6()">Epsoide 6</button>
-                                <button id="bt-ep" onclick="ep4()">Epsoide 4</button>
-                                <button id="bt-ep" onclick="ep5()">Epsoide 5</button>
-                                <button id="bt-ep" onclick="ep6()">Epsoide 6</button>
+                                <button id="bt-ep" onclick="ep7()">Epsoide 7</button>
+                                <button id="bt-ep" onclick="ep8()">Epsoide 8</button>
+                                <button id="bt-ep" onclick="ep9()">Epsoide 9</button>
                             </div>
                             <h4 style="color:cadetblue">Top Gun - Ep 1</h4>
                             <br>
@@ -129,7 +129,11 @@
                                                         <img class="flag-img" src="{% static 'css/Trailer_Detail/image/icon/icons8-flag-30.png'%}">
                                                     </button>
                                                 </div>
-                                                
+                                                <!-- <script>
+                                                    function click(x){
+                                                        x.classList.toggle("{% static 'css/Trailer_Detail/image/icon/icons8-like-green-24.png'%}")
+                                                    }
+                                                </script> -->
                                             </div>
                                         </li>
                                         <li>
@@ -260,7 +264,7 @@
                                         <label>More watch options</label></a>
                                 </li>
                                 <li id="news">
-                                    <a href="NewMovies.html">
+                                    <a href="https://www.gq.com/story/2022-summer-movie-guide-doctor-strange-top-gun-maverick-thor-love-and-thunder#:~:text=Summer%20Movies%202022%3A%2020%20Movies%20Worth%20Watching%20This,8%20Elvis%20%28in%20theaters%20June%2024%29%20More%20items">
                                         <div style="margin-bottom:40px;">
                                             <img src="{% static 'css/Trailer_Detail/image/news-movies.jpg'%}" alt="news movie" style="margin-left:55px">
                                             <label>2022 Summer Move Guide</label>
@@ -269,22 +273,22 @@
                                     </a>
                                 </li>
                                 <li>
-                                    <button class="morebt" type="button" onclick="bestMovie()">
+                                    <a class="morebt" href="{% url 'home' %}#onSeptember">
                                         <img class="button_img" src="{% static 'css/Trailer_Detail/image/best_movies.jpg'%}" alt="best movie">
                                         <div class="best-div">
                                             <img src="{% static 'css/Trailer_Detail/image/icon/more_option.png'%}">
-                                            <label>The Best Movies and Shows in September</label>
+                                            <label>The Best Movies in September</label>
                                         </div>
-                                    </button>
+                                    </a>
                                 </li>
-                                <li id="top50">
-                                    <button class="morebt" type="button" onclick="top50()">
-                                        <img class="button_img" src="{% static 'css/Trailer_Detail/image/top50.jpg'%}" alt="Top 50 TV Dramas">
+                                <li>
+                                    <a class="morebt" href="{%url 'movies'%}#Upcoming">
+                                        <img class="button_img" src="{% static 'css/Trailer_Detail/image/new-upcoming.jpg'%}" alt="new and upcoming">
                                         <div class="best-div">
                                             <img src="{% static 'css/Trailer_Detail/image/icon/more_option.png'%}">
-                                            <label>Top 50 TV Dramas</label>
+                                            <label>New & Upcoming Movies</label>
                                         </div>
-                                    </button>
+                                    </a>
                                 </li>
                             </ul>
                         </div>

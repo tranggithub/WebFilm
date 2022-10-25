@@ -52,7 +52,7 @@
 }
 .logout{    /*button logout*/
     background-color:#212121;
-    margin-top:60%;
+    margin-top:50%;
 }
 .button a:hover, .logout a:hover{  /*ree chuọt*/
     background-color: #50c5c1a2;
@@ -347,6 +347,9 @@
 }
 .rateimg:hover{
     content: url("./image/icon/icons8-star-rate-24.png");
+}
+.ratebt:after{
+    content:url("./image/icon/icons8-star-green-24.png");
 }
 .bottom_right li{
     list-style-type: none;

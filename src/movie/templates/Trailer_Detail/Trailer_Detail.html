@@ -15,8 +15,8 @@
                     <ul>
                         <li><a href="{% url 'home' %}"><img src="{% static 'css/Trailer_Detail/image/icon/icons8-home-page-48.png'%}" alt="home"><label><b style="background:none;">Home</b></label></a></li>
                         <li><a id="main" href="{% url 'movies' %}"><img src="{% static 'css/Trailer_Detail/image/icon/icons8-video-call-48.png'%}" alt="movies"><label><b style="background:none;">Movies</b></label></a></li>
-                        <li><a href="Series.html"><img id="series" src="{% static 'css/Trailer_Detail/image/icon/icons8-tv-48.png'%}" alt="series"><label><b style="background:none;">TV Series</b></label></a></li>
-                        <li><a href="Upcoming.html"><img src="{% static 'css/Trailer_Detail/image/icon/icons8-calendar-48.png'%}" alt="upcoming"><label><b style="background:none;">Upcoming</b></label></a></li>
+                        <li><a href="{% url 'home'%}#TVseries"><img id="series" src="{% static 'css/Trailer_Detail/image/icon/icons8-tv-48.png'%}" alt="series"><label><b style="background:none;">TV Series</b></label></a></li>
+                        <li><a href="{% url 'home' %}#Upcoming"><img src="{% static 'css/Trailer_Detail/image/icon/icons8-calendar-48.png'%}" alt="upcoming"><label><b style="background:none;">Upcoming</b></label></a></li>
 
                     </ul>
                 </div>
@@ -68,7 +68,6 @@
                                 vid.controls="true";
                             }
                         }
-                        
                     </script>
                 </div>
                 <div class="body_center">
@@ -130,10 +129,86 @@
                             </div>
                             <div class="info_movies">
                                 <hr>
-                                <h4>
-                                    All cast & crew
-                                </h4>
-                                <hr>
+                                <button class="accordion"><h4>All cast & crew</h4></button>
+                                <div class="allcast">
+                                    <ul>
+                                        <li><img src="{% static 'css/Trailer_Detail/image/tomcruise.webp'%}" alt="Tom Cruise">
+                                            <b><br>Tom Cruise</b><br>Capt. Pete Mitchell<br> (Maverick)
+                                        </li>
+                                        <li><img src="{% static 'css/Trailer_Detail/image/jennifer.jpg'%}" alt="Jennifer Connelly">
+                                            <b><br>Jennifer Connelly</b><br>Penny Benjamin
+                                        </li>
+                                        <li><img src="{% static 'css/Trailer_Detail/image/miliies.webp'%}" alt="Millies Teller">
+                                            <b><br>Millies Teller</b><br>Bradley Bradshow<br>(Rooster)
+                                        </li>
+                                        <li><img src="{% static 'css/Trailer_Detail/image/vai.jpg' %}" alt="Vai Kilmer">
+                                            <b><br>Vai Kilmer</b><br>Tom Kazansky<br>(Iceman)
+                                        </li>
+                                        <li>
+                                            <img src="{% static 'css/Trailer_Detail/image/anthony.jpg'%}" alt="Anthony">
+                                            <b><br>Anthony Edwards</b><br>Lt. Nick Bradshaw
+                                        </li>
+                                        <li>
+                                            <img src="{%static 'css/Trailer_Detail/image/tomskerritt.jpg' %}" alt="Tom Skerritt">
+                                            <b><br>Tom Skerritt</b><br>Cmdr. Mike Metcalf
+                                        </li>
+                                        <li>
+                                            <img src="{% static 'css/Trailer_Detail/image/Michael.jpg' %}" alt="Michael">
+                                            <b><br>Michael Ironside</b><br>Dick Wetherly
+                                        </li>
+                                        <li>
+                                            <img src="{% static 'css/Trailer_Detail/image/Meg.jpg' %}" alt="Meg">
+                                            <b><br>Meg Ryan</b><br>Carole
+                                        </li>
+                                        <li>
+                                            <img src="{% static 'css/Trailer_Detail/image/John.jpg' %}" alt="John">
+                                            <b><br>John Stockwell</b><br>Cougar
+                                        </li>
+                                        <li>
+                                            <img src="{% static 'css/Trailer_Detail/image/Barry.jpg' %}" alt="Barry">
+                                            <b><br>Barry Tubb</b><br>Henry Ruth
+                                        </li>
+                                    </ul>
+                                    <ul>
+                                        <li><img src="{% static 'css/Trailer_Detail/image/Tony.jpg' %}" alt="Tom Cruise">
+                                            <b><br>Tony Scott</b><br>Director<br>
+                                        </li>
+                                        <li><img src="{% static 'css/Trailer_Detail/image/noimage.jpg' %}" alt="Millies Teller">
+                                            <b><br>Bobbie Read</b><br>Costume Designer<br>
+                                        </li>
+                                        <li><img src="{% static 'css/Trailer_Detail/image/noimage.jpg' %}" alt="Vai Kilmer">
+                                            <b><br>Chris Lebenzon</b><br>Editor<br>
+                                        </li>
+                                        <li>
+                                            <img src="{% static 'css/Trailer_Detail/image/noimage.jpg' %}" alt="Anthony">
+                                            <b><br>Don Simpson</b><br>Producer<br>
+                                        </li>
+                                        <li>
+                                            <img src="{% static 'css/Trailer_Detail/image/noimage.jpg' %}" alt="Tom Skerritt">
+                                            <b><br>Donald O.Mitchell</b><br>Sound Deigner<br>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <!--hiển thị all cast, crew-->
+                                <script>    
+                                    var acc=document.getElementsByClassName("accordion");
+                                    var i;
+
+                                    for (i=0;i<acc.length;i++){
+                                        acc[i].addEventListener("click", function(){
+                                            this.classList.toggle("active");
+                                            var panel=this.nextElementSibling;
+                                            if(panel.style.maxHeight){
+                                                panel.style.maxHeight=null;
+                                            }
+                                            else{
+                                                panel.style.maxHeight=panel.scrollHeight + "px";
+                                            }
+                                        });
+                                    }
+                                </script>
+                                
+                                <hr style="margin-bottom:10px;">
                                 <img src="{% static 'css/Trailer_Detail/image/movie.jpg'%}" alt="movie" >
                                 <h4 style="margin-top:15px;">
                                         'Top Gun' Trivia, Facts, and Figures
@@ -143,11 +218,11 @@
                                     break down<br> all the statistics you need to know (and<br> some you don't) of the
                                     original '80s classic<br> 'Top Gun.'
                                 </p>
-                                <a href="moreinfo">Learn more</a>
+                                <a href="https://www.trivianerd.com/collection/top-gun-trivia">Learn more</a>
                             </div>
                             <div class="similar_movies">
-                                <h4>Similar Movies</h4>
-                                <a href="similars_movies.html">See all</a>
+                                <h4>Other movies</h4>
+                                <a href="{% url 'home' %}">See all</a>
                                 <div class="similar">
                                     <ul>
                                         <li>
@@ -212,19 +287,20 @@
                                 <li id="more">
                                     <a  href="{% url 'movies' %}">
                                         <img src="{% static 'css/Trailer_Detail/image/icon/more_option.png'%}">
-                                        <label>More watch options</label></a>
+                                        <label>More watch options</label>
+                                    </a>
                                 </li>
                                 <li>
-                                    <button class="morebt" type="button" onclick="bestMovie()">
+                                    <a class="morebt" href="{% url 'movies' %}#onSeptember">
                                         <img class="button_img" src="{% static 'css/Trailer_Detail/image/best_movies.jpg'%}" alt="best movie">
                                         <div class="best-div">
                                             <img src="{% static 'css/Trailer_Detail/image/icon/more_option.png'%}">
-                                            <label>The Best Movies and Shows in September</label>
+                                            <label>The Best Movies in September</label>
                                         </div>
-                                    </button>
+                                    </a>
                                 </li>
                                 <li id="news">
-                                    <a href="News.html">
+                                    <a href="https://www.imdb.com/list/ls063095038/">
                                         <div>
                                             <img src="{% static 'css/Trailer_Detail/image/news.jpg'%}" alt="news" >
                                             <label>The Billion-Dollar Film Club: 50 Movies to Reach $1 Billion Worldwide</label>
@@ -233,7 +309,7 @@
                                     </a>
                                 </li>
                                 <li id="news">
-                                    <a href="NewMovies.html">
+                                    <a href="https://www.gq.com/story/2022-summer-movie-guide-doctor-strange-top-gun-maverick-thor-love-and-thunder#:~:text=Summer%20Movies%202022%3A%2020%20Movies%20Worth%20Watching%20This,8%20Elvis%20%28in%20theaters%20June%2024%29%20More%20items">
                                         <div style="margin-bottom:40px;">
                                             <img src="{% static 'css/Trailer_Detail/image/news-movies.jpg'%}" alt="news movie" style="margin-left:55px">
                                             <label>2022 Summer Move Guide</label>
@@ -242,7 +318,7 @@
                                     </a>
                                 </li>
                                 <li id="news">
-                                    <a href="Upcoming.html">
+                                    <a href="https://www.imdb.com/list/ls560301026/">
                                         <div style="margin-bottom:20px;">
                                             <img src="{% static 'css/Trailer_Detail/image/upcoming.jpg'%}" alt="upcoming action" style="margin-left:18px;">
                                             <label>Upcoming Action and Adventure<br> Movies and TV</label>
@@ -259,20 +335,19 @@
                                         </div>
                                     </button>
                                 </li>
-                                <li id>
-                                    <button class="morebt" type="button" onclick="newupcoming()">
+                                <li >
+                                    <a class="morebt" href="{%url 'movies'%}#Upcoming">
                                         <img class="button_img" src="{% static 'css/Trailer_Detail/image/new-upcoming.jpg'%}" alt="new and upcoming">
                                         <div class="best-div">
                                             <img src="{% static 'css/Trailer_Detail/image/icon/more_option.png'%}">
-                                            <label>New & Upcoming Sequels, Requels</label>
+                                            <label>New & Upcoming Movies</label>
                                         </div>
-                                    </button>
+                                    </a>
                                 </li>
                             </ul>
                         </div>
                     </div>
                 </div>
-                
             </div>
         </div>
     </body>

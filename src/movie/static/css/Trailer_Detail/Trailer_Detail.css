@@ -54,7 +54,7 @@
 }
 .logout{    /*button logout*/
     background-color:#212121;
-    margin-top:60%;
+    margin-top:50%;
 }
 .button a:hover, .logout a:hover{  /*ree chuọt*/
     background-color: #50c5c1a2;
@@ -245,14 +245,14 @@
     border-radius: 18px;
 }
 
-.info_characters{
+.info_characters, .allcast{
     color:#cccccc;
 }
 .info_characters h4{
     margin-bottom:30px;
     letter-spacing: 1.5px;
 }
-.info_characters li{
+.info_characters li, .allcast li{
     list-style-type: none;
     text-align: center;
     float:left;
@@ -261,10 +261,49 @@
     margin-bottom:30px;
     margin-left: 10px;;
 }
-.info_characters li img{
+.info_characters li img, .allcast li img{
     width:95px;
     height:90px;
     border-radius: 50%;
+}
+.accordion{
+    background:none;
+    color:#cccccc;
+    cursor:pointer;
+    width:100%;
+    border:none;
+    text-align: left;
+    outline:none;
+    transition:0.4s;
+    font-size:14px;
+    padding-top:10px;
+    display:flex;
+    border-radius: 5px;
+}
+.accordion h4{
+    background:none;
+}
+.active, .accordion:hover{
+    background-color:cadetblue;
+    color:#212121;
+}
+.accordion:after{
+    content:'\002B';    /*dau cong*/
+    color:#cccccc;
+    margin-left:430px;
+}
+.active:after{
+    content:"\2212"; /*dau tru*/
+    color:#212121;
+}
+.allcast{
+    padding:0 5px;
+    max-height: 0;
+    overflow:hidden;
+    transition:max-height 0.2s ease-out;
+}
+.allcast ul{
+    margin-top:20px;
 }
 
 .info_movies{
@@ -272,7 +311,6 @@
 }
 .info_movies hr{
     width:600px;
-    margin-bottom: 10px;
 }
 .info_movies img{
     float:right;
@@ -410,6 +448,9 @@
     position:relative;
     display:flex;
     margin-bottom:20px;
+}
+.morebt a{
+    display:block;
 }
 .button_img{
     width:280px;
