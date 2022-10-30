@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+    {%load static %}
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="{% static 'css/Info/user.css' %}">
+    <body>
+        <h1 class="h2_name" style="color:#3DD2CC">Change picture</h1>
+          <div class="col-75">
+            <input type="file" name="file" id="file" class="inputfile" />
+           <label for="file">Choose a file</label>
+            <div style="margin-left:55%; margin-top:5%">
+                <a href="{% url 'info'%}" class="save" style="text-decoration:none;">Cancel</a>
+                <button class="save">Save</button>
+            </div>
+    </body>
+</html>

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+    {% load static %}
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="{%static 'css/Info/user.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <body>
+        <a href="{%url 'home'%}" class="home"><i class="fa fa-home"></i></a>
+        <img src="{% static 'css/Info/Logo/avatar.png' %}" alt="Avatar" style="border-radius: 50%; width:160px;height:150px; position: absolute; left: 45%; top:7%;">
+        <h1>Your profile</h1>
+        <section style="margin-top: 17%; margin-left: 10%; margin-right: 20%;">
+        <div>
+            <h4>Name</h4>
+            <p>Tuyetlan</p>
+            <aside style="margin-top:-3%">
+                <a href="{% url 'change_name' %}">
+                <button class="btn" style="margin-left:93%;margin-bottom: -5%;"><i class="fa fa-pencil"></i></button>
+                </a>
+            </aside>
+        </div>
+        <div>
+            <h4>Birthday</h4>
+            <p>29/05/2002</p>
+            <aside style="margin-top:-3%">
+                <a href="{% url 'change_bdate' %}">
+                <button class="btn" style="margin-left:93%;margin-bottom: -5%;"><i class="fa fa-pencil"></i></button>
+                </a>
+            </aside>
+        </div>
+        <div>
+            <h4>Gender</h4>
+            <p>Female</p>
+            <aside style="margin-top:-3%">
+                <a href="{% url 'change_gender' %}">
+                <button class="btn" style="margin-left:93%;margin-bottom: -5%;"><i class="fa fa-pencil"></i></button>
+                </a>
+            </aside>
+        </div>
+        <div>
+            <h4>Email</h4>
+            <p>phanthituyetlan471@gmail.com</p>
+            <aside style="margin-top:-3%">
+                <a href="{% url 'change_mail' %}">
+                <button class="btn" style="margin-left:93%;margin-bottom: -5%;"><i class="fa fa-pencil"></i></button>
+                </a>
+            </aside>
+        </div>
+        
+        <div>
+            <h4>Profile picture</h4>
+                <p>Add profile picture</p>
+                <aside style="margin-top:-3%">
+                    <a href="{% url 'change_picture'%}">
+                    <button class="btn" style="margin-left:93%;margin-bottom: -5%;"><i class="fa fa-pencil"></i></button>
+                    </a>
+                </aside>
+        </div>
+        <div style="margin-top:30px;">
+            <a class="changepw" href="{% url 'change_password' %}">
+                Password
+            </a>
+        </div>
+        </section>
+    </body>
+</html>

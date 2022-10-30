@@ -1,0 +1,159 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap');
+*{
+    font-family:'Poppins', sans-serif;
+}
+body{
+    background-color: black;
+    margin-bottom:30px;
+}
+.avatar{
+    left: 45%;
+    right:300px;
+    top:100px;
+}
+
+h1{
+    color: aliceblue;
+   margin-left: 44%;
+   margin-top:17%;
+   margin-bottom: -14%;
+}
+h4{
+    color: #3DD2CC;
+    margin-left:200px;
+    margin-right: 45px;
+    margin-top: 25px;
+    margin-bottom: -5px;
+}
+p{
+    color: aliceblue;
+    left:30%;
+    margin-left:200px;
+    margin-right: 45px;
+    margin-top: 25px;
+    margin-bottom: -5px;
+    border-bottom: 1px solid #3DD2CC;
+}
+.btn {
+    background-color: black;
+    border: none;
+    color: white;
+    padding: 10px 13px;
+    font-size: 10px;
+    cursor: pointer;
+  }
+  
+  /* Darker background on mouse-over */
+  .btn:hover {
+    background-color: rgb(14, 15, 15);
+  }
+.h2_name{
+    margin-left: 41%;
+   margin-top:10%;
+   margin-bottom: -1%;
+}
+.col-25 {
+    float: left;
+    width: 25%;
+    margin-top: 10%;
+  }
+  
+  .col-75 {
+    float: left;
+    width: 75%;
+    margin-top: 10%;
+  }
+  input[type=text], select, textarea {
+    width: 50%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    resize: vertical;
+    margin-left: 18%;
+    margin-bottom:10px;
+  }
+  
+  label {
+    padding: 12px 12px 12px 0;
+    display: inline-block;
+  }
+  .save {
+    border: none;
+    color: white;
+    padding: 9px 18px;
+    font-size: 16px;
+    cursor: pointer;
+    background-color: #3DD2CC;
+    border-radius: 10%;
+    width:100px;
+    margin-right:10px;
+  }
+  .save:hover, .changepw:hover{
+    background:  #19706e;
+  }
+  input[type=password]{
+    width: 50%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    resize: vertical;
+    margin-left: 18%;
+    margin-bottom:10px;
+  }
+  .inputfile {
+    width: 0.1px;
+    height: 0.1px;
+    opacity: 0;
+    overflow: hidden;
+    position: absolute;
+    z-index: -1;
+    
+  }
+  .inputfile + label {
+    font-size: 1.25em;
+    font-weight: 700;
+    text-align: center;
+    color:#3DD2CC;
+    background-color:white;
+    display: inline-block;
+    border-radius: 10px;
+    margin-left: 50%;
+    width:300px;
+}
+
+.inputfile:focus + label,
+.inputfile + label:hover {
+    background-color: #19706e;
+}
+.inputfile + label {
+	cursor: pointer; /* "hand" cursor */
+}
+.inputfile:focus + label {
+	outline: 1px dotted #000;
+	outline: -webkit-focus-ring-color auto 5px;
+}
+
+.home{
+    background-color: black;
+    border: none;
+    color: white;
+    padding: 12px 16px;
+    font-size: 20px;
+    cursor: pointer;
+    top:3px;
+}
+.pass{
+  float: left;
+    width: 75%;
+    margin-top: 10%;
+    margin-left: 19%;
+}
+
+.changepw{
+  text-decoration: none;  
+  background:#3DD2CC;
+  color:aliceblue;
+  margin-left:210px;
+  padding:10px 20px;
+  border-radius: 10px;
+}

@@ -53,3 +53,31 @@ def Detail(request):
 def UserPacket(request):
   template = loader.get_template('UserPacket\Service_pack.html')
   return HttpResponse(template.render())
+
+def Info(request):
+  template = loader.get_template('.\Info\info.html')
+  return HttpResponse(template.render())
+
+def ChangeBDate(request):
+  template = loader.get_template('.\Info\change_date.html')
+  return HttpResponse(template.render())
+
+def ChangeGender(request):
+  template = loader.get_template('.\Info\change_gender.html')
+  return HttpResponse(template.render())
+
+def ChangeMail(request):
+  template = loader.get_template('.\Info\change_mail.html')
+  return HttpResponse(template.render())
+
+def ChangeName(request):
+  template = loader.get_template('.\Info\change_name.html')
+  return HttpResponse(template.render())
+
+def ChangePassword(request):
+  template = loader.get_template('.\Info\change_password.html')
+  return HttpResponse(template.render())
+
+def ChangePicture(request):
+  template = loader.get_template('.\Info\change_picture.html')
+  return HttpResponse(template.render())
