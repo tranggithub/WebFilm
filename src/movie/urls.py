@@ -13,4 +13,5 @@ urlpatterns = [
     path('movies/',views.Movies, name='movies'),
     path('watch/',views.WatchFilm, name='watch'),
     path('detail/',views.Detail, name='detail'),
+    path('userpacket/',views.UserPacket, name='userpacket'),
 ]

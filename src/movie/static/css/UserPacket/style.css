@@ -1,0 +1,133 @@
+*{
+    margin:0;
+}
+.grid{ 
+    width: 100%;
+    max-width: 100%;
+    margin: 0 auto;
+    background: #191919;
+    font-family: 'Poppins', sans-serif;
+}
+.grid__row{
+    display: flex;   
+    
+   
+    margin-top:-12px;
+    margin-bottom: -12px;
+    padding-bottom:147px;
+}
+.grid__column-2{
+   
+    margin-left:-12px;
+    
+    width: 50%;
+    padding-left: 12px;
+    
+    
+    height: 60%;
+    
+}
+
+.Young{
+    box-shadow: 5px 5px 5px black;
+
+
+    
+}
+.Standar{
+    box-shadow: -5px 5px 5px black;
+}
+.content{
+  color:white;
+  text-align:  center;
+  font-size: 25px;
+  font-family: 'Poppins';
+}
+
+
+
+.bt__Chon:hover{
+   
+   color: #fff;
+   box-shadow: inset 0px 0px 0px 0px #50c5c1a2 ;
+    
+    
+    
+}
+.bt__Chon{
+    position: relative;
+    
+    border: #CCCCCC;
+    
+    padding-left:0%;
+    border-radius: 5%;
+    
+    margin-top: 2%;
+    margin-bottom: 15px;
+    text-align: center;
+    
+    
+}
+
+.bt__Chon a {
+    text-decoration: none;
+    color: #CCCCCC;   /*ree chuọt*/
+        
+}
+
+
+
+.Head{
+  font-size:  40px;
+  margin-bottom: 20px;
+}
+
+.center{
+    height: 100%;
+    width: 100%;
+    background-color: #212121;
+    position: relative;
+    margin-bottom: 3%;
+
+   
+    padding-top: 10px;
+    padding-bottom: 10px;
+    box-shadow: 5px 0px 5px #d2cdcd;
+
+}
+.Logo{
+    padding-left: 5%;
+    margin-top:1%;
+}
+.bt_Young{
+   width: 30%;
+    border-radius: 50%;
+    cursor: pointer;
+}
+.bt_Adult{
+    width: 30%;
+    border-radius: 50%;
+    cursor: pointer;
+}
+ .Left{
+    text-align: right;
+    margin-right: 5%;
+}
+.Right{
+    text-align: left;
+    margin-left: 5%;
+} 
+.Adult{
+    text-align: right;
+    margin-right:15%;
+}
+.Children{
+    text-align: left;
+    margin-left: 12.8%;
+}
+
+    
+   
+ 
+    
+  

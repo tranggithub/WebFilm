@@ -45,3 +45,7 @@ def WatchFilm(request):
 def Detail(request):
   template = loader.get_template('.\Trailer_Detail\Trailer_Detail.html')
   return HttpResponse(template.render())
+
+def UserPacket(request):
+  template = loader.get_template('UserPacket\Service_pack.html')
+  return HttpResponse(template.render())

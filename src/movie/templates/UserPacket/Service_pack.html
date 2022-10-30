@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  {% load static %}
+  <meta charset="utf-8" />
+  <link rel="stylesheet" href="{% static 'css/UserPacket/style.css'%}" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700&display=swap" rel="stylesheet">
+  <title>Services | LTWFlix</title>
+</head>
+
+<body>
+  <div class="app__container">
+    <div class="grid">
+      <div class="center"> <img src="{% static 'css/UserPacket/image/Vector.png'%}" class="Logo"></div>
+      <div class="content Head"> Who's watching?</div>
+      <div class="grid__row">
+        <div class="grid__column-2 ">
+
+          <div class="bt__Chon Left">
+            <a href="{% url 'home' %}"><img src="{% static 'css/UserPacket/image/Adult.png'%}" class="bt_Adult"></a>
+          </div>
+          <div class="content Adult ">Adult</div>
+        </div>
+        <div class="grid__column-2">
+
+
+          <div class="bt__Chon Right">
+            <a href="{% url 'home' %}"><img src="{% static 'css/UserPacket/image/Young.png'%}" class="bt_Young"></a>
+          </div>
+          <div class="content Children ">Children</div>
+        </div>
+
+
+
+
+
+      </div>
+
+    </div>
+
+
+    <!-- <footer style="width:100%">
+                <div class="main-footer">
+                  <div class="main-footer-item"   >
+                    <div class="title-footer">ImgartStore</div>
+                    <div class="desc-footer">
+                      Contact us on
+                    </div>
+                    <div class="logo-social-network">
+                      <a href="https://www.facebook.com/profile.php?id=100077535672034">
+                        <i class="fab fa-facebook fa-icon"></i>
+                      </a>
+                      <a href="https://www.instagram.com/anht.hu0707/">
+                        <i class="fab fa-instagram fa-icon"></i>
+                      </a>
+                      <a href="https://mail.google.com/">
+                        <i class="fas fa-envelope fa-icon"></i>
+                      </a>
+                    </div>
+                    <div class="extra-footer-item">
+                      Copyright 2022 Movies, All right reserved.
+                    </div>
+                  </div>
+                 
+              </footer> -->
+
+</body>
+
+</html>
