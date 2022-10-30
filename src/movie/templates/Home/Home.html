@@ -62,21 +62,21 @@
                 <div class="grid__row-4">
 
                     <div class="grid_heading_play_info">
-                        <button type ="button" class="grid_heading_play_more"> 
-                            <i class="fas fa-play"></i>
-                            <a> Play</a>
-                        </button>
-                        <button type="button"  class="grid_heading_play_more"> 
-                            <i class="fas fa-exclamation-circle"></i>
-                            <a>More info</a>
-                        </button>
+                        <a class="grid_heading_play_more" href="{% url 'watch' %}"  style="text-decoration:none;"> 
+                                <i class="fas fa-play"></i>
+                                Play
+                        </a>
+                        <a href="{% url 'detail' %}"  class="grid_heading_play_more" style="text-decoration:none;"> 
+                                <i class="fas fa-exclamation-circle"></i>
+                                More info
+                        </a>
                     </div>
              
                  
                 </div>
                 <div class="grid__row-4-Body">
                     <div class="Head__Up">Trending</div>
-                    <a class="Head__See" href="Trending.html">See all</a>
+                    <a class="Head__See" href="{% url 'seeall_trending_english'%}">See all</a>
                 </div> 
                 <div class="grid__row-4">
                     <button class="column__movie">   
@@ -159,7 +159,7 @@
             </div>
             <div class="grid__column-2-right">
                 <div class="grid__row-4">
-                    <button class="button__Notifi"type="button" onclick="user()"><i class="far fa-bell"></i></button>
+                    <button class="button__Notifi"type="button" onclick="notify()"><i class="far fa-bell"></i></button>
                     <button class="button__User" type="button" onclick="user()"><img src="{% static 'css/Home/Logo/User.jpg' %}"></button>
                 </div>
                 <div class="grid__row-4__grid-Check">

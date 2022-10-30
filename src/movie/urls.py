@@ -14,4 +14,5 @@ urlpatterns = [
     path('watch/',views.WatchFilm, name='watch'),
     path('detail/',views.Detail, name='detail'),
     path('userpacket/',views.UserPacket, name='userpacket'),
+    path('seeall_trending_english/', views.SeeAll_Trending, name='seeall_trending_english'),
 ]

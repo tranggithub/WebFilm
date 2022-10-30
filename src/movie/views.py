@@ -18,6 +18,10 @@ def Home(request):
   template = loader.get_template('.\Home\Home.html')
   return HttpResponse(template.render())
 
+def SeeAll_Trending(request):
+  template = loader.get_template('.\Home\SeeAll_Trending_English.html')
+  return HttpResponse(template.render())
+
 def Loading_Circle(request):
   template = loader.get_template('.\Loading_Screen_Logo\loading_screen.html')
   return HttpResponse(template.render())

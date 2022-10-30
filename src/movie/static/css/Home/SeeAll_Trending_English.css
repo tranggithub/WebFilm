@@ -1,0 +1,252 @@
+
+.grid{ 
+    width: 120%;
+    max-width: 120%;
+    margin: 0 auto;
+    background: #292929;
+    font-family: 'Poppins', sans-serif;
+}
+
+.grid__row{
+    display: flex;
+    flex-wrap: wrap;
+    margin-left:-12px;
+    margin-right: -12px;
+    margin-top:-12px;
+    margin-bottom: -12px;
+}
+.grid__column-2{
+    position: fixed;
+    width: 17%;
+    background-color: #212121;
+    border-radius: 0px 30px 30px 0px;
+    height: 100%;  
+}
+.category__heading_Movibies{
+    margin-bottom: 20px;
+    text-align: center;
+    font-size: 30px;
+}
+.category__heading_Movibies img{
+    width:115px;
+}
+.button{
+    margin-top:26%;
+}
+.button ul{
+    margin-left: -50px;
+}
+.button li{
+    background-color:#212121;
+    list-style-type: none;
+
+}
+.button #main{
+    background-color: #50c5c1a2;
+    border-right: 5px solid #3DD2CC;
+}
+.button a{
+    font-size: 15px;
+    color:#CCCCCC;
+    display:flex;
+    text-align: center;
+    padding: 18px 0px 18px 60px;
+    text-decoration: none;
+
+}
+.button a:hover{  /*ree chuọt*/
+    background-color: #50c5c1a2;
+    color:aliceblue;
+}
+.button  label{
+    background:none;
+    padding-left:12px;
+    cursor: pointer;
+  
+}
+.button img{    /*icon*/
+    width:20px;
+    height:20px;
+   background: none;
+}
+.grid__column-8{
+    margin-left: 15%;
+    padding-left: 12px;
+    padding-right:12px;
+    width:62.5%;
+    position: relative;
+    display:-ms-flexbox;
+}
+.container__search{
+
+    height: 45px;
+    top: 44px;
+    margin-top: 30px;
+    margin-bottom: 20px;
+    margin-left: -15px;
+    display: inline-flex;
+    width: 100%;
+}
+.text__search{   
+
+    text-align: left;
+    margin-left: 30px;
+    font-family: 'Poppins';
+    font-style: normal;
+    display: inline;
+    font-size: 20px;
+    line-height: 38px;
+    color: #666666;
+    width: 100%;
+    text-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
+}
+.keyword{
+
+    background-color: rgb(46,45,45);
+    padding-left: 70px;
+    width: 76%;
+    height: 45px;
+    border-radius: 30px;
+    border: none;
+    font-size: 18px;
+    color: #CCCCCC;
+}
+.grid__row-4-Body{
+    justify-content: space-between;
+    display: flex;
+    margin-right: 4%;
+    margin-bottom: 3%;
+    margin-left: 2%;
+   
+}
+.Head__Up{      
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 20px;
+    color: #E8E8E8;
+}
+.grid__row-4{
+    display: flex;
+    flex-wrap: wrap;
+    margin-bottom: 2%;
+}
+.column__movie{   
+   border:none;
+   margin-right:8px;
+   background: none;
+   cursor:pointer;
+ 
+    filter: drop-shadow(0px 2px 4px rgba(0, 0, 0, 0.25));
+    border-radius: 20px;
+    margin-bottom:3%;
+}
+.column__movie img{
+    width:160px;
+    height:250px;
+    border-radius: 20px;
+}
+
+.fa-search{
+    width: 24px;
+    height: 24px; 
+    filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.2));
+   margin-left: 20px;
+    position: absolute;
+    margin-top: 16px;
+    
+}
+.button__User{
+
+    width: 50px;
+    height: 50px;
+
+    cursor: pointer;
+    background-color: #212121;
+    box-shadow: 0px 1px 2px rgb(35 34 34 / 25%);
+    border-radius: 40px;
+    border: none;
+   
+}
+.button__User img{
+    width:45px;
+    height:45px;
+    border-radius: 50%;
+}
+.button__Notifi{
+
+    width: 40px;
+    height: 40px;
+    border: none;
+    opacity: 50%;
+    cursor: pointer;
+    background: #434141;
+    box-shadow: 0px 1px 2px rgb(0 0 0 / 25%);
+    border-radius: 40px;
+    margin-right: 12px;
+}
+.button_Noti_user {
+    display: flex;
+}
+
+select{
+    padding-left:6px;
+}
+  .select_{
+    display: inline-flex;
+    margin-bottom: 15px;
+    margin-left: 1%;
+    margin-top: 1%;
+    width:95%;
+  }
+  .select p{
+    color: wheat;
+    margin-bottom: 10px;
+  }
+  .select{
+    width: 20%;
+  }
+  #select_properties{
+    width: 100%;
+    height: 40px;
+    cursor: pointer;
+    background: rgb(41, 41, 41);
+    color: white;
+    font-size: 15px;
+    border: 1.4px solid;
+    
+   }
+   #select_Type{
+    width: 100%;
+    height: 40px;
+    cursor: pointer;
+    background: rgb(41, 41, 41);
+    color: white;
+    font-size: 15px;
+    border: 1.4px solid;
+    border-radius: 20px;
+    border-radius: 15px 0px 0px 15px;
+   }
+   #select_Movie_Genre{
+    width: 100%;
+    height: 40px;
+    cursor: pointer;
+    background: rgb(41, 41, 41);
+    color: white;
+    font-size: 15px;
+    border: 1.4px solid;
+    border-radius: 20px;
+    border-radius: 0px 15px 15px 0px;
+   }
+  /* .Text_Select{
+    display: inline-flex;
+    height: 50px;
+    margin-left: 1%;
+  }
+  .Text_Select h4{
+    width: 150px;
+    color: aliceblue; 
+  }  */
+
+  
+
