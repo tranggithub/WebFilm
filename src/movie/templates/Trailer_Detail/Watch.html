@@ -30,7 +30,9 @@
                         <img src="{% static 'css/Trailer_Detail/image/icon/icons8-notification-30.png'%}">
                     </button>
                     <button class="user" type="button" onclick="user()">
-                        <img src="{% static 'css/Trailer_Detail/image/user.png'%}">
+                        <a href="{% url 'info' %}">
+                            <img src="{% static 'css/Trailer_Detail/image/user.png'%}">
+                        </a>
                     </button>
                     <div class="top_left">
                         <form method="GET" id="from-search" action="https://movie.HD/search/" style="width:auto">
