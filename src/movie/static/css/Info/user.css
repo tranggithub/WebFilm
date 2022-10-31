@@ -161,10 +161,9 @@ p{
 .pic{
     border: none;
     color: white;
-    padding: 10px 25px;
-    font-size: 15px;
+    padding: 10px 20px;
+    font-size: 16px;
     cursor: pointer;
     background-color: #3DD2CC;
     border-radius: 10%;
-    margin-right:10px;
 }
