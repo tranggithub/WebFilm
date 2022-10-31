@@ -26,16 +26,19 @@
     animation: spin 2s linear infinite;
   }
 
-  .loader-wrapper {
-    width:100%;
-    background: black;
-    position: fixed;
-    height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  .sign_up{
+.loader-wrapper {
+  position: fixed;
+  width:100%;
+  top: 0;
+  left: 0;
+  background: black;
+  position: fixed;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+  /* .sign_up{
     position:fixed;
     width: 120px;
     Height: 120px;
@@ -54,8 +57,35 @@
     align-items: center;
     justify-content: center;
   }
-  /* tao animation */
+  tao animation
   @keyframes spin {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
-  }
+  } */
+
+.sign_up-wapper{
+  position: fixed;
+  width:100%;
+  top: 0;
+  left: 0;
+  background: black;
+  position: fixed;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.sign_up{
+  position:fixed;
+  width: 120px;
+  Height: 120px;
+  left: 45%;
+  right: 45.51%;
+  top: 40%;
+  bottom: 46%;
+  animation: spin 2s linear infinite;
+}
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}

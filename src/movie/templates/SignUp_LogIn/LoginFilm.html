@@ -43,7 +43,7 @@
                 <div class="Forgot_password">
                     <a href="">Forgot password</a>
                 </div>
-                <a href="{% url 'home' %}">
+                <a href="{% url 'userpacket' %}">
                     <button class="LoginButton">Log in</button>
                 </a>
                 <div class="NoAccount">
@@ -69,5 +69,14 @@
                 </div>
             </div>
         </div>
+        <div class="sign_up-wapper">
+            <img class="sign_up" src="{% static 'css/Loading_Screen_Logo/logo.png'%}" alt="Logo">
+        </div>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script>
+            $(window).on("load", function(){
+                $(".sign_up-wapper").fadeOut(1000);
+            });
+        </script>
     </body>
 </html>
