@@ -7,6 +7,11 @@
     <body>
         <a href="{%url 'home'%}" class="home"><i class="fa fa-home"></i></a>
         <img src="{% static 'css/Info/Logo/avatar.png' %}" alt="Avatar" style="border-radius: 50%; width:160px;height:150px; position: absolute; left: 45%; top:7%;">
+        <div style="margin-top:15%; margin-left: 47%; margin-bottom: -12%;">
+            <a class="changepi" href="{% url 'change_picture'%}">
+                Upload Image
+            </a>
+        </div>
         <h1>Your profile</h1>
         <section style="margin-top: 17%; margin-left: 10%; margin-right: 20%;">
         <div>
@@ -39,21 +44,6 @@
         <div>
             <h4>Email</h4>
             <p>phanthituyetlan471@gmail.com</p>
-            <aside style="margin-top:-3%">
-                <a href="{% url 'change_mail' %}">
-                <button class="btn" style="margin-left:93%;margin-bottom: -5%;"><i class="fa fa-pencil"></i></button>
-                </a>
-            </aside>
-        </div>
-        
-        <div>
-            <h4>Profile picture</h4>
-                <p>Add profile picture</p>
-                <aside style="margin-top:-3%">
-                    <a href="{% url 'change_picture'%}">
-                    <button class="btn" style="margin-left:93%;margin-bottom: -5%;"><i class="fa fa-pencil"></i></button>
-                    </a>
-                </aside>
         </div>
         <div style="margin-top:30px;">
             <a class="changepw" href="{% url 'change_password' %}">
