@@ -7,9 +7,9 @@
     <body>
         <a href="{%url 'home'%}" class="home"><i class="fa fa-home"></i></a>
         <img src="{% static 'css/Info/Logo/avatar.png' %}" alt="Avatar" style="border-radius: 50%; width:160px;height:150px; position: absolute; left: 45%; top:7%;">
-        <div style="margin-top:15%; margin-left: 47%; margin-bottom: -12%;">
-            <a class="changepi" href="{% url 'change_picture'%}">
-                Upload Image
+        <div>
+            <a href="{% url 'change_picture' %}" id="changepic" >
+                Upload image
             </a>
         </div>
         <h1>Your profile</h1>
