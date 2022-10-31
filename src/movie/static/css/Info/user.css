@@ -153,15 +153,18 @@ p{
   text-decoration: none;  
   background:#3DD2CC;
   color:aliceblue;
-  margin-left:170px;
+  margin-left:200px;
   padding:10px 20px;
   border-radius: 10px;
 }
-.changepi{
-  text-decoration: none;  
-  background-color:#3DD2CC;
-  color:aliceblue;
-  margin-left:400px;
-  padding:10px 20px;
-  border-radius: 10px;
+.pic{
+    border: none;
+    color: white;
+    padding: 7px 14px;
+    font-size: 12px;
+    cursor: pointer;
+    background-color: #3DD2CC;
+    border-radius: 8%;
+    width:125px;
+    margin-right:10px;
 }
