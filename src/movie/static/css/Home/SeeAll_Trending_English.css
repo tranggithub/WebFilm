@@ -216,7 +216,7 @@ select{
     border: 1.4px solid;
     
    }
-   #select_Type{
+    #select_Sort{
     width: 100%;
     height: 40px;
     cursor: pointer;
@@ -227,7 +227,7 @@ select{
     border-radius: 20px;
     border-radius: 15px 0px 0px 15px;
    }
-   #select_Movie_Genre{
+   #select_Category{
     width: 100%;
     height: 40px;
     cursor: pointer;
@@ -238,15 +238,6 @@ select{
     border-radius: 20px;
     border-radius: 0px 15px 15px 0px;
    }
-  /* .Text_Select{
-    display: inline-flex;
-    height: 50px;
-    margin-left: 1%;
-  }
-  .Text_Select h4{
-    width: 150px;
-    color: aliceblue; 
-  }  */
 
   
 
