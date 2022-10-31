@@ -43,7 +43,9 @@
                 <div class="Forgot_password">
                     <a href="">Forgot password</a>
                 </div>
-                <button class="LoginButton">Log in</button>
+                <a href="{% url 'home' %}">
+                    <button class="LoginButton">Log in</button>
+                </a>
                 <div class="NoAccount">
                     <p>Don’t have an account ? <a href="{% url 'sign_up' %}" class="hyperlink">Sign up for free</a></p>
                 </div>
