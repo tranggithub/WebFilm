@@ -153,6 +153,7 @@ p{
   text-decoration: none;  
   background:#3DD2CC;
   color:aliceblue;
+  margin-left:23%;
   padding:10px 20px;
   border-radius: 10px;
   margin-top:30%;
@@ -164,7 +165,7 @@ p{
     font-size: 12px;
     cursor: pointer;
     background-color: #3DD2CC;
-    border-radius: 8%;
+    border-radius: 10%;
     width:125px;
     margin-right:10px;
 }
