@@ -5,6 +5,4 @@ from .models import Movie
 
 
 
-
-
 admin.site.register(Movie)
