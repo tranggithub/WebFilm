@@ -342,8 +342,9 @@ input
 }
 .Login .Login_Left .LoginWithGoogle:hover
 {
+    background-color: white;
     color: black;
-    background-color: #4D4B4B;
+    border: 2px solid #4D4B4B;
 }
 .Login .Login_Left .line-1
 {
@@ -461,8 +462,9 @@ input
 
 .Login .Login_Left .LoginButton:hover
 {
-    background: #4D4B4B;
+    background-color: black;
     color: white;
+    border-color: white;
 }
 .Login .Login_Left .NoAccount
 {
