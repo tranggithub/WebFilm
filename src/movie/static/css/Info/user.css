@@ -167,3 +167,6 @@ p{
     background-color: #3DD2CC;
     border-radius: 10%;
 }
+.pic:hover{
+  background:  #19706e;
+}
