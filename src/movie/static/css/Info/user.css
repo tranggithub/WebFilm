@@ -153,10 +153,15 @@ p{
   text-decoration: none;  
   background:#3DD2CC;
   color:aliceblue;
+<<<<<<< HEAD
   margin-left:200px;
+=======
+>>>>>>> 8f9d6bbf8722444b2ad1902180687ed113ab3dc1
   padding:10px 20px;
   border-radius: 10px;
+  margin-top:30%;
 }
+<<<<<<< HEAD
 .pic{
     border: none;
     color: white;
@@ -168,3 +173,5 @@ p{
     width:125px;
     margin-right:10px;
 }
+=======
+>>>>>>> 8f9d6bbf8722444b2ad1902180687ed113ab3dc1
