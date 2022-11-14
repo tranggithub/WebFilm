@@ -110,8 +110,11 @@ def ChangeMail(request):
   return HttpResponse(template.render())
 
 def ChangeName(request):
-  template = loader.get_template('.\Info\change_name.html')
-  return HttpResponse(template.render())
+  if request.method == "POST":
+    request.user.first_name = request.POST.get('firstname')
+    request.user.save()
+    return redirect('/movies/info')
+  return render(request,".\Info\change_name.html")
 
 def ChangePassword(request):
   template = loader.get_template('.\Info\change_password.html')
