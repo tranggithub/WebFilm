@@ -93,8 +93,9 @@ def UserPacket(request):
   return HttpResponse(template.render())
 
 def Info(request):
-  template = loader.get_template('.\Info\info.html')
-  return HttpResponse(template.render())
+  nm = request.user.first_name
+  mail = request.user.email
+  return render(request,".\Info\info.html",{'name':nm, 'email':mail})
 
 def ChangeBDate(request):
   template = loader.get_template('.\Info\change_date.html')
