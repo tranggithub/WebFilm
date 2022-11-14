@@ -26,16 +26,22 @@
                 <div class="line-1" style="left: 29%;"></div>
                 <div class="line-1" style="left: 57%;"></div>
                 <div class="or">or</div>
-                <div class="Input">
-                    <p>
-                        <Label class="bold" style="margin-right: 1.86cm;">Email:</Label>
-                        <input class="Input_box" type="email" name="email" id="id_email" placeholder="Your Email">
-                    </p>
-                    <p>
-                        <Label class="bold" style="margin-right: 1.19cm;">Password:</Label>
-                        <input class="Input_box" type="password" name="password1" id="id_password1" placeholder="Password"></li>
-                    </p>
-                </div>
+                <form method="POST">
+                    {% csrf_token %}
+                    <div class="Input">
+                        <p>
+                            <Label class="bold" style="margin-right: 1.06cm;">Username:</Label>
+                            <input class="Input_box" type="text" name="username" id="id_username" placeholder="Your Username">
+                        </p>
+                        <p>
+                            <Label class="bold" style="margin-right: 1.19cm;">Password:</Label>
+                            <input class="Input_box" type="password" name="password" id="id_password1" placeholder="Password"></li>
+                        </p>
+                    </div>
+
+                    <button type="submit" class="LoginButton">Log in</button>
+                </form>
+                
                 <div class="Checkbox_content">
                     <input type="checkbox" class="Checkbox">
                     <p class="content">Remember me for 30 days</p>
@@ -43,9 +49,7 @@
                 <div class="Forgot_password">
                     <a href="">Forgot password</a>
                 </div>
-                <a href="{% url 'userpacket' %}">
-                    <button class="LoginButton">Log in</button>
-                </a>
+
                 <div class="NoAccount">
                     <p>Don’t have an account ? <a href="{% url 'sign_up' %}" class="hyperlink">Sign up for free</a></p>
                 </div>

@@ -1,11 +1,13 @@
 
-from django.urls import path
+from django.urls import path, include
 from .views import MovieList, MovieDetailView
 from . import views
+
 urlpatterns = [
     #test
     path('', MovieList.as_view(), name='movie_list'),
     path('<int:pk>', MovieDetailView.as_view(), name='movie_detail'),
+    path("accounts/", include("django.contrib.auth.urls")),
 
     path('home/',views.Home, name='home'),
     path('loading_circle/',views.Loading_Circle,name='loading_circle'),
