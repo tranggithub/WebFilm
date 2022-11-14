@@ -3,7 +3,7 @@ from django.http import HttpResponse
 from pyexpat import model
 from django.template import loader
 from django.shortcuts import render, redirect
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 from django.contrib import messages
 # Create your views here.
@@ -47,16 +47,18 @@ def LogIn(request):
       user = authenticate(request,username=name,password=passwd)
       if user is not None:
         login(request, user)
-        messages.success(request,"Login successfully")
+        messages.success(request,"Log in successfully")
         return redirect('/movies/userpacket')
       else:
         messages.error(request,"Invalid Username or Password")
         return redirect('/movies/log_in')
     return render(request,".\SignUp_LogIn\LogInFilm.html")
 
-# def LogIn(request):
-#   template = loader.get_template('.\SignUp_LogIn\LogInFilm.html')
-#   return HttpResponse(template.render())
+def LogOut(request):
+  if request.user.is_authenticated:
+    logout(request)
+    messages.success(request,"Log out successfully")
+    return redirect('/movies/log_in')
 
 def Movies(request):
   template = loader.get_template('.\Movies\movies.html')
