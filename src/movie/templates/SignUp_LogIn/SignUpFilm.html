@@ -48,28 +48,35 @@
                 <div class="Subtitle1">
                     <p style="color: #BABABAB2;">Let's get started with your 30 days free trial</p>
                 </div>
-                <div class="Input">
-                    <p>
-                        <Label class="bold" style="margin-right: 3cm;">Name:</Label>
-                        <input class="Input_box" type="name" name="name" id="id_name" placeholder="Your Name">
-                    </p>
-                    <p>
-                        <Label class="bold" style="margin-right: 3.1cm;">Email:</Label>
-                        <input class="Input_box" type="email" name="email" id="id_email" placeholder="Your Email">
-                    </p>
-                    <p>
-                        <Label class="bold" style="margin-right: 2.5cm;">Password:</Label>
-                        <input class="Input_box" type="password" name="password1" id="id_password1" placeholder="Password"></li>
-                    </p>
-                    <p>
-                        <Label class="bold" style="margin-right: 1cm;">Confirm password:</Label>
-                        <input class="Input_box" type="password" name="password2" id="id_password2" placeholder="Comfirm Password"></li>
-                    </p>
-                </div>
-                <div class="Button">
-                    <button class="CreateButton">Create account</button>
-                    <button class="SignUpWithGoogleButton">Sign up with Google</button>
-                </div>
+                <form method="POST">
+                    {% csrf_token %}
+                    <div class="Input">
+                        <p>
+                            <Label class="bold" style="margin-right: 2.3cm;">Username:</Label>
+                            <input class="Input_box" type="text" name="username" id="id_username" placeholder="Username" required>
+                        </p>
+                        <p>
+                            <Label class="bold" style="margin-right: 3cm;">Name:</Label>
+                            <input class="Input_box" type="name" name="name" id="id_name" placeholder="Your Name" required>
+                        </p>
+                        <p>
+                            <Label class="bold" style="margin-right: 3.1cm;">Email:</Label>
+                            <input class="Input_box" type="email" name="email" id="id_email" placeholder="Your Email" required>
+                        </p>
+                        <p>
+                            <Label class="bold" style="margin-right: 2.5cm;">Password:</Label>
+                            <input class="Input_box" type="password" name="password1" id="id_password1" placeholder="Password" required></li>
+                        </p>
+                        <p>
+                            <Label class="bold" style="margin-right: 1cm;">Confirm password:</Label>
+                            <input class="Input_box" type="password" name="password2" id="id_password2" placeholder="Comfirm Password" required></li>
+                        </p>
+                    </div>
+                    <div class="Button">
+                        <button type="submit" class="CreateButton">Create account</button>
+                        <button class="SignUpWithGoogleButton">Sign up with Google</button>
+                    </div>
+                </form>
                 <div class="Subtitle2">
                     <p style="color: #BABABAD9;">
                         Already have an account? <a href="{% url 'log_in' %}" style="color:#FEFEFE"> Log In</a>
