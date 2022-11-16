@@ -14,7 +14,7 @@ CATEGORY_CHOICE = (
 )
 
 LAGUAGE_CHOICES = (
-    ('EN','ENDLISH'),
+    ('EN','ENGLISH'),
     ('VI','VIETNAM'),
 )
 
@@ -23,6 +23,14 @@ STATUS_CHOICES = (
     ('MW','MOST WATCHED'),
     ('TR', 'TOP RATED'),
 )
+
+# class Actor(models.Model):
+#     name = models.CharField(max_length=255, null=False, blank=False)
+#     character = models.CharField(max_length=255, null=False, blank=False)
+
+#     def __str__(self):
+#         return str(self.name)
+
 class Movie(models.Model):
     title = models.CharField(max_length=225)
     description = models.TextField(max_length=1000)
@@ -32,6 +40,7 @@ class Movie(models.Model):
     status = models.CharField(choices=STATUS_CHOICES,max_length=2)
     year_of_production = models.DateField()
     views_count = models.IntegerField(default=0)
+    # actors = models.ManyToManyField(Actor)
 
     def __str__(self):
         return str(self.title) 
