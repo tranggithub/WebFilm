@@ -24,12 +24,12 @@ STATUS_CHOICES = (
     ('TR', 'TOP RATED'),
 )
 
-# class Actor(models.Model):
-#     name = models.CharField(max_length=255, null=False, blank=False)
-#     character = models.CharField(max_length=255, null=False, blank=False)
-
-#     def __str__(self):
-#         return str(self.name)
+class Cast_and_Crew(models.Model):
+    name = models.CharField(max_length=255)
+    character = models.CharField(max_length=255)
+    image = models.ImageField(upload_to='movie', null=True)
+    def __str__(self):
+        return str(self.name) + " - " + self.character
 
 class Movie(models.Model):
     title = models.CharField(max_length=225)
@@ -40,7 +40,19 @@ class Movie(models.Model):
     status = models.CharField(choices=STATUS_CHOICES,max_length=2)
     year_of_production = models.DateField()
     views_count = models.IntegerField(default=0)
-    # actors = models.ManyToManyField(Actor)
+    director = models.CharField(max_length=100, null=True)
+    writers = models.CharField(max_length=255, null=True)
+    #stars
+    episodes = models.PositiveIntegerField(null=True)
+
+    cast_and_crew = models.ManyToManyField(Cast_and_Crew)
 
     def __str__(self):
         return str(self.title) 
+
+class Episode(models.Model):
+    title = models.ForeignKey(Movie, on_delete=models.CASCADE)
+    # episodes = models.AutoField()
+    number_episode = models.IntegerField(default=1)
+    
+
