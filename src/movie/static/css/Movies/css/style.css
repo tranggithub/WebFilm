@@ -71,7 +71,7 @@
     background-color: #50c5c1a2;
     border-right: 5px solid #3DD2CC;
 }
-.button li a{
+.button a{
     font-size: 15px;
     color:#CCCCCC;
     display:flex;
@@ -141,7 +141,7 @@
     height: 30px;
     filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.2));
 }
-.log__out{
+/* .log__out{
     margin-left: -5px;
     text-align: center;
     font-family: 'Poppins';
@@ -152,7 +152,7 @@
     color: #666666;
     text-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
     margin-bottom: 20px;
-}
+} */
 
 .container__search{
     height: 45px;

@@ -15,7 +15,7 @@
 }
 
 .left{
-    height:fixed;
+    position:fixed;
     background-color:#212121;
     border-top-right-radius: 20px;
     border-bottom-right-radius: 20px;
@@ -71,7 +71,6 @@
 
 .center{
     width:100%;
-    height:600px;
     overflow-x:auto;
     color:#cccccc;
     padding-left:40px;

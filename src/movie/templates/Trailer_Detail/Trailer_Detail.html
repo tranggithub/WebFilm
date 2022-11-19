@@ -79,27 +79,29 @@
                             <div class="title_movies">
                                 <h5>
                                     <ul>
-                                        <li id="first_ele">Top Gun: Maverick</li>
-                                        <li>2022</li>
+                                        <li id="first_ele">Top Gun: Maverick</li> <!--{{movie.title}}-->
+                                        <li>1-11-2022</li>   
                                         <li>PG-13</li>
                                         <li>2h10m</li>
                                     </ul>
                                 </h5>
+                                <br>
+                                <br>
                                 <h6 style="font-size:10px;color:aliceblue">
-                                    <label>Action</label>
+                                    <label>Action</label>   <!--{{movie.category}}-->
                                     <label>Drama</label>
                                </h6>
-                               <p style="font-size:12px; margin-bottom:10px;">
+                               <p style="font-size:12px; margin-bottom:10px;">    <!--{{movie.description}}-->
                                    <br>After thrity years, Maverick is still pushing the envelope as a top naval aviator,
-                                   but must confront<br> ghosts of his past when he leads TOP GUN's elite graduates
-                                   on a mission that demands the<br> ultimate sacrifice from those chosen to fly it.
+                                   but must confront ghosts of his past when he leads TOP GUN's elite graduates
+                                   on a mission that demands the ultimate sacrifice from those chosen to fly it. 
                                </p>
                             </div>
                             <div class="info">  <!--Thông tin đạo diễn, diễn viên-->
                                 <hr>
-                                <p>Director :  <span style="color:cadetblue">Joseph Kosinski</span></p>
+                                <p>Director :  <span style="color:cadetblue">Joseph Kosinski</span></p>     <!--{{movie.director}}-->
                                 <hr>
-                                <p>Writers : <span style="color:cadetblue">Jim Cash, Jack Epps Jr, Peter Craig</span></p>
+                                <p>Writers : <span style="color:cadetblue">Jim Cash, Jack Epps Jr, Peter Craig</span></p>    <!--{{movie.writers}}-->
                                 <hr>
                                 <p>Stars : <span style="color:cadetblue">Tom Cruise, Jennifer Connelly, Miles Teller</span></p>
                                 <hr>
@@ -214,12 +216,12 @@
                                 <hr style="margin-bottom:10px;">
                                 <img src="{% static 'css/Trailer_Detail/image/movie.jpg'%}" alt="movie" >
                                 <h4 style="margin-top:15px;">
-                                        'Top Gun' Trivia, Facts, and Figures
+                                        'Top Gun' Trivia, Facts, and Figures    <!--{{movie.more}}-->
                                 </h4>
                                 <p>
-                                    How exensive was Top Gun to make? In this <br>epsoide of 'By the Numbers', we
-                                    break down<br> all the statistics you need to know (and<br> some you don't) of the
-                                    original '80s classic<br> 'Top Gun.'
+                                    How exensive was Top Gun to make? In this epsoide of 'By the Numbers', we
+                                    break down all the statistics you need to know (and some you don't) of the
+                                    original '80s classic 'Top Gun.'
                                 </p>
                                 <a href="https://www.trivianerd.com/collection/top-gun-trivia">Learn more</a>
                             </div>
@@ -229,9 +231,9 @@
                                 <div class="similar">
                                     <ul>
                                         <li>
-                                            <button class="movie_button" type="button" onclick="Top_Gun2()">
+                                            <button class="movie_button" type="button" onclick="Top_Gun2020()">
                                                 
-                                                <img src="{% static 'css/Trailer_Detail/image/Top_Gun2.jpg'%}" alt="Top Gun 2">
+                                                <img src="{% static 'css/Trailer_Detail/image/Top_Gun2020.jpg'%}" alt="Top Gun 2020">
                                             </button>
                                         </li>
                                         <li>
@@ -313,7 +315,7 @@
                                 </li>
                                 <li id="news">
                                     <a href="https://www.gq.com/story/2022-summer-movie-guide-doctor-strange-top-gun-maverick-thor-love-and-thunder#:~:text=Summer%20Movies%202022%3A%2020%20Movies%20Worth%20Watching%20This,8%20Elvis%20%28in%20theaters%20June%2024%29%20More%20items">
-                                        <div style="margin-bottom:40px;">
+                                        <div>
                                             <img src="{% static 'css/Trailer_Detail/image/news-movies.jpg'%}" alt="news movie" style="margin-left:55px">
                                             <label>2022 Summer Move Guide</label>
                                         </div>
@@ -322,7 +324,7 @@
                                 </li>
                                 <li id="news">
                                     <a href="https://www.imdb.com/list/ls560301026/">
-                                        <div style="margin-bottom:20px;">
+                                        <div>
                                             <img src="{% static 'css/Trailer_Detail/image/upcoming.jpg'%}" alt="upcoming action" style="margin-left:18px;">
                                             <label>Upcoming Action and Adventure<br> Movies and TV</label>
                                         </div>
