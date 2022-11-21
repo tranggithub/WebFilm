@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <body>
         <a href="{%url 'home'%}" class="home"><i class="fa fa-home"></i></a>
-        <img src="{% static 'css/Info/Logo/avatar.png' %}" alt="Avatar" style="border-radius: 50%; width:160px;height:150px; position: absolute; left: 45%; top:7%;">
+        <img src="{{avatar}}"  alt="Avatar" style="border-radius: 50%; width:160px;height:150px; position: absolute; left: 45%; top:7%;">
         <div style="margin-top:15%; margin-left: 45%; margin-bottom: -12%;">
             <a href="{% url 'change_info'%}">
                     <button class="pic">Update Picture</button>

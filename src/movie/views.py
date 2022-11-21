@@ -112,7 +112,7 @@ def Info(request):
   nm = request.user.first_name
   mail = request.user.email
   sex = request.user.profile.get_gender_display
-  ava = request.user.profile.avatar
+  ava = request.user.profile.avatar.url
   bd = request.user.profile.birthday
   return render(request,".\Info\info.html",{'name':nm, 'email':mail, 'gender':sex,'avatar':ava,'birthday':bd})
 
