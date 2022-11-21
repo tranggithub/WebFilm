@@ -5,6 +5,9 @@ from statistics import mode
 from django.db import models
 # from multiselectfield import Multiselectfield
 
+from django.contrib.auth.models import User
+from django.dispatch import receiver
+from django.db.models.signals import post_save
 # Create your models here.
 CATEGORY_CHOICE = (
     ('A','ACTION'),
@@ -24,7 +27,12 @@ STATUS_CHOICES = (
     ('MW','MOST WATCHED'),
     ('TR', 'TOP RATED'),
 )
-
+GENDER_CHOICES = (
+    ('F','FEMALE'),
+    ('M','MALE'),
+    ('O', 'OTHERS'),
+    ('N', 'NO INFORMATION'),
+)
 class Cast_and_Crew(models.Model):
     title_movie = models.CharField(max_length=255)
     name = models.CharField(max_length=255)
@@ -60,3 +68,17 @@ class Episode(models.Model):
     number_episode = models.IntegerField(default=1)
     
 
+class Profile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    avatar = models.ImageField(upload_to='user_profile',null=True)
+    birthday = models.DateField(null=True, blank=True)
+    gender = models.CharField(choices=GENDER_CHOICES,max_length=1,default='N')
+
+    def __str__(self):
+        return self.user.username
+
+# Tin hieu thong bao them user moi -> Them Profile moi
+@receiver(post_save, sender=User)
+def create_user_profile(sender,instance,created,**kwargs):
+    if created:
+        Profile.objects.create(user=instance)
