@@ -12,18 +12,17 @@
             <div class="left">
                 <img id="brandname" src="{% static 'css/Trailer_Detail/image/icon/BrandNameLogin.png'%}" >
                 <div class="button">
-                    <ul>
+                    <ul style="    background-color:#212121;">
                         <li><a href="{% url 'home' %}"><img src="{% static 'css/Trailer_Detail/image/icon/icons8-home-page-48.png'%}" alt="home"><label><b style="background:none;">Home</b></label></a></li>
                         <li><a id="main" href="{% url 'movies' %}"><img src="{% static 'css/Trailer_Detail/image/icon/icons8-video-call-48.png'%}" alt="movies"><label><b style="background:none;">Movies</b></label></a></li>
-                        <li><a href="{% url 'movies'%}#TVseries"><img id="series" src="{% static 'css/Trailer_Detail/image/icon/icons8-tv-48.png'%}" alt="series"><label><b style="background:none;">TV Series</b></label></a></li>
-                        <li><a href="{%url 'movies'%}#Upcoming"><img src="{% static 'css/Trailer_Detail/image/icon/icons8-calendar-48.png'%}" alt="upcoming"><label><b style="background:none;">Upcoming</b></label></a></li>
+                        <li><a href="{% url 'home'%}#TVseries"><img id="series" src="{% static 'css/Trailer_Detail/image/icon/icons8-tv-48.png'%}" alt="series"><label><b style="background:none;">TV Series</b></label></a></li>
+                        <li><a href="{% url 'home' %}#Upcoming"><img src="{% static 'css/Trailer_Detail/image/icon/icons8-calendar-48.png'%}" alt="upcoming"><label><b style="background:none;">Upcoming</b></label></a></li>
                         <li><a href="#"><label><b style="background:none;">Library</b></label></a></li>
-                        
+                        <li style="margin-top:30%;"><a href="{% url 'log_out' %}"><img src="{% static 'css/Trailer_Detail/image/icon/icons8-logout-acc-48.png'%}" alt="logout"><label><b style="background:none;">Logout</b></label></a></li>
                     </ul>
                 </div>
                 <div class="logout">
-                    <a href="{% url 'log_out'%}"><img src="{% static 'css/Trailer_Detail/image/icon/icons8-logout-acc-48.png'%}" alt="logout"><label><b style="background:none;">Logout</b></label></a>
-                </div>
+                     </div>
             </div>
             <div class="center">
                 <div class="top">

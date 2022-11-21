@@ -7,19 +7,23 @@
     background-color: #292929;
     font-family:'Poppins', sans-serif ;
     line-height:22px;
+
 }
 
 .Container{
     width:100%;
-    display:flex;
+    display:block;
 }
 
 .left{
     position:fixed;
+    top:0;
     background-color:#212121;
     border-top-right-radius: 20px;
     border-bottom-right-radius: 20px;
-    width:20%;
+    height:100%;
+    width:220px;
+    float:left;
 }
 
 #brandname{
@@ -41,7 +45,7 @@
     background-color: #50c5c1a2;
     border-right: 5px solid #3DD2CC;
 }
-.button a, .logout a{
+.button a{
     background-color:#212121;
     font-size: 15px;
     color:#CCCCCC;
@@ -50,30 +54,27 @@
     padding: 16px 0px 16px 40px;
     text-decoration: none;
 }
-.logout{    /*button logout*/
-    background-color:#212121;
-    margin-top:50%;
-}
-.button a:hover, .logout a:hover{  /*ree chuọt*/
+.button a:hover{  /*ree chuọt*/
     background-color: #50c5c1a2;
     color:aliceblue;
 }
-.button label, .logout label{
+.button label{
     cursor:pointer;
     background:none;
     padding-left:12px;
 }
-.button img, .logout img{    /*icon*/
+.button img{    /*icon*/
     width:20px;
     height:20px;
     background:none;
 }
 
 .center{
-    width:100%;
+    width:83%;
     overflow-x:auto;
     color:#cccccc;
     padding-left:40px;
+    float:right;
 }
 .top{
     display:inline-block;
