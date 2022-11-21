@@ -3,6 +3,7 @@ from email.mime import image
 from pydoc import describe
 from statistics import mode
 from django.db import models
+# from multiselectfield import Multiselectfield
 
 # Create your models here.
 CATEGORY_CHOICE = (
@@ -25,13 +26,14 @@ STATUS_CHOICES = (
 )
 
 class Cast_and_Crew(models.Model):
+    title_movie = models.CharField(max_length=255)
     name = models.CharField(max_length=255)
     character = models.CharField(max_length=255)
     sub_character = models.CharField(max_length=255, blank=True) #not required
     image = models.ImageField(upload_to='cast')
     
     def __str__(self):
-        return str(self.name) + " - " + self.character
+        return str(self.name) + ' - ' + self.character
 
 class Movie(models.Model):
     title = models.CharField(max_length=225)
@@ -47,7 +49,7 @@ class Movie(models.Model):
     #stars
     episodes = models.PositiveIntegerField(default=1)
 
-    # cast_and_crew = models.ManyToManyField(Cast_and_Crew)
+    cast_and_crew = models.ManyToManyField(Cast_and_Crew)
 
     def __str__(self):
         return str(self.title) 
