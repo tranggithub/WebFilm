@@ -236,3 +236,12 @@ animation: spin 2s linear infinite;
 .pic:hover{
   background:  #19706e;
 }
+ul
+{
+  color: aliceblue;
+  margin-left: 14.2%;
+}
+.errorlist
+{
+  color:crimson;
+}
