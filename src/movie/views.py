@@ -118,29 +118,25 @@ def Info(request):
 
 #Đồng nhất khi thay đổi dữ liệu
 @transaction.atomic
-def ChangeBDate(request):
-  template = loader.get_template('.\Info\change_date.html')
-  return HttpResponse(template.render())
-
-def ChangeGender(request):
-  template = loader.get_template('.\Info\change_gender.html')
-  return HttpResponse(template.render())
-
-def ChangeMail(request):
-  template = loader.get_template('.\Info\change_mail.html')
-  return HttpResponse(template.render())
-
-def ChangeName(request):
+def ChangeInfo(request):
   if request.method == "POST":
-    request.user.first_name = request.POST.get('firstname')
-    request.user.save()
-    return redirect('/movies/info')
-  return render(request,".\Info\change_name.html")
+    user_form = UserForm(request.POST, instance=request.user)
+    user_profile_form = ProfileForm(request.POST, instance=request.user.profile)
+    if user_form.is_valid() and user_profile_form.is_valid():
+      user_form.save()
+      user_profile_form.save()
+      messages.success(request,"Change birthday successfully")
+      return redirect('/movies/info')
+    else:
+      messages.error(request,"Invalid value")
+  else:
+    user_form = UserForm(instance=request.user)
+    user_profile_form = ProfileForm(instance=request.user.profile)
+  return render(request,'.\Info\change_info.html',{'u_form':user_form, 'p_form':user_profile_form}) 
+  # template = loader.get_template('.\Info\change_date.html')
+  # return HttpResponse(template.render())
+
 
 def ChangePassword(request):
   template = loader.get_template('.\Info\change_password.html')
-  return HttpResponse(template.render())
-
-def ChangePicture(request):
-  template = loader.get_template('.\Info\change_picture.html')
   return HttpResponse(template.render())

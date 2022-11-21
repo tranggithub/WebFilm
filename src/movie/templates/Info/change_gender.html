@@ -11,6 +11,9 @@
         </div>
 
         <div class="col-75">
+            <form method="POST">
+                {% csrf_token %}
+            </form>
             <select name="gender" id="fname">
                 <option value=""></option>
                 <option value="Male">Male</option>
