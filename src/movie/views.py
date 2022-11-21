@@ -1,4 +1,4 @@
-from ast import Mod
+﻿from ast import Mod
 from django.http import HttpResponse
 from pyexpat import model
 from django.template import loader
@@ -6,31 +6,18 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 from django.contrib import messages
+from django.db import transaction
+from django.contrib.auth.decorators import login_required
+from django import forms
 # Create your views here.
 from django.views.generic import ListView, DetailView
-from .models import Movie
+from .models import Movie, Profile
 
 class MovieList (ListView):
     model = Movie
     
 class MovieDetailView (DetailView):
     model = Movie
-
-def Home(request):
-  template = loader.get_template('.\Home\Home.html')
-  return HttpResponse(template.render())
-
-def SeeAll_Trending(request):
-  template = loader.get_template('.\Home\SeeAll_Trending_English.html')
-  return HttpResponse(template.render())
-
-def Loading_Circle(request):
-  template = loader.get_template('.\Loading_Screen_Logo\loading_screen.html')
-  return HttpResponse(template.render())
-
-def Loading_Logo(request):
-  template = loader.get_template('.\Loading_Screen_Logo\sign_up.html')
-  return HttpResponse(template.render())
 
 def SignUp(request):
   if request.method == "POST":
@@ -70,6 +57,25 @@ def LogIn(request):
         return redirect('/movies/log_in')
     return render(request,".\SignUp_LogIn\LogInFilm.html")
 
+@login_required
+def Home(request):
+  template = loader.get_template('.\Home\Home.html')
+  return HttpResponse(template.render())
+
+def SeeAll_Trending(request):
+  template = loader.get_template('.\Home\SeeAll_Trending_English.html')
+  return HttpResponse(template.render())
+
+def Loading_Circle(request):
+  template = loader.get_template('.\Loading_Screen_Logo\loading_screen.html')
+  return HttpResponse(template.render())
+
+def Loading_Logo(request):
+  template = loader.get_template('.\Loading_Screen_Logo\sign_up.html')
+  return HttpResponse(template.render())
+
+
+
 def LogOut(request):
   if request.user.is_authenticated:
     logout(request)
@@ -92,11 +98,26 @@ def UserPacket(request):
   template = loader.get_template('UserPacket\Service_pack.html')
   return HttpResponse(template.render())
 
+class UserForm(forms.ModelForm):
+  class Meta:
+    model = User
+    fields = ("first_name","email")
+
+class ProfileForm(forms.ModelForm):
+  class Meta:
+    model = Profile
+    fields = ("avatar","birthday","gender")
+
 def Info(request):
   nm = request.user.first_name
   mail = request.user.email
-  return render(request,".\Info\info.html",{'name':nm, 'email':mail})
+  sex = request.user.profile.get_gender_display
+  ava = request.user.profile.avatar
+  bd = request.user.profile.birthday
+  return render(request,".\Info\info.html",{'name':nm, 'email':mail, 'gender':sex,'avatar':ava,'birthday':bd})
 
+#Đồng nhất khi thay đổi dữ liệu
+@transaction.atomic
 def ChangeBDate(request):
   template = loader.get_template('.\Info\change_date.html')
   return HttpResponse(template.render())
