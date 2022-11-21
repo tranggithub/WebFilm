@@ -126,7 +126,7 @@ def ChangeInfo(request):
     if user_form.is_valid() and user_profile_form.is_valid():
       user_form.save()
       user_profile_form.save()
-      messages.success(request,"Change birthday successfully")
+      messages.success(request,"Change information of your account successfully")
       return redirect('/movies/info')
     else:
       messages.error(request,"Invalid value")
