@@ -59,12 +59,14 @@ def LogIn(request):
 
 @login_required
 def Home(request):
-  template = loader.get_template('.\Home\Home.html')
-  return HttpResponse(template.render())
+  ava = request.user.profile.avatar.url
+  return render(request,".\Home\Home.html",{'avatar':ava})
+
 
 def SeeAll_Trending(request):
-  template = loader.get_template('.\Home\SeeAll_Trending_English.html')
-  return HttpResponse(template.render())
+  ava = request.user.profile.avatar.url
+  return render(request,".\Home\SeeAll_Trending_English.html",{'avatar':ava})
+
 
 def Loading_Circle(request):
   template = loader.get_template('.\Loading_Screen_Logo\loading_screen.html')
@@ -74,8 +76,6 @@ def Loading_Logo(request):
   template = loader.get_template('.\Loading_Screen_Logo\sign_up.html')
   return HttpResponse(template.render())
 
-
-
 def LogOut(request):
   if request.user.is_authenticated:
     logout(request)
@@ -83,16 +83,17 @@ def LogOut(request):
     return redirect('/movies/log_in')
 
 def Movies(request):
-  template = loader.get_template('.\Movies\movies.html')
-  return HttpResponse(template.render())
+  ava = request.user.profile.avatar.url
+  return render(request,".\Movies\movies.html",{'avatar':ava})
 
 def WatchFilm(request):
-  template = loader.get_template('.\Trailer_Detail\Watch.html')
-  return HttpResponse(template.render())
+  ava = request.user.profile.avatar.url
+  return render(request,".\Trailer_Detail\Watch.html",{'avatar':ava})
 
 def Detail(request):
-  template = loader.get_template('.\Trailer_Detail\Trailer_Detail.html')
-  return HttpResponse(template.render())
+  ava = request.user.profile.avatar.url
+  return render(request,".\Trailer_Detail\Trailer_Detail.html",{'avatar':ava})
+
 
 def UserPacket(request):
   template = loader.get_template('UserPacket\Service_pack.html')

@@ -70,7 +70,7 @@ class Episode(models.Model):
 
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    avatar = models.ImageField(upload_to='user_profile',null=True)
+    avatar = models.ImageField(upload_to='user_profile',null=True, default="/media/user_profile/User.jpg")
     birthday = models.DateField(null=True, blank=True)
     gender = models.CharField(choices=GENDER_CHOICES,max_length=1,default='N')
 
