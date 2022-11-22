@@ -26,13 +26,9 @@ urlpatterns = [
     path('userpacket/',views.UserPacket, name='userpacket'),
     path('seeall_trending_english/', views.SeeAll_Trending, name='seeall_trending_english'),
     path('info/',views.Info,name='info'),
-    path('change_bdate/',views.ChangeBDate,name='change_bdate'),
-    path('change_gender/',views.ChangeGender,name='change_gender'),
-    path('change_mail/', views.ChangeMail,name='change_mail'),
-    path('change_name/',views.ChangeName,name='change_name'),
+    path('change_info/',views.ChangeInfo,name='change_info'),
     path('change_password/',auth_views.PasswordChangeView.as_view(
         template_name='.\Info\change_password.html',
         success_url = '/movies/info'
     ),name='change_password'),
-    path('change_picture/',views.ChangePicture,name='change_picture'),
 ]

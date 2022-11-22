@@ -6,9 +6,9 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <body>
         <a href="{%url 'home'%}" class="home"><i class="fa fa-home"></i></a>
-        <img src="{% static 'css/Info/Logo/avatar.png' %}" alt="Avatar" style="border-radius: 50%; width:160px;height:150px; position: absolute; left: 45%; top:7%;">
+        <img src="{{avatar}}"  alt="Avatar" style="border-radius: 50%; width:160px;height:150px; position: absolute; left: 45%; top:7%;">
         <div style="margin-top:15%; margin-left: 45%; margin-bottom: -12%;">
-            <a href="{% url 'change_picture'%}">
+            <a href="{% url 'change_info'%}">
                     <button class="pic">Update Picture</button>
             </a>
         </div>
@@ -17,34 +17,34 @@
         <section style="margin-top: 17%; margin-left: 10%; margin-right: 20%;">
         <div>
             <h4>Name</h4>
-            <p>{{name}}</p>
+            <p class="info">{{name}}</p>
             <aside style="margin-top:-3%">
-                <a href="{% url 'change_name' %}">
+                <a href="{% url 'change_info' %}">
                 <button class="btn" style="margin-left:93%;margin-bottom: -5%;"><i class="fa fa-pencil"></i></button>
                 </a>
             </aside>
         </div>
         <div>
             <h4>Birthday</h4>
-            <p>{{birthday}}</p>
+            <p class="info">{{birthday}}</p>
             <aside style="margin-top:-3%">
-                <a href="{% url 'change_bdate' %}">
+                <a href="{% url 'change_info' %}">
                 <button class="btn" style="margin-left:93%;margin-bottom: -5%;"><i class="fa fa-pencil"></i></button>
                 </a>
             </aside>
         </div>
         <div>
             <h4>Gender</h4>
-            <p>{{gender}}</p>
+            <p class="info">{{gender}}</p>
             <aside style="margin-top:-3%">
-                <a href="{% url 'change_gender' %}">
+                <a href="{% url 'change_info' %}">
                 <button class="btn" style="margin-left:93%;margin-bottom: -5%;"><i class="fa fa-pencil"></i></button>
                 </a>
             </aside>
         </div>
         <div>
             <h4>Email</h4>
-            <p>{{email}}</p>
+            <p class="info">{{email}}</p>
         </div>
         <div style="margin-top:30px">
             <a class="changepw" href="{% url 'change_password' %}">

@@ -59,12 +59,14 @@ def LogIn(request):
 
 @login_required
 def Home(request):
-  template = loader.get_template('.\Home\Home.html')
-  return HttpResponse(template.render())
+  ava = request.user.profile.avatar.url
+  return render(request,".\Home\Home.html",{'avatar':ava})
+
 
 def SeeAll_Trending(request):
-  template = loader.get_template('.\Home\SeeAll_Trending_English.html')
-  return HttpResponse(template.render())
+  ava = request.user.profile.avatar.url
+  return render(request,".\Home\SeeAll_Trending_English.html",{'avatar':ava})
+
 
 def Loading_Circle(request):
   template = loader.get_template('.\Loading_Screen_Logo\loading_screen.html')
@@ -74,8 +76,6 @@ def Loading_Logo(request):
   template = loader.get_template('.\Loading_Screen_Logo\sign_up.html')
   return HttpResponse(template.render())
 
-
-
 def LogOut(request):
   if request.user.is_authenticated:
     logout(request)
@@ -83,16 +83,17 @@ def LogOut(request):
     return redirect('/movies/log_in')
 
 def Movies(request):
-  template = loader.get_template('.\Movies\movies.html')
-  return HttpResponse(template.render())
+  ava = request.user.profile.avatar.url
+  return render(request,".\Movies\movies.html",{'avatar':ava})
 
 def WatchFilm(request):
-  template = loader.get_template('.\Trailer_Detail\Watch.html')
-  return HttpResponse(template.render())
+  ava = request.user.profile.avatar.url
+  return render(request,".\Trailer_Detail\Watch.html",{'avatar':ava})
 
 def Detail(request):
-  template = loader.get_template('.\Trailer_Detail\Trailer_Detail.html')
-  return HttpResponse(template.render())
+  ava = request.user.profile.avatar.url
+  return render(request,".\Trailer_Detail\Trailer_Detail.html",{'avatar':ava})
+
 
 def UserPacket(request):
   template = loader.get_template('UserPacket\Service_pack.html')
@@ -112,35 +113,31 @@ def Info(request):
   nm = request.user.first_name
   mail = request.user.email
   sex = request.user.profile.get_gender_display
-  ava = request.user.profile.avatar
+  ava = request.user.profile.avatar.url
   bd = request.user.profile.birthday
   return render(request,".\Info\info.html",{'name':nm, 'email':mail, 'gender':sex,'avatar':ava,'birthday':bd})
 
 #Đồng nhất khi thay đổi dữ liệu
 @transaction.atomic
-def ChangeBDate(request):
-  template = loader.get_template('.\Info\change_date.html')
-  return HttpResponse(template.render())
-
-def ChangeGender(request):
-  template = loader.get_template('.\Info\change_gender.html')
-  return HttpResponse(template.render())
-
-def ChangeMail(request):
-  template = loader.get_template('.\Info\change_mail.html')
-  return HttpResponse(template.render())
-
-def ChangeName(request):
+def ChangeInfo(request):
   if request.method == "POST":
-    request.user.first_name = request.POST.get('firstname')
-    request.user.save()
-    return redirect('/movies/info')
-  return render(request,".\Info\change_name.html")
+    user_form = UserForm(request.POST, instance=request.user)
+    user_profile_form = ProfileForm(request.POST, request.FILES, instance=request.user.profile)
+    if user_form.is_valid() and user_profile_form.is_valid():
+      user_form.save()
+      user_profile_form.save()
+      messages.success(request,"Change information of your account successfully")
+      return redirect('/movies/info')
+    else:
+      messages.error(request,"Invalid value")
+  else:
+    user_form = UserForm(instance=request.user)
+    user_profile_form = ProfileForm(instance=request.user.profile)
+  return render(request,'.\Info\change_info.html',{'u_form':user_form, 'p_form':user_profile_form}) 
+  # template = loader.get_template('.\Info\change_date.html')
+  # return HttpResponse(template.render())
+
 
 def ChangePassword(request):
   template = loader.get_template('.\Info\change_password.html')
-  return HttpResponse(template.render())
-
-def ChangePicture(request):
-  template = loader.get_template('.\Info\change_picture.html')
   return HttpResponse(template.render())

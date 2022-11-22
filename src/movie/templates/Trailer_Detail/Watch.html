@@ -31,7 +31,7 @@
                     </button>
                     <button class="user" type="button" onclick="user()">
                         <a href="{% url 'info' %}">
-                            <img src="{% static 'css/Trailer_Detail/image/user.png'%}">
+                            <img src="{{avatar}}">
                         </a>
                     </button>
                     <div class="top_left">
@@ -96,7 +96,7 @@
                                     <div class="comments">
                                         <span>
                                             <button id="user-comment" type="button" onclick="user()">
-                                                <img src="{% static 'css/Trailer_Detail/image/user.png'%}">
+                                                <img src="{{avatar}}">
                                             </button>
                                             <input id="input-cmt" type="text" placeholder="Comment">
                                             <button id="cmtbt" type="button">
