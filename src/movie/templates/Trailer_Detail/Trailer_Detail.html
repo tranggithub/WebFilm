@@ -8,6 +8,7 @@
         <link rel="stylesheet" href="{% static 'css/Trailer_Detail/Trailer_Detail.css'%}">
     </head>
     <body>
+        {% for movie in movies %}
         <div class="Container">
             <div class="left">
                 <img id="brandname" src="{% static 'css/Trailer_Detail/image/icon/BrandNameLogin.png'%}" >
@@ -27,7 +28,7 @@
                     <button class="bell" type="button" onclick="notification()">
                         <img src="{% static 'css/Trailer_Detail/image/icon/icons8-notification-30.png'%}">
                     </button>
-                    <button class="user" type="button" onclick="user()">
+                    <button class="user" type="button">
                         <a href="{% url 'info' %}">
                             <img src="{{avatar}}">
                         </a>
@@ -45,11 +46,11 @@
                 <div class="trailer_vid" >
                     <div class="vid">
                         <div class="play">
-                            <video id="vid" width="945px"  poster="{% static 'css/Trailer_Detail/image/trailer.jfif'%}" >
-                                <source src="{% static 'css/Trailer_Detail/vid/vid.mp4'%}" type="video/mp4">
+                            <video id="vid" height="396px" width="945px"  poster="{{movie.trailer_image.url}}" border-radius="23px;">
+                                <source src="{{movie.trailer.url}}" type="video/mp4">
                                 Your browser doesn't support html video.
                             </video>
-                            <button id="playbt" onclick="playPause()">
+                            <button id="playbt" onclick="playPause()"  style="margin-top:170px;">
                                 <img src="{% static 'css/Trailer_Detail/image/icon/icons8-play-48.png'%}">
                             </button>
                         </div>
@@ -76,33 +77,41 @@
                             <div class="title_movies">
                                 <h5>
                                     <ul>
-                                        <li id="first_ele">Top Gun: Maverick</li> <!--{{movie.title}}-->
-                                        <li>1-11-2022</li>   
-                                        <li>PG-13</li>
-                                        <li>2h10m</li>
+                                        <li id="first_ele">{{movie.title}}</li> 
+                                        <li>{{movie.year_of_production}}</li>   
+                                        <li>{{movie.time}}</li>
                                     </ul>
                                 </h5>
                                 <br>
                                 <br>
                                 <h6 style="font-size:10px;color:aliceblue">
-                                    <label>Action</label>   <!--{{movie.category}}-->
-                                    <label>Drama</label>
+                                    {% for c in category %}
+                                    <label>
+                                        {{c}}
+                                    </label> 
+                                    {% endfor %}
+                                    
                                </h6>
-                               <p style="font-size:12px; margin-bottom:10px;">    <!--{{movie.description}}-->
-                                   <br>After thrity years, Maverick is still pushing the envelope as a top naval aviator,
-                                   but must confront ghosts of his past when he leads TOP GUN's elite graduates
-                                   on a mission that demands the ultimate sacrifice from those chosen to fly it. 
+                               <p style="font-size:12px; margin-bottom:10px;">    
+                                   <br>{{movie.description}} 
                                </p>
                             </div>
                             <div class="info">  <!--Thông tin đạo diễn, diễn viên-->
                                 <hr>
-                                <p>Director :  <span style="color:cadetblue">Joseph Kosinski</span></p>     <!--{{movie.director}}-->
+                                <p>Director :  <span style="color:cadetblue">{{movie.director}}</span></p>     <!--{{movie.director}}-->
                                 <hr>
-                                <p>Writers : <span style="color:cadetblue">Jim Cash, Jack Epps Jr, Peter Craig</span></p>    <!--{{movie.writers}}-->
+                                <p>Writers : <span style="color:cadetblue">{{movie.writers}}</span></p>    <!--{{movie.writers}}-->
                                 <hr>
-                                <p>Stars : <span style="color:cadetblue">Tom Cruise, Jennifer Connelly, Miles Teller</span></p>
+                                
+                                <p>Stars : 
+                                    {% for c in cast_crew %}
+                                    <span style="color:cadetblue">
+                                        <lable>{{c.name}} .</lable>
+                                    </span>
+                                    {% endfor %}
+                                </p>
                                 <hr>
-                                <a href="{% url 'watch' %}">Watch movie</a>
+                                <a href="{% url 'watch' movie.id %}">Watch movie</a>
                                     <button class="rate_button" type="button" onclick="topRate()">Top rated movie #65</button>
                                     <select>
                                         <option>Awards 3 nominations</option>
@@ -114,18 +123,11 @@
                             <div class="info_characters">  <!--Thôgn tin chi tiết dv-->
                                 <h4>Top Cast</h4>
                                 <ul>
-                                    <li><img src="{% static 'css/Trailer_Detail/image/tomcruise.webp'%}" alt="Tom Cruise">
-                                        <b><br>Tom Cruise</b><br>Capt. Pete Mitchell<br> (Maverick)
+                                    {% for c in topcast %}
+                                    <li><img src="{{c.image.url}}" alt="{{c.name}}">
+                                        <b><br>{{c.name}}</b><br>{{c.character}}<br> ({{c.sub_character}})
                                     </li>
-                                    <li><img src="{% static 'css/Trailer_Detail/image/jennifer.jpg'%}" alt="Jennifer Connelly">
-                                        <b><br>Jennifer Connelly</b><br>Penny Benjamin
-                                    </li>
-                                    <li><img src="{% static 'css/Trailer_Detail/image/miliies.webp'%}" alt="Millies Teller">
-                                        <b><br>Millies Teller</b><br>Lt. Bradley Bradshow<br>(Rooster)
-                                    </li>
-                                    <li><img src="{% static 'css/Trailer_Detail/image/vai.jpg'%}" alt="Vai Kilmer">
-                                        <b><br>Vai Kilmer</b><br>Adm. Tom Kazansky<br>(Iceman)
-                                    </li>
+                                    {% endfor %}
                                 </ul>
                                 <br>
                             </div>
@@ -134,61 +136,11 @@
                                 <button class="accordion"><h4>All cast & crew</h4></button>
                                 <div class="allcast">
                                     <ul>
-                                        <li><img src="{% static 'css/Trailer_Detail/image/tomcruise.webp'%}" alt="Tom Cruise">
-                                            <b><br>Tom Cruise</b><br>Capt. Pete Mitchell<br> (Maverick)
+                                        {% for c in cast_crew %}
+                                        <li><img src="{{c.image.url}}" alt="{{c.name}}">
+                                            <b><br>{{c.name}}</b><br>{{c.character}}<br> ({{c.sub_character}})
                                         </li>
-                                        <li><img src="{% static 'css/Trailer_Detail/image/jennifer.jpg'%}" alt="Jennifer Connelly">
-                                            <b><br>Jennifer Connelly</b><br>Penny Benjamin
-                                        </li>
-                                        <li><img src="{% static 'css/Trailer_Detail/image/miliies.webp'%}" alt="Millies Teller">
-                                            <b><br>Millies Teller</b><br>Bradley Bradshow<br>(Rooster)
-                                        </li>
-                                        <li><img src="{% static 'css/Trailer_Detail/image/vai.jpg' %}" alt="Vai Kilmer">
-                                            <b><br>Vai Kilmer</b><br>Tom Kazansky<br>(Iceman)
-                                        </li>
-                                        <li>
-                                            <img src="{% static 'css/Trailer_Detail/image/anthony.jpg'%}" alt="Anthony">
-                                            <b><br>Anthony Edwards</b><br>Lt. Nick Bradshaw
-                                        </li>
-                                        <li>
-                                            <img src="{%static 'css/Trailer_Detail/image/tomskerritt.jpg' %}" alt="Tom Skerritt">
-                                            <b><br>Tom Skerritt</b><br>Cmdr. Mike Metcalf
-                                        </li>
-                                        <li>
-                                            <img src="{% static 'css/Trailer_Detail/image/Michael.jpg' %}" alt="Michael">
-                                            <b><br>Michael Ironside</b><br>Dick Wetherly
-                                        </li>
-                                        <li>
-                                            <img src="{% static 'css/Trailer_Detail/image/Meg.jpg' %}" alt="Meg">
-                                            <b><br>Meg Ryan</b><br>Carole
-                                        </li>
-                                        <li>
-                                            <img src="{% static 'css/Trailer_Detail/image/John.jpg' %}" alt="John">
-                                            <b><br>John Stockwell</b><br>Cougar
-                                        </li>
-                                        <li>
-                                            <img src="{% static 'css/Trailer_Detail/image/Barry.jpg' %}" alt="Barry">
-                                            <b><br>Barry Tubb</b><br>Henry Ruth
-                                        </li>
-                                    </ul>
-                                    <ul>
-                                        <li><img src="{% static 'css/Trailer_Detail/image/Tony.jpg' %}" alt="Tom Cruise">
-                                            <b><br>Tony Scott</b><br>Director<br>
-                                        </li>
-                                        <li><img src="{% static 'css/Trailer_Detail/image/noimage.jpg' %}" alt="Millies Teller">
-                                            <b><br>Bobbie Read</b><br>Costume Designer<br>
-                                        </li>
-                                        <li><img src="{% static 'css/Trailer_Detail/image/noimage.jpg' %}" alt="Vai Kilmer">
-                                            <b><br>Chris Lebenzon</b><br>Editor<br>
-                                        </li>
-                                        <li>
-                                            <img src="{% static 'css/Trailer_Detail/image/noimage.jpg' %}" alt="Anthony">
-                                            <b><br>Don Simpson</b><br>Producer<br>
-                                        </li>
-                                        <li>
-                                            <img src="{% static 'css/Trailer_Detail/image/noimage.jpg' %}" alt="Tom Skerritt">
-                                            <b><br>Donald O.Mitchell</b><br>Sound Deigner<br>
-                                        </li>
+                                        {% endfor %}
                                     </ul>
                                 </div>
                                 <!--hiển thị all cast, crew-->
@@ -211,16 +163,14 @@
                                 </script>
                                 
                                 <hr style="margin-bottom:10px;">
-                                <img src="{% static 'css/Trailer_Detail/image/movie.jpg'%}" alt="movie" >
-                                <h4 style="margin-top:15px;">
-                                        'Top Gun' Trivia, Facts, and Figures    <!--{{movie.more}}-->
+                                <img src="{{movie.trivia_image.url}}" alt="{{movie.title}}" style="margin-top:15px;">
+                                <h4 style="margin-top:15px; width:290px;">
+                                        '{{movie.title}}' Trivia, Facts, and Figures   
                                 </h4>
-                                <p>
-                                    How exensive was Top Gun to make? In this epsoide of 'By the Numbers', we
-                                    break down all the statistics you need to know (and some you don't) of the
-                                    original '80s classic 'Top Gun.'
+                                <p style="width:290px;">
+                                    {{movie.trivia_summary}}
                                 </p>
-                                <a href="https://www.trivianerd.com/collection/top-gun-trivia">Learn more</a>
+                                <a href="{{movie.trivia_url}}">Learn more</a>
                             </div>
                             <div class="similar_movies">
                                 <h4>Other movies</h4>
@@ -228,25 +178,14 @@
                                 <div class="similar">
                                     <ul>
                                         <li>
-                                            <button class="movie_button" type="button" onclick="Top_Gun2020()">
-                                                
-                                                <img src="{% static 'css/Trailer_Detail/image/Top_Gun2020.jpg'%}" alt="Top Gun 2020">
-                                            </button>
-                                        </li>
-                                        <li>
-                                            <button class="movie_button" type="button" onclick="Bat_Man()">
-                                                <img src="{% static 'css/Trailer_Detail/image/batman.jpg'%}" alt="Bat Man">
-                                            </button>
-                                        </li>
-                                        <li>
-                                            <button class="movie_button" type="button" onclick="Spiderman()">
-                                                <img src="{% static 'css/Trailer_Detail/image/spiderman.jpg'%}" alt="Spiderman">
-                                            </button>
-                                        </li>
-                                        <li>
-                                            <button class="movie_button" type="button" onclick="Docter_Strange()">
-                                                <img src="{% static 'css/Trailer_Detail/image/docter_strange.jpg'%}" alt="Docter Strange">
-                                            </button>
+                                            {% for movie in another %}
+                                                <button class="movie_button" type="button">
+                                                    <a href="{% url 'detail' movie.id %}">
+                                                        <img class="img-movie" src="{{movie.image.url}}" alt="{{movie.title}}" style="width:130px; height:192px; border-radius: 10px; margin-right:15px;"/>
+                                                    </a>
+                                                </button>
+                                            {% endfor %}
+            
                                         </li>
                                     </ul>
                                     
@@ -361,6 +300,7 @@
                 $(".loader-wrapper").fadeOut(1000);
             });
         </script>
+        {% endfor %}
     </body>
 </html>
 

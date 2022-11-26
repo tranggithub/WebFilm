@@ -283,11 +283,13 @@
                     <button class="column__movie">   
                         <img src="{% static 'css/Home/Logo/Rectangle 17.png'%}" alt="" />                 
                     </button>
+                    {% for movie in movies %}
                     <button class="column__movie">
-                        <a href="{% url 'detail' %}">
-                            <img class="img-movie" src="{% static 'css/Movies/css/Logo/Rectangle 18.png' %}" alt="" />
+                        <a href="{% url 'detail' movie.id %}">
+                            <img class="img-movie" src="{{movie.image.url}}" alt="{{movie.title}}" />
                         </a>
                     </button> 
+                    {% endfor %}
                     <button class="column__movie">
                         <img src="{%static 'css/Home/Logo/Rectangle 19.png' %}" alt="" />  
                     </button>
