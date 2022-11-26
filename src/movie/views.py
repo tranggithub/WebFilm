@@ -61,6 +61,10 @@ def LogIn(request):
       passwd = request.POST.get('password')
       user = authenticate(request,username=name,password=passwd)
       if user is not None:
+        if not request.POST.get('remember_me', None):
+            request.session.set_expiry(360) #6 phút
+        else:
+            request.session.set_expiry(2592000)#30 ngày
         login(request, user)
         messages.success(request,"Log in successfully")
         return redirect('/movies/userpacket')
