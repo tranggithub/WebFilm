@@ -15,17 +15,8 @@
                 <a href="{%url 'log_in'%}" class="save" style="text-decoration:none;">Back</a>
             </div>
         {% else %}
-        <form method="POST">
-            {% csrf_token %}
-            <div class="col-25">
-              </div>
-                    {{form.as_p}}
-                    <div style="margin-left:25%; margin-top:3%">
-                        <a href="{%url 'log_in'%}" class="save" style="text-decoration:none;">Back</a>
-                        <button type="submit" class="save">Send</button>
-                        
-                    </div>
-        </form>
+            <p style="margin:0 25%; color: aliceblue; text-align: center;">We've emailed you instructions for setting your password, if an account exists with the email you entered. You should receive them shortly.
+                <br>If you don't receive an email, please make sure you've entered the address you registered with, and check your spam folder.</p>
         {% endif %}
     </body>
 </html>
