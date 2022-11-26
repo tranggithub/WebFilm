@@ -153,9 +153,10 @@ def Movies(request):
 
 def WatchFilm(request, movie_id):
   ava = request.user.profile.avatar.url
+  user = request.user
   movies = Movie.objects.filter(id=movie_id)
   episode = movies.get().movie_episode.all()
-  return render(request,".\Trailer_Detail\Watch.html",{'avatar':ava, 'movies': movies, 'episode': episode})
+  return render(request,".\Trailer_Detail\Watch.html",{'avatar':ava, 'movies': movies, 'episode': episode, 'user':user})
 
 def Detail(request, movie_id):
   ava = request.user.profile.avatar.url
