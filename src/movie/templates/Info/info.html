@@ -1,10 +1,36 @@
 <!DOCTYPE html>
 <html>
     {% load static %}
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="{%static 'css/Info/user.css' %}">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="{%static 'css/Info/user.css' %}">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <title>Personal information | LTWFlix </title>
+        {% comment %} Alert JS {% endcomment%}
+        <!-- CSS -->
+        <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css"/>
+        <!-- Default theme -->
+        <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/default.min.css"/>
+    </head>
+    
+
     <body>
+        {% comment %} alertifyjs - Thông báo  {% endcomment %}
+            <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
+            <script>
+                alertify.set('notifier','position', 'top-right');
+            </script>
+            {% for msg in messages %}
+                {% if msg.tags == "error" %}
+                    <script>
+                        alertify.error('{{msg}}'); 
+                    </script>
+                {% else %}
+                    <script>
+                        alertify.success('{{msg}}');
+                    </script>
+                {% endif %}
+            {% endfor %}
         <a href="{%url 'home'%}" class="home"><i class="fa fa-home"></i></a>
         <img src="{{avatar}}"  alt="Avatar" style="border-radius: 50%; width:160px;height:150px; position: absolute; left: 45%; top:7%;">
         <div style="margin-top:15%; margin-left: 45%; margin-bottom: -12%;">

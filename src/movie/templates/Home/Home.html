@@ -9,8 +9,30 @@
  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700&display=swap" rel="stylesheet">
  <title>Home | LTWFlix</title>
+ {% comment %} Alert JS {% endcomment%}
+        <!-- CSS -->
+        <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css"/>
+        <!-- Default theme -->
+        <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/default.min.css"/>
  </head>
  <body>
+        {% comment %} alertifyjs - Thông báo {% endcomment %}
+        <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
+        <script>
+            alertify.set('notifier','position', 'top-right');
+        </script>
+        {% for msg in messages %}
+            {% if msg.tags == "error" %}
+                <script>
+                    alertify.error('{{msg}}'); 
+                </script>
+            {% else %}
+                <script>
+                    alertify.success('{{msg}}');
+                </script>
+            {% endif %}
+        {% endfor %}
+
     <div class="app__container">
         <div class="grid">
           <div class="grid__row">
