@@ -159,6 +159,6 @@ def ChangeInfo(request):
   # return HttpResponse(template.render())
 
 
-def ChangePassword(request):
-  template = loader.get_template('.\Info\change_password.html')
-  return HttpResponse(template.render())
+# def ChangePassword(request):
+#   template = loader.get_template('.\Info\change_password.html')
+#   return HttpResponse(template.render())
