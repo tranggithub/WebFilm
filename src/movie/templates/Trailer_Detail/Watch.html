@@ -8,6 +8,7 @@
         <link rel="stylesheet" href="{% static 'css/Trailer_Detail/Watch.css'%}">
     </head>
     <body>
+        {% for movie in movies %}
         <div class="Container">
             <div class="left">
                 <img id="brandname" src="{% static 'css/Trailer_Detail/image/icon/BrandNameLogin.png'%}" >
@@ -21,15 +22,13 @@
                         <li style="margin-top:30%;"><a href="{% url 'log_out' %}"><img src="{% static 'css/Trailer_Detail/image/icon/icons8-logout-acc-48.png'%}" alt="logout"><label><b style="background:none;">Logout</b></label></a></li>
                     </ul>
                 </div>
-                <div class="logout">
-                     </div>
             </div>
             <div class="center">
                 <div class="top">
                     <button class="bell" type="button" onclick="notification()">
                         <img src="{% static 'css/Trailer_Detail/image/icon/icons8-notification-30.png'%}">
                     </button>
-                    <button class="user" type="button" onclick="user()">
+                    <button class="user" type="button">
                         <a href="{% url 'info' %}">
                             <img src="{{avatar}}">
                         </a>
@@ -48,30 +47,47 @@
                     <div class="film" >
                         <div class="vid">
                             <div class="play">
-                                <video id="vid" width="945px"  poster="{% static 'css/Trailer_Detail/image/trailer.jfif'%}" >
-                                    <source src="{% static 'css/Trailer_Detail/vid/vid.mp4'%}" type="video/mp4">
+                                <video id="vid" width="945px"  poster="{{movie.trailer_image.url}}">
+                                    <source id="ep" src="{{movie.trailer.url}}" type="video/mp4">
                                     Your browser doesn't support html video.
                                 </video>
-                                <button id="playbt" onclick="playPause()">
-                                    <img src="{% static 'css/Trailer_Detail/image/icon/icons8-play-48.png'%}">
+                                <button id="playbt" onclick="playPause()" style="margin-top:170px;">
+                                    <img src="{% static 'css/Trailer_Detail/image/icon/icons8-play-48.png'%}" >
                                 </button>
                             </div>
                         </div>
                         <script>
-                            var myVideo=document.getElementById("vid");
-                            const button=document.getElementById("playbt");
-                            button.addEventListener("click",()=>{
+                            // var myVideo=document.getElementById("vid");
+                            // const button=document.getElementById("playbt");
+                            // button.addEventListener("click",()=>{
+                            //     button.style.visibility="hidden";
+                            //     playPause();        
+                            // })
+                            // function playPause(){
+                            //     if(myVideo.paused)
+                            //     {
+                            //         myVideo.play();
+                            //         vid.controls="true";
+                            //     }
+                            // }
+                            
+                            function episode(){
+                                document.getElementById("ep").src="{{ep.video.url}}";
+                                document.getElementById("vid").load();
+                                var myVideo=document.getElementById("vid");
+                                const button=document.getElementById("playbt");
+                                button.addEventListener("click",()=>{
                                 button.style.visibility="hidden";
                                 playPause();        
-                            })
-                            function playPause(){
+                                })
+                                function playPause(){
                                 if(myVideo.paused)
                                 {
                                     myVideo.play();
                                     vid.controls="true";
                                 }
+                                }
                             }
-                            
                         </script>
                     </div>
                    
@@ -79,17 +95,11 @@
                         <div class="bottom_left">
                             <h4>Episode</h4>
                             <div class="ep">
-                                <button id="bt-ep" onclick="ep1()">Episode 1</button>
-                                <button id="bt-ep" onclick="ep2()">Episode 2</button>
-                                <button id="bt-ep" onclick="ep3()">Episode 3</button>
-                                <button id="bt-ep" onclick="ep4()">Episode 4</button>
-                                <button id="bt-ep" onclick="ep5()">Episode 5</button>
-                                <button id="bt-ep" onclick="ep6()">Episode 6</button>
-                                <button id="bt-ep" onclick="ep7()">Episode 7</button>
-                                <button id="bt-ep" onclick="ep8()">Episode 8</button>
-                                <button id="bt-ep" onclick="ep9()">Episode 9</button>
+                                {% for ep in episode %}
+                                <button id="bt-ep" onclick="episode()">Episode {{ep.number_episode}}</button>
+                                {% endfor %}
                             </div>
-                            <h4 style="color:cadetblue">Top Gun - Ep 1</h4>
+                            <h4 style="color:cadetblue">{{movie.title}} - Ep 1</h4>
                             <br>
                             <div class="bottom">
                                 <h5 style="margin-bottom:10px;">Comment</h5>
@@ -309,6 +319,7 @@
                 $(".loader-wrapper").fadeOut(1000);
             });
         </script>
+        {% endfor %}
     </body>
 </html>
 

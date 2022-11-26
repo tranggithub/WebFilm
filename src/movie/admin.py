@@ -1,7 +1,7 @@
 from django.contrib import admin
 
 # Register your models here.
-from .models import Movie, Cast_and_Crew, Profile
+from .models import Movie, Cast_and_Crew, Profile, Category, Episode, Statuses
 from django.contrib.auth.admin import UserAdmin as AuthUserAdmin
 from django.contrib.auth.models import User
 
@@ -22,4 +22,17 @@ admin.site.register(User, AccountsUserAdmin)
 
 
 admin.site.register(Movie)
-admin.site.register(Cast_and_Crew)
+
+@admin.register(Cast_and_Crew)
+class CastAdmin(admin.ModelAdmin):
+    list_display = ('name', 'title_movie')
+    search_fields = ('title_movie', 'name', 'character')
+
+admin.site.register(Category)
+
+@admin.register(Episode)
+class EpisodeAdmin(admin.ModelAdmin):
+    list_display = ('title', 'number_episode')
+    search_fields = ('title', 'number_episode')
+    
+admin.site.register(Statuses)

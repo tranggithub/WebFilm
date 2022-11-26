@@ -60,12 +60,18 @@ def LogIn(request):
 @login_required
 def Home(request):
   ava = request.user.profile.avatar.url
-  return render(request,".\Home\Home.html",{'avatar':ava})
+  movies = Movie.objects.all()
+  trending = Movie.objects.filter(status__status='T')[:4]
+  upcoming = Movie.objects.filter(status__status='U')[:4]
+  tv_series = Movie.objects.filter(format='TV')[:4]
+  ps = Movie.objects.filter(format='PS')[:4]
+  return render(request,"Home/Home.html",{'avatar':ava, 'movies': movies,'trending': trending, 'upcoming':upcoming, 'tv_series':tv_series, 'ps':ps})
 
 
 def SeeAll_Trending(request):
   ava = request.user.profile.avatar.url
-  return render(request,".\Home\SeeAll_Trending_English.html",{'avatar':ava})
+  movies = Movie.objects.filter(status__status='T')
+  return render(request,".\Home\SeeAll_Trending_English.html",{'avatar':ava, 'movies':movies})
 
 
 def Loading_Circle(request):
@@ -84,15 +90,26 @@ def LogOut(request):
 
 def Movies(request):
   ava = request.user.profile.avatar.url
-  return render(request,".\Movies\movies.html",{'avatar':ava})
+  movies = Movie.objects.all()[:4]
+  upcoming = Movie.objects.filter(status__status='U')[:4]
+  tv_series = Movie.objects.filter(format='TV')[:4]
+  ps = Movie.objects.filter(format='PS')[:4]
+  return render(request,"Movies/movies.html",{'avatar':ava, 'movies': movies, 'upcoming':upcoming, 'tv_series':tv_series, 'ps':ps})
 
-def WatchFilm(request):
+def WatchFilm(request, movie_id):
   ava = request.user.profile.avatar.url
-  return render(request,".\Trailer_Detail\Watch.html",{'avatar':ava})
+  movies = Movie.objects.filter(id=movie_id)
+  episode = movies.get().movie_episode.all()
+  return render(request,".\Trailer_Detail\Watch.html",{'avatar':ava, 'movies': movies, 'episode': episode})
 
-def Detail(request):
+def Detail(request, movie_id):
   ava = request.user.profile.avatar.url
-  return render(request,".\Trailer_Detail\Trailer_Detail.html",{'avatar':ava})
+  another = Movie.objects.all().exclude(id=movie_id)[:4]
+  movies = Movie.objects.filter(id=movie_id)
+  category = movies.get().movie_category.all()
+  cast_crew = movies.get().cast_and_crew.all()
+  topcast = cast_crew[:4]
+  return render(request,".\Trailer_Detail\Trailer_Detail.html",{'avatar':ava, 'another': another, 'movies': movies, 'category': category, 'topcast': topcast, 'cast_crew': cast_crew})
 
 
 def UserPacket(request):

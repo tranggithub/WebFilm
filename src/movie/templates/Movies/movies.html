@@ -72,20 +72,13 @@
                         <div style="display: none;" id="suggestions" class="top-search-box"></div>
                 </div>
                 <div class="grid__row-4">
-                    <button class="column__movie">   
-                        <img src="{% static 'css/Movies/css/Logo/Rectangle 17.png' %}" alt="" />                 
-                    </button>
+                    {% for movie in movies %}
                     <button class="column__movie">
-                        <a href="{% url 'detail' %}">
-                            <img class="img-movie" src="{% static 'css/Movies/css/Logo/Rectangle 18.png' %}" alt="" />
+                        <a href="{% url 'detail' movie.id %}">
+                            <img class="img-movie" src="{{movie.image.url}}" alt="{{movie.title}}" />
                         </a>
                     </button> 
-                    <button class="column__movie">
-                        <img src="{% static 'css/Movies/css/Logo/Rectangle 19.png' %}" alt="" />
-                    </button>
-                    <button class="column__movie">
-                        <img src="{% static 'css/Movies/css/Logo/Rectangle 20.png' %}" alt="" />  
-                    </button>
+                    {% endfor %}
                 </div>
                 <div class="grid__row-4-Body">
                     <div class="Head__Up">
@@ -94,18 +87,13 @@
                     <a class="Head__See" href="Upcoming.html">See all</a>
                 </div>  
                 <div class="grid__row-4">
-                    <button class="column__movie">   
-                        <img src="{% static 'css/Movies/css/Logo/Rectangle 21.png' %}" alt="" />                 
-                    </button>
+                    {% for movie in upcoming %}
                     <button class="column__movie">
-                    <img src="{% static 'css/Movies/css/Logo/Rectangle 22.png' %}" alt="" />  
-                    </button> 
-                    <button class="column__movie">
-                        <img src="{% static 'css/Movies/css/Logo/Rectangle 24.png' %}" alt="" />  
+                        <a href="{% url 'detail' movie.id %}">
+                            <img class="img-movie" src="{{movie.image.url}}" alt="{{movie.title}}" style="width:160px; height:252px; border-radius: 10px;"/>
+                        </a>
                     </button>
-                    <button class="column__movie">
-                        <img src="{% static 'css/Movies/css/Logo/Rectangle 25.png' %}" alt="" />  
-                    </button>
+                    {% endfor %}
                 </div>   
                 <div class="grid__row-4-Body">
                     <div class="Head__Up">
@@ -114,20 +102,13 @@
                     <a class="Head__See" href="TVSeries.html">See all</a>
                 </div>  
                 <div class="grid__row-4">
-                    <button class="column__movie">   
-                        <img src="{% static 'css/Movies/css/Logo/Rectangle 17.png' %}" alt="" />                 
-                    </button>
-                    <button class="column__movie">
-                        <a href="{% url 'detail' %}">
-                            <img class="img-movie" src="{% static 'css/Movies/css/Logo/Rectangle 18.png' %}" alt="" />
-                        </a>
-                    </button> 
-                    <button class="column__movie">
-                        <img src="{% static 'css/Movies/css/Logo/Rectangle 19.png' %}" alt="" />  
-                    </button>
-                    <button class="column__movie">
-                        <img src="{% static 'css/Movies/css/Logo/Rectangle 20.png' %}" alt="" />  
-                    </button>
+                    {% for movie in tv_series %}
+                        <button class="column__movie">
+                            <a href="{% url 'detail' movie.id %}">
+                                <img class="img-movie" src="{{movie.image.url}}" alt="{{movie.title}}" style="width:160px; height:252px; border-radius: 10px;"/>
+                            </a>
+                        </button>
+                    {% endfor %}
                 </div>   
                 <div class="grid__row-4-Body">
                     <div class="Head__Poplular">
@@ -136,18 +117,13 @@
                     <a class="Head__See" href="Popular.html">See all</a>
                 </div>  
                 <div class="grid__row-4">
-                    <button class="column__movie">   
-                        <img src="{% static 'css/Movies/css/Logo/Rectangle 21.png' %}" alt="" />                 
-                    </button>
-                    <button class="column__movie">
-                    <img src="{% static 'css/Movies/css/Logo/Rectangle 22.png' %}" alt="" />  
-                    </button> 
-                    <button class="column__movie">
-                        <img src="{% static 'css/Movies/css/Logo/Rectangle 24.png' %}" alt="" />  
-                    </button>
-                    <button class="column__movie">
-                        <img src="{% static 'css/Movies/css/Logo/Rectangle 25.png' %}" alt="" />  
-                    </button>
+                    {% for movie in ps %}
+                        <button class="column__movie">
+                            <a href="{% url 'detail' movie.id %}">
+                                <img class="img-movie" src="{{movie.image.url}}" alt="{{movie.title}}" style="width:160px; height:252px; border-radius: 10px;"/>
+                            </a>
+                        </button>
+                    {% endfor %}
                 </div>   
             </div>
             <div class="grid__column-2-right">
