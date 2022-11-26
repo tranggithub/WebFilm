@@ -6,8 +6,30 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Watch | LTWFlix</title>
         <link rel="stylesheet" href="{% static 'css/Trailer_Detail/Watch.css'%}">
+        {% comment %} Alert JS {% endcomment%}
+        <!-- CSS -->
+        <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css"/>
+        <!-- Default theme -->
+        <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/default.min.css"/>
     </head>
     <body>
+        {% comment %} alertifyjs - Thông báo  {% endcomment %}
+                <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
+                <script>
+                    alertify.set('notifier','position', 'top-right');
+                </script>
+                {% for msg in messages %}
+                    {% if msg.tags == "error" %}
+                        <script>
+                            alertify.error('{{msg}}'); 
+                        </script>
+                    {% else %}
+                        <script>
+                            alertify.success('{{msg}}');
+                        </script>
+                    {% endif %}
+                {% endfor %}
+            
         {% for movie in movies %}
         <div class="Container">
             <div class="left">
@@ -103,17 +125,20 @@
                             <br>
                             <div class="bottom">
                                 <h5 style="margin-bottom:10px;">Comment</h5>
-                                    <div class="comments">
-                                        <span>
-                                            <button id="user-comment" type="button" onclick="user()">
-                                                <img src="{{user.profile.avatar.url}}">
-                                            </button>
-                                            <input id="input-cmt" type="text" placeholder="Comment">
-                                            <button id="cmtbt" type="button">
-                                                <img class="cmtbt-img" src="{% static 'css/Trailer_Detail/image/icon/icons8-cmt-white-30.png'%}">
-                                            </button>
-                                        </span>
-                                    </div>
+                                    <form method="POST">
+                                        {% csrf_token %}
+                                        <div class="comments">
+                                            <span>
+                                                <button id="user-comment" type="button" onclick="user()">
+                                                    <img src="{{user.profile.avatar.url}}">
+                                                </button>
+                                                <input id="input-cmt" name="comment" type="text" placeholder="Comment" required>
+                                                <button id="cmtbt" type="submit">
+                                                    <img class="cmtbt-img" src="{% static 'css/Trailer_Detail/image/icon/icons8-cmt-white-30.png'%}">
+                                                </button>
+                                            </span>
+                                        </div>
+                                    </form>
                                 <div class="comment-box">
                                     {% if not movie.comments.all %}
                                     <div class="content">
