@@ -5,8 +5,29 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="{% static 'css/Info/user.css' %}">
         <title>Reset Password | LTWFlix </title>
+        {% comment %} Alert JS {% endcomment%}
+        <!-- CSS -->
+        <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css"/>
+        <!-- Default theme -->
+        <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/default.min.css"/>
     </head>
     <body>
+        {% comment %} alertifyjs - Thông báo  {% endcomment %}
+                <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
+                <script>
+                    alertify.set('notifier','position', 'top-right');
+                </script>
+                {% for msg in messages %}
+                    {% if msg.tags == "error" %}
+                        <script>
+                            alertify.error('{{msg}}'); 
+                        </script>
+                    {% else %}
+                        <script>
+                            alertify.success('{{msg}}');
+                        </script>
+                    {% endif %}
+                {% endfor %}
         <h1 class="h2_name" style="color:#3DD2CC; padding-bottom: 5%;">Reset Password</h1>
         {% if user.is_authenticated %}
             <p style="margin-left:38%; color: aliceblue;">You've already logined. Click back to login</p>

@@ -97,6 +97,9 @@ def password_reset_request(request):
           messages.success(request, 'A message with reset password instructions has been sent to your inbox.')
           return redirect ("/movies/reset_password/done")
       messages.error(request, 'An invalid email has been entered.')
+      return redirect('/movies/reset_password/')
+    messages.error(request, 'An invalid email has been entered.')
+    return redirect('/movies/reset_password/')
 
   password_reset_form = PasswordResetForm()
   return render(request, template_name=".\Info\\reset_password.html", context={"form":password_reset_form})
