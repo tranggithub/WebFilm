@@ -30,7 +30,7 @@ urlpatterns = [
         success_url = '/movies/info'
     ),name='change_password'),
     path('reset_password/',auth_views.PasswordResetView.as_view(
-        template_name='.\Info\reset_password.html',
+        template_name='.\Info\\reset_password.html',
         success_url = '/movies/log_in'
     ),name='reset_password'),
 ]
