@@ -75,7 +75,7 @@
                     {% for movie in movies %}
                     <button class="column__movie">
                         <a href="{% url 'detail' movie.id %}">
-                            <img class="img-movie" src="{{movie.image.url}}" alt="{{movie.title}}" />
+                            <img class="img-movie" src="{{movie.image.url}}" alt="{{movie.title}}" style="width:160px; height:252px; border-radius: 10px;" />
                         </a>
                     </button> 
                     {% endfor %}
