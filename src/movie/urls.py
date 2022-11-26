@@ -10,8 +10,6 @@ urlpatterns = [
     path('<int:pk>', MovieDetailView.as_view(), name='movie_detail'),
     path("accounts/", include("django.contrib.auth.urls")),
 
-    
-
 
 
     path('home/',views.Home, name='home'),

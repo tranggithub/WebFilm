@@ -5,7 +5,13 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>LogIn | LTWFlix</title>
-        <link rel="stylesheet" href="{% static 'css/SignUp_LogIn/styleFilm.css' %}">
+        <link rel="stylesheet" href="{% static 'css/SignUp_LogIn/styleFilm.css' %}">\
+
+        {% comment %} Alert JS {% endcomment%}
+        <!-- CSS -->
+        <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css"/>
+        <!-- Default theme -->
+        <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/default.min.css"/>
     </head>
     <body>
         <div class="Login">
@@ -16,6 +22,25 @@
                 <div class="BrandName_Login">
                     <img style="width: 75px;" src="{% static 'css/SignUp_LogIn/BrandNameLogin.png' %}">
                 </div>
+                
+                {% comment %} alertifyjs - Thông báo  {% endcomment %}
+                <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
+                <script>
+                    alertify.set('notifier','position', 'top-right');
+                </script>
+                {% for msg in messages %}
+                    {% if msg.tags == "error" %}
+                        <script>
+                            alertify.error('{{msg}}'); 
+                        </script>
+                    {% else %}
+                        <script>
+                            alertify.success('{{msg}}');
+                        </script>
+                    {% endif %}
+                {% endfor %}
+                
+
                 <div class="Title">
                     <p>Welcome back</p>
                 </div>

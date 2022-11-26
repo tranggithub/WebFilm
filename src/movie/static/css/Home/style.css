@@ -1,4 +1,7 @@
-
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&display=swap");
+*{
+    font-family:'Poppins', sans-serif;
+}
 .grid{ 
     width: 120%;
     max-width: 120%;
@@ -513,4 +516,8 @@
 @keyframes spin {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
+}
+.ajs-message
+{
+    font-family: 'Montserrat', sans-serif;
 }

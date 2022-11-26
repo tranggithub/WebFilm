@@ -26,18 +26,22 @@ def SignUp(request):
     passwd1 = request.POST.get('password1')
     passwd2 = request.POST.get('password2')
     if passwd1 == passwd2:
-      nm = request.POST.get('name')
-      myuser = User.objects.create_user(username=usernm,email=mail,password=passwd1)
-      myuser.first_name = nm
-      myuser.save()
-      messages.success(request,"Your account has been created successfully")
-      return redirect('/movies/log_in')
+      try:
+        user= User.objects.get(username=usernm)
+        messages.error(request,"The username you entered has already been taken. Please try another username.")
+        return redirect('/movies/sign_up')
+      except User.DoesNotExist:
+        nm = request.POST.get('name')
+        myuser = User.objects.create_user(username=usernm,email=mail,password=passwd1)
+        myuser.first_name = nm
+        myuser.save()
+        messages.success(request,"Your account has been created successfully")
+        return redirect('/movies/log_in')
     else:
-      messages.error(request,"Your confirm password and yor password not the same")
+      messages.error(request,"Your confirm password and your password are not the same")
       return redirect('/movies/sign_up')
   return render(request,".\SignUp_LogIn\SignUpFilm.html")
-  # template = loader.get_template('.\SignUp_LogIn\SignUpFilm.html')
-  # return HttpResponse(template.render())
+
 
 def LogIn(request):
   if request.user.is_authenticated:
