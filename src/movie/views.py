@@ -173,14 +173,20 @@ def WatchFilm(request, movie_id):
         #comment = get_object_or_404(Comment, id=request.POST.get('like'))
         value = request.POST.get('like')
         comment = Comment.objects.get(pk=value)
-        comment.unlikes.remove(request.user)
-        comment.likes.add(request.user)
+        if comment.likes.filter(id=request.user.id).exists():
+          comment.likes.remove(request.user)
+        else:
+          comment.unlikes.remove(request.user)
+          comment.likes.add(request.user)
         return HttpResponseRedirect(reverse('watch', args=[str(movie_id)]))
       elif 'unlike' in request.POST:
         value = request.POST.get('unlike')
         comment = Comment.objects.get(pk=value)
-        comment.likes.remove(request.user)
-        comment.unlikes.add(request.user)
+        if comment.unlikes.filter(id=request.user.id).exists():
+          comment.unlikes.remove(request.user)
+        else:
+          comment.likes.remove(request.user)
+          comment.unlikes.add(request.user)
         return HttpResponseRedirect(reverse('watch', args=[str(movie_id)]))
     ava = request.user.profile.avatar.url
     movies = Movie.objects.filter(id=movie_id)
