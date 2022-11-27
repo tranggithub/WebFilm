@@ -107,7 +107,7 @@
                     <a class="Head__See" href="Upcoming.html">See all</a>
                 </div>  
                 <div class="grid__row-4">
-                    {% for movie in upcoming %}
+                    {% for movie in love %}
                         <button class="column__movie">
                             <a href="{% url 'detail' movie.id %}">
                                 <img class="img-movie" src="{{movie.image.url}}" alt="{{movie.title}}" style="width:160px; height:252px; border-radius: 10px;"/>
@@ -118,12 +118,12 @@
                 </div>   
                 <div class="grid__row-4-Body">
                     <div class="Head__Up">
-                        <a name="TVseries">Marked Videos</a>
+                        <a name="TVseries">Mark Book</a>
                     </div>
                     <a class="Head__See" href="TVSeries.html">See all</a>
                 </div>  
                 <div class="grid__row-4">
-                    {% for movie in tv_series %}
+                    {% for movie in mark %}
                         <button class="column__movie">
                             <a href="{% url 'detail' movie.id%}">
                                 <img class="img-movie" src="{{movie.image.url}}" alt="{{movie.title}}" style="width:160px; height:252px; border-radius: 10px;"/>

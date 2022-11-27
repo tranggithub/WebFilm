@@ -156,10 +156,12 @@ def Library(request):
   ava = request.user.profile.avatar.url
   movies = Movie.objects.all()
   trending = Movie.objects.filter(status__status='T')[:4]
+  love = Movie.objects.filter(loves__id=request.user.id)
+  mark = Movie.objects.filter(marks__id=request.user.id)
   upcoming = Movie.objects.filter(status__status='U')[:4]
   tv_series = Movie.objects.filter(format='TV')[:4]
   ps = Movie.objects.filter(format='PS')[:4]
-  return render(request,".\Trailer_Detail\Library.html",{'avatar':ava, 'movies': movies,'trending': trending, 'upcoming':upcoming, 'tv_series':tv_series, 'ps':ps})
+  return render(request,".\Trailer_Detail\Library.html",{'avatar':ava, 'movies': movies,'trending': trending, 'love':love, 'mark':mark, 'ps':ps})
 def WatchFilm(request, movie_id):
   if request.user.is_authenticated:
     movie = Movie.objects.get(pk=movie_id)

@@ -113,7 +113,7 @@ class Movie(models.Model):
     writers = models.CharField(max_length=255)
     
     #Love and mark video
-    loves = models.ManyToManyField(User,related_name="movie_love")
+    loves = models.ManyToManyField(User,related_name="movie_love", verbose_name="loves")
     marks = models.ManyToManyField(User,related_name="movie_mark")
 
     #Hỗ trợ chức năng đổi icon 
