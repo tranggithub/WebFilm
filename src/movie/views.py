@@ -158,8 +158,6 @@ def Library(request):
   trending = Movie.objects.filter(status__status='T')[:4]
   love = Movie.objects.filter(loves__id=request.user.id)
   mark = Movie.objects.filter(marks__id=request.user.id)
-  upcoming = Movie.objects.filter(status__status='U')[:4]
-  tv_series = Movie.objects.filter(format='TV')[:4]
   ps = Movie.objects.filter(format='PS')[:4]
   return render(request,".\Trailer_Detail\Library.html",{'avatar':ava, 'movies': movies,'trending': trending, 'love':love, 'mark':mark, 'ps':ps})
 def WatchFilm(request, movie_id):
@@ -208,6 +206,66 @@ def WatchFilm(request, movie_id):
           comment.marks.add(request.user)
         url = '/movies/watch/'+ movie_id
         return redirect(url)
+      elif 'star1' in request.POST:
+        if RatingStar.objects.filter(movie__id=movie_id, user__id=request.user.id).exists():
+          myrate = RatingStar.objects.get(movie__id=movie_id, user__id=request.user.id)
+          myrate.rate = 1
+          myrate.save()
+        else:
+          usr = request.user
+          myrate = RatingStar.objects.create(user=usr,movie=movie,rate=1)
+          myrate.save()
+        url = '/movies/watch/'+ movie_id
+        return redirect(url)
+      elif 'star2' in request.POST:
+        if RatingStar.objects.filter(movie__id=movie_id, user__id=request.user.id).exists():
+          myrate = RatingStar.objects.get(movie__id=movie_id, user__id=request.user.id)
+          myrate.rate = 2
+          myrate.save()
+        else:
+          usr = request.user
+          myrate = RatingStar.objects.create(user=usr,movie=movie,rate=2)
+          myrate.save()
+        url = '/movies/watch/'+ movie_id
+        return redirect(url)
+      elif 'star3' in request.POST:
+        if RatingStar.objects.filter(movie__id=movie_id, user__id=request.user.id).exists():
+          myrate = RatingStar.objects.get(movie__id=movie_id, user__id=request.user.id)
+          myrate.rate = 3
+          myrate.save()
+        else:
+          usr = request.user
+          myrate = RatingStar.objects.create(user=usr,movie=movie,rate=3)
+          myrate.save()
+        url = '/movies/watch/'+ movie_id
+        return redirect(url)
+      elif 'star4' in request.POST:
+        if RatingStar.objects.filter(movie__id=movie_id, user__id=request.user.id).exists():
+          myrate = RatingStar.objects.get(movie__id=movie_id, user__id=request.user.id)
+          myrate.rate = 4
+          myrate.save()
+        else:
+          usr = request.user
+          myrate = RatingStar.objects.create(user=usr,movie=movie,rate=4)
+          myrate.save()
+        url = '/movies/watch/'+ movie_id
+        return redirect(url)
+      elif 'star5' in request.POST:
+        if RatingStar.objects.filter(movie__id=movie_id, user__id=request.user.id).exists():
+          myrate = RatingStar.objects.get(movie__id=movie_id, user__id=request.user.id)
+          myrate.rate = 5
+          myrate.save()
+        else:
+          usr = request.user
+          myrate = RatingStar.objects.create(user=usr,movie=movie,rate=5)
+          myrate.save()
+        url = '/movies/watch/'+ movie_id
+        return redirect(url)
+    try: 
+      myrate = RatingStar.objects.get(movie__id=movie_id, user__id=request.user.id)
+      rate = myrate.rate
+    except:
+      rate = 0
     ava = request.user.profile.avatar.url
     movies = Movie.objects.filter(id=movie_id)
     user = request.user
@@ -230,6 +288,7 @@ def WatchFilm(request, movie_id):
         'movies': movies, 
         'episode': episode, 
         'user':user,
+        'rate' : rate
         })
   else:
     messages.error(request,"Please log in!")

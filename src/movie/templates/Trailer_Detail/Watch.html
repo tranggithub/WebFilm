@@ -311,15 +311,52 @@
                         </div>
                         
                         <div class="bottom_right">
-                            <div class="rate">
-                                <span>
-                                    <button id="ratebt" onclick="rate()"><img class="rateimg" src="{% static 'css/Trailer_Detail/image/icon/icons8-star-green-24.png'%}"></button>
-                                    <button id="ratebt" onclick="rate()"><img class="rateimg" src="{% static 'css/Trailer_Detail/image/icon/icons8-star-green-24.png'%}"></button>
-                                    <button id="ratebt" onclick="rate()"><img class="rateimg" src="{% static 'css/Trailer_Detail/image/icon/icons8-star-green-24.png'%}"></button>
-                                    <button id="ratebt" onclick="rate()"><img class="rateimg" src="{% static 'css/Trailer_Detail/image/icon/icons8-star-green-24.png'%}"></button>
-                                    <button id="ratebt" onclick="rate()"><img class="rateimg" src="{% static 'css/Trailer_Detail/image/icon/icons8-star-green-24.png'%}"></button>
-                                </span>
-                            </div>
+                            <form method="post">
+                                {% csrf_token %}
+                                <div class="rate">
+                                    <span>
+                                        {% if rate == 0 %}
+                                            <button type="submit" name="star1" value=1 id="ratebt" onclick="rate()"><img class="rateimg" src="{% static 'css/Trailer_Detail/image/icon/icons8-star-green-24.png'%}"></button>
+                                            <button type="submit" name="star2" value=2 id="ratebt" onclick="rate()"><img class="rateimg" src="{% static 'css/Trailer_Detail/image/icon/icons8-star-green-24.png'%}"></button>
+                                            <button type="submit" name="star3" value=3 id="ratebt" onclick="rate()"><img class="rateimg" src="{% static 'css/Trailer_Detail/image/icon/icons8-star-green-24.png'%}"></button>
+                                            <button type="submit" name="star4" value=4 id="ratebt" onclick="rate()"><img class="rateimg" src="{% static 'css/Trailer_Detail/image/icon/icons8-star-green-24.png'%}"></button>
+                                            <button type="submit" name="star5" value=5 id="ratebt" onclick="rate()"><img class="rateimg" src="{% static 'css/Trailer_Detail/image/icon/icons8-star-green-24.png'%}"></button>
+                                        {% elif rate == 1 %}
+                                            <button type="submit" name="star1" value=1 id="ratebt" onclick="rate()"><img class="rateimg" src="{% static 'css/Trailer_Detail/image/icon/icons8-star-rate-24.png'%}"></button>
+                                            <button type="submit" name="star2" value=2 id="ratebt" onclick="rate()"><img class="rateimg" src="{% static 'css/Trailer_Detail/image/icon/icons8-star-green-24.png'%}"></button>
+                                            <button type="submit" name="star3" value=3 id="ratebt" onclick="rate()"><img class="rateimg" src="{% static 'css/Trailer_Detail/image/icon/icons8-star-green-24.png'%}"></button>
+                                            <button type="submit" name="star4" value=4 id="ratebt" onclick="rate()"><img class="rateimg" src="{% static 'css/Trailer_Detail/image/icon/icons8-star-green-24.png'%}"></button>
+                                            <button type="submit" name="star5" value=5 id="ratebt" onclick="rate()"><img class="rateimg" src="{% static 'css/Trailer_Detail/image/icon/icons8-star-green-24.png'%}"></button>
+                                        {% elif rate == 2 %}
+                                            <button type="submit" name="star1" value=1 id="ratebt" onclick="rate()"><img class="rateimg" src="{% static 'css/Trailer_Detail/image/icon/icons8-star-rate-24.png'%}"></button>
+                                            <button type="submit" name="star2" value=2 id="ratebt" onclick="rate()"><img class="rateimg" src="{% static 'css/Trailer_Detail/image/icon/icons8-star-rate-24.png'%}"></button>
+                                            <button type="submit" name="star3" value=3 id="ratebt" onclick="rate()"><img class="rateimg" src="{% static 'css/Trailer_Detail/image/icon/icons8-star-green-24.png'%}"></button>
+                                            <button type="submit" name="star4" value=4 id="ratebt" onclick="rate()"><img class="rateimg" src="{% static 'css/Trailer_Detail/image/icon/icons8-star-green-24.png'%}"></button>
+                                            <button type="submit" name="star5" value=5 id="ratebt" onclick="rate()"><img class="rateimg" src="{% static 'css/Trailer_Detail/image/icon/icons8-star-green-24.png'%}"></button>
+                                        {% elif rate == 3 %}
+                                            <button type="submit" name="star1" value=1 id="ratebt" onclick="rate()"><img class="rateimg" src="{% static 'css/Trailer_Detail/image/icon/icons8-star-rate-24.png'%}"></button>
+                                            <button type="submit" name="star2" value=2 id="ratebt" onclick="rate()"><img class="rateimg" src="{% static 'css/Trailer_Detail/image/icon/icons8-star-rate-24.png'%}"></button>
+                                            <button type="submit" name="star3" value=3 id="ratebt" onclick="rate()"><img class="rateimg" src="{% static 'css/Trailer_Detail/image/icon/icons8-star-rate-24.png'%}"></button>
+                                            <button type="submit" name="star4" value=4 id="ratebt" onclick="rate()"><img class="rateimg" src="{% static 'css/Trailer_Detail/image/icon/icons8-star-green-24.png'%}"></button>
+                                            <button type="submit" name="star5" value=5 id="ratebt" onclick="rate()"><img class="rateimg" src="{% static 'css/Trailer_Detail/image/icon/icons8-star-green-24.png'%}"></button>
+                                        {% elif rate == 4 %}
+                                            <button type="submit" name="star1" value=1 id="ratebt" onclick="rate()"><img class="rateimg" src="{% static 'css/Trailer_Detail/image/icon/icons8-star-rate-24.png'%}"></button>
+                                            <button type="submit" name="star2" value=2 id="ratebt" onclick="rate()"><img class="rateimg" src="{% static 'css/Trailer_Detail/image/icon/icons8-star-rate-24.png'%}"></button>
+                                            <button type="submit" name="star3" value=3 id="ratebt" onclick="rate()"><img class="rateimg" src="{% static 'css/Trailer_Detail/image/icon/icons8-star-rate-24.png'%}"></button>
+                                            <button type="submit" name="star4" value=4 id="ratebt" onclick="rate()"><img class="rateimg" src="{% static 'css/Trailer_Detail/image/icon/icons8-star-rate-24.png'%}"></button>
+                                            <button type="submit" name="star5" value=5 id="ratebt" onclick="rate()"><img class="rateimg" src="{% static 'css/Trailer_Detail/image/icon/icons8-star-green-24.png'%}"></button>
+                                        {% elif rate == 5 %}
+                                            <button type="submit" name="star1" value=1 id="ratebt" onclick="rate()"><img class="rateimg" src="{% static 'css/Trailer_Detail/image/icon/icons8-star-rate-24.png'%}"></button>
+                                            <button type="submit" name="star2" value=2 id="ratebt" onclick="rate()"><img class="rateimg" src="{% static 'css/Trailer_Detail/image/icon/icons8-star-rate-24.png'%}"></button>
+                                            <button type="submit" name="star3" value=3 id="ratebt" onclick="rate()"><img class="rateimg" src="{% static 'css/Trailer_Detail/image/icon/icons8-star-rate-24.png'%}"></button>
+                                            <button type="submit" name="star4" value=4 id="ratebt" onclick="rate()"><img class="rateimg" src="{% static 'css/Trailer_Detail/image/icon/icons8-star-rate-24.png'%}"></button>
+                                            <button type="submit" name="star5" value=5 id="ratebt" onclick="rate()"><img class="rateimg" src="{% static 'css/Trailer_Detail/image/icon/icons8-star-rate-24.png'%}"></button>
+                                        {% endif %}
+                                            
+                                        
+                                    </span>
+                                </div>
+                            </form>
                             <ul>
                                 <li id="more">
                                     <a  href="{% url 'movies' %}">

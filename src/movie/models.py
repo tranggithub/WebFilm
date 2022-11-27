@@ -176,6 +176,13 @@ class Comment(models.Model):
     def is_mark(self):
         return self.marks.filter(id=self.who_has_it_open).exists()
 
+class RatingStar(models.Model):
+    movie = models.ForeignKey(Movie,related_name="movies", on_delete=models.CASCADE)
+    user = models.ForeignKey(User, related_name="owner", on_delete=models.CASCADE)
+    rate = models.IntegerField(blank=True, null=True, default=0)
+    def __str__(self):
+        return '%s - %s - %d' % (self.movie.title,self.user.first_name, self.rate)
+
 # Tin hieu thong bao them user moi -> Them Profile moi
 @receiver(post_save, sender=User)
 def create_user_profile(sender,instance,created,**kwargs):

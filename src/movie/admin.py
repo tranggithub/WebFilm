@@ -23,6 +23,7 @@ admin.site.register(User, AccountsUserAdmin)
 
 admin.site.register(Movie)
 admin.site.register(Comment)
+admin.site.register(RatingStar)
 @admin.register(Cast_and_Crew)
 class CastAdmin(admin.ModelAdmin):
     list_display = ('name', 'title_movie')
@@ -34,5 +35,5 @@ admin.site.register(Category)
 class EpisodeAdmin(admin.ModelAdmin):
     list_display = ('title', 'number_episode')
     search_fields = ('title', 'number_episode')
-    
+  
 admin.site.register(Statuses)
