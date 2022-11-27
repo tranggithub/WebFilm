@@ -187,17 +187,35 @@ def WatchFilm(request, movie_id):
         else:
           comment.likes.remove(request.user)
           comment.unlikes.add(request.user)
-        return HttpResponseRedirect(reverse('watch', args=[str(movie_id)]))
+        url = '/movies/watch/'+ movie_id
+        return redirect(url)
     ava = request.user.profile.avatar.url
     movies = Movie.objects.filter(id=movie_id)
     user = request.user
     episode = movies.get().movie_episode.all()
-    return render(request,".\Trailer_Detail\Watch.html",{'avatar':ava, 'movies': movies, 'episode': episode, 'user':user})
+    for comment in movie.comments.all():
+      comment.who_has_it_open = request.user.id
+      comment.save()
+    # value = request.GET.get('like')
+    # try:
+    #   comment = Comment.objects.get(pk=value)
+    # except:
+    #   return HttpResponseRedirect(reverse('watch', args=[str(movie_id)]))
+    # if comment.likes.filter(id=request.user.id).exists():
+    #   like = True
+    # else:
+    #   like = False
+
+    return render(request,".\Trailer_Detail\Watch.html",{
+        'avatar':ava, 
+        'movies': movies, 
+        'episode': episode, 
+        'user':user,
+        })
   else:
     messages.error(request,"Please log in!")
     url=reverse_lazy('log_in')
     redirect(url)
-
 
 def Detail(request, movie_id):
   ava = request.user.profile.avatar.url

@@ -147,12 +147,18 @@ class Comment(models.Model):
     date_added = models.DateField(auto_now_add=True)
     likes = models.ManyToManyField(User,related_name="comnent_like")
     unlikes = models.ManyToManyField(User,related_name="comnent_unlike")
+    who_has_it_open = models.IntegerField(null=True,blank=True,default=0)
     def __str__(self):
         return '%s - %s' % (self.movie.title,self.user.first_name)
     def total_likes(self):
         return self.likes.count()
     def total_unlikes(self):
         return self.unlikes.count()
+    def is_like(self):
+        return self.likes.filter(id=self.who_has_it_open).exists()
+    def is_unlike(self):
+        return self.unlikes.filter(id=self.who_has_it_open).exists()
+
 # Tin hieu thong bao them user moi -> Them Profile moi
 @receiver(post_save, sender=User)
 def create_user_profile(sender,instance,created,**kwargs):

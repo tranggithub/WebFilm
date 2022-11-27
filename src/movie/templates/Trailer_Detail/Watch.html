@@ -160,11 +160,19 @@
                                                             <form method="post">
                                                                 {% csrf_token %}
                                                                 <button id="likebt" type="submit" name="like" value="{{comment.id}}">
-                                                                    <img class="like-img" src="{% static 'css/Trailer_Detail/image/icon/icons8-like-24.png'%}">
+                                                                    {% if not comment.is_like %}
+                                                                        <img class="like-img" src="{% static 'css/Trailer_Detail/image/icon/icons8-like-24.png'%}">
+                                                                    {% else %}
+                                                                        <img class="like-img" src="{% static 'css/Trailer_Detail/image/icon/icons8-like-green-24.png'%}">
+                                                                    {% endif %}
                                                                 </button>
                                                                 <label id="comment-number">{{comment.total_likes}}</label>
                                                                 <button id="likebt" type="submit" name="unlike" value="{{comment.id}}">
-                                                                    <img class="dislike-img" src="{% static 'css/Trailer_Detail/image/icon/icons8-dislike-24.png'%}">
+                                                                    {% if not comment.is_unlike %}
+                                                                        <img class="dislike-img" src="{% static 'css/Trailer_Detail/image/icon/icons8-dislike-24.png'%}">
+                                                                    {% else %}
+                                                                        <img class="dislike-img" src="{% static 'css/Trailer_Detail/image/icon/icons8-dislike-green-24.png'%}">
+                                                                    {% endif %}
                                                                 </button>
                                                                 <label id="comment-number">{{comment.total_unlikes}}</label>
                                                                 <button id="cmt" type="submit" name="subcomment" value="{{comment.id}}" >
