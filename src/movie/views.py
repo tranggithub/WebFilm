@@ -189,6 +189,15 @@ def WatchFilm(request, movie_id):
           comment.unlikes.add(request.user)
         url = '/movies/watch/'+ movie_id
         return redirect(url)
+      elif 'mark' in request.POST:
+        value = request.POST.get('mark')
+        comment = Comment.objects.get(pk=value)
+        if comment.marks.filter(id=request.user.id).exists():
+          comment.marks.remove(request.user)
+        else:
+          comment.marks.add(request.user)
+        url = '/movies/watch/'+ movie_id
+        return redirect(url)
     ava = request.user.profile.avatar.url
     movies = Movie.objects.filter(id=movie_id)
     user = request.user
