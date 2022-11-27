@@ -316,13 +316,25 @@ def Detail(request, movie_id):
   for movie in Movie.objects.all():
       movie.who_has_it_open = request.user.id
       movie.save()
+  try: 
+    myrate = RatingStar.objects.get(movie__id=movie_id, user__id=request.user.id)
+    average = myrate.average_of_star()
+  except:
+    average = 0
   ava = request.user.profile.avatar.url
   another = Movie.objects.all().exclude(id=movie_id)[:4]
   movies = Movie.objects.filter(id=movie_id)
   category = movies.get().movie_category.all()
   cast_crew = movies.get().cast_and_crew.all()
   topcast = cast_crew[:4]
-  return render(request,".\Trailer_Detail\Trailer_Detail.html",{'avatar':ava, 'another': another, 'movies': movies, 'category': category, 'topcast': topcast, 'cast_crew': cast_crew})
+  return render(request,".\Trailer_Detail\Trailer_Detail.html",
+  {'avatar':ava, 
+  'another': another, 
+  'movies': movies, 
+  'category': category, 
+  'topcast': topcast, 
+  'cast_crew': cast_crew,
+  'average': average})
 
 
 def UserPacket(request):

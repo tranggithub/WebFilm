@@ -182,6 +182,16 @@ class RatingStar(models.Model):
     rate = models.IntegerField(blank=True, null=True, default=0)
     def __str__(self):
         return '%s - %s - %d' % (self.movie.title,self.user.first_name, self.rate)
+    def average_of_star(self):
+        myrate = RatingStar.objects.all()
+        myrate = myrate.filter(movie__id=self.movie.id)
+        sum = 0
+        for i in myrate:
+            sum = sum + i.rate
+        if myrate.count() == 0:
+            return 0
+        return sum/(myrate.count())
+
 
 # Tin hieu thong bao them user moi -> Them Profile moi
 @receiver(post_save, sender=User)
