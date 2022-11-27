@@ -45,7 +45,7 @@
                         <li><a id="main" href="{% url 'movies' %}"> <i class="fas fa-video fa-icon "></i><label>Movies</label></a></li>
                         <li><a href="{% url 'movies' %}#TVseries"><i class="fas fa-tv fa-icon"></i><label>TV Series</label></a></li>
                         <li><a href="{% url 'movies' %}#Upcoming"><i class="fas fa-calendar-alt fa-icon"></i><label>Upcoming</label></a></li>
-                        <li><a href="#"><label><b style="background:none;">Library</b></label></a></li>
+                        <li><a href="{% url 'library' %}"><img src="{% static 'css/Trailer_Detail/image/icon/icons8-book-shelf-50.png'%}" alt="library"><label><b style="background:none;">Library</b></label></a></li>
                         
                         <li  style="margin-top:20%;"><a href="{% url 'log_out' %}"><i class="fas fa-sign-out-alt fa-icon"></i><label>Logout</label></a></li>
                     </ul>

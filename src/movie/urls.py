@@ -19,6 +19,7 @@ urlpatterns = [
     path('log_out/',views.LogOut, name='log_out'),
     path('sign_up/',views.SignUp, name='sign_up'),
     path('movies/',views.Movies, name='movies'),
+    path('library/',views.Library, name='library'),
     path('watch/<movie_id>',views.WatchFilm, name='watch'),
     path('detail/<movie_id>',views.Detail, name='detail'),
     path('userpacket/',views.UserPacket, name='userpacket'),
