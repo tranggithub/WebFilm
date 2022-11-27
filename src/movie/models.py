@@ -112,6 +112,13 @@ class Movie(models.Model):
     director = models.CharField(max_length=100)
     writers = models.CharField(max_length=255)
     
+    #Love and mark video
+    loves = models.ManyToManyField(User,related_name="movie_love")
+    marks = models.ManyToManyField(User,related_name="movie_mark")
+
+    #Hỗ trợ chức năng đổi icon 
+    who_has_it_open = models.IntegerField(null=True,blank=True,default=0)
+
     #stars
     cast_and_crew = models.ManyToManyField(Cast_and_Crew, related_name='cast_crew')
     format = models.CharField(choices=FORMAT_CHOICES, max_length=2)
@@ -121,6 +128,12 @@ class Movie(models.Model):
 
     def __str__(self):
         return str(self.title) 
+
+    # Xem người dùng hiện tại đã đánh dấu chưa
+    def is_love(self):
+        return self.loves.filter(id=self.who_has_it_open).exists()
+    def is_mark(self):
+        return self.marks.filter(id=self.who_has_it_open).exists()
 
 class Episode(models.Model):
     title = models.ForeignKey(Movie,related_name="movie_episode", on_delete=models.CASCADE)
