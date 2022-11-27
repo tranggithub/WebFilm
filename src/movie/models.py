@@ -143,15 +143,16 @@ class Profile(models.Model):
 class Comment(models.Model):
     movie = models.ForeignKey(Movie,related_name="comments", on_delete=models.CASCADE)
     user = models.ForeignKey(User, related_name="publisher", on_delete=models.CASCADE)
-    #avatar = models.ImageField(default='user_profile/anonymous.PNG')
-    #name = models.CharField(max_length=255, null=True,blank=True, default=user.)
     body = models.TextField()
     date_added = models.DateField(auto_now_add=True)
-
+    likes = models.ManyToManyField(User,related_name="comnent_like")
+    unlikes = models.ManyToManyField(User,related_name="comnent_unlike")
     def __str__(self):
-        # self.avatar = self.user.avatar
-        # self.name = self.user.user.first_name
         return '%s - %s' % (self.movie.title,self.user.first_name)
+    def total_likes(self):
+        return self.likes.count()
+    def total_unlikes(self):
+        return self.unlikes.count()
 # Tin hieu thong bao them user moi -> Them Profile moi
 @receiver(post_save, sender=User)
 def create_user_profile(sender,instance,created,**kwargs):

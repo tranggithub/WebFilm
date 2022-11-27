@@ -125,7 +125,7 @@
                             <br>
                             <div class="bottom">
                                 <h5 style="margin-bottom:10px;">Comment</h5>
-                                    <form method="POST">
+                                    <form method="POST" name="comment">
                                         {% csrf_token %}
                                         <div class="comments">
                                             <span>
@@ -157,21 +157,24 @@
                                                         <label id="time">{{comment.date_added}}</label>
                                                         <p>{{comment.body}}</p>
                                                         <div class="like">
-                                                            <button id="likebt" type="button">
-                                                                <img class="like-img" src="{% static 'css/Trailer_Detail/image/icon/icons8-like-24.png'%}">
-                                                            </button>
-                                                            <label id="comment-number">100</label>
-                                                            <button id="likebt" type="button">
-                                                                <img class="dislike-img" src="{% static 'css/Trailer_Detail/image/icon/icons8-dislike-24.png'%}">
-                                                            </button>
-                                                            <label id="comment-number">2</label>
-                                                            <button id="cmt" type="button">
-                                                                <img class="cmt-img"src="{% static 'css/Trailer_Detail/image/icon/icons8-comments-30.png'%}">
-                                                            </button>
-                                                            <label id="comment-number">0</label>
-                                                            <button id="flag">
-                                                                <img class="flag-img" src="{% static 'css/Trailer_Detail/image/icon/icons8-flag-30.png'%}">
-                                                            </button>
+                                                            <form method="post">
+                                                                {% csrf_token %}
+                                                                <button id="likebt" type="submit" name="like" value="{{comment.id}}">
+                                                                    <img class="like-img" src="{% static 'css/Trailer_Detail/image/icon/icons8-like-24.png'%}">
+                                                                </button>
+                                                                <label id="comment-number">{{comment.total_likes}}</label>
+                                                                <button id="likebt" type="submit" name="unlike" value="{{comment.id}}">
+                                                                    <img class="dislike-img" src="{% static 'css/Trailer_Detail/image/icon/icons8-dislike-24.png'%}">
+                                                                </button>
+                                                                <label id="comment-number">{{comment.total_unlikes}}</label>
+                                                                <button id="cmt" type="submit" name="subcomment" value="{{comment.id}}" >
+                                                                    <img class="cmt-img"src="{% static 'css/Trailer_Detail/image/icon/icons8-comments-30.png'%}">
+                                                                </button>
+                                                                <label id="comment-number">0</label>
+                                                                <button id="flag">
+                                                                    <img class="flag-img" src="{% static 'css/Trailer_Detail/image/icon/icons8-flag-30.png'%}">
+                                                                </button>
+                                                            </form>
                                                         </div>
                                                         <!-- <script>
                                                             function click(x){

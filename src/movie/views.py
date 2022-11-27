@@ -1,8 +1,8 @@
 ﻿from ast import Mod
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from pyexpat import model
 from django.template import loader
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 from django.contrib import messages
@@ -21,7 +21,7 @@ from django.template.loader import render_to_string
 from django.db.models.query_utils import Q
 from django.core.mail import send_mail, BadHeaderError
 from .models import *
-from django.urls import reverse_lazy
+from django.urls import reverse_lazy, reverse
 class MovieList (ListView):
     model = Movie
     
@@ -156,18 +156,32 @@ def WatchFilm(request, movie_id):
   if request.user.is_authenticated:
     movie = Movie.objects.get(pk=movie_id)
     if request.method == "POST":
-      usr = request.user
-      comment = request.POST.get('comment')
-      try:
-        cmt = Comment.objects.create(movie=movie,user=usr,body=comment)
-        cmt.save()
-      except:
-        messages.error(request,"Fail to comment")
+      if 'comment' in request.POST:
+        usr = request.user
+        comment = request.POST.get('comment')
+        try:
+          cmt = Comment.objects.create(movie=movie,user=usr,body=comment)
+          cmt.save()
+        except:
+          messages.error(request,"Fail to comment")
+          url = '/movies/watch/'+ movie_id
+          return redirect(url)
+        messages.success(request,"Comment successfully")
         url = '/movies/watch/'+ movie_id
         return redirect(url)
-      messages.success(request,"Comment successfully")
-      url = '/movies/watch/'+ movie_id
-      return redirect(url)
+      elif 'like' in request.POST:
+        #comment = get_object_or_404(Comment, id=request.POST.get('like'))
+        value = request.POST.get('like')
+        comment = Comment.objects.get(pk=value)
+        comment.unlikes.remove(request.user)
+        comment.likes.add(request.user)
+        return HttpResponseRedirect(reverse('watch', args=[str(movie_id)]))
+      elif 'unlike' in request.POST:
+        value = request.POST.get('unlike')
+        comment = Comment.objects.get(pk=value)
+        comment.likes.remove(request.user)
+        comment.unlikes.add(request.user)
+        return HttpResponseRedirect(reverse('watch', args=[str(movie_id)]))
     ava = request.user.profile.avatar.url
     movies = Movie.objects.filter(id=movie_id)
     user = request.user
