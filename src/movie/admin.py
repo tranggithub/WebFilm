@@ -23,7 +23,7 @@ admin.site.register(User, AccountsUserAdmin)
 
 #admin.site.register(Movie)
 admin.site.register(Comment)
-admin.site.register(RatingStar)
+#admin.site.register(RatingStar)
 @admin.register(Cast_and_Crew)
 class CastAdmin(admin.ModelAdmin):
     list_display = ('name', 'title_movie')
@@ -42,8 +42,14 @@ class AwardInline(admin.StackedInline):
     model = Award
     extra = 0
 
+class RatingStarInline(admin.StackedInline):
+    model = RatingStar
+    extra = 0
 class MovieAdmin(admin.ModelAdmin):
     list_display = ('title','description')
     search_fields = ('title','description')
-    inlines = [AwardInline]
+    inlines = [
+    AwardInline,
+    RatingStarInline
+    ]
 admin.site.register(Movie, MovieAdmin)
