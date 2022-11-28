@@ -111,7 +111,7 @@
                                     {% endfor %}
                                 </p>
                                 <hr>
-                                <a href="{% url 'watch' movie.id %}">Watch movie</a>
+                                <a href="{% url 'watch' movie.id 1 %}">Watch movie</a>
                                     <button class="rate_button" type="button" onclick="topRate()">Top rated movie #65</button>
                                     <select>
                                         <option>Awards {{movie.movie_award.count }} nominations</option>

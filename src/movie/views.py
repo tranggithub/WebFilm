@@ -163,9 +163,10 @@ def Library(request):
   ps = Movie.objects.filter(format='PS')[:4]
   return render(request,".\Trailer_Detail\Library.html",{'avatar':ava, 'movies': movies,'trending': trending, 'love':love, 'mark':mark, 'ps':ps})
 
-def WatchFilm(request, movie_id):
+def WatchFilm(request, movie_id, number_ep):
   if request.user.is_authenticated:
     movie = Movie.objects.get(pk=movie_id)
+    ep = get_object_or_404(Episode,title__id=movie_id,number_episode=number_ep)
     if request.method == "POST":
       if 'comment' in request.POST:
         usr = request.user
@@ -291,7 +292,8 @@ def WatchFilm(request, movie_id):
         'movies': movies, 
         'episode': episode, 
         'user':user,
-        'rate' : rate
+        'rate' : rate,
+        'ep': ep
         })
   else:
     messages.error(request,"Please log in!")
