@@ -422,7 +422,7 @@ def Episode(request, movie_id, number_ep):
     # else:
     #   like = False
 
-    return render(request,".\Trailer_Detail\Watch.html",{
+    return render(request,".\Trailer_Detail\Episode.html",{
         'avatar':ava, 
         'movies': movies, 
         'episode': episode, 
@@ -461,7 +461,7 @@ def Detail(request, movie_id):
   movies = Movie.objects.filter(id=movie_id)
   category = movies.get().categories.all()
   cast_crew = movies.get().cast_and_crew.all()
-  topcast = cast_crew[:4]
+  topcast = movies.get().cast_and_crew.all()[:4]
   return render(request,".\Trailer_Detail\Trailer_Detail.html",
   {'avatar':ava, 
   'another': another, 
