@@ -18,7 +18,7 @@
                         <li><a id="main" href="{% url 'movies' %}"><img src="{% static 'css/Trailer_Detail/image/icon/icons8-video-call-48.png'%}" alt="movies"><label><b style="background:none;">Movies</b></label></a></li>
                         <li><a href="{% url 'home'%}#TVseries"><img id="series" src="{% static 'css/Trailer_Detail/image/icon/icons8-tv-48.png'%}" alt="series"><label><b style="background:none;">TV Series</b></label></a></li>
                         <li><a href="{% url 'home' %}#Upcoming"><img src="{% static 'css/Trailer_Detail/image/icon/icons8-calendar-48.png'%}" alt="upcoming"><label><b style="background:none;">Upcoming</b></label></a></li>
-                        <li><a href="#"><label><b style="background:none;">Library</b></label></a></li>
+                        <li><a href="{% url 'library' %}"><img src="{% static 'css/Trailer_Detail/image/icon/icons8-book-shelf-50.png'%}" alt="library"><label><b style="background:none;">Library</b></label></a></li>
                         <li style="margin-top:30%;"><a href="{% url 'log_out' %}"><img src="{% static 'css/Trailer_Detail/image/icon/icons8-logout-acc-48.png'%}" alt="logout"><label><b style="background:none;">Logout</b></label></a></li>
                     </ul>
                 </div>
@@ -114,10 +114,12 @@
                                 <a href="{% url 'watch' movie.id %}">Watch movie</a>
                                     <button class="rate_button" type="button" onclick="topRate()">Top rated movie #65</button>
                                     <select>
-                                        <option>Awards 3 nominations</option>
-                                        <option>Best movie</option>
-                                        <option>Top 3 Healing movie</option>
-                                        <option>Top 1 Action movie</option>
+                                        <option>Awards {{movie.movie_award.count }} nominations</option>
+                                        {% for award in movie.movie_award.all %}
+                                            <option>{{award.name}}</option>
+                                        {% endfor %}
+                                        <!-- <option>Top 3 Healing movie</option>
+                                        <option>Top 1 Action movie</option> -->
                                     </select>
                             </div>
                             <div class="info_characters">  <!--Thôgn tin chi tiết dv-->
@@ -197,29 +199,40 @@
                     <div class="body_right">
                         <div class="fav">
                             <ul>
-                                <li><button class="favbt" type="button" onclick="favMovies()">
-                                    <img class="heart" src="{% static 'css/Trailer_Detail/image/icon/icons8-heart-24.png'%}">
-                                </button>
-                                </li>
-                                <li>
-                                    <button class="favbt" type="button" onclick="share()">
-                                        <img class="share" src="{% static 'css/Trailer_Detail/image/icon/icons8-share-24.png'%}">
+                                <form method="post">
+                                    {% csrf_token %}
+                                    <li><button class="favbt" type="submit" name="love" onclick="favMovies()">
+                                        {% if movie.is_love %}
+                                            <img class="heart" src="{% static 'css/Trailer_Detail/image/icon/icons8-heart-red-24.png'%}">
+                                        {% else %}
+                                            <img class="heart" src="{% static 'css/Trailer_Detail/image/icon/icons8-heart-24.png'%}">
+                                        {% endif %}
                                     </button>
-                                </li>
-                                <li>
-                                    <button class="favbt" type="button" onclick="bookmark()">
-                                        <img class="bookmark"src="{% static 'css/Trailer_Detail/image/icon/icons8-bookmark-24.png'%}">
-                                    </button>
-                                </li>
-                                <li>
-                                    <button class="favbt" type="button">
-                                        <img src="{% static 'css/Trailer_Detail/image/icon/icons8-star-24.png'%}">
-                                        
-                                    </button>
-                                </li>
-                                <li>
-                                    <label >8.5 | <span style="color:#534d4d;font-size:12px;">350k</span></label>
-                                </li>
+                                    </li>
+                                    <li>
+                                        <button class="favbt" type="button" onclick="share()">
+                                            <img class="share" src="{% static 'css/Trailer_Detail/image/icon/icons8-share-24.png'%}">
+                                        </button>
+                                    </li>
+                                    <li>
+                                        <button class="favbt" type="submit" name="mark" onclick="bookmark()">
+                                            {% if movie.is_mark %}
+                                                <img class="bookmark" src="{% static 'css/Trailer_Detail/image/icon/icons8-bookmark-white-24.png'%}">
+                                            {% else %}
+                                                <img class="bookmark"src="{% static 'css/Trailer_Detail/image/icon/icons8-bookmark-24.png'%}">
+                                            {% endif %}
+                                        </button>
+                                    </li>
+                                    <li>
+                                        <button class="favbt" type="button">
+                                            <img src="{% static 'css/Trailer_Detail/image/icon/icons8-star-24.png'%}">
+                                            
+                                        </button>
+                                    </li>
+                                    <li>
+                                        <label >{{average}} | <span style="color:#534d4d;font-size:12px;">350k</span></label>
+                                    </li>
+                                </form>
                             </ul>
                             
                         </div>

@@ -19,6 +19,7 @@ urlpatterns = [
     path('log_out/',views.LogOut, name='log_out'),
     path('sign_up/',views.SignUp, name='sign_up'),
     path('movies/',views.Movies, name='movies'),
+    path('library/',views.Library, name='library'),
     path('watch/<movie_id>',views.WatchFilm, name='watch'),
     path('detail/<movie_id>',views.Detail, name='detail'),
     path('userpacket/',views.UserPacket, name='userpacket'),
@@ -29,4 +30,20 @@ urlpatterns = [
         template_name='.\Info\change_password.html',
         success_url = '/movies/info'
     ),name='change_password'),
+
+    path("reset_password/", views.password_reset_request, name="reset_password"),
+    # path('reset_password/',auth_views.PasswordResetView.as_view(
+    #     template_name='.\Info\\reset_password.html',
+    #     success_url = '/movies/log_in'
+    # ),name='reset_password'),
+    path('reset_password/<uidb64>/<token>',auth_views.PasswordResetConfirmView.as_view(
+        template_name='.\Info\\reset_confirm.html',
+        success_url = '/movies/reset_password/complete'
+    ),name='reset_confirm'),
+    path('reset_password/done',auth_views.PasswordResetDoneView.as_view(
+        template_name='.\Info\\reset_done.html',
+    ),name='reset_done'),
+    path('reset_password/complete',auth_views.PasswordResetCompleteView.as_view(
+        template_name='.\Info\\reset_complete.html',
+    ),name='reset_complete'),
 ]

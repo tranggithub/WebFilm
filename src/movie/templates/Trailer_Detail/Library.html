@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+
+{% load static %}
+
+<head>
+ <meta charset="utf-8" />
+ <link rel="stylesheet" href="{% static 'css/Home/style.css' %}" />
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
+ <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700&display=swap" rel="stylesheet">
+ <title> Library | LTWFlix</title>
+ {% comment %} Alert JS {% endcomment%}
+        <!-- CSS -->
+        <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css"/>
+        <!-- Default theme -->
+        <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/default.min.css"/>
+ </head>
+ <body>
+        {% comment %} alertifyjs - Thông báo {% endcomment %}
+        <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
+        <script>
+            alertify.set('notifier','position', 'top-right');
+        </script>
+        {% for msg in messages %}
+            {% if msg.tags == "error" %}
+                <script>
+                    alertify.error('{{msg}}'); 
+                </script>
+            {% else %}
+                <script>
+                    alertify.success('{{msg}}');
+                </script>
+            {% endif %}
+        {% endfor %}
+
+    <div class="app__container">
+        <div class="grid">
+          <div class="grid__row">
+            <div class="grid__column-2">
+                <nav class="category">
+                    <h3 class="category__heading_Movibies">
+                        <img src="{% static 'css/Home/Logo/Vector.png'%}" alt="" />
+                 
+                    </h3>
+                </nav>
+                <!-- <nav class="category">
+                    <h3 class="category__heading">
+                        <i class="fas fa-home fa-icon"></i> Home
+                    </h3>
+                </nav>
+                <nav class="category">
+                    <h3 class="category__heading category__heading__active ">
+                        <i class="fas fa-video fa-icon "></i> Movies
+                    </h3>
+                </nav>
+                <nav class="category">
+                    <h3 class="category__heading">
+                        <i class="fab fa-youtube fa-icon "></i> TV Series
+                    </h3>
+                </nav>
+                <nav class="category">
+                    <h3 class="category__heading">
+                        <i class="fas fa-calendar-alt fa-icon"></i> Upcoming
+                    </h3>
+                </nav> -->
+                <div class="button">
+                    <ul>
+                        <li><a href="{% url 'home' %}"><i class="fas fa-home fa-icon"></i><label>Home</label></a></li>
+                        <li><a href="{% url 'movies' %}"> <i class="fas fa-video fa-icon "></i><label>Movies</label></a></li>
+                        <li><a href="{% url 'home' %}#TVseries"><i class="fas fa-tv fa-icon"></i><label>TV Series</label></a></li>
+                        <li><a href="{% url 'home' %}#Upcoming"><i class="fas fa-calendar-alt fa-icon"></i><label>Upcoming</label></a></li>
+                        <li><a id="main" href="{% url 'library' %}"><img src="{% static 'css/Trailer_Detail/image/icon/icons8-book-shelf-50.png'%}" alt="library"><label><b style="background:none;">Library</b></label></a></li>
+                        <li style="margin-top:20%;"><a href="{% url 'log_out' %}"><i class="fas fa-sign-out-alt fa-icon"></i><label>Logout</label></a></li>
+                    </ul>
+                </div>
+            
+            </div>
+            <div class="grid__column-8">        
+                <div class="container__search">                    
+                    <div class="text__search">
+                        <i class="fas fa-search"></i>
+                        <input class="keyword" type="text" name="keyword" placeholder="Search for movies, TV show..." value ></div>
+                        <div style="display: none;" id="suggestions" class="top-search-box"></div>
+                </div>
+                <div class="grid__row-4">             
+                 
+                </div>
+                <div class="grid__row-4-Body">
+                    <div class="Head__Up">History</div>
+                    <a class="Head__See" href="{% url 'seeall_trending_english' %}">See all</a>
+                </div> 
+
+                <div class="grid__row-4">
+                    {% for movie in trending %}
+                        <button class="column__movie">
+                            <a href="{% url 'detail' movie.id %}">
+                                <img class="img-movie" src="{{movie.image.url}}" alt="" style="width:160px; height:252px; border-radius: 10px;" />
+                            </a>
+                        </button>
+                    {% endfor %}
+                   
+                </div>
+                <div class="grid__row-4-Body">
+                    <div class="Head__Up">
+                        <a name="Upcoming">Loved videos</a>
+                    </div>
+                    <a class="Head__See" href="Upcoming.html">See all</a>
+                </div>  
+                <div class="grid__row-4">
+                    {% for movie in love %}
+                        <button class="column__movie">
+                            <a href="{% url 'detail' movie.id %}">
+                                <img class="img-movie" src="{{movie.image.url}}" alt="{{movie.title}}" style="width:160px; height:252px; border-radius: 10px;"/>
+                            </a>
+                        </button>
+                    {% endfor %}
+                    
+                </div>   
+                <div class="grid__row-4-Body">
+                    <div class="Head__Up">
+                        <a name="TVseries">Mark Book</a>
+                    </div>
+                    <a class="Head__See" href="TVSeries.html">See all</a>
+                </div>  
+                <div class="grid__row-4">
+                    {% for movie in mark %}
+                        <button class="column__movie">
+                            <a href="{% url 'detail' movie.id%}">
+                                <img class="img-movie" src="{{movie.image.url}}" alt="{{movie.title}}" style="width:160px; height:252px; border-radius: 10px;"/>
+                            </a>
+                        </button>
+                    {% endfor %}
+                </div>    
+                <div class="grid__row-4">
+                    {% for movie in ps %}
+                        <button class="column__movie">
+                            <a href="{% url 'detail' movie.id %}">
+                                <img class="img-movie" src="{{movie.image.url}}" alt="{{movie.title}}" style="width:160px; height:252px; border-radius: 10px;"/>
+                            </a>
+                        </button>
+                    {% endfor %}
+                </div>   
+            </div>
+            <div class="grid__column-2-right">
+                <div class="grid__row-4">
+                    <button class="button__Notifi"type="button" onclick="notify()"><i class="far fa-bell"></i></button>
+                    <button class="button__User" type="button" onclick="user()">
+                        <a href="{% url 'info'%}">
+                            <img src="{{avatar}}">
+                        </a>
+                    </button>
+                </div>
+                <div class="grid__row-4__grid-Check">
+                    <div class="grid__column-List">Categories</div>  
+                    <div class="grid__column-Check">Uncheck all</div>                    
+                </div>
+                <div class="container__Check">      
+                    <div class="Check">          
+                        <div class="text__Check"> Action</div>
+                        <input type="checkbox" name="vehicle1" value="Action">
+                    </div>    
+                       
+                        <hr class="hr_h">
+                        <div class="Check">          
+                            <div class="text__Check"> Adventure</div>
+                            <input type="checkbox" name="vehicle1" value="Action">
+                        </div>
+                        <hr class="hr_h">
+                        <div class="Check">          
+                            <div class="text__Check"> Animated</div>
+                            <input type="checkbox" name="vehicle1" value="Action">
+                        </div>
+                        <hr class="hr_h">
+                        <div class="Check">          
+                            <div class="text__Check"> Comedy</div>
+                            <input type="checkbox" name="vehicle1" value="Action">
+                        </div>
+                            <hr class="hr_h">
+                            <div class="Check">          
+                                <div class="text__Check"> Crime</div>
+                                <input type="checkbox" name="vehicle1" value="Action">
+                            </div>
+                            <hr class="hr_h">
+                            <div class="Check">          
+                                <div class="text__Check"> Fantasy</div>
+                                <input type="checkbox" name="vehicle1" value="Action">
+                            </div>
+                            <hr class="hr_h">
+                            <div class="text__More">See more</div>
+
+                </div>
+                <div class="grid__row-4__grid-Check">
+                    <div class="grid__column-List">Services</div>  
+                    <div class="grid__column-Check">Uncheck all</div>                    
+                </div>
+                <div class="container__Check">      
+                    <div class="Check">          
+                        <div class="text__Check"> Netflix</div>
+                        <input type="checkbox" name="vehicle1" value="Action">
+                    </div>    
+                       
+                        <hr class="hr_h">
+                        <div class="Check">          
+                            <div class="text__Check"> Prime video</div>
+                            <input type="checkbox" name="vehicle1" value="Action">
+                        </div>
+                        <hr class="hr_h">
+                        <div class="Check">          
+                            <div class="text__Check"> Disney +</div>
+                            <input type="checkbox" name="vehicle1" value="Action">
+                        </div>
+                        <hr class="hr_h">
+                        <div class="Check">          
+                            <div class="text__Check"> HBO max</div>
+                            <input type="checkbox" name="vehicle1" value="Action">
+                        </div>
+                            <hr class="hr_h">
+                            <div class="Check">          
+                                <div class="text__Check"> Hulu</div>
+                                <input type="checkbox" name="vehicle1" value="Action">
+                            </div>
+                            <hr class="hr_h">
+                            <div class="Check">          
+                                <div class="text__Check"> Starz</div>
+                                <input type="checkbox" name="vehicle1" value="Action">
+                            </div>
+                            <hr class="hr_h">
+                            <div class="text__More">See more</div>
+
+                </div>
+               
+               
+
+                
+
+            </div>
+        </div>
+    </div>
+    </div>
+    <div class="loader-wrapper">
+        <div class="loader"></div>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+        $(window).on("load", function(){
+            $(".loader-wrapper").fadeOut(1000);
+        });
+    </script>
+ </body>
+</html>

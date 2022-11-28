@@ -112,6 +112,13 @@ class Movie(models.Model):
     director = models.CharField(max_length=100)
     writers = models.CharField(max_length=255)
     
+    #Love and mark video
+    loves = models.ManyToManyField(User,related_name="movie_love", verbose_name="loves")
+    marks = models.ManyToManyField(User,related_name="movie_mark")
+
+    #Hỗ trợ chức năng đổi icon 
+    who_has_it_open = models.IntegerField(null=True,blank=True,default=0)
+
     #stars
     cast_and_crew = models.ManyToManyField(Cast_and_Crew, related_name='cast_crew')
     format = models.CharField(choices=FORMAT_CHOICES, max_length=2)
@@ -122,6 +129,23 @@ class Movie(models.Model):
     def __str__(self):
         return str(self.title) 
 
+    # Xem người dùng hiện tại đã đánh dấu chưa
+    def is_love(self):
+        return self.loves.filter(id=self.who_has_it_open).exists()
+    def is_mark(self):
+        return self.marks.filter(id=self.who_has_it_open).exists()
+
+    #Tính trung bình đánh giá sao
+    def average_of_star(self):
+        myrate = RatingStar.objects.all()
+        myrate = myrate.filter(movie__id=self.id)
+        sum = 0
+        for i in myrate:
+            sum = sum + i.rate
+        if myrate.count() == 0:
+            return 0
+        return sum/(myrate.count())
+
 class Episode(models.Model):
     title = models.ForeignKey(Movie,related_name="movie_episode", on_delete=models.CASCADE)
     # episodes = models.AutoField()
@@ -131,6 +155,12 @@ class Episode(models.Model):
     def __str__(self):
         return str(self.number_episode)    
 
+class Award(models.Model):
+    movie = models.ForeignKey(Movie ,related_name="movie_award", on_delete=models.CASCADE)
+    name = models.CharField(max_length=255, blank=True, null=True, default=' ')
+    def __str__(self):
+        return '%s - %s' % (self.movie.title, self.name)
+
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     avatar = models.ImageField(upload_to='user_profile',null=True, default='user_profile/anonymous.PNG')
@@ -139,6 +169,37 @@ class Profile(models.Model):
 
     def __str__(self):
         return self.user.username
+
+class Comment(models.Model):
+    movie = models.ForeignKey(Movie,related_name="comments", on_delete=models.CASCADE)
+    user = models.ForeignKey(User, related_name="publisher", on_delete=models.CASCADE)
+    body = models.TextField()
+    date_added = models.DateField(auto_now_add=True)
+    likes = models.ManyToManyField(User,related_name="comnent_like")
+    unlikes = models.ManyToManyField(User,related_name="comnent_unlike")
+    marks = models.ManyToManyField(User,related_name="comnent_mark")
+    who_has_it_open = models.IntegerField(null=True,blank=True,default=0)
+    def __str__(self):
+        return '%s - %s' % (self.movie.title,self.user.first_name)
+    def total_likes(self):
+        return self.likes.count()
+    def total_unlikes(self):
+        return self.unlikes.count()
+
+    def is_like(self):
+        return self.likes.filter(id=self.who_has_it_open).exists()
+    def is_unlike(self):
+        return self.unlikes.filter(id=self.who_has_it_open).exists()
+    def is_mark(self):
+        return self.marks.filter(id=self.who_has_it_open).exists()
+
+class RatingStar(models.Model):
+    movie = models.ForeignKey(Movie,related_name="movies", on_delete=models.CASCADE)
+    user = models.ForeignKey(User, related_name="owner", on_delete=models.CASCADE)
+    rate = models.IntegerField(blank=True, null=True, default=0)
+    def __str__(self):
+        return '%s - %s - %d' % (self.movie.title,self.user.first_name, self.rate)
+
 
 # Tin hieu thong bao them user moi -> Them Profile moi
 @receiver(post_save, sender=User)
