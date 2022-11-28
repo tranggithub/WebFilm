@@ -65,26 +65,18 @@
                         </form>
                     </div>
                 </div>
-                
+                <div class="vid">
+                    <iframe width="945" height="400" src="{{ep.episode}}" frameborder="0" allowfullscreen style="margin-bottom:20px; margin-left:10px;"></iframe>
+                </div>   
                 <div class="body_center">
-                    <div class="film">
-                        <div class="vid">
-                            <iframe width="945" height="400" src="{{movie.trailer_video}}" frameborder="0" allowfullscreen title="{{movie." style="margin-bottom:20px; margin-left:10px;"></iframe>
-                            
-                        </div>
-                    <a class="detail" href="{% url 'detail' movie.id %}">Detail movie</a>
-                    <h4 style="margin-top:15px;">Episode</h4>
-                    <div class="ep">
-                        {% for ep in episode %}
-                        <button id="bt-ep" onclick="episode()">Episode {{ep.number_episode}}
-                           <!-- <a href="#"></a> -->
-                        </button>
-                       
-                        {% endfor %}
-                        <h4 style="color:cadetblue">{{movie.title}} - {{number_ep}}</h4>
-                    </div>
                     <div class="body_bottom">
                         <div class="bottom_left">
+                            <a class="detail" href="{% url 'detail' movie.id %}">Detail movie</a>
+                        <h4 style="margin-top:15px; margin-bottom:15px;">Episode</h4>
+                        {% for ep in episode %}
+                            <a class="bt-ep" href="{% url 'watch' movie.id ep.number_episode %}" style="margin-right:10px;">Episode {{ep.number_episode}}</a>
+                        {% endfor %}
+                            <h4 style="color:cadetblue; margin-top:15px;">{{movie.title}} - {{ep.number_episode}}</h4>
                             <br>
                             <div class="bottom">
                                 <h5 style="margin-bottom:10px;">Comment</h5>

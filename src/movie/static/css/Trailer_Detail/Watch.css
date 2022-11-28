@@ -146,30 +146,17 @@
 .bottom_left{
     width:auto;
 }
-.detail{
+.detail, .bt-ep{
     background-color: #5c4289;
     text-decoration:none;
     color:#cccccc;
     padding: 8px 15px;
     border-radius: 10px;
 }
-.ep{
-    width: 650px;
-    margin-bottom:15px;
-}
-#bt-ep{
-    border-radius: 15px;
-    width:90px;
-    height:35px;
-    margin-right:10px;
+.bt-ep{
     background-color: cadetblue;
-    border:none;
-    margin-top:15px;
-    cursor:pointer;
 }
-#bt-ep:hover{
-    background-color: darkcyan;
-}
+
 
 .body_bottom{
     display:grid;
