@@ -299,6 +299,8 @@ def WatchFilm(request, movie_id):
     redirect(url)
 
 def Detail(request, movie_id):
+  #movie = get_object_or_404(Movie,id=movie_id)
+  movie = Movie.objects.get(pk=movie_id)
   if request.method == "POST":
       if 'love' in request.POST:
         #comment = get_object_or_404(Comment, id=request.POST.get('like'))
@@ -309,7 +311,6 @@ def Detail(request, movie_id):
           movie.loves.add(request.user)
         return HttpResponseRedirect(reverse('detail', args=[str(movie_id)]))
       elif 'mark' in request.POST:
-        movie = Movie.objects.get(pk=movie_id)
         if movie.marks.filter(id=request.user.id).exists():
           movie.marks.remove(request.user)
         else:
@@ -319,10 +320,6 @@ def Detail(request, movie_id):
   for movie in Movie.objects.all():
       movie.who_has_it_open = request.user.id
       movie.save()
-  try: 
-    average = movie.average_of_star()
-  except:
-    average = 0
   ava = request.user.profile.avatar.url
   another = Movie.objects.all().exclude(id=movie_id)[:4]
   movies = Movie.objects.filter(id=movie_id)
@@ -335,8 +332,7 @@ def Detail(request, movie_id):
   'movies': movies, 
   'category': category, 
   'topcast': topcast, 
-  'cast_crew': cast_crew,
-  'average': average})
+  'cast_crew': cast_crew})
 
 
 def UserPacket(request):
