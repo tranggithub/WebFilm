@@ -72,7 +72,9 @@ def LogIn(request):
       else:
         messages.error(request,"Invalid Username or Password")
         return redirect('/movies/log_in')
-    return render(request,".\SignUp_LogIn\LogInFilm.html")
+    
+    movie = Movie.objects.all()
+    return render(request,".\SignUp_LogIn\LogInFilm.html",{'movie':movie})
 
 def password_reset_request(request):
   if request.method == "POST":
@@ -317,8 +319,7 @@ def Detail(request, movie_id):
       movie.who_has_it_open = request.user.id
       movie.save()
   try: 
-    myrate = RatingStar.objects.get(movie__id=movie_id, user__id=request.user.id)
-    average = myrate.average_of_star()
+    average = movie.average_of_star()
   except:
     average = 0
   ava = request.user.profile.avatar.url

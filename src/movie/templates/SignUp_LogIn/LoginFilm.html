@@ -81,7 +81,7 @@
 
             <div class="Login_Right">
                 <div class="Title">
-                    <p>Top Gun: Maverick</p>
+                    <p>{{movie.0.title}}</p>
                 </div>
                 <div class="Subtitle">
                     <p>2022 | PG-13 | 2h 10m</p>
@@ -89,11 +89,13 @@
                 </div>
                 <div  class="star"><img src="{% static 'css/SignUp_LogIn/Star.png' %}"> </div>
                 <div class="Rating">
-                    <p>8.5 / 10</p>
+                    <p>{{movie.0.average_of_star}} / 5</p>
                 </div>
                 <div class="Navigation">
-                    <button class="Navigation_Left"><a href=""></a></button>
-                    <button class="Navigation_Right"><a href=""></a></button>
+                    <form method="get">
+                        <button name='left' type="submit" class="Navigation_Left"><a href=""></a></button>
+                        <button name ='right' type="submit" class="Navigation_Right"><a href=""></a></button>
+                    </form>
                 </div>
             </div>
         </div>
