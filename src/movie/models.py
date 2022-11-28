@@ -155,6 +155,12 @@ class Episode(models.Model):
     def __str__(self):
         return str(self.number_episode)    
 
+class Award(models.Model):
+    movie = models.ForeignKey(Movie ,related_name="movie_award", on_delete=models.CASCADE)
+    name = models.CharField(max_length=255, blank=True, null=True, default=' ')
+    def __str__(self):
+        return '%s - %s' % (self.movie.title, self.name)
+
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     avatar = models.ImageField(upload_to='user_profile',null=True, default='user_profile/anonymous.PNG')

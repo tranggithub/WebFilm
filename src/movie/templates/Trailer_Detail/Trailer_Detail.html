@@ -114,10 +114,12 @@
                                 <a href="{% url 'watch' movie.id %}">Watch movie</a>
                                     <button class="rate_button" type="button" onclick="topRate()">Top rated movie #65</button>
                                     <select>
-                                        <option>Awards 3 nominations</option>
-                                        <option>Best movie</option>
-                                        <option>Top 3 Healing movie</option>
-                                        <option>Top 1 Action movie</option>
+                                        <option>Awards {{movie.movie_award.count }} nominations</option>
+                                        {% for award in movie.movie_award.all %}
+                                            <option>{{award.name}}</option>
+                                        {% endfor %}
+                                        <!-- <option>Top 3 Healing movie</option>
+                                        <option>Top 1 Action movie</option> -->
                                     </select>
                             </div>
                             <div class="info_characters">  <!--Thôgn tin chi tiết dv-->
