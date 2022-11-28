@@ -36,6 +36,10 @@ admin.site.register(Category)
 #     list_display = ('title', 'number_episode')
 #     search_fields = ('title', 'number_episode')
   
+class EpisodeInline(admin.TabularInline):
+    model = Episode
+    extra = 0
+
 admin.site.register(Statuses)
 
 class AwardInline(admin.StackedInline):

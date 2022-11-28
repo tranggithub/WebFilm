@@ -80,7 +80,6 @@ class Cast_and_Crew(models.Model):
         verbose_name_plural='Casts and Crews'
 
 class Category(models.Model):
-    movie = models.ManyToManyField('Movie', related_name='movie_category')
     category = models.CharField(choices=CATEGORY_CHOICE, max_length=15, unique=True)
 
     def __str__(self):
@@ -101,16 +100,15 @@ class Movie(models.Model):
     title = models.CharField(max_length=225)
     description = models.TextField(max_length=1000)
     image = models.ImageField(upload_to='movies')
-    trailer = models.FileField(upload_to='trailers', null=True)
+    trailer_video = models.URLField(max_length=1000, null=True)
     trailer_image = models.ImageField(upload_to='trailer_image', null=True)
     national = models.CharField(choices=NATIONAL_CHOICES,max_length=10)
     status = models.ManyToManyField(Statuses, verbose_name='status')
+    categories = models.ManyToManyField(Category, verbose_name='category')
     language = models.CharField(choices=LAGUAGE_CHOICES,max_length=2)
     year_of_production = models.DateField()
     views_count = models.IntegerField(default=0)
     time = models.CharField(default='2h10m', max_length=6)
-    director = models.CharField(max_length=100)
-    writers = models.CharField(max_length=255)
     
     #Love and mark video
     loves = models.ManyToManyField(User,related_name="movie_love", verbose_name="loves")
@@ -119,7 +117,8 @@ class Movie(models.Model):
     #Hỗ trợ chức năng đổi icon 
     who_has_it_open = models.IntegerField(null=True,blank=True,default=0)
 
-    #stars
+    director = models.CharField(max_length=100)
+    writers = models.CharField(max_length=255)
     cast_and_crew = models.ManyToManyField(Cast_and_Crew, related_name='cast_crew')
     format = models.CharField(choices=FORMAT_CHOICES, max_length=2)
     trivia_summary = models.CharField(max_length=500)
@@ -148,9 +147,8 @@ class Movie(models.Model):
 
 class Episode(models.Model):
     title = models.ForeignKey(Movie,related_name="movie_episode", on_delete=models.CASCADE)
-    # episodes = models.AutoField()
     number_episode = models.IntegerField(default=1)
-    video = models.FileField(upload_to='episodes', null=True)
+    episode = models.URLField(max_length=1000, null=True)
     
     def __str__(self):
         return str(self.number_episode)    

@@ -6,6 +6,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Trailer_Detail | LTWFlix</title>
         <link rel="stylesheet" href="{% static 'css/Trailer_Detail/Trailer_Detail.css'%}">
+        <link href="https://vjs.zencdn.net/7.20.3/video-js.css" rel="stylesheet" />
     </head>
     <body>
         {% for movie in movies %}
@@ -45,17 +46,18 @@
                 </div>
                 <div class="trailer_vid" >
                     <div class="vid">
-                        <div class="play">
+                        <!-- <div class="play">
                             <video id="vid" height="396px" width="945px"  poster="{{movie.trailer_image.url}}" border-radius="23px;">
-                                <source src="{{movie.trailer.url}}" type="video/mp4">
+                                <source src="{{movie.trailer_video}}" type="video/mp4">
                                 Your browser doesn't support html video.
                             </video>
                             <button id="playbt" onclick="playPause()"  style="margin-top:170px;">
                                 <img src="{% static 'css/Trailer_Detail/image/icon/icons8-play-48.png'%}">
                             </button>
-                        </div>
+                        </div> -->
+                        <iframe width="945" height="400" src="{{movie.trailer_video}}" frameborder="0" allowfullscreen style="margin-bottom:20px; margin-left:10px;"></iframe>
                     </div>
-                    <script>
+                    <!-- <script>
                         var myVideo=document.getElementById("vid");
                         const button=document.getElementById("playbt");
                         button.addEventListener("click",()=>{
@@ -70,6 +72,7 @@
                             }
                         }
                     </script>
+                    <script src="https://vjs.zencdn.net/7.20.3/video.min.js"></script> -->
                 </div>
                 <div class="body_center">
                     <div class="body_left">
@@ -85,12 +88,11 @@
                                 <br>
                                 <br>
                                 <h6 style="font-size:10px;color:aliceblue">
-                                    {% for c in category %}
+                                    {% for category in categories %}
                                     <label>
-                                        {{c}}
+                                        {{category.category}}
                                     </label> 
                                     {% endfor %}
-                                    
                                </h6>
                                <p style="font-size:12px; margin-bottom:10px;">    
                                    <br>{{movie.description}} 

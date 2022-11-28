@@ -40,7 +40,7 @@
                         <li><a id="main" href="{% url 'movies' %}"><img src="{% static 'css/Trailer_Detail/image/icon/icons8-video-call-48.png'%}" alt="movies"><label><b style="background:none;">Movies</b></label></a></li>
                         <li><a href="{% url 'home'%}#TVseries"><img id="series" src="{% static 'css/Trailer_Detail/image/icon/icons8-tv-48.png'%}" alt="series"><label><b style="background:none;">TV Series</b></label></a></li>
                         <li><a href="{% url 'home' %}#Upcoming"><img src="{% static 'css/Trailer_Detail/image/icon/icons8-calendar-48.png'%}" alt="upcoming"><label><b style="background:none;">Upcoming</b></label></a></li>
-                        <li><a href="#"><label><b style="background:none;">Library</b></label></a></li>
+                        <li><a href="{% url 'library' %}"><img src="{% static 'css/Trailer_Detail/image/icon/icons8-book-shelf-50.png'%}" alt="library"><label><b style="background:none;">Library</b></label></a></li>
                         <li style="margin-top:30%;"><a href="{% url 'log_out' %}"><img src="{% static 'css/Trailer_Detail/image/icon/icons8-logout-acc-48.png'%}" alt="logout"><label><b style="background:none;">Logout</b></label></a></li>
                     </ul>
                 </div>
@@ -65,63 +65,26 @@
                         </form>
                     </div>
                 </div>
+                
                 <div class="body_center">
-                    <div class="film" >
+                    <div class="film">
                         <div class="vid">
-                            <div class="play">
-                                <video id="vid" width="945px"  poster="{{movie.trailer_image.url}}">
-                                    <source id="ep" src="{{movie.trailer.url}}" type="video/mp4">
-                                    Your browser doesn't support html video.
-                                </video>
-                                <button id="playbt" onclick="playPause()" style="margin-top:170px;">
-                                    <img src="{% static 'css/Trailer_Detail/image/icon/icons8-play-48.png'%}" >
-                                </button>
-                            </div>
-                        </div>
-                        <script>
-                            // var myVideo=document.getElementById("vid");
-                            // const button=document.getElementById("playbt");
-                            // button.addEventListener("click",()=>{
-                            //     button.style.visibility="hidden";
-                            //     playPause();        
-                            // })
-                            // function playPause(){
-                            //     if(myVideo.paused)
-                            //     {
-                            //         myVideo.play();
-                            //         vid.controls="true";
-                            //     }
-                            // }
+                            <iframe width="945" height="400" src="{{movie.trailer_video}}" frameborder="0" allowfullscreen title="{{movie." style="margin-bottom:20px; margin-left:10px;"></iframe>
                             
-                            function episode(){
-                                document.getElementById("ep").src="{{ep.video.url}}";
-                                document.getElementById("vid").load();
-                                var myVideo=document.getElementById("vid");
-                                const button=document.getElementById("playbt");
-                                button.addEventListener("click",()=>{
-                                button.style.visibility="hidden";
-                                playPause();        
-                                })
-                                function playPause(){
-                                if(myVideo.paused)
-                                {
-                                    myVideo.play();
-                                    vid.controls="true";
-                                }
-                                }
-                            }
-                        </script>
+                        </div>
+                    <a class="detail" href="{% url 'detail' movie.id %}">Detail movie</a>
+                    <h4 style="margin-top:15px;">Episode</h4>
+                    <div class="ep">
+                        {% for ep in episode %}
+                        <button id="bt-ep" onclick="episode()">Episode {{ep.number_episode}}
+                           <a href="{% url 'episode' ep.number_episode%}"></a>
+                        </button>
+                       
+                        {% endfor %}
+                        <h4 style="color:cadetblue">{{movie.title}} - {{number_ep}}</h4>
                     </div>
-                   
                     <div class="body_bottom">
                         <div class="bottom_left">
-                            <h4>Episode</h4>
-                            <div class="ep">
-                                {% for ep in episode %}
-                                <button id="bt-ep" onclick="episode()">Episode {{ep.number_episode}}</button>
-                                {% endfor %}
-                            </div>
-                            <h4 style="color:cadetblue">{{movie.title}} - Ep 1</h4>
                             <br>
                             <div class="bottom">
                                 <h5 style="margin-bottom:10px;">Comment</h5>
