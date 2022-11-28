@@ -139,7 +139,7 @@
 }
 
 /*trailer_vid*/
-.play{
+/* .play{
     position:relative;
     display:flex;
     margin-left: 5px;
@@ -171,7 +171,8 @@
     border-radius: 23px;
     margin-left:5px;
     border:none;
-}
+
+} */
 
 .body_center{
     display:grid;

@@ -31,11 +31,14 @@ class CastAdmin(admin.ModelAdmin):
 
 admin.site.register(Category)
 
-@admin.register(Episode)
-class EpisodeAdmin(admin.ModelAdmin):
-    list_display = ('title', 'number_episode')
-    search_fields = ('title', 'number_episode')
-  
+# @admin.register(Episode)
+# class EpisodeAdmin(admin.ModelAdmin):
+#     list_display = ('title', 'number_episode')
+#     search_fields = ('title', 'number_episode')
+class EpisodeInline(admin.TabularInline):
+    model = Episode
+    extra = 0
+
 admin.site.register(Statuses)
 
 class AwardInline(admin.StackedInline):
@@ -50,6 +53,7 @@ class MovieAdmin(admin.ModelAdmin):
     search_fields = ('title','description')
     inlines = [
     AwardInline,
-    RatingStarInline
+    RatingStarInline,
+    EpisodeInline
     ]
 admin.site.register(Movie, MovieAdmin)

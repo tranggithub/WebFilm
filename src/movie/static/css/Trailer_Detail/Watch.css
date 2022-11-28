@@ -140,45 +140,18 @@
 
 }
 
-/*trailer_vid*/
-.play{
-    position:relative;
-    display:flex;
-    margin-left: 5px;
-    margin-bottom:20px;
-}
-#playbt{
-    cursor:pointer;
-    border:none;
-    position:absolute;
-    margin-left:460px;
-    background:none;
-    padding-top:8px;
-    padding-left: 10px;
-    padding-right: 5px;
-    border-radius: 50%;
-    background-color:#cccccc;
-    opacity:55%;
-}
-#playbt:hover
-{
-    background:#c0c5c4;
-    opacity: 100%;
-}
-#playbt img{
-    background:none;
-}
-#vid{
-    border-radius: 23px;
-    margin-left:5px;
-    border:none;
-}
-
 .body_center{
     width:auto;
 }
 .bottom_left{
     width:auto;
+}
+.detail{
+    background-color: #5c4289;
+    text-decoration:none;
+    color:#cccccc;
+    padding: 8px 15px;
+    border-radius: 10px;
 }
 .ep{
     width: 650px;
