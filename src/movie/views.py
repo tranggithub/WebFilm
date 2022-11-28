@@ -162,6 +162,7 @@ def Library(request):
   mark = Movie.objects.filter(marks__id=request.user.id)
   ps = Movie.objects.filter(format='PS')[:4]
   return render(request,".\Trailer_Detail\Library.html",{'avatar':ava, 'movies': movies,'trending': trending, 'love':love, 'mark':mark, 'ps':ps})
+
 def WatchFilm(request, movie_id):
   if request.user.is_authenticated:
     movie = Movie.objects.get(pk=movie_id)
