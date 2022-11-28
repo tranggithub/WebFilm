@@ -292,7 +292,7 @@ def WatchFilm(request, movie_id, number_ep):
     url=reverse_lazy('log_in')
     redirect(url)
 
-def Episode(request, movie_id, number_ep):
+# def Episode(request, movie_id, number_ep):
   if request.user.is_authenticated:
     movie = Movie.objects.get(pk=movie_id)
     if request.method == "POST":
