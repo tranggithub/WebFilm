@@ -317,9 +317,8 @@ def Detail(request, movie_id):
           movie.marks.add(request.user)
         url = '/movies/detail/'+ movie_id
         return redirect(url)
-  for movie in Movie.objects.all():
-      movie.who_has_it_open = request.user.id
-      movie.save()
+  movie.who_has_it_open = request.user.id
+  movie.save()
   ava = request.user.profile.avatar.url
   another = Movie.objects.all().exclude(id=movie_id)[:4]
   movies = Movie.objects.filter(id=movie_id)
