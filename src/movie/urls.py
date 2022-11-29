@@ -4,6 +4,7 @@ from .views import MovieList, MovieDetailView
 from . import views
 from django.contrib.auth import views as auth_views
 
+
 urlpatterns = [
     #test
     path('', MovieList.as_view(), name='movie_list'),
@@ -48,3 +49,4 @@ urlpatterns = [
         template_name='.\Info\\reset_complete.html',
     ),name='reset_complete'),
 ]
+
