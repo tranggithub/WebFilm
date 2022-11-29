@@ -40,7 +40,7 @@
                         <li><a id="main" href="{% url 'movies' %}"><img src="{% static 'css/Trailer_Detail/image/icon/icons8-video-call-48.png'%}" alt="movies"><label><b style="background:none;">Movies</b></label></a></li>
                         <li><a href="{% url 'home'%}#TVseries"><img id="series" src="{% static 'css/Trailer_Detail/image/icon/icons8-tv-48.png'%}" alt="series"><label><b style="background:none;">TV Series</b></label></a></li>
                         <li><a href="{% url 'home' %}#Upcoming"><img src="{% static 'css/Trailer_Detail/image/icon/icons8-calendar-48.png'%}" alt="upcoming"><label><b style="background:none;">Upcoming</b></label></a></li>
-                        <li><a href="#"><label><b style="background:none;">Library</b></label></a></li>
+                        <li><a href="{% url 'library' %}"><img src="{% static 'css/Trailer_Detail/image/icon/icons8-book-shelf-50.png'%}" alt="library"><label><b style="background:none;">Library</b></label></a></li>
                         <li style="margin-top:30%;"><a href="{% url 'log_out' %}"><img src="{% static 'css/Trailer_Detail/image/icon/icons8-logout-acc-48.png'%}" alt="logout"><label><b style="background:none;">Logout</b></label></a></li>
                     </ul>
                 </div>
@@ -65,26 +65,18 @@
                         </form>
                     </div>
                 </div>
-                
+                <div class="vid">
+                    <iframe width="945" height="400" src="{{ep.episode}}" frameborder="0" allowfullscreen style="margin-bottom:20px; margin-left:10px;"></iframe>
+                </div>   
                 <div class="body_center">
-                    <div class="film">
-                        <div class="vid">
-                            <iframe width="945" height="400" src="{{movie.trailer_video}}" frameborder="0" allowfullscreen title="{{movie." style="margin-bottom:20px; margin-left:10px;"></iframe>
-                            
-                        </div>
-                    <a class="detail" href="{% url 'detail' movie.id %}">Detail movie</a>
-                    <h4 style="margin-top:15px;">Episode</h4>
-                    <div class="ep">
-                        {% for ep in episode %}
-                        <button id="bt-ep" onclick="episode()">Episode {{ep.number_episode}}
-                           
-                        </button>
-                       
-                        {% endfor %}
-                        <h4 style="color:cadetblue">{{movie.title}} - {{number_ep}}</h4>
-                    </div>
                     <div class="body_bottom">
                         <div class="bottom_left">
+                            <a class="detail" href="{% url 'detail' movie.id %}">Detail movie</a>
+                        <h4 style="margin-top:15px; margin-bottom:15px;">Episode</h4>
+                        {% for ep in episode %}
+                            <a class="bt-ep" href="{% url 'watch' movie.id ep.number_episode %}" style="margin-right:10px;">Episode {{ep.number_episode}}</a>
+                        {% endfor %}
+                            <h4 style="color:cadetblue; margin-top:15px;">{{movie.title}} - {{ep.number_episode}}</h4>
                             <br>
                             <div class="bottom">
                                 <h5 style="margin-bottom:10px;">Comment</h5>
@@ -109,7 +101,7 @@
                                     </div>
                                       
                                     {% else %}
-                                        {% for comment in movie.comments.all %}
+                                        {% for comment in movie.only_parent_comment %}
                                             <ul id="comment">
                                                 <li>
                                                     <button id="user-comment" type="button" onclick="another-user()">
@@ -138,10 +130,10 @@
                                                                     {% endif %}
                                                                 </button>
                                                                 <label id="comment-number">{{comment.total_unlikes}}</label>
-                                                                <!-- <button id="cmt" type="submit" name="subcomment" value="{{comment.id}}" >
+                                                                <button id="cmt" type="submit" name="subcomment" value="{{comment.id}}" >
                                                                     <img class="cmt-img"src="{% static 'css/Trailer_Detail/image/icon/icons8-comments-30.png'%}">
                                                                 </button>
-                                                                <label id="comment-number">0</label> -->
+                                                                <label id="comment-number">{{comment.children_count}}</label>
                                                                 <button id="flag" type="submit" name="mark" value="{{comment.id}}">
                                                                     {% if not comment.is_mark %}
                                                                         <img class="flag-img" src="{% static 'css/Trailer_Detail/image/icon/icons8-flag-30.png'%}">
@@ -152,6 +144,7 @@
                                                                 </button>
                                                             </form>
                                                         </div>
+
                                                         <!-- <script>
                                                             function click(x){
                                                                 x.classList.toggle("{% static 'css/Trailer_Detail/image/icon/icons8-like-green-24.png'%}")
@@ -159,7 +152,168 @@
                                                         </script> -->
                                                     </div>
                                                 </li>
-                                            
+                                                <form method="POST" name="subcomment" style="background:none;">
+                                                    {% csrf_token %}
+                                                    <div class="comments" style="margin-left:10%; margin-top:1%; background:none;">
+                                                        <span style="background:none;">
+                                                            <button id="user-comment" type="button" onclick="user()">
+                                                                <img style="width:30px;height:30px;" src="{{user.profile.avatar.url}}">
+                                                            </button>
+                                                            <input id="input-cmt" name="subcomment" type="text" placeholder="Comment" style="width:64%; height: 30px; margin-top: 8px; " required>
+                                                            <input id="input-cmt" name="comment_id" type="hidden" value="{{comment.id}}">
+                                                            <button id="cmtbt" type="submit" style="margin-left:401px; margin-top: 1.2%; height: 30px; width: 57px;">
+                                                                <img class="cmtbt-img" style="margin-right: 50px; width: 20px;" src="{% static 'css/Trailer_Detail/image/icon/icons8-cmt-white-30.png'%}">
+                                                            </button>
+                                                        </span>
+                                                    </div>
+                                                </form>
+                                                {% for comment in comment.children %}
+                                                    <ul id="comment" style="margin-left: 10%;">
+                                                        <li>
+                                                            <button id="user-comment" type="button" onclick="another-user()">
+                                                                <img src="{{comment.user.profile.avatar.url}}" style="width:30px; height:30px;">
+                                                            </button>
+                                                            <div class="content" id="subcomment">
+                                                                <label id="name-user" style="font-size:13px;">{{comment.user.first_name}}</label>
+                                                                <label id="time" style="font-size:8px;">{{comment.date_added}}</label>
+                                                                <p style="font-size:10px;">{{comment.body}}</p>
+                                                                <div class="like" id="sublike">
+                                                                    <form method="post">
+                                                                        {% csrf_token %}
+                                                                        <button id="likebt" type="submit" name="like" value="{{comment.id}}">
+                                                                            {% if not comment.is_like %}
+                                                                                <img class="like-img" id="subcmt" src="{% static 'css/Trailer_Detail/image/icon/icons8-like-24.png'%}">
+                                                                            {% else %}
+                                                                                <img class="like-img" id="subcmt" src="{% static 'css/Trailer_Detail/image/icon/icons8-like-green-24.png'%}">
+                                                                            {% endif %}
+                                                                        </button>
+                                                                        <label id="comment-number"  style="font-size:10px;">{{comment.total_likes}}</label>
+                                                                        <button id="likebt" type="submit" name="unlike" value="{{comment.id}}">
+                                                                            {% if not comment.is_unlike %}
+                                                                                <img class="dislike-img" id="subcmt" src="{% static 'css/Trailer_Detail/image/icon/icons8-dislike-24.png'%}">
+                                                                            {% else %}
+                                                                                <img class="dislike-img" id="subcmt" src="{% static 'css/Trailer_Detail/image/icon/icons8-dislike-green-24.png'%}">
+                                                                            {% endif %}
+                                                                        </button>
+                                                                        <label id="comment-number" style="font-size:10px;">{{comment.total_unlikes}}</label>
+                                                                        <!-- <button id="cmt" type="submit" name="subcomment_show" value="{{comment.id}}" >
+                                                                            <img class="cmt-img"src="{% static 'css/Trailer_Detail/image/icon/icons8-comments-30.png'%}">
+                                                                        </button>
+                                                                        <label id="comment-number">{{comment.children_count}}</label> -->
+                                                                        <button id="flag" type="submit" name="mark" value="{{comment.id}}">
+                                                                            {% if not comment.is_mark %}
+                                                                                <img class="flag-img" id="subcmt" src="{% static 'css/Trailer_Detail/image/icon/icons8-flag-30.png'%}">
+                                                                            {% else %}
+                                                                                <img class="flag-img" id="subcmt" src="{% static 'css/Trailer_Detail/image/icon/icons8-flag-green-30.png'%}">
+                                                                            {% endif %}
+                                                                            
+                                                                        </button>
+                                                                    </form>
+                                                                </div>
+
+                                                                <!-- <script>
+                                                                    function click(x){
+                                                                        x.classList.toggle("{% static 'css/Trailer_Detail/image/icon/icons8-like-green-24.png'%}")
+                                                                    }
+                                                                </script> -->
+                                                            </div>
+                                                        </li>
+                                                    
+                                                        <!-- <li>
+                                                            <button id="user-comment" type="button" onclick="another-user()">
+                                                                <img src="{% static 'css/Trailer_Detail/image/user-4.jpg'%}">
+                                                            </button>
+                                                            <div class="content">
+                                                                <label id="name-user">RM_7012</label>
+                                                                <label id="time">About 50 minutes</label>
+                                                                <p>Like an echo in the forest. The day will come back around. As if nothing happened. Yeah, life goes on.
+                                                                Like an arrow in the blue sky. Another day flying by.
+                                                                </p>
+                                                                <div class="like">
+                                                                    <button id="likebt" type="button">
+                                                                        <img class="like-img" src="{% static 'css/Trailer_Detail/image/icon/icons8-like-24.png'%}">
+                                                                        
+                                                                    </button>
+                                                                    <label id="comment-number">1k</label>
+                                                                    <button id="likebt" type="button">
+                                                                        <img class="dislike-img" src="{% static 'css/Trailer_Detail/image/icon/icons8-dislike-24.png'%}">
+                                                                    </button>
+                                                                    <label id="comment-number">0</label>
+                                                                    <button id="cmt" type="button">
+                                                                        <img class="cmt-img"src="{% static 'css/Trailer_Detail/image/icon/icons8-comments-30.png'%}">
+                                                                    </button>
+                                                                    <label id="comment-number">112</label>
+                                                                    <button id="flag">
+                                                                        <img class="flag-img" src="{% static 'css/Trailer_Detail/image/icon/icons8-flag-30.png'%}">
+                                                                    </button>
+                                                                </div>
+                                                                
+                                                            </div>
+                                                        </li>
+                                                        <li>
+                                                            <button id="user-comment" type="button" onclick="another-user()">
+                                                                <img src="{% static 'css/Trailer_Detail/image/user-1.jpg'%}">
+                                                            </button>
+                                                            <div class="content">
+                                                                <label id="name-user">Phuong20222</label>
+                                                                <label id="time">About 10 minutes</label>
+                                                                <p>Everywhere I go, everything I do. I will show you, as much as I sharpened my sword.
+                                                                    To all the people who looked down on me. Hey shout it out.
+                                                                </p>
+                                                                <div class="like">
+                                                                    <button id="likebt" type="button">
+                                                                        <img class="like-img" src="{% static 'css/Trailer_Detail/image/icon/icons8-like-24.png'%}">
+                                                                        
+                                                                    </button>
+                                                                    <label id="comment-number">12k</label>
+                                                                    <button id="likebt" type="button">
+                                                                        <img class="dislike-img" src="{% static 'css/Trailer_Detail/image/icon/icons8-dislike-24.png'%}">
+                                                                    </button>
+                                                                    <label id="comment-number">0</label>
+                                                                    <button id="cmt" type="button">
+                                                                        <img class="cmt-img"src="{% static 'css/Trailer_Detail/image/icon/icons8-comments-30.png'%}">
+                                                                    </button>
+                                                                    <label id="comment-number">0</label>
+                                                                    <button id="flag">
+                                                                        <img class="flag-img" src="{% static 'css/Trailer_Detail/image/icon/icons8-flag-30.png'%}">
+                                                                    </button>
+                                                                </div>
+
+                                                            </div>
+                                                        </li>
+                                                        <li>
+                                                            <button id="user-comment" type="button" onclick="another-user()">
+                                                                <img src="{% static 'css/Trailer_Detail/image/tomcruise.webp'%}">
+                                                            </button>
+                                                            <div class="content">
+                                                                <label id="name-user">dvdj</label>
+                                                                <label id="time">About 1 minutes</label>
+                                                                <p>In the dark night, don't be lonely. Like the stars, we shine.
+                                                                    Don't disappear, because you're great existence. Let us shine
+                                                                </p>
+                                                                <div class="like">
+                                                                    <button id="likebt" type="button">
+                                                                        <img class="like-img" src="{% static 'css/Trailer_Detail/image/icon/icons8-like-24.png'%}">
+                                                                        
+                                                                    </button>
+                                                                    <label id="comment-number">2k</label>
+                                                                    <button id="likebt" type="button">
+                                                                        <img class="dislike-img" src="{% static 'css/Trailer_Detail/image/icon/icons8-dislike-24.png'%}">
+                                                                    </button>
+                                                                    <label id="comment-number">0</label>
+                                                                    <button id="cmt" type="button">
+                                                                        <img class="cmt-img"src="{% static 'css/Trailer_Detail/image/icon/icons8-comments-30.png'%}">
+                                                                    </button>
+                                                                    <label id="comment-number">30</label>
+                                                                    <button id="flag">
+                                                                        <img class="flag-img" src="{% static 'css/Trailer_Detail/image/icon/icons8-flag-30.png'%}">
+                                                                    </button>
+                                                                </div>
+                                                                
+                                                            </div>
+                                                        </li> -->
+                                                    </ul>
+                                                {% endfor %}
                                                 <!-- <li>
                                                     <button id="user-comment" type="button" onclick="another-user()">
                                                         <img src="{% static 'css/Trailer_Detail/image/user-4.jpg'%}">

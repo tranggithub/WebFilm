@@ -91,7 +91,7 @@
                 </div> 
 
                 <div class="grid__row-4">
-                    {% for movie in trending %}
+                    {% for movie in history %}
                         <button class="column__movie">
                             <a href="{% url 'detail' movie.id %}">
                                 <img class="img-movie" src="{{movie.image.url}}" alt="" style="width:160px; height:252px; border-radius: 10px;" />

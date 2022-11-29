@@ -157,16 +157,22 @@ def Movies(request):
 def Library(request):
   ava = request.user.profile.avatar.url
   movies = Movie.objects.all()
-  trending = Movie.objects.filter(status__status='T')[:4]
   love = Movie.objects.filter(loves__id=request.user.id)
   mark = Movie.objects.filter(marks__id=request.user.id)
+  history = Movie.objects.filter(history__id=request.user.id)
   ps = Movie.objects.filter(format='PS')[:4]
-  return render(request,".\Trailer_Detail\Library.html",{'avatar':ava, 'movies': movies,'trending': trending, 'love':love, 'mark':mark, 'ps':ps})
+  return render(request,".\Trailer_Detail\Library.html",{'avatar':ava, 'movies': movies,'history': history, 'love':love, 'mark':mark, 'ps':ps})
 
-def WatchFilm(request, movie_id):
+def WatchFilm(request, movie_id, number_ep):
   if request.user.is_authenticated:
     movie = Movie.objects.get(pk=movie_id)
+    ep = get_object_or_404(Episode,title__id=movie_id,number_episode=number_ep)
+    if movie.history.filter(id=request.user.id).exists():
+      pass
+    else:
+      movie.history.add(request.user)
     if request.method == "POST":
+      url = '/movies/watch/'+ movie_id + "/" + number_ep
       if 'comment' in request.POST:
         usr = request.user
         comment = request.POST.get('comment')
@@ -175,10 +181,8 @@ def WatchFilm(request, movie_id):
           cmt.save()
         except:
           messages.error(request,"Fail to comment")
-          url = '/movies/watch/'+ movie_id
           return redirect(url)
         messages.success(request,"Comment successfully")
-        url = '/movies/watch/'+ movie_id
         return redirect(url)
       elif 'like' in request.POST:
         #comment = get_object_or_404(Comment, id=request.POST.get('like'))
@@ -198,7 +202,6 @@ def WatchFilm(request, movie_id):
         else:
           comment.likes.remove(request.user)
           comment.unlikes.add(request.user)
-        url = '/movies/watch/'+ movie_id
         return redirect(url)
       elif 'mark' in request.POST:
         value = request.POST.get('mark')
@@ -207,7 +210,6 @@ def WatchFilm(request, movie_id):
           comment.marks.remove(request.user)
         else:
           comment.marks.add(request.user)
-        url = '/movies/watch/'+ movie_id
         return redirect(url)
       elif 'star1' in request.POST:
         if RatingStar.objects.filter(movie__id=movie_id, user__id=request.user.id).exists():
@@ -218,7 +220,6 @@ def WatchFilm(request, movie_id):
           usr = request.user
           myrate = RatingStar.objects.create(user=usr,movie=movie,rate=1)
           myrate.save()
-        url = '/movies/watch/'+ movie_id
         return redirect(url)
       elif 'star2' in request.POST:
         if RatingStar.objects.filter(movie__id=movie_id, user__id=request.user.id).exists():
@@ -229,7 +230,6 @@ def WatchFilm(request, movie_id):
           usr = request.user
           myrate = RatingStar.objects.create(user=usr,movie=movie,rate=2)
           myrate.save()
-        url = '/movies/watch/'+ movie_id
         return redirect(url)
       elif 'star3' in request.POST:
         if RatingStar.objects.filter(movie__id=movie_id, user__id=request.user.id).exists():
@@ -240,7 +240,6 @@ def WatchFilm(request, movie_id):
           usr = request.user
           myrate = RatingStar.objects.create(user=usr,movie=movie,rate=3)
           myrate.save()
-        url = '/movies/watch/'+ movie_id
         return redirect(url)
       elif 'star4' in request.POST:
         if RatingStar.objects.filter(movie__id=movie_id, user__id=request.user.id).exists():
@@ -251,7 +250,6 @@ def WatchFilm(request, movie_id):
           usr = request.user
           myrate = RatingStar.objects.create(user=usr,movie=movie,rate=4)
           myrate.save()
-        url = '/movies/watch/'+ movie_id
         return redirect(url)
       elif 'star5' in request.POST:
         if RatingStar.objects.filter(movie__id=movie_id, user__id=request.user.id).exists():
@@ -262,142 +260,24 @@ def WatchFilm(request, movie_id):
           usr = request.user
           myrate = RatingStar.objects.create(user=usr,movie=movie,rate=5)
           myrate.save()
-        url = '/movies/watch/'+ movie_id
         return redirect(url)
-    try: 
-      myrate = RatingStar.objects.get(movie__id=movie_id, user__id=request.user.id)
-      rate = myrate.rate
-    except:
-      rate = 0
-    ava = request.user.profile.avatar.url
-    movies = Movie.objects.filter(id=movie_id)
-    user = request.user
-    episode = movies.get().movie_episode.all()
-    for comment in movie.comments.all():
-      comment.who_has_it_open = request.user.id
-      comment.save()
-    # value = request.GET.get('like')
-    # try:
-    #   comment = Comment.objects.get(pk=value)
-    # except:
-    #   return HttpResponseRedirect(reverse('watch', args=[str(movie_id)]))
-    # if comment.likes.filter(id=request.user.id).exists():
-    #   like = True
-    # else:
-    #   like = False
-
-    return render(request,".\Trailer_Detail\Watch.html",{
-        'avatar':ava, 
-        'movies': movies, 
-        'episode': episode, 
-        'user':user,
-        'rate' : rate
-        })
-  else:
-    messages.error(request,"Please log in!")
-    url=reverse_lazy('log_in')
-    redirect(url)
-
-def Episode(request, movie_id, number_ep):
-  if request.user.is_authenticated:
-    movie = Movie.objects.get(pk=movie_id)
-    if request.method == "POST":
-      if 'comment' in request.POST:
+      elif 'subcomment' in request.POST:
+        parent_id=request.POST.get('comment_id')
         usr = request.user
-        comment = request.POST.get('comment')
+        comment = request.POST.get('subcomment')
+        parent_obj = None
         try:
-          cmt = Comment.objects.create(movie=movie,user=usr,body=comment)
+          parent_obj = Comment.objects.get(id=parent_id)
+        except:
+          parent_obj = None
+
+        try:
+          cmt = Comment.objects.create(movie=movie,user=usr,body=comment,parent=parent_obj)
           cmt.save()
         except:
           messages.error(request,"Fail to comment")
-          url = '/movies/watch/'+ movie_id + "/" + number_ep
           return redirect(url)
         messages.success(request,"Comment successfully")
-        url = '/movies/watch/'+ movie_id + "/" + number_ep
-        return redirect(url)
-      elif 'like' in request.POST:
-        #comment = get_object_or_404(Comment, id=request.POST.get('like'))
-        value = request.POST.get('like')
-        comment = Comment.objects.get(pk=value)
-        if comment.likes.filter(id=request.user.id).exists():
-          comment.likes.remove(request.user)
-        else:
-          comment.unlikes.remove(request.user)
-          comment.likes.add(request.user)
-        return HttpResponseRedirect(reverse('watch', args=[str(movie_id)]))
-      elif 'unlike' in request.POST:
-        value = request.POST.get('unlike')
-        comment = Comment.objects.get(pk=value)
-        if comment.unlikes.filter(id=request.user.id).exists():
-          comment.unlikes.remove(request.user)
-        else:
-          comment.likes.remove(request.user)
-          comment.unlikes.add(request.user)
-        url = '/movies/watch/'+ movie_id + "/" + number_ep
-        return redirect(url)
-      elif 'mark' in request.POST:
-        value = request.POST.get('mark')
-        comment = Comment.objects.get(pk=value)
-        if comment.marks.filter(id=request.user.id).exists():
-          comment.marks.remove(request.user)
-        else:
-          comment.marks.add(request.user)
-        url = '/movies/watch/'+ movie_id + "/" + number_ep
-        return redirect(url)
-      elif 'star1' in request.POST:
-        if RatingStar.objects.filter(movie__id=movie_id, user__id=request.user.id).exists():
-          myrate = RatingStar.objects.get(movie__id=movie_id, user__id=request.user.id)
-          myrate.rate = 1
-          myrate.save()
-        else:
-          usr = request.user
-          myrate = RatingStar.objects.create(user=usr,movie=movie,rate=1)
-          myrate.save()
-        url = '/movies/watch/'+ movie_id + "/" + number_ep
-        return redirect(url)
-      elif 'star2' in request.POST:
-        if RatingStar.objects.filter(movie__id=movie_id, user__id=request.user.id).exists():
-          myrate = RatingStar.objects.get(movie__id=movie_id, user__id=request.user.id)
-          myrate.rate = 2
-          myrate.save()
-        else:
-          usr = request.user
-          myrate = RatingStar.objects.create(user=usr,movie=movie,rate=2)
-          myrate.save()
-        url = '/movies/watch/'+ movie_id + "/" + number_ep
-        return redirect(url)
-      elif 'star3' in request.POST:
-        if RatingStar.objects.filter(movie__id=movie_id, user__id=request.user.id).exists():
-          myrate = RatingStar.objects.get(movie__id=movie_id, user__id=request.user.id)
-          myrate.rate = 3
-          myrate.save()
-        else:
-          usr = request.user
-          myrate = RatingStar.objects.create(user=usr,movie=movie,rate=3)
-          myrate.save()
-        url = '/movies/watch/'+ movie_id + "/" + number_ep
-        return redirect(url)
-      elif 'star4' in request.POST:
-        if RatingStar.objects.filter(movie__id=movie_id, user__id=request.user.id).exists():
-          myrate = RatingStar.objects.get(movie__id=movie_id, user__id=request.user.id)
-          myrate.rate = 4
-          myrate.save()
-        else:
-          usr = request.user
-          myrate = RatingStar.objects.create(user=usr,movie=movie,rate=4)
-          myrate.save()
-        url = '/movies/watch/'+ movie_id + "/" + number_ep
-        return redirect(url)
-      elif 'star5' in request.POST:
-        if RatingStar.objects.filter(movie__id=movie_id, user__id=request.user.id).exists():
-          myrate = RatingStar.objects.get(movie__id=movie_id, user__id=request.user.id)
-          myrate.rate = 5
-          myrate.save()
-        else:
-          usr = request.user
-          myrate = RatingStar.objects.create(user=usr,movie=movie,rate=5)
-          myrate.save()
-        url = '/movies/watch/'+ movie_id + "/" + number_ep
         return redirect(url)
     try: 
       myrate = RatingStar.objects.get(movie__id=movie_id, user__id=request.user.id)
@@ -408,7 +288,8 @@ def Episode(request, movie_id, number_ep):
     movies = Movie.objects.filter(id=movie_id)
     user = request.user
     episode = movies.get().movie_episode.all()
-    num_ep = episode.filter(number_episode=number_ep)
+    # get_ep = episode.filter(number_episode=number_ep)
+    ep = get_object_or_404(Episode, title__id=movie_id, number_episode=number_ep)
     for comment in movie.comments.all():
       comment.who_has_it_open = request.user.id
       comment.save()
@@ -426,14 +307,16 @@ def Episode(request, movie_id, number_ep):
         'avatar':ava, 
         'movies': movies, 
         'episode': episode, 
-        'number_ep': num_ep,
+        'ep': ep,
         'user':user,
-        'rate' : rate
+        'rate' : rate,
+        'ep': ep
         })
   else:
     messages.error(request,"Please log in!")
     url=reverse_lazy('log_in')
     redirect(url)
+
 
 def Detail(request, movie_id):
   #movie = get_object_or_404(Movie,id=movie_id)
@@ -461,7 +344,7 @@ def Detail(request, movie_id):
   movies = Movie.objects.filter(id=movie_id)
   category = movies.get().categories.all()
   cast_crew = movies.get().cast_and_crew.all()
-  topcast = cast_crew[:4]
+  topcast = movies.get().cast_and_crew.all()[:4]
   return render(request,".\Trailer_Detail\Trailer_Detail.html",
   {'avatar':ava, 
   'another': another, 

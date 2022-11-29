@@ -35,6 +35,7 @@ admin.site.register(Category)
 # class EpisodeAdmin(admin.ModelAdmin):
 #     list_display = ('title', 'number_episode')
 #     search_fields = ('title', 'number_episode')
+  
 class EpisodeInline(admin.TabularInline):
     model = Episode
     extra = 0
@@ -47,6 +48,10 @@ class AwardInline(admin.StackedInline):
 
 class RatingStarInline(admin.StackedInline):
     model = RatingStar
+    extra = 0
+
+class EpisodeInline(admin.StackedInline):
+    model = Episode
     extra = 0
 class MovieAdmin(admin.ModelAdmin):
     list_display = ('title','description')

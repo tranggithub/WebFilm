@@ -113,7 +113,8 @@
                                     {% endfor %}
                                 </p>
                                 <hr>
-                                <a href="{% url 'watch' movie.id %}">Watch movie</a>
+                                    <a type="submit" href="{% url 'watch' movie.id 1 %}">Watch movie</a>
+                                
                                     <button class="rate_button" type="button" onclick="topRate()">Top rated movie #65</button>
                                     <select>
                                         <option>Awards {{movie.movie_award.count }} nominations</option>
@@ -232,7 +233,7 @@
                                         </button>
                                     </li>
                                     <li>
-                                        <label >{{movie.average_of_star}} | <span style="color:#534d4d;font-size:12px;">{{movie.views_count}}</span></label>
+                                        <label >{{movie.average_of_star}} | <span style="color:#534d4d;font-size:12px;">{{movie.total_views}}</span></label>
                                     </li>
                                 </form>
                             </ul>
