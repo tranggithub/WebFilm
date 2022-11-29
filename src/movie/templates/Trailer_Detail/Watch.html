@@ -152,16 +152,16 @@
                                                         </script> -->
                                                     </div>
                                                 </li>
-                                                <form method="POST" name="subcomment">
+                                                <form method="POST" name="subcomment" style="background:none;">
                                                     {% csrf_token %}
-                                                    <div class="comments" style="margin-left:10%; margin-top:1%">
-                                                        <span>
+                                                    <div class="comments" style="margin-left:10%; margin-top:1%; background:none;">
+                                                        <span style="background:none;">
                                                             <button id="user-comment" type="button" onclick="user()">
                                                                 <img style="width:30px;height:30px;" src="{{user.profile.avatar.url}}">
                                                             </button>
-                                                            <input id="input-cmt" name="subcomment" type="text" placeholder="Comment" style="width:65%;height: 30px; margin-top: 8px;" required>
+                                                            <input id="input-cmt" name="subcomment" type="text" placeholder="Comment" style="width:64%; height: 30px; margin-top: 8px; " required>
                                                             <input id="input-cmt" name="comment_id" type="hidden" value="{{comment.id}}">
-                                                            <button id="cmtbt" type="submit" style="margin-left:400px; margin-top: 1.1%;height: 30px; width: 60px;">
+                                                            <button id="cmtbt" type="submit" style="margin-left:401px; margin-top: 1.2%; height: 30px; width: 57px;">
                                                                 <img class="cmtbt-img" style="margin-right: 50px; width: 20px;" src="{% static 'css/Trailer_Detail/image/icon/icons8-cmt-white-30.png'%}">
                                                             </button>
                                                         </span>
@@ -171,40 +171,40 @@
                                                     <ul id="comment" style="margin-left: 10%;">
                                                         <li>
                                                             <button id="user-comment" type="button" onclick="another-user()">
-                                                                <img src="{{comment.user.profile.avatar.url}}">
+                                                                <img src="{{comment.user.profile.avatar.url}}" style="width:30px; height:30px;">
                                                             </button>
-                                                            <div class="content">
-                                                                <label id="name-user">{{comment.user.first_name}}</label>
-                                                                <label id="time">{{comment.date_added}}</label>
-                                                                <p>{{comment.body}}</p>
-                                                                <div class="like">
+                                                            <div class="content" id="subcomment">
+                                                                <label id="name-user" style="font-size:13px;">{{comment.user.first_name}}</label>
+                                                                <label id="time" style="font-size:8px;">{{comment.date_added}}</label>
+                                                                <p style="font-size:10px;">{{comment.body}}</p>
+                                                                <div class="like" id="sublike">
                                                                     <form method="post">
                                                                         {% csrf_token %}
                                                                         <button id="likebt" type="submit" name="like" value="{{comment.id}}">
                                                                             {% if not comment.is_like %}
-                                                                                <img class="like-img" src="{% static 'css/Trailer_Detail/image/icon/icons8-like-24.png'%}">
+                                                                                <img class="like-img" id="subcmt" src="{% static 'css/Trailer_Detail/image/icon/icons8-like-24.png'%}">
                                                                             {% else %}
-                                                                                <img class="like-img" src="{% static 'css/Trailer_Detail/image/icon/icons8-like-green-24.png'%}">
+                                                                                <img class="like-img" id="subcmt" src="{% static 'css/Trailer_Detail/image/icon/icons8-like-green-24.png'%}">
                                                                             {% endif %}
                                                                         </button>
-                                                                        <label id="comment-number">{{comment.total_likes}}</label>
+                                                                        <label id="comment-number"  style="font-size:10px;">{{comment.total_likes}}</label>
                                                                         <button id="likebt" type="submit" name="unlike" value="{{comment.id}}">
                                                                             {% if not comment.is_unlike %}
-                                                                                <img class="dislike-img" src="{% static 'css/Trailer_Detail/image/icon/icons8-dislike-24.png'%}">
+                                                                                <img class="dislike-img" id="subcmt" src="{% static 'css/Trailer_Detail/image/icon/icons8-dislike-24.png'%}">
                                                                             {% else %}
-                                                                                <img class="dislike-img" src="{% static 'css/Trailer_Detail/image/icon/icons8-dislike-green-24.png'%}">
+                                                                                <img class="dislike-img" id="subcmt" src="{% static 'css/Trailer_Detail/image/icon/icons8-dislike-green-24.png'%}">
                                                                             {% endif %}
                                                                         </button>
-                                                                        <label id="comment-number">{{comment.total_unlikes}}</label>
+                                                                        <label id="comment-number" style="font-size:10px;">{{comment.total_unlikes}}</label>
                                                                         <!-- <button id="cmt" type="submit" name="subcomment_show" value="{{comment.id}}" >
                                                                             <img class="cmt-img"src="{% static 'css/Trailer_Detail/image/icon/icons8-comments-30.png'%}">
                                                                         </button>
                                                                         <label id="comment-number">{{comment.children_count}}</label> -->
                                                                         <button id="flag" type="submit" name="mark" value="{{comment.id}}">
                                                                             {% if not comment.is_mark %}
-                                                                                <img class="flag-img" src="{% static 'css/Trailer_Detail/image/icon/icons8-flag-30.png'%}">
+                                                                                <img class="flag-img" id="subcmt" src="{% static 'css/Trailer_Detail/image/icon/icons8-flag-30.png'%}">
                                                                             {% else %}
-                                                                                <img class="flag-img" src="{% static 'css/Trailer_Detail/image/icon/icons8-flag-green-30.png'%}">
+                                                                                <img class="flag-img" id="subcmt" src="{% static 'css/Trailer_Detail/image/icon/icons8-flag-green-30.png'%}">
                                                                             {% endif %}
                                                                             
                                                                         </button>
