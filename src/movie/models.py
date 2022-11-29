@@ -177,6 +177,15 @@ class Comment(models.Model):
     unlikes = models.ManyToManyField(User,related_name="comnent_unlike")
     marks = models.ManyToManyField(User,related_name="comnent_mark")
     who_has_it_open = models.IntegerField(null=True,blank=True,default=0)
+
+    
+    #Reply cho comment
+    parent = models.ForeignKey("self",blank=True, null=True, on_delete=models.CASCADE)
+
+    class Meta:
+        #cái nào mới nhất thì show trước
+        ordering = ['-date_added']
+
     def __str__(self):
         return '%s - %s' % (self.movie.title,self.user.first_name)
     def total_likes(self):
@@ -190,6 +199,18 @@ class Comment(models.Model):
         return self.unlikes.filter(id=self.who_has_it_open).exists()
     def is_mark(self):
         return self.marks.filter(id=self.who_has_it_open).exists()
+
+    #subcomment
+    def children(self):
+        return Comment.objects.filter(parent=self)
+    
+    def children_count(self):
+        return Comment.objects.filter(parent=self).count()
+    @property
+    def is_parent(self):
+        if self.parent is not None:
+            return False
+        return True
 
 class RatingStar(models.Model):
     movie = models.ForeignKey(Movie,related_name="movies", on_delete=models.CASCADE)

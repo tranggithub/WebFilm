@@ -144,6 +144,7 @@
                                                                 </button>
                                                             </form>
                                                         </div>
+
                                                         <!-- <script>
                                                             function click(x){
                                                                 x.classList.toggle("{% static 'css/Trailer_Detail/image/icon/icons8-like-green-24.png'%}")
@@ -151,6 +152,20 @@
                                                         </script> -->
                                                     </div>
                                                 </li>
+                                                <form method="POST" name="subcomment">
+                                                    {% csrf_token %}
+                                                    <div class="comments" style="margin-left:10%; margin-top:1%">
+                                                        <span>
+                                                            <button id="user-comment" type="button" onclick="user()">
+                                                                <img style="width:30px;height:30px;" src="{{user.profile.avatar.url}}">
+                                                            </button>
+                                                            <input id="input-cmt" name="comment" type="text" placeholder="Comment" style="width:65%;height: 30px; margin-top: 8px;" required>
+                                                            <button id="cmtbt" type="submit" style="margin-left:400px; margin-top: 1.1%;height: 30px; width: 60px;">
+                                                                <img class="cmtbt-img" style="margin-right: 50px; width: 20px;" src="{% static 'css/Trailer_Detail/image/icon/icons8-cmt-white-30.png'%}">
+                                                            </button>
+                                                        </span>
+                                                    </div>
+                                                </form>
                                             
                                                 <!-- <li>
                                                     <button id="user-comment" type="button" onclick="another-user()">
