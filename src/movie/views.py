@@ -1,4 +1,5 @@
 ﻿from ast import Mod
+import json
 from django.http import HttpResponse, HttpResponseRedirect
 from pyexpat import model
 from django.template import loader
@@ -22,6 +23,7 @@ from django.db.models.query_utils import Q
 from django.core.mail import send_mail, BadHeaderError
 from .models import *
 from django.urls import reverse_lazy, reverse
+from django.http import JsonResponse
 class MovieList (ListView):
     model = Movie
     
@@ -371,7 +373,24 @@ def ChangeInfo(request):
     user_form = UserForm(instance=request.user)
     user_profile_form = ProfileForm(instance=request.user.profile)
   return render(request,'.\Info\change_info.html',{'u_form':user_form, 'p_form':user_profile_form}) 
-  # template = loader.get_template('.\Info\change_date.html')
+
+def searchBar(request):
+  keyword=request.GET['keyword']
+  ava = request.user.profile.avatar.url 
+  movies = Movie.objects.filter(title__contains=keyword)   
+  tv_series = Movie.objects.filter(format='TV')[:4]
+  ps = Movie.objects.filter(format='PS')[:4]
+  return render(request,".\Search\Searchbar.html",{'avatar':ava, 'movies':movies, 'tv_series':tv_series, 'ps':ps})
+
+# def searchBar_auto(request):
+#    keyword= request.GET.get('keyword')
+#    movies=Movie.objects.filter(title__icontains=keyword)
+#    movie=[]
+#    movie+= [x.title for x in movies]
+#    return JsonResponse(movie,safe=False)
+    
+      
+  
   # return HttpResponse(template.render())
 
 

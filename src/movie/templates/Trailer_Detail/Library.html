@@ -78,9 +78,11 @@
             <div class="grid__column-8">        
                 <div class="container__search">                    
                     <div class="text__search">
+                         <form action="{% url 'search'%}" method="get"> 
                         <i class="fas fa-search"></i>
                         <input class="keyword" type="text" name="keyword" placeholder="Search for movies, TV show..." value ></div>
                         <div style="display: none;" id="suggestions" class="top-search-box"></div>
+                        </form>
                 </div>
                 <div class="grid__row-4">             
                  

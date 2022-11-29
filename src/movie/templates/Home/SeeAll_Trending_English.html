@@ -35,9 +35,10 @@
             <div class="grid__column-8">        
                 <div class="container__search">                    
                     <div class="text__search">
+                        <form action="{% url 'search'%}" method="get">  
                         <i class="fas fa-search"></i>
                         <input class="keyword" type="text" name="keyword" placeholder="Search for movies, TV show..." value >
-                        
+                        </form>
                     </div>
                     <div class="button_Noti_user">
                         <button class="button__Notifi"type="button" onclick="notify()"><i class="far fa-bell"></i></button>

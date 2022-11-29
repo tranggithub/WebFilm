@@ -56,10 +56,13 @@
                         </a>
                     </button>
                     <div class="top_left">
-                        <form method="GET" id="from-search" action="https://movie.HD/search/" style="width:auto">
+                        <form method="GET" id="from-search" action="{% url 'search'%}" style="width:auto">
                             <div class="search">
+                               
                                 <img src="{% static 'css/Trailer_Detail/image/icon/icons8-search-30 (1).png'%}">
+                              
                                 <input class="keyword" type="text" name="keyword" placeholder="Search for movies, TV show,..." value >
+                                
                             </div>
                             <div style="display: none;" id="suggestions" class="top-search-box"></div>
                         </form>
