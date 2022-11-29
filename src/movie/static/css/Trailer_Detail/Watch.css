@@ -219,18 +219,18 @@
 
 .comment-box{
     width:660px;
-    height:370px;
+    height:400px;
     background:rgba(62, 75, 80, 0.381);
     border-top-left-radius: 35px;
     border-bottom-left-radius: 8px;
     margin-top:10px;
     margin-bottom:20px;
     overflow-y:scroll;
-
 }
 #comment{
     background:none;
     margin-bottom:20px;
+
 }
 #comment li{
     list-style-type: none;
@@ -291,7 +291,9 @@
 .flag-img:hover{
     content:url("./image/icon/icons8-flag-green-30.png");
 }
-
+#subcmt{
+    width:15px;
+}
 .bottom_right{
     width:auto;
     margin-right:20px;
