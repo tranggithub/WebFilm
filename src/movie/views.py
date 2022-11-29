@@ -157,16 +157,20 @@ def Movies(request):
 def Library(request):
   ava = request.user.profile.avatar.url
   movies = Movie.objects.all()
-  trending = Movie.objects.filter(status__status='T')[:4]
   love = Movie.objects.filter(loves__id=request.user.id)
   mark = Movie.objects.filter(marks__id=request.user.id)
+  history = Movie.objects.filter(history__id=request.user.id)
   ps = Movie.objects.filter(format='PS')[:4]
-  return render(request,".\Trailer_Detail\Library.html",{'avatar':ava, 'movies': movies,'trending': trending, 'love':love, 'mark':mark, 'ps':ps})
+  return render(request,".\Trailer_Detail\Library.html",{'avatar':ava, 'movies': movies,'history': history, 'love':love, 'mark':mark, 'ps':ps})
 
 def WatchFilm(request, movie_id, number_ep):
   if request.user.is_authenticated:
     movie = Movie.objects.get(pk=movie_id)
     ep = get_object_or_404(Episode,title__id=movie_id,number_episode=number_ep)
+    if movie.history.filter(id=request.user.id).exists():
+      pass
+    else:
+      movie.history.add(request.user)
     if request.method == "POST":
       url = '/movies/watch/'+ movie_id + "/" + number_ep
       if 'comment' in request.POST:

@@ -113,6 +113,7 @@ class Movie(models.Model):
     #Love and mark video
     loves = models.ManyToManyField(User,related_name="movie_love", verbose_name="loves")
     marks = models.ManyToManyField(User,related_name="movie_mark")
+    history = models.ManyToManyField(User,related_name="movie_history")
 
     #Hỗ trợ chức năng đổi icon 
     who_has_it_open = models.IntegerField(null=True,blank=True,default=0)
@@ -146,6 +147,9 @@ class Movie(models.Model):
         return sum/(myrate.count())
     def only_parent_comment(self):
         return Comment.objects.filter(movie=self,parent=None)
+    
+    def total_views(self):
+        return self.history.count()
     
 class Episode(models.Model):
     title = models.ForeignKey(Movie,related_name="movie_episode", on_delete=models.CASCADE)
