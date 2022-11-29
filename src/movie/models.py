@@ -146,6 +146,7 @@ class Movie(models.Model):
         return sum/(myrate.count())
     def only_parent_comment(self):
         return Comment.objects.filter(movie=self,parent=None)
+    
 class Episode(models.Model):
     title = models.ForeignKey(Movie,related_name="movie_episode", on_delete=models.CASCADE)
     number_episode = models.IntegerField(default=1)

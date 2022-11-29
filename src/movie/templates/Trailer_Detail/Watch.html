@@ -130,10 +130,10 @@
                                                                     {% endif %}
                                                                 </button>
                                                                 <label id="comment-number">{{comment.total_unlikes}}</label>
-                                                                <!-- <button id="cmt" type="submit" name="subcomment" value="{{comment.id}}" >
+                                                                <button id="cmt" type="submit" name="subcomment" value="{{comment.id}}" >
                                                                     <img class="cmt-img"src="{% static 'css/Trailer_Detail/image/icon/icons8-comments-30.png'%}">
                                                                 </button>
-                                                                <label id="comment-number">0</label> -->
+                                                                <label id="comment-number">{{comment.children_count}}</label>
                                                                 <button id="flag" type="submit" name="mark" value="{{comment.id}}">
                                                                     {% if not comment.is_mark %}
                                                                         <img class="flag-img" src="{% static 'css/Trailer_Detail/image/icon/icons8-flag-30.png'%}">
@@ -196,10 +196,10 @@
                                                                             {% endif %}
                                                                         </button>
                                                                         <label id="comment-number">{{comment.total_unlikes}}</label>
-                                                                        <!-- <button id="cmt" type="submit" name="subcomment" value="{{comment.id}}" >
+                                                                        <!-- <button id="cmt" type="submit" name="subcomment_show" value="{{comment.id}}" >
                                                                             <img class="cmt-img"src="{% static 'css/Trailer_Detail/image/icon/icons8-comments-30.png'%}">
                                                                         </button>
-                                                                        <label id="comment-number">0</label> -->
+                                                                        <label id="comment-number">{{comment.children_count}}</label> -->
                                                                         <button id="flag" type="submit" name="mark" value="{{comment.id}}">
                                                                             {% if not comment.is_mark %}
                                                                                 <img class="flag-img" src="{% static 'css/Trailer_Detail/image/icon/icons8-flag-30.png'%}">
