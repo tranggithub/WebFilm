@@ -257,6 +257,24 @@ def WatchFilm(request, movie_id, number_ep):
           myrate = RatingStar.objects.create(user=usr,movie=movie,rate=5)
           myrate.save()
         return redirect(url)
+      elif 'subcomment' in request.POST:
+        parent_id=request.POST.get('comment_id')
+        usr = request.user
+        comment = request.POST.get('subcomment')
+        parent_obj = None
+        try:
+          parent_obj = Comment.objects.get(id=parent_id)
+        except:
+          parent_obj = None
+
+        try:
+          cmt = Comment.objects.create(movie=movie,user=usr,body=comment,parent=parent_obj)
+          cmt.save()
+        except:
+          messages.error(request,"Fail to comment")
+          return redirect(url)
+        messages.success(request,"Comment successfully")
+        return redirect(url)
     try: 
       myrate = RatingStar.objects.get(movie__id=movie_id, user__id=request.user.id)
       rate = myrate.rate
