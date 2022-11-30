@@ -8,6 +8,8 @@
  <link rel="stylesheet" href="{% static 'css/Home/style.css' %}" />
  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700&display=swap" rel="stylesheet">
+ <!-- CSS only Bootstrap -->
+ <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
  <title> Library | LTWFlix</title>
  {% comment %} Alert JS {% endcomment%}
         <!-- CSS -->
@@ -93,15 +95,31 @@
                 </div> 
 
                 <div class="grid__row-4">
-                    {% for movie in history %}
+                    {% for movie in history_page.object_list %}
                         <button class="column__movie">
                             <a href="{% url 'detail' movie.id %}">
                                 <img class="img-movie" src="{{movie.image.url}}" alt="" style="width:160px; height:252px; border-radius: 10px;" />
                             </a>
                         </button>
                     {% endfor %}
-                   
                 </div>
+                <nav class="my-4">
+                    <ul class="pagination justify-content-center">
+                        {% if history_page.has_previous %}
+                            <li class="page-item"><a class="page-link" href="{% url 'library' %}?l_num={{love_page.number}}&m_num={{mark_page.number}}&h_num={{history_page.previous_page_number}}">Previous</a></li>
+                        {% endif %}
+                        {% for i in history_page.paginator.page_range %}
+                            {% if history_page.number == i %}
+                                <li class="page-item"><a class="page-link active" href="{% url 'library' %}?l_num={{love_page.number}}&m_num={{mark_page.number}}&h_num={{i}}">{{i}}</a></li>
+                            {% else %}
+                                <li class="page-item"><a class="page-link" href="{% url 'library' %}?l_num={{love_page.number}}&m_num={{mark_page.number}}&h_num={{i}}">{{i}}</a></li>
+                            {% endif %}
+                        {% endfor %}
+                        {% if history_page.has_next %}
+                            <li class="page-item"><a class="page-link" href="{% url 'library' %}?l_num={{love_page.number}}&m_num={{mark_page.number}}&h_num={{history_page.next_page_number}}">After</a></li>
+                        {% endif %}
+                    </ul>
+                </nav>
                 <div class="grid__row-4-Body">
                     <div class="Head__Up">
                         <a name="Upcoming">Loved videos</a>
@@ -109,15 +127,33 @@
                     <a class="Head__See" href="Upcoming.html">See all</a>
                 </div>  
                 <div class="grid__row-4">
-                    {% for movie in love %}
+                    {% for movie in love_page.object_list %}
                         <button class="column__movie">
                             <a href="{% url 'detail' movie.id %}">
                                 <img class="img-movie" src="{{movie.image.url}}" alt="{{movie.title}}" style="width:160px; height:252px; border-radius: 10px;"/>
                             </a>
                         </button>
                     {% endfor %}
-                    
                 </div>   
+                <!-- Thanh chuyển trang -->
+                <!-- </br> -->
+                <nav class="my-4">
+                    <ul class="pagination justify-content-center">
+                        {% if love_page.has_previous %}
+                            <li class="page-item"><a class="page-link" href="{% url 'library' %}?l_num={{love_page.previous_page_number}}&m_num={{mark_page.number}}&h_num={{history_page.number}}">Previous</a></li>
+                        {% endif %}
+                        {% for i in love_page.paginator.page_range %}
+                            {% if love_page.number == i %}
+                                <li class="page-item"><a class="page-link active" href="{% url 'library' %}?l_num={{i}}&m_num={{mark_page.number}}&h_num={{history_page.number}}">{{i}}</a></li>
+                            {% else %}
+                                <li class="page-item"><a class="page-link" href="{% url 'library' %}?l_num={{i}}&m_num={{mark_page.number}}&h_num={{history_page.number}}">{{i}}</a></li>
+                            {% endif %}
+                        {% endfor %}
+                        {% if love_page.has_next %}
+                            <li class="page-item"><a class="page-link" href="{% url 'library' %}?l_num={{love_page.next_page_number}}&m_num={{mark_page.number}}&h_num={{history_page.number}}">After</a></li>
+                        {% endif %}
+                    </ul>
+                </nav>
                 <div class="grid__row-4-Body">
                     <div class="Head__Up">
                         <a name="TVseries">Mark Book</a>
@@ -125,14 +161,31 @@
                     <a class="Head__See" href="TVSeries.html">See all</a>
                 </div>  
                 <div class="grid__row-4">
-                    {% for movie in mark %}
+                    {% for movie in mark_page.object_list %}
                         <button class="column__movie">
                             <a href="{% url 'detail' movie.id%}">
                                 <img class="img-movie" src="{{movie.image.url}}" alt="{{movie.title}}" style="width:160px; height:252px; border-radius: 10px;"/>
                             </a>
                         </button>
                     {% endfor %}
-                </div>    
+                </div> 
+                <nav class="my-4">
+                    <ul class="pagination justify-content-center">
+                        {% if mark_page.has_previous %}
+                            <li class="page-item"><a class="page-link" href="{% url 'library' %}?l_num={{love_page.number}}&m_num={{mark_page.previous_page_number}}&h_num={{history_page.number}}">Previous</a></li>
+                        {% endif %}
+                        {% for i in mark_page.paginator.page_range %}
+                            {% if mark_page.number == i %}
+                                <li class="page-item"><a class="page-link active" href="{% url 'library' %}?l_num={{love_page.number}}&m_num={{i}}&h_num={{history_page.number}}">{{i}}</a></li>
+                            {% else %}
+                                <li class="page-item"><a class="page-link" href="{% url 'library' %}?l_num={{love_page.number}}&m_num={{i}}&h_num={{history_page.number}}">{{i}}</a></li>
+                            {% endif %}
+                        {% endfor %}
+                        {% if mark_page.has_next %}
+                            <li class="page-item"><a class="page-link" href="{% url 'library' %}?l_num={{love_page.number}}&m_num={{mark_page.next_page_number}}&h_num={{history_page.number}}">After</a></li>
+                        {% endif %}
+                    </ul>
+                </nav>   
                 <!-- <div class="grid__row-4">
                     {% for movie in ps %}
                         <button class="column__movie">
