@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+    {% load static %}
+<head>
+ <meta charset="utf-8" />
+ <link rel="stylesheet" href="{% static 'css/Movies/css/style.css' %}" />
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
+ <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700&display=swap" rel="stylesheet">
+ <title>Movie | LTWFlix</title>
+ </head>
+ <body>
+    <div class="app__container">
+        <div class="grid">
+          <div class="grid__row">
+            <div class="grid__column-2">
+                <nav class="category">
+                    <h3 class="category__heading_Movibies">
+                        <img src="{% static 'css/Movies/css/Logo/Vector.png' %}" alt="" />
+                 
+                    </h3>
+                </nav>
+               
+                </nav> 
+                <div class="button">
+                    <ul>
+                        <li><a href="{% url 'home' %}"><i class="fas fa-home fa-icon"></i><label>Home</label></a></li>
+                        <li><a id="main" href="{% url 'movies' %}"> <i class="fas fa-video fa-icon "></i><label>Movies</label></a></li>
+                        <li><a href="{% url 'movies' %}#TVseries"><i class="fas fa-tv fa-icon"></i><label>TV Series</label></a></li>
+                        <li><a href="{% url 'movies' %}#Upcoming"><i class="fas fa-calendar-alt fa-icon"></i><label>Upcoming</label></a></li>
+                        <li><a href="#"><label><img src="/static/css/Trailer_Detail/image/icon/icons8-book-shelf-50.png" alt="library" style="margin-left:-35%; margin-right:12%"><b style="background:none;">Library</b></label></a></li>
+                        
+                        <li  style="margin-top:20%;"><a href="{% url 'log_out' %}"><i class="fas fa-sign-out-alt fa-icon"></i><label>Logout</label></a></li>
+                    </ul>
+                </div>
+               
+             
+                
+            </div>
+            
+            <div class="grid__column-8">        
+                <div class="container__search">                               
+                    <div class="text__search">
+                        <form action="{% url 'search'%}" method="get"> 
+                        <i class="fas fa-search"></i>
+                        <input class="keyword" id="search_auto" type="text" name="keyword" placeholder="Search for movies, TV show..." value ></div>
+                        <div style="display: none;" id="suggestions" class="top-search-box">
+                        
+                        </div>    
+                    </form>                   
+
+                       
+                </div>                
+                <div class="Head__Up">Search result for "{{request.GET.keyword}}"</div>
+                <div class="grid__row-4" >
+                    
+                        <a name="movies"></a>
+                   
+                        {% for movie in movies %}                      
+                    <button class="column__movie">
+                       
+                        <a href="{% url 'detail' movie.id %}">
+                            <img class="img-movie" src="{{movie.image.url}}" alt="{{movie.title}}" style="width:160px; height:252px; border-radius: 10px;"/>
+                        </a>
+                    </button>
+                    {% endfor %}
+                    
+                    
+                </div>  
+                <div class="grid__row-4">
+                    {% for movie in upcoming %}
+                    <button class="column__movie">
+                        <a href="{% url 'detail' movie.id %}">
+                            <img class="img-movie" src="{{movie.image.url}}" alt="{{movie.title}}" style="width:160px; height:252px; border-radius: 10px;"/>
+                        </a>
+                    </button>
+                    {% endfor %}
+                </div>   
+                <div class="grid__row-4-Body">
+                    <div class="Head__Up">
+                        <a name="TVseries">TV Series</a>
+                    </div>
+                    <a class="Head__See" href="TVSeries.html">See all</a>
+                </div>  
+                <div class="grid__row-4">
+                    {% for movie in tv_series %}
+                        <button class="column__movie">
+                            <a href="{% url 'detail' movie.id%}">
+                                <img class="img-movie" src="{{movie.image.url}}" alt="{{movie.title}}" style="width:160px; height:252px; border-radius: 10px;"/>
+                            </a>
+                        </button>
+                    {% endfor %}
+                </div>   
+                <div class="grid__row-4-Body">
+                    <div class="Head__Poplular">
+                        <a name="onSeptember">Popular movies on September</a>
+                    </div>
+                    <a class="Head__See" href="Popular.html">See all</a>
+                </div>  
+                <div class="grid__row-4">
+                    {% for movie in ps %}
+                        <button class="column__movie">
+                            <a href="{% url 'detail' movie.id %}">
+                                <img class="img-movie" src="{{movie.image.url}}" alt="{{movie.title}}" style="width:160px; height:252px; border-radius: 10px;"/>
+                            </a>
+                        </button>
+                    {% endfor %}
+                </div>   
+            </div>
+            <div class="grid__column-2-right">
+                <div class="grid__row-4">
+                    <button class="button__Notifi"type="button" onclick="user()"><i class="far fa-bell"></i></button>
+                    <button class="button__User" type="button" onclick="user()">
+                        <a href="{% url 'info'%}">
+                            <img src="{{avatar}}">
+                        </a>
+                    </button>
+                </div>      
+            </div>
+        </div>
+    </div>
+    <div class="loader-wrapper">
+        <div class="loader"></div>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    
+    <script>
+        $(window).on("load", function(){
+            $(".loader-wrapper").fadeOut(1000);
+        });
+    </script>
+ </body>
+</html>
+    
+    
+    
+    
+  
