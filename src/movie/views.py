@@ -22,6 +22,7 @@ from django.db.models.query_utils import Q
 from django.core.mail import send_mail, BadHeaderError
 from .models import *
 from django.urls import reverse_lazy, reverse
+
 class MovieList (ListView):
     model = Movie
     
@@ -113,6 +114,25 @@ def password_reset_request(request):
 
 @login_required
 def Home(request):
+  if request.method == "POST":
+    url='/movies/home/'
+    if 'notify' in request.POST:
+      if request.user.profile.is_need_to_notify == False:
+        if request.user.email is not None:
+          request.user.profile.is_need_to_notify = True
+          request.user.profile.save()
+          messages.success(request,"You will reveive email if we add new movie")
+          redirect(url)
+        else:
+          messages.error(request,"You don't have an email in your account")
+          redirect(url)
+      else:
+        request.user.profile.is_need_to_notify = False
+        request.user.profile.save()
+        messages.success(request,"You won't reveive email when we add new movie")
+        redirect(url)
+
+
   ava = request.user.profile.avatar.url
   movies = Movie.objects.all()
   trending = Movie.objects.filter(status__status='T')[:4]
@@ -164,6 +184,13 @@ def Library(request):
   return render(request,".\Trailer_Detail\Library.html",{'avatar':ava, 'movies': movies,'history': history, 'love':love, 'mark':mark, 'ps':ps})
 
 def WatchFilm(request, movie_id, number_ep):
+  # try: 
+  #   tests = Profile.objects.filter(is_need_to_notify=True)
+  #   for test in tests:
+  #     test.send_notification(movie_id)
+  #   messages.success(request,"Succeed in mailing")
+  # except:
+  #   messages.error(request,"Fail to mail")
   if request.user.is_authenticated:
     movie = Movie.objects.get(pk=movie_id)
     ep = get_object_or_404(Episode,title__id=movie_id,number_episode=number_ep)
@@ -355,8 +382,7 @@ def Detail(request, movie_id):
 
 
 def UserPacket(request):
-  template = loader.get_template('UserPacket\Service_pack.html')
-  return HttpResponse(template.render())
+  return render(request,'UserPacket\Service_pack.html')
 
 class UserForm(forms.ModelForm):
   class Meta:

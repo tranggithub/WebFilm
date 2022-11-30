@@ -169,7 +169,10 @@
             </div>
             <div class="grid__column-2-right">
                 <div class="grid__row-4">
-                    <button class="button__Notifi"type="button" onclick="notify()"><i class="far fa-bell"></i></button>
+                    <form method="post" name="notify">
+                        {% csrf_token %}
+                        <button name="notify" class="button__Notifi"type="submit" onclick="notify()"><i class="far fa-bell"></i></button>
+                    </form>
                     <button class="button__User" type="button" onclick="user()">
                         <a href="{% url 'info'%}">
                             <img src="{{avatar}}">
