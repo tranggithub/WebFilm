@@ -8,12 +8,15 @@
  <link rel="stylesheet" href="{% static 'css/Home/style.css' %}" />
  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700&display=swap" rel="stylesheet">
+ {% comment %} <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css"> {% endcomment %}
  <title>Home | LTWFlix</title>
  {% comment %} Alert JS {% endcomment%}
         <!-- CSS -->
         <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css"/>
         <!-- Default theme -->
         <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/default.min.css"/>
+        
+       
  </head>
  <body>
         {% comment %} alertifyjs - Thông báo {% endcomment %}
@@ -33,6 +36,9 @@
             {% endif %}
         {% endfor %}
 
+
+
+
     <div class="app__container">
         <div class="grid">
           <div class="grid__row">
@@ -43,26 +49,7 @@
                  
                     </h3>
                 </nav>
-                <!-- <nav class="category">
-                    <h3 class="category__heading">
-                        <i class="fas fa-home fa-icon"></i> Home
-                    </h3>
-                </nav>
-                <nav class="category">
-                    <h3 class="category__heading category__heading__active ">
-                        <i class="fas fa-video fa-icon "></i> Movies
-                    </h3>
-                </nav>
-                <nav class="category">
-                    <h3 class="category__heading">
-                        <i class="fab fa-youtube fa-icon "></i> TV Series
-                    </h3>
-                </nav>
-                <nav class="category">
-                    <h3 class="category__heading">
-                        <i class="fas fa-calendar-alt fa-icon"></i> Upcoming
-                    </h3>
-                </nav> -->
+               
                 <div class="button">
                     <ul>
                         <li><a id="main" href="{% url 'home' %}"><i class="fas fa-home fa-icon"></i><label>Home</label></a></li>
@@ -75,13 +62,27 @@
                 </div>
             
             </div>
+           
+
+            {% comment %} <script>
+                $( function() {                  
+                  $( "#search_auto" ).autocomplete({
+                    source: "{% url 'searchbar_auto'%}",
+                  });
+                } );
+                </script> {% endcomment %}
             <div class="grid__column-8">        
                 <div class="container__search">                    
                     <div class="text__search">
-                        <i class="fas fa-search"></i>
-                        <input class="keyword" type="text" name="keyword" placeholder="Search for movies, TV show..." value ></div>
+                        <form action="{% url 'search' %}" method="GET">
+                        <i type ="submit" class="fas fa-search"></i>
+                        <input class="keyword" type="text" name="keyword" placeholder="Search for movies, TV show..." value >
+                    </div>
                         <div style="display: none;" id="suggestions" class="top-search-box"></div>
+                    </form>
                 </div>
+                       
+                
                 <div class="grid__row-4">
 
                     <div class="grid_heading_play_info">
@@ -169,7 +170,10 @@
             </div>
             <div class="grid__column-2-right">
                 <div class="grid__row-4">
-                    <button class="button__Notifi"type="button" onclick="notify()"><i class="far fa-bell"></i></button>
+                    <form method="post" name="notify">
+                        {% csrf_token %}
+                        <button name="notify" class="button__Notifi"type="submit" onclick="notify()"><i class="far fa-bell"></i></button>
+                    </form>
                     <button class="button__User" type="button" onclick="user()">
                         <a href="{% url 'info'%}">
                             <img src="{{avatar}}">
@@ -253,11 +257,7 @@
                             <hr class="hr_h">
                             <div class="text__More">See more</div>
 
-                </div>
-               
-               
-
-                
+                </div>      
 
             </div>
         </div>

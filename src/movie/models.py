@@ -8,6 +8,11 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.dispatch import receiver
 from django.db.models.signals import post_save
+
+from django.template.loader import render_to_string
+from django.db.models.query_utils import Q
+from django.core.mail import send_mail, BadHeaderError
+from django.contrib import messages
 # Create your models here.
 CATEGORY_CHOICE = (
     ('Action','ACTION'),
@@ -111,9 +116,9 @@ class Movie(models.Model):
     time = models.CharField(default='2h10m', max_length=6)
     
     #Love and mark video
-    loves = models.ManyToManyField(User,related_name="movie_love", verbose_name="loves")
-    marks = models.ManyToManyField(User,related_name="movie_mark")
-    history = models.ManyToManyField(User,related_name="movie_history")
+    loves = models.ManyToManyField(User,related_name="movie_love", verbose_name="loves", null=True, blank=True)
+    marks = models.ManyToManyField(User,related_name="movie_mark", null=True, blank=True)
+    history = models.ManyToManyField(User,related_name="movie_history", null=True, blank=True)
 
     #Hỗ trợ chức năng đổi icon 
     who_has_it_open = models.IntegerField(null=True,blank=True,default=0)
@@ -171,8 +176,30 @@ class Profile(models.Model):
     birthday = models.DateField(null=True, blank=True, default='2022-01-01')
     gender = models.CharField(choices=GENDER_CHOICES,max_length=1,default='N')
 
+    #Hỗ trợ việc cần thông báo đến người dùng có film mới hay không
+    is_need_to_notify = models.BooleanField(default=False)
+
     def __str__(self):
         return self.user.username
+    def send_notification(self, title, description):
+        if self.is_need_to_notify:
+            subject = "A New Movie Notification"
+            email_template_name = "./Info/notification.txt"
+            c = {
+            "email":self.user.email,
+            'domain':'127.0.0.1:8000',
+            'site_name': 'LTWFlix',
+            "user": self.user,
+            'protocol': 'http',
+            "title": title,
+            "description":description
+            }
+            email = render_to_string(email_template_name, c)
+            try:
+                send_mail(subject, email, 'group11.ltw@gmail.com' , [self.user.email], fail_silently=False)
+            except:
+                pass
+
 
 class Comment(models.Model):
     movie = models.ForeignKey(Movie,related_name="comments", on_delete=models.CASCADE)
@@ -231,3 +258,16 @@ class RatingStar(models.Model):
 def create_user_profile(sender,instance,created,**kwargs):
     if created:
         Profile.objects.create(user=instance)
+
+@receiver(post_save,sender=Movie)
+def send_notification_to_listuser(sender,instance,created,**kwargs):
+    #return HttpResponseRedirect('/log_in/')
+    #raise ""
+    if created:
+        try: 
+            tests = Profile.objects.filter(is_need_to_notify=True)
+            for test in tests:
+                test.send_notification(instance.title, instance.description)
+            print("Succeed in mailing")
+        except:
+            print("Fail to mail")

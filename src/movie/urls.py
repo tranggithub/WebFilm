@@ -47,5 +47,7 @@ urlpatterns = [
     path('reset_password/complete',auth_views.PasswordResetCompleteView.as_view(
         template_name='.\Info\\reset_complete.html',
     ),name='reset_complete'),
+    path('search/',views.searchBar, name='search'),
+ 
 ]
 
