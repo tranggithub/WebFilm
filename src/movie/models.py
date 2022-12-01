@@ -216,6 +216,7 @@ class Comment(models.Model):
     likes = models.ManyToManyField(User,related_name="comnent_like")
     unlikes = models.ManyToManyField(User,related_name="comnent_unlike")
     marks = models.ManyToManyField(User,related_name="comnent_mark")
+    reply = models.ManyToManyField(User,related_name="comnent_reply")
     who_has_it_open = models.IntegerField(null=True,blank=True,default=0)
 
     
@@ -239,6 +240,8 @@ class Comment(models.Model):
         return self.unlikes.filter(id=self.who_has_it_open).exists()
     def is_mark(self):
         return self.marks.filter(id=self.who_has_it_open).exists()
+    def is_reply(self):
+        return self.reply.filter(id=self.who_has_it_open).exists()
 
     #subcomment
     def children(self):
