@@ -252,7 +252,7 @@ def WatchFilm(request, movie_id, number_ep):
         else:
           comment.unlikes.remove(request.user)
           comment.likes.add(request.user)
-        return HttpResponseRedirect(reverse('watch', args=[str(movie_id)]))
+        return redirect(url)
       elif 'unlike' in request.POST:
         value = request.POST.get('unlike')
         comment = Comment.objects.get(pk=value)
