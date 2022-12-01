@@ -22,7 +22,7 @@
     border-top-right-radius: 20px;
     border-bottom-right-radius: 20px;
     height:100%;
-    width:220px;
+    width:17.5%;
     float:left;
 }
 
@@ -176,7 +176,7 @@
     cursor: pointer;
 }
 #input-cmt{
-    width:590px;
+    width:570px;
     height:40px;
     border-top-left-radius: 20px;
     border-bottom-right-radius: 20px;
@@ -199,7 +199,7 @@
     padding-left: 15px;
     position:absolute;
     background:none;
-    margin-left:555px;
+    margin-left:540px;
 }
 .cmtbt-img{
     background:none;
@@ -218,14 +218,16 @@
 }
 
 .comment-box{
-    width:660px;
-    height:400px;
+    width:640px;
     background:rgba(62, 75, 80, 0.381);
     border-top-left-radius: 35px;
     border-bottom-left-radius: 8px;
+    border-top-right-radius: 8px;
+    border-bottom-right-radius: 35px;
     margin-top:10px;
     margin-bottom:20px;
-    overflow-y:scroll;
+    padding-top:10px;
+    padding-bottom:10px;
 }
 #comment{
     background:none;
