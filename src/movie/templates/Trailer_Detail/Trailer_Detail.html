@@ -214,9 +214,12 @@
                                     </button>
                                     </li>
                                     <li>
-                                        <button class="favbt" type="button" onclick="share()">
-                                            <img class="share" src="{% static 'css/Trailer_Detail/image/icon/icons8-share-24.png'%}">
-                                        </button>
+                                        <a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u={{request.build_absolute_uri}}">
+                                            <button class="favbt" type="button" onclick="share()">
+                                                <img class="share" src="{% static 'css/Trailer_Detail/image/icon/icons8-share-24.png'%}">
+                                            </button>
+                                        </a>
+                                        
                                     </li>
                                     <li>
                                         <button class="favbt" type="submit" name="mark" onclick="bookmark()">

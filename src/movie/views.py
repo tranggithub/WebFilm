@@ -24,6 +24,7 @@ from django.core.mail import send_mail, BadHeaderError
 from .models import *
 from django.urls import reverse_lazy, reverse
 from django.http import JsonResponse
+from django.core.paginator import Paginator
 class MovieList (ListView):
     model = Movie
     
@@ -181,8 +182,34 @@ def Library(request):
   love = Movie.objects.filter(loves__id=request.user.id)
   mark = Movie.objects.filter(marks__id=request.user.id)
   history = Movie.objects.filter(history__id=request.user.id)
-  ps = Movie.objects.filter(format='PS')[:4]
-  return render(request,".\Trailer_Detail\Library.html",{'avatar':ava, 'movies': movies,'history': history, 'love':love, 'mark':mark, 'ps':ps})
+
+  #Số movie mỗi trang
+  movies_per_page = 4
+
+  #Số lượng movie xuất hiện là 4
+  love_paginator = Paginator(love,movies_per_page)
+  #Lấy số trang từ request
+  l_num = request.GET.get('l_num')
+  #Chỉ định list trang muốn lấy ở trang nào
+  love_page = love_paginator.get_page(l_num)
+
+
+  mark_paginator = Paginator(mark,movies_per_page)
+  m_num = request.GET.get('m_num')
+  mark_page = mark_paginator.get_page(m_num)
+
+  history_paginator = Paginator(history,movies_per_page)
+  h_num = request.GET.get('h_num')
+  history_page = history_paginator.get_page(h_num)
+  context = {
+    'avatar':ava, 
+    'movies': movies,
+
+    'love_page': love_page,
+    'mark_page': mark_page,
+    'history_page': history_page
+  }
+  return render(request,".\Trailer_Detail\Library.html",context)
 
 def WatchFilm(request, movie_id, number_ep):
   # try: 
