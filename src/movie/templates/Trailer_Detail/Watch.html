@@ -11,7 +11,6 @@
         <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css"/>
         <!-- Default theme -->
         <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/default.min.css"/>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     </head>
     <body>
         {% comment %} alertifyjs - Thông báo  {% endcomment %}
@@ -70,7 +69,7 @@
                     </div>
                 </div>
                 <div class="vid">
-                    <iframe width="945" height="400" src="{{ep.episode}}" frameborder="0" allowfullscreen style="margin-bottom:20px; margin-left:10px;"></iframe>
+                    <iframe width="945px;" height="400px;" src="{{ep.episode}}" frameborder="0" allowfullscreen style="margin-bottom:20px; margin-left:10px;"></iframe>
                 </div>   
                 <div class="body_center">
                     <div class="body_bottom">
@@ -522,33 +521,13 @@
         <div class="loader-wrapper">
             <div class="loader"></div>
         </div>
-        
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <script>
             $(window).on("load", function(){
                 $(".loader-wrapper").fadeOut(1000);
             });
         </script>
         {% endfor %}
-
-        <!-- <script type="text/javascript">
-            $(document).on('submit','#post-form',function(e){
-                e.preventDefault();
-                $.ajax({
-                    type:'POST',
-                    url:'',
-                    data:{
-                        name:$('#name').val(),
-                        name:$('#name').val(),
-                        name:$('#name').val(),
-                        csrfmiddlewaretoken:$('input[name=csrfmiddlewaretoken]').val(),
-                    },
-                    success:function(){
-
-                    }
-                });
-            }); -->
-
-        </script>
     </body>
 </html>
 

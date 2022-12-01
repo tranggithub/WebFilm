@@ -106,7 +106,7 @@ class Movie(models.Model):
     description = models.TextField(max_length=1000)
     image = models.ImageField(upload_to='movies')
     trailer_video = models.URLField(max_length=1000, null=True)
-    trailer_image = models.ImageField(upload_to='trailer_image', null=True)
+    # trailer_image = models.ImageField(upload_to='trailer_image', null=True)
     national = models.CharField(choices=NATIONAL_CHOICES,max_length=10)
     status = models.ManyToManyField(Statuses, verbose_name='status')
     categories = models.ManyToManyField(Category, verbose_name='category')
