@@ -65,6 +65,17 @@ NATIONAL_CHOICES = (
     ('Vietnamese', 'VIETNAMESE')
 )
 
+SORT_CHOISE=(
+    ('Newest','NEWEST'),
+    ('Most view','MOST VIEW'),
+    ('New update','NEW UPDATE')
+)
+
+CONDITION_CHOISE=(
+    ('Trailer','TRAILER'),
+    ('Now showing','NOW SHOWING'),
+    ('Finish','FINISH')
+)
 # class CAST_CREW (models.Model):
 #     name = models.CharField(max_length=255)
 #     movie = models.ManyToManyField('Movie', related_name='movie_cast')
@@ -119,7 +130,9 @@ class Movie(models.Model):
     loves = models.ManyToManyField(User,related_name="movie_love", verbose_name="loves", null=True, blank=True)
     marks = models.ManyToManyField(User,related_name="movie_mark", null=True, blank=True)
     history = models.ManyToManyField(User,related_name="movie_history", null=True, blank=True)
-
+    #add for filter movie
+    sort = models.CharField(choices=SORT_CHOISE, max_length=20, default='Newest')
+    condition = models.CharField(choices=CONDITION_CHOISE, max_length=20, null=True)
     #Hỗ trợ chức năng đổi icon 
     who_has_it_open = models.IntegerField(null=True,blank=True,default=0)
 

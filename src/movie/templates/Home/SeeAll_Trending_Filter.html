@@ -1,0 +1,63 @@
+{% extends '.\Home\SeeAll_Trending_English.html' %}
+
+{% block seeall_filer %}
+    <div style="width: 100%; margin-left: 2%;">
+        {% if movie_national %}
+            <h3 style ="margin-top=0px ; color: white;">{{movie_national|title}} Movies</h3>
+        {% endif %}
+
+        {% if movie_category %}
+            <h3 style ="margin-top=0px ; color: white;">{{movie_category|title}} Movies</h3>
+        {% endif %}
+
+        {% if movie_format %}
+             <h3 style ="margin-top=0% ; color: white;">{{movie_format|title}} Movies</h3>
+        {% endif %}
+
+        {% if movie_sort %}
+             <h3 style ="margin-top=0% ; color: white;">{{movie_sort|title}} Movies</h3>
+        {% endif %}
+        {% if movie_condition %}
+             <h3 style ="margin-top=0% ; color: white;">{{movie_condition|title}} Movies</h3>
+        {% endif %}   
+
+        {% if movie_year %}
+            <h3 style ="margin-top=0% ; color: white;"> Movies produced in {{movie_year|title}} </h3>
+        {% endif %}   
+
+        
+        <div style ="display: flex;"> 
+            {%for movie in object_list %}
+            <div class="mov">
+                <button class="column__movie">
+                    <a href="{% url 'detail' movie.id %}">
+                        <img class="img-movie" src="{{movie.image.url}}" alt="" style="width:160px; height:252px; border-radius: 10px;" />
+                    </a>
+                </button>
+            </div>
+            {%empty%}
+                <h3 style="color:#FEFEFE; margin-top=50%">There are no movies in this Category </h3>
+            {%endfor%}
+    
+        </div>
+        
+
+    </div>
+    <div class="pagination">
+        <span class="step-links">
+            {% if page_obj.has_previous %}
+                <a href="?page=1">&laquo; first</a>
+                <a href="?page={{ page_obj.previous_page_number }}">previous</a>
+            {% endif %}
+    
+            <span class="current">
+                Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+            </span>
+    
+            {% if page_obj.has_next %}
+                <a href="?page={{ page_obj.next_page_number }}">next</a>
+                <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
+            {% endif %}
+        </span>
+    </div>
+{% endblock  %}

@@ -290,3 +290,103 @@ animation: spin 2s linear infinite;
 
   
 
+
+/*| Navigation |*/
+
+.navigation{
+ 
+    /* box-shadow: 0 3px 10px -2px rgba(0,0,0,.1);
+    border: 1px solid rgba(0,0,0,.1); */
+    cursor: pointer;
+    /* margin-bottom: 15px;
+   
+    margin-top: 1%; */
+   
+    width: 95%;
+    background: rgb(41, 41, 41);
+    color: white;
+    font-size: 14px;
+  }
+  .navigation ul{
+      list-style: none;
+      position: relative;
+      z-index: 1;
+  
+      margin-right: 100px;
+      display: flex;
+      padding-left: 1%;
+     
+  }
+  
+  
+  
+  .navigation ul li:hover{background: rgba(0,0,0,.15);}
+  .navigation ul li:hover > ul{display: block;}
+  .navigation ul li{
+        float: left;
+      
+        border: 1.4px solid;
+  }
+  .navigation ul li a{
+          display: block; 
+          width: 100%;
+          /* width: 150px; */
+          padding-left: 10px;
+          color:white; 
+          font-size: .9em;
+          letter-spacing: 1px;
+          text-decoration: none;
+          padding: 7%;
+  }
+  
+  .navigation ul ul{
+          display: none;
+          background:rgb(41, 41, 41);
+          position: absolute; 
+          top: 100%;
+          /* box-shadow: -3px 3px 10px -2px black;
+          border: 1px solid black; */
+          
+          padding-left: 0;
+  }
+  
+  
+  .navigation_ul3{
+      width: 305%;
+  }
+  .navigation_ul3 li {
+      width: 32.6%;
+  }
+  .navigation_1{
+      position: relative;
+      width: 18%;
+  }
+  .navigation_ul1
+  {
+      width: 100%;
+  }
+  .navigation_ul1 li
+  {
+      width: 100%;
+  }
+  .navigation_ul2{
+      /* max-width: 50% */
+      width: 203%;
+  }
+  .navigation_ul2 li{
+      /* max-width: 50% */
+      width: 49%;
+  }
+  .navigation_li1{
+      width: 100%;
+  }
+  
+  .navigation_ul{
+      display: flex;
+  }
+
+
+
+  
+
+

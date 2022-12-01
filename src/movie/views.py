@@ -25,6 +25,9 @@ from .models import *
 from django.urls import reverse_lazy, reverse
 from django.http import JsonResponse
 from django.core.paginator import Paginator
+#####################################
+from django.views.generic.dates import YearArchiveView
+
 class MovieList (ListView):
     model = Movie
     
@@ -474,3 +477,87 @@ def searchBar(request):
 #   return HttpResponse(template.render())
 def handler404(request, exception):
     return render(request,'Not_found_404.html')
+
+
+
+
+
+class SeeAll_Trending_Filer(ListView):
+  model = Movie
+  template_name = '.\Home\SeeAll_Trending_Filter.html'
+
+class MovieNational(ListView):
+  model=Movie
+  paginate_by = 10
+  template_name = '.\Home\SeeAll_Trending_Filter.html'
+  def get_queryset(self):
+    self.national=self.kwargs['Nation']
+    return Movie.objects.filter(national=self.national)
+  def get_context_data(self, **kwargs):
+    context=super(MovieNational , self).get_context_data(**kwargs)
+    context['movie_national']=self.national
+    return context
+
+class MovieFormat(ListView):
+  model=Movie
+  paginate_by = 10
+  template_name = '.\Home\SeeAll_Trending_Filter.html'
+  def get_queryset(self):
+    self.format=self.kwargs['for']
+    return Movie.objects.filter(format=self.format)
+  def get_context_data(self, **kwargs):
+    context=super(MovieFormat , self).get_context_data(**kwargs)
+    context['movie_format']=self.format
+    return context
+
+class MovieSort(ListView):
+  model=Movie
+  paginate_by = 10
+  template_name = '.\Home\SeeAll_Trending_Filter.html'
+  def get_queryset(self):
+    self.sort=self.kwargs['so']
+    return Movie.objects.filter(sort=self.sort)
+  def get_context_data(self, **kwargs):
+    context=super(MovieSort , self).get_context_data(**kwargs)
+    context['movie_sort']=self.sort
+    return context
+
+
+class MovieCondition(ListView):
+  model=Movie
+  paginate_by = 10
+  template_name = '.\Home\SeeAll_Trending_Filter.html'
+  def get_queryset(self):
+    self.condition =self.kwargs['condi']
+    return Movie.objects.filter(condition =self.condition)
+  def get_context_data(self, **kwargs):
+    context=super(MovieCondition , self).get_context_data(**kwargs)
+    context['movie_condition']=self.condition
+    return context
+
+
+class MovieYear(ListView):
+  model=Movie
+  paginate_by = 10
+  template_name = '.\Home\SeeAll_Trending_Filter.html'
+  def get_queryset(self):
+    self.year=self.kwargs['year']
+    return Movie.objects.filter(year_of_production__contains=self.year)
+  def get_context_data(self, **kwargs):
+    context=super(MovieYear , self).get_context_data(**kwargs)
+    context['movie_year']=self.year
+    return context
+
+
+
+class MovieCategory(ListView):
+  model=Movie
+  paginate_by = 10
+  template_name = '.\Home\SeeAll_Trending_Filter.html'
+  def get_queryset(self):
+    self.category=self.kwargs['cate']
+    return Movie.objects.filter(categories__category=self.category)
+  def get_context_data(self, **kwargs):
+    context=super(MovieCategory , self).get_context_data(**kwargs)
+    context['movie_category']=self.category
+    return context
