@@ -471,3 +471,5 @@ def searchBar(request):
 # def ChangePassword(request):
 #   template = loader.get_template('.\Info\change_password.html')
 #   return HttpResponse(template.render())
+def handler404(request, exception):
+    return render(request,'Not_found_404.html')
