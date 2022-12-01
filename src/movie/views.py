@@ -77,7 +77,17 @@ def LogIn(request):
         return redirect('/movies/log_in')
     
     movie = Movie.objects.all()
-    return render(request,".\SignUp_LogIn\LogInFilm.html",{'movie':movie})
+
+    #Số movie mỗi trang
+    movies_per_page = 1
+
+    #Số lượng movie xuất hiện là 4
+    movie_paginator = Paginator(movie,movies_per_page)
+    #Lấy số trang từ request
+    m_num = request.GET.get('m_num')
+    #Chỉ định list trang muốn lấy ở trang nào
+    movie_page = movie_paginator.get_page(m_num)
+    return render(request,".\SignUp_LogIn\LogInFilm.html",{'movie_page':movie_page})
 
 def password_reset_request(request):
   if request.method == "POST":

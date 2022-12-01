@@ -156,6 +156,13 @@ class Movie(models.Model):
     def total_views(self):
         return self.history.count()
     
+    #Query gernes
+    def query_gernes(self):
+        gernes = ""
+        for i in self.categories.all():
+            gernes = gernes + '|' + i.category
+        return gernes
+    
 class Episode(models.Model):
     title = models.ForeignKey(Movie,related_name="movie_episode", on_delete=models.CASCADE)
     number_episode = models.IntegerField(default=1)

@@ -498,6 +498,7 @@ input
 
     background: url(TopGun.jpg);
     background-size: cover;
+    
 }
 
 .Login .Login_Right .Title
@@ -525,7 +526,7 @@ input
 .Login .Login_Right .Subtitle
 {
     position: absolute;
-    width: 300px;
+    width: 80%;
     height: 36px;
     left: 1%;
     top: 85%;

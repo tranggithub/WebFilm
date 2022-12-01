@@ -79,23 +79,29 @@
                 </div>
             </div>
 
-            <div class="Login_Right">
+            <div class="Login_Right" style="background:url('{{movie_page.object_list.0.trivia_image.url}}');"  >
                 <div class="Title">
-                    <p>{{movie.0.title}}</p>
+                    <p>{{movie_page.object_list.0.title}}</p>
                 </div>
                 <div class="Subtitle">
-                    <p>2022 | PG-13 | 2h 10m</p>
-                    <p style="margin-top: 1cm;">Genres : Action , Drama</p>
+                    <p>{{movie_page.object_list.0.year_of_production.year}} | {{movie_page.object_list.0.time}}</p>
+                    <p style="margin-top: 1cm;">Genres : {{movie_page.object_list.0.query_gernes}}</p>
                 </div>
                 <div  class="star"><img src="{% static 'css/SignUp_LogIn/Star.png' %}"> </div>
                 <div class="Rating">
-                    <p>{{movie.0.average_of_star}} / 5</p>
+                    <p>{{movie_page.object_list.0.average_of_star}} / 5</p>
                 </div>
                 <div class="Navigation">
-                    <form method="get">
-                        <button name='left' type="submit" class="Navigation_Left"><a href=""></a></button>
-                        <button name ='right' type="submit" class="Navigation_Right"><a href=""></a></button>
-                    </form>
+                    {% if movie_page.has_previous %}
+                        <a class="page-link" href="{% url 'log_in' %}?m_num={{movie_page.previous_page_number}}">
+                            <button name='left' type="submit" class="Navigation_Left"></button>
+                        </a>
+                    {% endif %}
+                    {% if movie_page.has_next %}
+                        <a class="page-link" href="{% url 'log_in' %}?m_num={{movie_page.next_page_number}}">
+                            <button name ='right' type="submit" class="Navigation_Right"></button>
+                        </a>
+                    {% endif %}
                 </div>
             </div>
         </div>
