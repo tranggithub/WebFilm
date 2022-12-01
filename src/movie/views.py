@@ -219,8 +219,12 @@ def WatchFilm(request, movie_id, number_ep):
   #   messages.success(request,"Succeed in mailing")
   # except:
   #   messages.error(request,"Fail to mail")
+  
   if request.user.is_authenticated:
     movie = Movie.objects.get(pk=movie_id)
+    for comment in movie.comments.all():
+      comment.who_has_it_open = request.user.id
+      comment.save()
     ep = get_object_or_404(Episode,title__id=movie_id,number_episode=number_ep)
     if movie.history.filter(id=request.user.id).exists():
       pass
@@ -345,9 +349,6 @@ def WatchFilm(request, movie_id, number_ep):
     episode = movies.get().movie_episode.all()
     # get_ep = episode.filter(number_episode=number_ep)
     ep = get_object_or_404(Episode, title__id=movie_id, number_episode=number_ep)
-    for comment in movie.comments.all():
-      comment.who_has_it_open = request.user.id
-      comment.save()
     # value = request.GET.get('like')
     # try:
     #   comment = Comment.objects.get(pk=value)
@@ -376,6 +377,8 @@ def WatchFilm(request, movie_id, number_ep):
 def Detail(request, movie_id):
   #movie = get_object_or_404(Movie,id=movie_id)
   movie = Movie.objects.get(pk=movie_id)
+  movie.who_has_it_open = request.user.id
+  movie.save()
   if request.method == "POST":
       if 'love' in request.POST:
         #comment = get_object_or_404(Comment, id=request.POST.get('like'))
@@ -392,8 +395,6 @@ def Detail(request, movie_id):
           movie.marks.add(request.user)
         url = '/movies/detail/'+ movie_id
         return redirect(url)
-  movie.who_has_it_open = request.user.id
-  movie.save()
   ava = request.user.profile.avatar.url
   another = Movie.objects.all().exclude(id=movie_id)[:4]
   movies = Movie.objects.filter(id=movie_id)
