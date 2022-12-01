@@ -169,6 +169,13 @@ class Movie(models.Model):
     def total_views(self):
         return self.history.count()
     
+    #Query gernes
+    def query_gernes(self):
+        gernes = ""
+        for i in self.categories.all():
+            gernes = gernes + '|' + i.category
+        return gernes
+    
 class Episode(models.Model):
     title = models.ForeignKey(Movie,related_name="movie_episode", on_delete=models.CASCADE)
     number_episode = models.IntegerField(default=1)
@@ -222,6 +229,7 @@ class Comment(models.Model):
     likes = models.ManyToManyField(User,related_name="comnent_like")
     unlikes = models.ManyToManyField(User,related_name="comnent_unlike")
     marks = models.ManyToManyField(User,related_name="comnent_mark")
+    reply = models.ManyToManyField(User,related_name="comnent_reply")
     who_has_it_open = models.IntegerField(null=True,blank=True,default=0)
 
     
@@ -245,6 +253,8 @@ class Comment(models.Model):
         return self.unlikes.filter(id=self.who_has_it_open).exists()
     def is_mark(self):
         return self.marks.filter(id=self.who_has_it_open).exists()
+    def is_reply(self):
+        return self.reply.filter(id=self.who_has_it_open).exists()
 
     #subcomment
     def children(self):

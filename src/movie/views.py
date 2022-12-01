@@ -80,7 +80,17 @@ def LogIn(request):
         return redirect('/movies/log_in')
     
     movie = Movie.objects.all()
-    return render(request,".\SignUp_LogIn\LogInFilm.html",{'movie':movie})
+
+    #Số movie mỗi trang
+    movies_per_page = 1
+
+    #Số lượng movie xuất hiện là 4
+    movie_paginator = Paginator(movie,movies_per_page)
+    #Lấy số trang từ request
+    m_num = request.GET.get('m_num')
+    #Chỉ định list trang muốn lấy ở trang nào
+    movie_page = movie_paginator.get_page(m_num)
+    return render(request,".\SignUp_LogIn\LogInFilm.html",{'movie_page':movie_page})
 
 def password_reset_request(request):
   if request.method == "POST":
@@ -215,14 +225,6 @@ def Library(request):
   return render(request,".\Trailer_Detail\Library.html",context)
 
 def WatchFilm(request, movie_id, number_ep):
-  # try: 
-  #   tests = Profile.objects.filter(is_need_to_notify=True)
-  #   for test in tests:
-  #     test.send_notification(movie_id)
-  #   messages.success(request,"Succeed in mailing")
-  # except:
-  #   messages.error(request,"Fail to mail")
-  
   if request.user.is_authenticated:
     movie = Movie.objects.get(pk=movie_id)
     for comment in movie.comments.all():
@@ -272,6 +274,14 @@ def WatchFilm(request, movie_id, number_ep):
           comment.marks.remove(request.user)
         else:
           comment.marks.add(request.user)
+        return redirect(url)
+      elif 'subcomment_icon' in request.POST:
+        value = request.POST.get('subcomment_icon')
+        comment = Comment.objects.get(pk=value)
+        if comment.reply.filter(id=request.user.id).exists():
+          comment.reply.remove(request.user)
+        else:
+          comment.reply.add(request.user)
         return redirect(url)
       elif 'star1' in request.POST:
         if RatingStar.objects.filter(movie__id=movie_id, user__id=request.user.id).exists():
