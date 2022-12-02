@@ -8,7 +8,7 @@
  <link rel="stylesheet" href="{% static 'css/Home/SeeAll_Trending_English.css' %}" />
  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700&display=swap" rel="stylesheet">
- <title>Trending_English | LTWFlix</title>
+ <title>{{title}}_English | LTWFlix</title>
  </head>
  <body>
 
@@ -166,7 +166,7 @@
                 </div>
 
                 <div class="grid__row-4-Body">
-                    <div class="Head__Up">Trending</div>  
+                    <div class="Head__Up">{{title}}</div>  
                 </div> 
                 <div class="grid__row-4">
                     {%block seeall_filer %}

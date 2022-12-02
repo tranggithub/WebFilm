@@ -34,7 +34,7 @@ urlpatterns = [
     path('watch/<movie_id>/<number_ep>',views.WatchFilm, name='watch'),
     path('detail/<movie_id>',views.Detail, name='detail'),
     path('userpacket/',views.UserPacket, name='userpacket'),
-    path('seeall_trending_english/', views.SeeAll_Trending, name='seeall_trending_english'),
+    path('seeall_trending_english/<status_short>', views.SeeAll_Trending, name='seeall_trending_english'),
     path('info/',views.Info,name='info'),
     path('change_info/',views.ChangeInfo,name='change_info'),
     path('change_password/',auth_views.PasswordChangeView.as_view(
