@@ -64,6 +64,14 @@ NATIONAL_CHOICES = (
     ('USA', 'USA'),
     ('Vietnamese', 'VIETNAMESE')
 )
+CHILD_CHOICES = (
+    ('Yes','YES'),
+    ('No','NO')
+   
+)
+
+
+
 
 # class CAST_CREW (models.Model):
 #     name = models.CharField(max_length=255)
@@ -115,6 +123,7 @@ class Movie(models.Model):
     views_count = models.IntegerField(default=0)
     time = models.CharField(default='2h10m', max_length=6)
     
+    
     #Love and mark video
     loves = models.ManyToManyField(User,related_name="movie_love", verbose_name="loves", null=True, blank=True)
     marks = models.ManyToManyField(User,related_name="movie_mark", null=True, blank=True)
@@ -130,6 +139,10 @@ class Movie(models.Model):
     trivia_summary = models.CharField(max_length=500)
     trivia_image = models.ImageField(upload_to='trivia', null=True)
     trivia_url = models.URLField(max_length=500, null=True)
+    #Chức năng gói người dùng child
+    child = models.CharField(choices=CHILD_CHOICES,max_length=10,null=True)
+
+
 
     def __str__(self):
         return str(self.title) 

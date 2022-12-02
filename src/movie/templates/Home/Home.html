@@ -174,7 +174,7 @@
                         {% csrf_token %}
                         <button name="notify" class="button__Notifi"type="submit" onclick="notify()"><i class="far fa-bell"></i></button>
                     </form>
-                    <button class="button__User" type="button" onclick="user()">
+                    <button class="button__User" type="button" onclick="user()" style="background-color:#292929">
                         <a href="{% url 'info'%}">
                             <img src="{{avatar}}">
                         </a>
