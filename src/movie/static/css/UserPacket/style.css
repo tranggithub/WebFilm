@@ -2,6 +2,7 @@
 *{
     font-family:'Poppins', sans-serif;
     margin:0;
+    background: #191919;
 }
 
 .grid{ 
@@ -43,7 +44,7 @@
 .content{
   color:white;
   text-align:  center;
-  font-size: 25px;
+  font-size: 190%;
   font-family: 'Poppins';
 }
 
@@ -88,7 +89,7 @@
 .center{
     height: 100%;
     width: 100%;
-    background-color: #212121;
+    background-color: #191919;
     position: relative;
     margin-bottom: 3%;
 
@@ -122,11 +123,11 @@
 } 
 .Adult{
     text-align: right;
-    margin-right:15%;
+    margin-right:14%;
 }
 .Children{
     text-align: left;
-    margin-left: 11.8%;
+    margin-left: 9.5%;
 }
 .loader {
     border: 5px solid #f3f3f3;
