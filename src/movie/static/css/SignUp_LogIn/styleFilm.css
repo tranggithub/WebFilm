@@ -395,7 +395,7 @@ input
     width: 14px;
     height: 16px;
     left: 25%;
-    top: 65%;
+    top: 54.5%;
     
     border-radius: 4px;
 }
@@ -425,7 +425,7 @@ input
     width: 118px;
     height: 21px;
     left: 60%;
-    top: 70%;
+    top: 60%;
     font-family: Montserrat;
     font-style: normal;
     font-weight: 400;
@@ -442,7 +442,7 @@ input
     width: 40%;
     height: 8%;
     left: 30%;
-    top: 77%;
+    top: 66%;
 
     background: rgba(254, 254, 254, 0.96);
     border-radius: 15px;
@@ -467,7 +467,7 @@ input
     width: 40%;
     height: 21px;
     left: 33%;
-    top: 87%;
+    top: 75%;
 
     font-family: 'Poppins';
     font-style: normal;
