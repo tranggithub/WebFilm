@@ -73,6 +73,17 @@ CHILD_CHOICES = (
 
 
 
+SORT_CHOISE=(
+    ('Newest','NEWEST'),
+    ('Most view','MOST VIEW'),
+    ('New update','NEW UPDATE')
+)
+
+CONDITION_CHOISE=(
+    ('Trailer','TRAILER'),
+    ('Now showing','NOW SHOWING'),
+    ('Finish','FINISH')
+)
 # class CAST_CREW (models.Model):
 #     name = models.CharField(max_length=255)
 #     movie = models.ManyToManyField('Movie', related_name='movie_cast')
@@ -128,7 +139,9 @@ class Movie(models.Model):
     loves = models.ManyToManyField(User,related_name="movie_love", verbose_name="loves", null=True, blank=True)
     marks = models.ManyToManyField(User,related_name="movie_mark", null=True, blank=True)
     history = models.ManyToManyField(User,related_name="movie_history", null=True, blank=True)
-
+    #add for filter movie
+    sort = models.CharField(choices=SORT_CHOISE, max_length=20, default='Newest')
+    condition = models.CharField(choices=CONDITION_CHOISE, max_length=20, null=True)
     #Hỗ trợ chức năng đổi icon 
     who_has_it_open = models.IntegerField(null=True,blank=True,default=0)
 
@@ -168,6 +181,13 @@ class Movie(models.Model):
     
     def total_views(self):
         return self.history.count()
+    
+    #Query gernes
+    def query_gernes(self):
+        gernes = ""
+        for i in self.categories.all():
+            gernes = gernes + '|' + i.category
+        return gernes
     
 class Episode(models.Model):
     title = models.ForeignKey(Movie,related_name="movie_episode", on_delete=models.CASCADE)
@@ -222,6 +242,7 @@ class Comment(models.Model):
     likes = models.ManyToManyField(User,related_name="comnent_like")
     unlikes = models.ManyToManyField(User,related_name="comnent_unlike")
     marks = models.ManyToManyField(User,related_name="comnent_mark")
+    reply = models.ManyToManyField(User,related_name="comnent_reply")
     who_has_it_open = models.IntegerField(null=True,blank=True,default=0)
 
     
@@ -245,6 +266,8 @@ class Comment(models.Model):
         return self.unlikes.filter(id=self.who_has_it_open).exists()
     def is_mark(self):
         return self.marks.filter(id=self.who_has_it_open).exists()
+    def is_reply(self):
+        return self.reply.filter(id=self.who_has_it_open).exists()
 
     #subcomment
     def children(self):

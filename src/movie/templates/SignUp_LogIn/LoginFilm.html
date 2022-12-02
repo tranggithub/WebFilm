@@ -6,7 +6,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>LogIn | LTWFlix</title>
         <link rel="stylesheet" href="{% static 'css/SignUp_LogIn/styleFilm.css' %}">\
-
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous"/>
         {% comment %} Alert JS {% endcomment%}
         <!-- CSS -->
         <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css"/>
@@ -14,90 +14,99 @@
         <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/default.min.css"/>
     </head>
     <body>
-        <div class="Login">
-            <div class="Login_Left">
-                <div class="Logo_Login">
-                    <img  style="width: 39px;" src="{% static 'css/SignUp_LogIn/LogoLogIn.png' %}">
-                </div>
-                <div class="BrandName_Login">
-                    <img style="width: 75px;" src="{% static 'css/SignUp_LogIn/BrandNameLogin.png' %}">
-                </div>
-                
-                {% comment %} alertifyjs - Thông báo  {% endcomment %}
-                <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
-                <script>
-                    alertify.set('notifier','position', 'top-right');
-                </script>
-                {% for msg in messages %}
-                    {% if msg.tags == "error" %}
-                        <script>
-                            alertify.error('{{msg}}'); 
-                        </script>
-                    {% else %}
-                        <script>
-                            alertify.success('{{msg}}');
-                        </script>
-                    {% endif %}
-                {% endfor %}
-                
-
-                <div class="Title">
-                    <p>Welcome back</p>
-                </div>
-                <div class="Subtitle">
-                    <p>Welcome back! Please enter your details.</p>
-                </div>
-                <button class="LoginWithGoogle">Login with Google</button>
-                <div class="line-1" style="left: 29%;"></div>
-                <div class="line-1" style="left: 57%;"></div>
-                <div class="or">or</div>
-                <form method="POST">
-                    {% csrf_token %}
-                    <div class="Input">
-                        <p>
-                            <Label class="bold" style="margin-right: 1.06cm;">Username:</Label>
-                            <input class="Input_box" type="text" name="username" id="id_username" placeholder="Your Username">
-                        </p>
-                        <p>
-                            <Label class="bold" style="margin-right: 1.19cm;">Password:</Label>
-                            <input class="Input_box" type="password" name="password" id="id_password1" placeholder="Password"></li>
-                        </p>
+        <div class="Login container-fluid">
+            <div class="row">
+                <div class="col-md-6 mx-auto Login_Left">
+                    <div class="Logo_Login">
+                        <img  style="width: 39px;" src="{% static 'css/SignUp_LogIn/LogoLogIn.png' %}">
                     </div>
-                    <div class="Checkbox_content">
-                        <input type="checkbox" class="Checkbox" name="remember_me">
-                        <p class="content">Remember me for 30 days</p>
+                    <div class="BrandName_Login">
+                        <img style="width: 75px;" src="{% static 'css/SignUp_LogIn/BrandNameLogin.png' %}">
                     </div>
-                    <button type="submit" class="LoginButton">Log in</button>
-                </form>
-                
-                <div class="Forgot_password">
-                    <a href="{% url 'reset_password' %}">Forgot password</a>
-                </div>
-
-                <div class="NoAccount">
-                    <p>Don’t have an account ? <a href="{% url 'sign_up' %}" class="hyperlink">Sign up for free</a></p>
-                </div>
-            </div>
-
-            <div class="Login_Right">
-                <div class="Title">
-                    <p>{{movie.0.title}}</p>
-                </div>
-                <div class="Subtitle">
-                    <p>2022 | PG-13 | 2h 10m</p>
-                    <p style="margin-top: 1cm;">Genres : Action , Drama</p>
-                </div>
-                <div  class="star"><img src="{% static 'css/SignUp_LogIn/Star.png' %}"> </div>
-                <div class="Rating">
-                    <p>{{movie.0.average_of_star}} / 5</p>
-                </div>
-                <div class="Navigation">
-                    <form method="get">
-                        <button name='left' type="submit" class="Navigation_Left"><a href=""></a></button>
-                        <button name ='right' type="submit" class="Navigation_Right"><a href=""></a></button>
+                    
+                    {% comment %} alertifyjs - Thông báo  {% endcomment %}
+                    <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
+                    <script>
+                        alertify.set('notifier','position', 'top-right');
+                    </script>
+                    {% for msg in messages %}
+                        {% if msg.tags == "error" %}
+                            <script>
+                                alertify.error('{{msg}}'); 
+                            </script>
+                        {% else %}
+                            <script>
+                                alertify.success('{{msg}}');
+                            </script>
+                        {% endif %}
+                    {% endfor %}
+                    
+    
+                    <div class="Title">
+                        <p>Welcome back</p>
+                    </div>
+                    <div class="Subtitle">
+                        <p>Welcome back! Please enter your details.</p>
+                    </div>
+            
+                    <form method="POST">
+                        {% csrf_token %}
+                        <div class="Input">
+                            <p>
+                                <Label class="bold" style="margin-right: 1.06cm;">Username:</Label>
+                                <input class="Input_box" type="text" name="username" id="id_username" placeholder="Your Username">
+                            </p>
+                            <p>
+                                <Label class="bold" style="margin-right: 1.19cm;">Password:</Label>
+                                <input class="Input_box" type="password" name="password" id="id_password1" placeholder="Password"></li>
+                            </p>
+                        </div>
+                        <div class="Checkbox_content">
+                            <input type="checkbox" class="Checkbox" name="remember_me">
+                            <p class="content">Remember me for 30 days</p>
+                            
+                        </div>
+                        <div class="Forgot_password">
+                            <a  href="{% url 'reset_password' %}">Forgot password</a>
+                        </div>
+                        
+                        
+                        <button type="submit" class="LoginButton">Log in</button>
+                        
                     </form>
+    
+                    <div class="NoAccount">
+                        <p>Don’t have an account ? <a href="{% url 'sign_up' %}" class="hyperlink">Sign up for free</a></p>
+                    </div>
+                </div>
+    
+                <div class="col-md-6 d-sm-none d-md-block d-none d-block Login_Right" style="background:url('{{movie_page.object_list.0.trivia_image.url}}');"  >
+                    <div class="Title">
+                        <p>{{movie_page.object_list.0.title}}</p>
+                    </div>
+                    <div class="Subtitle">
+                        <p>{{movie_page.object_list.0.year_of_production.year}} | {{movie_page.object_list.0.time}}</p>
+                        <p style="margin-top: 1cm;">Genres : {{movie_page.object_list.0.query_gernes}}</p>
+                    </div>
+                    <div  class="star"><img src="{% static 'css/SignUp_LogIn/Star.png' %}"> </div>
+                    <div class="Rating">
+                        <p>{{movie_page.object_list.0.average_of_star}} / 5</p>
+                    </div>
+                    <div class="Navigation d-flex ">
+                        {% if movie_page.has_previous %}
+                            <a class="page-link" href="{% url 'log_in' %}?m_num={{movie_page.previous_page_number}}">
+                                <button name='left' type="submit" class="Navigation_Left"></button>
+                            </a>
+                        {% endif %}
+                        {% if movie_page.has_next %}
+                            <a class="page-link" href="{% url 'log_in' %}?m_num={{movie_page.next_page_number}}">
+                                <button name ='right' type="submit" class="Navigation_Right"></button>
+                            </a>
+                        {% endif %}
+                    </div>
                 </div>
             </div>
+            
         </div>
         <div class="sign_up-wapper">
             <img class="sign_up" src="{% static 'css/Loading_Screen_Logo/logo.png'%}" alt="Logo">

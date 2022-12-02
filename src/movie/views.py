@@ -25,6 +25,9 @@ from .models import *
 from django.urls import reverse_lazy, reverse
 from django.http import JsonResponse
 from django.core.paginator import Paginator
+#####################################
+from django.views.generic.dates import YearArchiveView
+
 class MovieList (ListView):
     model = Movie
     
@@ -77,7 +80,17 @@ def LogIn(request):
         return redirect('/movies/log_in')
     
     movie = Movie.objects.all()
-    return render(request,".\SignUp_LogIn\LogInFilm.html",{'movie':movie})
+
+    #Số movie mỗi trang
+    movies_per_page = 1
+
+    #Số lượng movie xuất hiện là 4
+    movie_paginator = Paginator(movie,movies_per_page)
+    #Lấy số trang từ request
+    m_num = request.GET.get('m_num')
+    #Chỉ định list trang muốn lấy ở trang nào
+    movie_page = movie_paginator.get_page(m_num)
+    return render(request,".\SignUp_LogIn\LogInFilm.html",{'movie_page':movie_page})
 
 def password_reset_request(request):
   if request.method == "POST":
@@ -285,14 +298,6 @@ def Library(request):
   return render(request,".\Trailer_Detail\Library.html",context)
 
 def WatchFilm(request, movie_id, number_ep):
-  # try: 
-  #   tests = Profile.objects.filter(is_need_to_notify=True)
-  #   for test in tests:
-  #     test.send_notification(movie_id)
-  #   messages.success(request,"Succeed in mailing")
-  # except:
-  #   messages.error(request,"Fail to mail")
-  
   if request.user.is_authenticated:
     movie = Movie.objects.get(pk=movie_id)
     for comment in movie.comments.all():
@@ -325,7 +330,7 @@ def WatchFilm(request, movie_id, number_ep):
         else:
           comment.unlikes.remove(request.user)
           comment.likes.add(request.user)
-        return HttpResponseRedirect(reverse('watch', args=[str(movie_id)]))
+        return redirect(url)
       elif 'unlike' in request.POST:
         value = request.POST.get('unlike')
         comment = Comment.objects.get(pk=value)
@@ -342,6 +347,14 @@ def WatchFilm(request, movie_id, number_ep):
           comment.marks.remove(request.user)
         else:
           comment.marks.add(request.user)
+        return redirect(url)
+      elif 'subcomment_icon' in request.POST:
+        value = request.POST.get('subcomment_icon')
+        comment = Comment.objects.get(pk=value)
+        if comment.reply.filter(id=request.user.id).exists():
+          comment.reply.remove(request.user)
+        else:
+          comment.reply.add(request.user)
         return redirect(url)
       elif 'star1' in request.POST:
         if RatingStar.objects.filter(movie__id=movie_id, user__id=request.user.id).exists():
@@ -614,3 +627,83 @@ def handler404(request, exception):
  
 # def Movies_Child(request):
 #     
+
+# class SeeAll_Trending_Filer(ListView):
+#   model = Movie
+#   template_name = '.\Home\SeeAll_Trending_Filter.html'
+
+class MovieNational(ListView):
+  model=Movie
+  paginate_by = 10
+  template_name = '.\Home\SeeAll_Trending_Filter.html'
+  def get_queryset(self):
+    self.national=self.kwargs['Nation']
+    return Movie.objects.filter(national=self.national)
+  def get_context_data(self, **kwargs):
+    context=super(MovieNational , self).get_context_data(**kwargs)
+    context['movie_national']=self.national
+    return context
+
+class MovieFormat(ListView):
+  model=Movie
+  paginate_by = 10
+  template_name = '.\Home\SeeAll_Trending_Filter.html'
+  def get_queryset(self):
+    self.format=self.kwargs['for']
+    return Movie.objects.filter(format=self.format)
+  def get_context_data(self, **kwargs):
+    context=super(MovieFormat , self).get_context_data(**kwargs)
+    context['movie_format']=self.format
+    return context
+
+class MovieSort(ListView):
+  model=Movie
+  paginate_by = 10
+  template_name = '.\Home\SeeAll_Trending_Filter.html'
+  def get_queryset(self):
+    self.sort=self.kwargs['so']
+    return Movie.objects.filter(sort=self.sort)
+  def get_context_data(self, **kwargs):
+    context=super(MovieSort , self).get_context_data(**kwargs)
+    context['movie_sort']=self.sort
+    return context
+
+
+class MovieCondition(ListView):
+  model=Movie
+  paginate_by = 10
+  template_name = '.\Home\SeeAll_Trending_Filter.html'
+  def get_queryset(self):
+    self.condition =self.kwargs['condi']
+    return Movie.objects.filter(condition =self.condition)
+  def get_context_data(self, **kwargs):
+    context=super(MovieCondition , self).get_context_data(**kwargs)
+    context['movie_condition']=self.condition
+    return context
+
+
+class MovieYear(ListView):
+  model=Movie
+  paginate_by = 10
+  template_name = '.\Home\SeeAll_Trending_Filter.html'
+  def get_queryset(self):
+    self.year=self.kwargs['year']
+    return Movie.objects.filter(year_of_production__contains=self.year)
+  def get_context_data(self, **kwargs):
+    context=super(MovieYear , self).get_context_data(**kwargs)
+    context['movie_year']=self.year
+    return context
+
+
+
+class MovieCategory(ListView):
+  model=Movie
+  paginate_by = 10
+  template_name = '.\Home\SeeAll_Trending_Filter.html'
+  def get_queryset(self):
+    self.category=self.kwargs['cate']
+    return Movie.objects.filter(categories__category=self.category)
+  def get_context_data(self, **kwargs):
+    context=super(MovieCategory , self).get_context_data(**kwargs)
+    context['movie_category']=self.category
+    return context

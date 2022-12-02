@@ -1,6 +1,6 @@
 
 from django.urls import path, include
-from .views import MovieList, MovieDetailView
+from .views import MovieList, MovieDetailView, MovieNational, SeeAll_Trending_Filer,MovieCategory,MovieFormat,MovieSort,MovieCondition,MovieYear
 from . import views
 from django.contrib.auth import views as auth_views
 
@@ -11,6 +11,16 @@ urlpatterns = [
     path('<int:pk>', MovieDetailView.as_view(), name='movie_detail'),
     path("accounts/", include("django.contrib.auth.urls")),
 
+
+    # Add url filter in see all
+    path('national/<str:Nation>',MovieNational.as_view(),name='national'),
+    path('SeeAll_Filter/',views.SeeAll_Trending_Filer.as_view(),name='SeeAll_Filter'),
+    path('category/<str:cate>',MovieCategory.as_view(),name='category'),
+    path('format/<str:for>',MovieFormat.as_view(),name='format'),
+    path('sort/<str:so>',MovieSort.as_view(),name='sort'),
+    path('condition/<str:condi>',MovieCondition.as_view(),name='condition'),
+    path('year/<int:year>',MovieYear.as_view(),name='movie_year'),
+    
 
 
     path('home/',views.Home, name='home'),

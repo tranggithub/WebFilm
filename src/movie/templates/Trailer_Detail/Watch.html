@@ -133,8 +133,12 @@
                                                                     {% endif %}
                                                                 </button>
                                                                 <label id="comment-number">{{comment.total_unlikes}}</label>
-                                                                <button id="cmt" type="submit" name="subcomment" value="{{comment.id}}" >
-                                                                    <img class="cmt-img"src="{% static 'css/Trailer_Detail/image/icon/icons8-comments-30.png'%}">
+                                                                <button id="cmt" type="submit" name="subcomment_icon" value="{{comment.id}}" >
+                                                                    {% if not comment.is_reply %}
+                                                                        <img class="cmt-img"src="{% static 'css/Trailer_Detail/image/icon/icons8-comments-30.png'%}">
+                                                                    {% else %}
+                                                                        <img class="cmt-img"src="{% static 'css/Trailer_Detail/image/icon/icons8-comments-green-30.png'%}">
+                                                                    {% endif %}
                                                                 </button>
                                                                 <label id="comment-number">{{comment.children_count}}</label>
                                                                 <button id="flag" type="submit" name="mark" value="{{comment.id}}">
@@ -155,6 +159,7 @@
                                                         </script> -->
                                                     </div>
                                                 </li>
+                                            {% if comment.is_reply %}
                                                 <form method="POST" name="subcomment" style="background:none;">
                                                     {% csrf_token %}
                                                     <div class="comments" style="margin-left:10%; margin-top:1%; background:none;">
@@ -317,6 +322,7 @@
                                                         </li> -->
                                                     </ul>
                                                 {% endfor %}
+                                            {% endif %}
                                                 <!-- <li>
                                                     <button id="user-comment" type="button" onclick="another-user()">
                                                         <img src="{% static 'css/Trailer_Detail/image/user-4.jpg'%}">

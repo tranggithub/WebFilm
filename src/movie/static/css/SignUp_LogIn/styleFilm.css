@@ -244,7 +244,7 @@ input
     background: black;
     position: absolute;
     left: 0%;
-    right: 50%;
+    right: 60%;
     top: 0%;
     bottom: 0%;
 
@@ -257,7 +257,6 @@ input
     right: 93.56%;
     top: 5%;
     bottom: 91.55%;
-
 
     filter: drop-shadow(0px 2px 6px rgba(61, 210, 204, 0.45));
 }
@@ -378,10 +377,10 @@ input
 .Login .Login_Left .Input
 {
     position: absolute;
-    width: 500px;
+    width: 70%;
     height: 0px;
-    left: 29%;
-    top: 50%;
+    left: 25%;
+    top: 33%;
 }
 
 .Login .Login_Left .bold
@@ -392,12 +391,11 @@ input
 .Login .Login_Left .Checkbox_content
 {
     box-sizing:border-box;
-
     position: absolute;
     width: 14px;
     height: 16px;
-    left: 29%;
-    top: 66%;
+    left: 25%;
+    top: 54.5%;
     
     border-radius: 4px;
 }
@@ -405,7 +403,7 @@ input
 .Checkbox_content .content
 {
     position: absolute;
-    width: 187px;
+    width: 150px;
     height: 21px;
     left: 20px;
     top: 0px;
@@ -417,7 +415,6 @@ input
     line-height: 21px;
     /* identical to box height */
 
-
     color: rgba(254, 254, 254, 0.5);
 }
 
@@ -427,19 +424,16 @@ input
     position: absolute;
     width: 118px;
     height: 21px;
-    left: 57.7%;
-    top: 66%;
-
+    left: 60%;
+    top: 60%;
     font-family: Montserrat;
     font-style: normal;
     font-weight: 400;
     font-size: 10px;
     line-height: 21px;
     /* identical to box height */
-
+    
     text-decoration-line: underline;
-
-    color: #FEFEFE;
 }
 
 .Login .Login_Left .LoginButton
@@ -448,7 +442,7 @@ input
     width: 40%;
     height: 8%;
     left: 30%;
-    top: 70%;
+    top: 66%;
 
     background: rgba(254, 254, 254, 0.96);
     border-radius: 15px;
@@ -470,10 +464,10 @@ input
 {
     /* Don’t have an account ? Sign up for free */
     position: absolute;
-    width: 285px;
+    width: 40%;
     height: 21px;
-    left: 33.5%;
-    top: 80%;
+    left: 33%;
+    top: 75%;
 
     font-family: 'Poppins';
     font-style: normal;
@@ -498,6 +492,7 @@ input
 
     background: url(TopGun.jpg);
     background-size: cover;
+    
 }
 
 .Login .Login_Right .Title
@@ -525,7 +520,7 @@ input
 .Login .Login_Right .Subtitle
 {
     position: absolute;
-    width: 300px;
+    width: 80%;
     height: 36px;
     left: 1%;
     top: 85%;
@@ -547,7 +542,7 @@ input
     position: absolute;
     width: 5px;
     height: 5px;
-    left: 80%;
+    left: 74%;
     top: 80%;
 
     background: url(Star.png);
@@ -558,7 +553,7 @@ input
     position: absolute;
     width: 100px;
     height: 27px;
-    left: 85%;
+    left: 78%;
     top: 80%;
 
     font-family: Monterrat;
@@ -573,7 +568,10 @@ input
 
     text-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
 }
-
+.Navigation a, .Navigation a:hover{
+    background:none;
+    border:none;
+}
 .Login .Login_Right .Navigation_Left
 {
     position: absolute;
@@ -595,7 +593,7 @@ input
     position: absolute;
     width: 80px;
     height: 70px;
-    left: 85%;
+    left: 180%;
     top: 85%;
 
     cursor: pointer;
