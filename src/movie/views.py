@@ -628,9 +628,9 @@ def handler404(request, exception):
 # def Movies_Child(request):
 #     
 
-# class SeeAll_Trending_Filer(ListView):
-#   model = Movie
-#   template_name = '.\Home\SeeAll_Trending_Filter.html'
+class SeeAll_Trending_Filer(ListView):
+    model = Movie
+    template_name = '.\Home\SeeAll_Trending_Filter.html'
 
 class MovieNational(ListView):
   model=Movie
