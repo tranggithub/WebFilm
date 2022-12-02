@@ -38,18 +38,24 @@
       <div class="content Head"> Who's watching?</div>
       <div class="grid__row">
         <div class="grid__column-2 ">
-
-          <div class="bt__Chon Left">
-            <a href="{% url 'home' %}"><img src="{% static 'css/UserPacket/image/Adult.png'%}" class="bt_Adult"></a>
-          </div>
+                    
+         
+      <form  method="post">  
+            {% csrf_token %}   
+          <button class="bt__Chon Left" type="submit" value="Adult" name='Child' style="background: none"  >                           
+              <img src="{% static 'css/UserPacket/image/Adult.png'%}" class="bt_Adult">            
+          </button>
+      </form>
           <div class="content Adult ">Adult</div>
         </div>
-        <div class="grid__column-2">
-
-
-          <div class="bt__Chon Right">
-            <a href="{% url 'home' %}"><img src="{% static 'css/UserPacket/image/Young.png'%}" class="bt_Young"></a>
-          </div>
+      <div class="grid__column-2">
+          <form method="post">
+            {% csrf_token %}
+          <button class="bt__Chon Right" type="submit" value="CHILD" name='Child' style="background: none"> 
+               <img src="{% static 'css/UserPacket/image/Young.png'%}" class="bt_Young">
+          </button>         
+          </form>
+          
           <div class="content Children ">Children</div>
         </div>
 
