@@ -44,24 +44,24 @@ def SignUp(request):
       try:
         user= User.objects.get(username=usernm)
         messages.error(request,"The username you entered has already been taken. Please try another username.")
-        return redirect('/movies/sign_up')
+        return redirect('sign_up')
       except User.DoesNotExist:
         nm = request.POST.get('name')
         myuser = User.objects.create_user(username=usernm,email=mail,password=passwd1)
         myuser.first_name = nm
         myuser.save()
         messages.success(request,"Your account has been created successfully")
-        return redirect('/movies/log_in')
+        return redirect('log_in')
     else:
       messages.error(request,"Your confirm password and your password are not the same")
-      return redirect('/movies/sign_up')
+      return redirect('sign_up')
   return render(request,".\SignUp_LogIn\SignUpFilm.html")
 
 
 def LogIn(request):
   if request.user.is_authenticated:
     messages.warning(request, "You have already logged in")
-    return redirect('/movies/userpacket')
+    return redirect('userpacket')
   else:
     if request.method == "POST":
       name = request.POST.get('username')
@@ -74,10 +74,10 @@ def LogIn(request):
             request.session.set_expiry(2592000)#30 ngày
         login(request, user)
         messages.success(request,"Log in successfully")
-        return redirect('/movies/userpacket')
+        return redirect('userpacket')
       else:
         messages.error(request,"Invalid Username or Password")
-        return redirect('/movies/log_in')
+        return redirect('log_in')
     
     movie = Movie.objects.all()
 
@@ -120,9 +120,9 @@ def password_reset_request(request):
           messages.success(request, 'A message with reset password instructions has been sent to your inbox.')
           return redirect ("/movies/reset_password/done")
       messages.error(request, 'An invalid email has been entered.')
-      return redirect('/movies/reset_password/')
+      return redirect('reset_password')
     messages.error(request, 'An invalid email has been entered.')
-    return redirect('/movies/reset_password/')
+    return redirect('reset_password')
 
   password_reset_form = PasswordResetForm()
   return render(request, template_name=".\Info\\reset_password.html", context={"form":password_reset_form})
@@ -561,7 +561,7 @@ def ChangeInfo(request):
       user_form.save()
       user_profile_form.save()
       messages.success(request,"Change information of your account successfully")
-      return redirect('/movies/info')
+      return redirect('info')
     else:
       messages.error(request,"Invalid value")
   else:
@@ -636,6 +636,8 @@ class MovieNational(ListView):
     model=Movie
     paginate_by = 10
     template_name = '.\Home\SeeAll_Trending_Filter.html'
+    def get_success_url(self):
+        return reverse_lazy('.\Home\SeeAll_Trending_Filter.html', kwargs={'avatar': self.request.user.profile.avatar })
     if  Choices_User=="CHILD": 
       def get_queryset(self):
         self.national=self.kwargs['Nation']   
@@ -643,6 +645,7 @@ class MovieNational(ListView):
       def get_context_data(self, **kwargs):
         context=super(MovieNational , self).get_context_data(**kwargs)
         context['movie_national']=self.national
+        context['avatar']=self.request.user.profile.avatar.url
         return context
     else:
       def get_queryset(self):
@@ -651,6 +654,7 @@ class MovieNational(ListView):
       def get_context_data(self, **kwargs):
         context=super(MovieNational , self).get_context_data(**kwargs)
         context['movie_national']=self.national
+        context['avatar']=self.request.user.profile.avatar.url
         return context
 
 
