@@ -7,6 +7,7 @@
         <title>Trailer_Detail | LTWFlix</title>
         <link rel="stylesheet" href="{% static 'css/Trailer_Detail/Trailer_Detail.css'%}">
         <link href="https://vjs.zencdn.net/7.20.3/video-js.css" rel="stylesheet" />
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700&display=swap" rel="stylesheet">
     </head>
     <body>
         {% for movie in movies %}
@@ -27,7 +28,8 @@
             <div class="center">
                 <div class="top">
                     <button class="bell" type="button" onclick="notification()">
-                        <img src="{% static 'css/Trailer_Detail/image/icon/icons8-notification-30.png'%}">
+                        <img class="bell-notify" src="{% static 'css/Trailer_Detail/image/icon/icons8-notification-30.png'%}">
+                        <button class="button__Notifi" type="submit" onclick="notify()"><i class="far fa-bell"></i></button>
                     </button>
                     <button class="user" type="button">
                         <a href="{% url 'info' %}">

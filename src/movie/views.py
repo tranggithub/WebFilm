@@ -149,7 +149,8 @@ def Home(request):
         request.user.profile.save()
         messages.success(request,"You won't reveive email when we add new movie")
         redirect(url)
-    
+  
+  profile=Profile.objects.get(user=request.user)  
 
   if Choices_User=="CHILD":
     ava = request.user.profile.avatar.url
@@ -158,7 +159,7 @@ def Home(request):
     upcoming = Movie.objects.filter(status__status='U',child='Yes')[:4]
     tv_series = Movie.objects.filter(format='TV',child='Yes')[:4]
     ps = Movie.objects.filter(format='PS',child='Yes')[:4]
-    return render(request,"Home/Home.html",{'avatar':ava, 'movies': movies,'trending': trending, 'upcoming':upcoming, 'tv_series':tv_series, 'ps':ps})
+    return render(request,"Home/Home.html",{'avatar':ava, 'movies': movies,'trending': trending, 'upcoming':upcoming, 'tv_series':tv_series, 'ps':ps,'profile':profile})
   else:
     ava = request.user.profile.avatar.url
     movies = Movie.objects.all()
@@ -166,7 +167,7 @@ def Home(request):
     upcoming = Movie.objects.filter(status__status='U')[:4]
     tv_series = Movie.objects.filter(format='TV')[:4]
     ps = Movie.objects.filter(format='PS')[:4]
-    return render(request,"Home/Home.html",{'avatar':ava, 'movies': movies,'trending': trending, 'upcoming':upcoming, 'tv_series':tv_series, 'ps':ps})
+    return render(request,"Home/Home.html",{'avatar':ava, 'movies': movies,'trending': trending, 'upcoming':upcoming, 'tv_series':tv_series, 'ps':ps,'profile':profile})
 
 def UserPacket(request):
   global Choices_User
@@ -215,29 +216,9 @@ def Movies(request):
     upcoming = Movie.objects.filter(status__status='U',child='Yes')[:4]
     tv_series = Movie.objects.filter(format='TV',child='Yes')[:4]
     ps = Movie.objects.filter(format='PS',child='Yes')[:4]
+    
 
-    #Số movie mỗi trang
-    movies_per_page = 4
-
-    #Số lượng movie xuất hiện là 4
-    movies_paginator = Paginator(movies,movies_per_page)
-    #Lấy số trang từ request
-    l_num = request.GET.get('l_num')
-    #Chỉ định list trang muốn lấy ở trang nào
-    movies_page = movies_paginator.get_page(l_num)
-
-
-    upcoming_paginator = Paginator(upcoming,movies_per_page)
-    m_num = request.GET.get('m_num')
-    upcoming_page = upcoming_paginator.get_page(m_num)
-
-    tv_series_paginator = Paginator(tv_series,movies_per_page)
-    h_num = request.GET.get('h_num')
-    tv_series_page = tv_series_paginator.get_page(h_num)
-    return render(request,"Movies/movies.html",{'avatar':ava, 'movies': movies, 'upcoming':upcoming, 'tv_series':tv_series, 'ps':ps,
-    'movies_page': movies_page,
-    'upcoming_page': upcoming_page,
-    'tv_series_page': tv_series_page})
+    return render(request,"Movies/movies.html",{'avatar':ava, 'movies': movies, 'upcoming':upcoming, 'tv_series':tv_series, 'ps':ps})
 
   else:
     ava = request.user.profile.avatar.url
@@ -245,29 +226,8 @@ def Movies(request):
     upcoming = Movie.objects.filter(status__status='U')[:4]
     tv_series = Movie.objects.filter(format='TV')[:4]
     ps = Movie.objects.filter(format='PS')[:4]
-    #Số movie mỗi trang
-    movies_per_page = 4
-
-    #Số lượng movie xuất hiện là 4
-    movies_paginator = Paginator(movies,movies_per_page)
-    #Lấy số trang từ request
-    l_num = request.GET.get('l_num')
-    #Chỉ định list trang muốn lấy ở trang nào
-    movies_page = movies_paginator.get_page(l_num)
-
-
-    upcoming_paginator = Paginator(upcoming,movies_per_page)
-    m_num = request.GET.get('m_num')
-    upcoming_page = upcoming_paginator.get_page(m_num)
-
-    tv_series_paginator = Paginator(tv_series,movies_per_page)
-    h_num = request.GET.get('h_num')
-    tv_series_page = tv_series_paginator.get_page(h_num)
-    return render(request,"Movies/movies.html",{'avatar':ava, 'movies': movies, 'upcoming':upcoming, 'tv_series':tv_series, 'ps':ps,
-    'movies_page': movies_page,
-    'upcoming_page': upcoming_page,
-    'tv_series_page': tv_series_page
-    })
+    
+    return render(request,"Movies/movies.html",{'avatar':ava, 'movies': movies, 'upcoming':upcoming, 'tv_series':tv_series, 'ps':ps})
 
 
 def Library(request):

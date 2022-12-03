@@ -6,116 +6,209 @@
  <link rel="stylesheet" href="{% static 'css/Movies/css/style.css' %}" />
  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700&display=swap" rel="stylesheet">
+ <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
+ integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
  <title>Movie | LTWFlix</title>
  </head>
  <body>
-    <div class="app__container">
-        <div class="grid">
-          <div class="grid__row">
-            <div class="grid__column-2">
-                <nav class="category">
-                    <h3 class="category__heading_Movibies">
-                        <img src="{% static 'css/Movies/css/Logo/Vector.png' %}" alt="" />
-                 
-                    </h3>
-                </nav>
-               
-                </nav> 
-                <div class="button">
-                    <ul>
-                        <li><a href="{% url 'home' %}"><i class="fas fa-home fa-icon"></i><label>Home</label></a></li>
-                        <li><a id="main" href="{% url 'movies' %}"> <i class="fas fa-video fa-icon "></i><label>Movies</label></a></li>
-                        <li><a href="{% url 'movies' %}#TVseries"><i class="fas fa-tv fa-icon"></i><label>TV Series</label></a></li>
-                        <li><a href="{% url 'movies' %}#Upcoming"><i class="fas fa-calendar-alt fa-icon"></i><label>Upcoming</label></a></li>
-                        <li><a href="#"><label><img src="/static/css/Trailer_Detail/image/icon/icons8-book-shelf-50.png" alt="library" style="margin-left:-35%; margin-right:12%"><b style="background:none;">Library</b></label></a></li>
-                        
-                        <li  style="margin-top:20%;"><a href="{% url 'log_out' %}"><i class="fas fa-sign-out-alt fa-icon"></i><label>Logout</label></a></li>
-                    </ul>
+    <div class="container-fluid overflow-hidden index">
+        <div class="row flex-nowrap vh-100 overflow-auto">
+            <div class="col-auto col-md-3 col-xl-2 px-sm-6 px-0 sticky-top">
+                <div class="d-flex flex-column  align-items-center align-items-sm-start px-4 pt-2 min-vh-100 sidebar" >
+                  <div class="d-flex pt-3 align-items-center pb-5 mb-md-4 mx-auto me-md-auto img-brand" >
+                    <img class="fs-5 d-none d-sm-inline brand"  src="{% static 'css/Movies/css/Logo/Vector.png' %}" alt=""></img>
+                  </div>
+                  <ul class="nav nav-pills pt-3 px-3 flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
+                    <li class="nav-item">
+                      <a href="{% url 'home' %}" class="nav-link align-middle p-3 px-0">
+                        <i class="fas fa-home fa-icon"></i>
+                        <span class="ms-2 d-none d-sm-inline">Home</span>
+                      </a>
+                    </li>
+                    <li>
+                      <a href="{% url 'movies'%}" class="nav-link px-0 p-3 align-middle movies">
+                        <i class="fas fa-video fa-icon movies_i"></i>
+                        <span class="ms-2 d-none d-sm-inline">Movies</span>
+                      </a>
+                    </li>
+                    <li>
+                      <a href="{% url 'movies'%}#TVseries" class="nav-link px-0 p-3  align-middle">
+                        <i class="fas fa-tv fa-icon"></i>
+                        <span class="ms-2 d-none d-sm-inline">TV Series</span></a >
+                    </li>
+                    <li>
+                      <a href="{% url 'home' %}#Upcoming" class="nav-link px-0 p-3  align-middle">
+                        <i class="fas fa-calendar-alt fa-icon"></i>
+                        <span class="ms-2 d-none d-sm-inline">Upcoming</span></a >
+                    </li>
+                    <li>
+                      <a href="{% url 'library' %}"  class="nav-link px-0 p-3  align-middle" >
+                        <i class="fas fa-book-open"></i>
+                        <span class="ms-2 d-none d-sm-inline">Library</span>
+                      </a>
+                    </li>
+                    <li>
+                      <a href="{% url 'log_out' %}" class="nav-link px-0 align-middle mt-5 p-3">
+                        <i class="fas fa-sign-out-alt fa-icon"></i>
+                        <span class="ms-2 d-none d-sm-inline">Log out</span>
+                      </a>
+                    </li>
+                  </ul>
                 </div>
-               
-             
+              </div>
+              <div class="col py-3">
+                <div class="row">
+                    <div class="top">
+                        <div class="container p-2 navbar navbar-expand-xl">
+                            <div class="container-fluid ">
+                                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                                  data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                                  aria-expanded="false" aria-label="Toggle navigation">
+                                  <span class="navbar-toggler-icon"></span>
+                                </button>
+                                <div class="collapse navbar-collapse row" id="navbarSupportedContent">
+                                    <div class="search">
+                                        <form class="pt-2" action="{% url 'search' %}" method="GET">
+                                            <i type ="submit" class="px-3 fas fa-search" style="color:#cccccc;"></i>
+                                            <input class=" p-2 px-5 keyword" type="text" name="keyword" placeholder="Search for movies, TV show..." value >
+                                        </form>
+                                    </div>
+                                </div>
+                                <div class="d-flex align-items-center mt-2 top-left">
+                                    <div class="p-2">
+                                        <form method="post" name="notify" >
+                                         {% csrf_token %}
+                                        <button name="notify" class="rounded-pill bell " type="submit" onclick="notify()"><i class="pt-2 pb-2 far fa-bell" style="width:28px; color:grey;"></i></button>
+                                        </form>
+                                    </div>
+                                </div>
+                                <div class=" px-2">
+                                    <a class="navbar-brand" href="{% url 'info' %}"><img class="rounded-pill" style="width:45px;" src="{{avatar}}"></a>
+                                </div> 
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="center mt-3 px-5">
+                        <div class="row">
+                            <div class="col-md-8 mx-auto center_left">
+                                <div class="Head__Up">Search result for "{{request.GET.keyword}}"</div>
+                                <div class="grid__row-4">                    
+                                    <a name="movies"></a>                   
+                                    {% for movie in movies %}                      
+                                    <button class="column__movie">                       
+                                        <a href="{% url 'detail' movie.id %}">
+                                        <img class="img-movie" src="{{movie.image.url}}" alt="{{movie.title}}" style="width:160px; height:252px; border-radius: 10px;"/></a>
+                                    {% endfor %}                                                                                                                                  
+                                    </button>
+                                </div>
+                                <div class="grid__row-4-Body">
+                                    <div class="Head__Up">
+                                        <a name="Toprated">Top Rated</a>
+                                    </div>
+                                    <a class="Head__See" href="TVSeries.html">See all</a>
+                                </div>  
+                                <div class="grid__row-4">
+                                    {% for movie in Toprated %}
+                                        <button class="column__movie">
+                                            <a href="{% url 'detail' movie.id%}">
+                                                <img class="img-movie" src="{{movie.image.url}}" alt="{{movie.title}}" style="width:160px; height:252px; border-radius: 10px;"/>
+                                            </a>
+                                        </button>
+                                    {% endfor %}
+                                </div>   
+                                <div class="grid__row-4-Body">
+                                    <div class="Head__Poplular">
+                                        <a name="Mostwatch">Most Watch</a>
+                                    </div>
+                                    <a class="Head__See" href="Popular.html">See all</a>
+                                </div>  
+                                <div class="grid__row-4">
+                                    {% for movie in Mostwatch %}
+                                        <button class="column__movie">
+                                            <a href="{% url 'detail' movie.id %}">
+                                                <img class="img-movie" src="{{movie.image.url}}" alt="{{movie.title}}" style="width:160px; height:252px; border-radius: 10px;"/>
+                                            </a>
+                                        </button>
+                                    {% endfor %}
+                                </div>   
+                            </div>
+                            <div class="col-md-4 d-sm-none d-md-block d-none d-block center_right ">
+                                <div class="grid__row-4__grid-Check">                                
+                                    <div class="grid__column-List">Categories</div>                                      
+                                </div>
+                                <div class="container__Check">      
+                                    <div class="Check">          
+                                        <div class="text__Check" style="margin -top:5%"> Action</div>                                        
+                                    </div>                                        
+                                    <hr class="hr_h">
+                                    <div class="Check">          
+                                        <div class="text__Check">Drama</div>                                           
+                                    </div>
+                                    <hr class="hr_h">
+                                    <div class="Check">          
+                                        <div class="text__Check"> Comedy</div>                                           
+                                    </div>
+                                    <hr class="hr_h">
+                                    <div class="Check">          
+                                        <div class="text__Check"> Romance</div>                                            
+                                    </div>
+                                    <hr class="hr_h">
+                                    <div class="Check">          
+                                        <div class="text__Check">Adventure</div>                                               
+                                    </div>
+                                    <hr class="hr_h">
+                                    <div class="Check">          
+                                        <div class="text__Check">Documentary</div>                                               
+                                    </div>
+                                    <hr class="hr_h">
+                                    <div class="Check">          
+                                        <div class="text__Check">Family</div>                                        
+                                    </div>
+                                    <hr class="hr_h">
+                                    <div class="Check">          
+                                        <div class="text__Check">Historical</div>                                        
+                                    </div>
+                                    <hr class="hr_h">
+                                    <div class="Check">          
+                                        <div class="text__Check">Musical</div>                                        
+                                    </div>
+                                    <hr class="hr_h">
+                                    <div class="Check">          
+                                        <div class="text__Check">Horror</div>                                        
+                                    </div>
+                                    <hr class="hr_h">
+                                    <div class="Check">          
+                                        <div class="text__Check">Science fiction</div>                                        
+                                    </div>
+                                    <hr class="hr_h">
+                                    <div class="Check">          
+                                        <div class="text__Check">Tragedy</div>                                        
+                                    </div>
+                                    <hr class="hr_h">
+                                    <div class="Check">          
+                                        <div class="text__Check">War</div>                                        
+                                    </div>
+                                    <hr class="hr_h">
+                                    <div class="Check">          
+                                        <div class="text__Check">Westerns</div>                                        
+                                    </div>
+                                </div>                                
+                            </div> 
+                                
+                                                       
+                        </div>
+                    </div>
+                        
+                    
+
+                </div>
                 
             </div>
-            
-            <div class="grid__column-8">        
-                <div class="container__search">                               
-                    <div class="text__search">
-                        <form action="{% url 'search'%}" method="get"> 
-                        <i class="fas fa-search"></i>
-                        <input class="keyword" id="search_auto" type="text" name="keyword" placeholder="Search for movies, TV show..." value ></div>
-                        <div style="display: none;" id="suggestions" class="top-search-box">
-                        
-                        </div>    
-                    </form>                   
-
-                       
-                </div>                
-                <div class="Head__Up">Search result for "{{request.GET.keyword}}"</div>
-                <div class="grid__row-4" >
-                    
-                        <a name="movies"></a>
-                   
-                        {% for movie in movies %}                      
-                    <button class="column__movie">
-                       
-                        <a href="{% url 'detail' movie.id %}">
-                            <img class="img-movie" src="{{movie.image.url}}" alt="{{movie.title}}" style="width:160px; height:252px; border-radius: 10px;"/>
-                        </a>
-                    </button>
-                    {% endfor %}
-                    
-                    
-                </div>  
-                {% comment %} <div class="grid__row-4">
-                    {% for movie in upcoming %}
-                    <button class="column__movie">
-                        <a href="{% url 'detail' movie.id %}">
-                            <img class="img-movie" src="{{movie.image.url}}" alt="{{movie.title}}" style="width:160px; height:252px; border-radius: 10px;"/>
-                        </a>
-                    </button>
-                    {% endfor %}
-                </div>    {% endcomment %}
-                <div class="grid__row-4-Body">
-                    <div class="Head__Up">
-                        <a name="Toprated">Top Rated</a>
-                    </div>
-                    <a class="Head__See" href="TVSeries.html">See all</a>
-                </div>  
-                <div class="grid__row-4">
-                    {% for movie in Toprated %}
-                        <button class="column__movie">
-                            <a href="{% url 'detail' movie.id%}">
-                                <img class="img-movie" src="{{movie.image.url}}" alt="{{movie.title}}" style="width:160px; height:252px; border-radius: 10px;"/>
-                            </a>
-                        </button>
-                    {% endfor %}
-                </div>   
-                <div class="grid__row-4-Body">
-                    <div class="Head__Poplular">
-                        <a name="Mostwatch">Most Watch</a>
-                    </div>
-                    <a class="Head__See" href="Popular.html">See all</a>
-                </div>  
-                <div class="grid__row-4">
-                    {% for movie in Mostwatch %}
-                        <button class="column__movie">
-                            <a href="{% url 'detail' movie.id %}">
-                                <img class="img-movie" src="{{movie.image.url}}" alt="{{movie.title}}" style="width:160px; height:252px; border-radius: 10px;"/>
-                            </a>
-                        </button>
-                    {% endfor %}
-                </div>   
-            </div>
-            <div class="grid__column-2-right">
-                <div class="grid__row-4">
-                    <button class="button__Notifi"type="button" onclick="user()"><i class="far fa-bell"></i></button>
-                    <button class="button__User" type="button" onclick="user()" style="background-color:#292929">
-                        <a href="{% url 'info'%}">
-                            <img src="{{avatar}}">
-                        </a>
-                    </button>
-                </div>      
-            </div>
+                
+           
+                
+           
         </div>
     </div>
     <div class="loader-wrapper">
@@ -127,6 +220,9 @@
         $(window).on("load", function(){
             $(".loader-wrapper").fadeOut(1000);
         });
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous">
     </script>
  </body>
 </html>
