@@ -196,7 +196,7 @@
 }
 .column__movie{   
    border:none;
-   margin-right:8px;
+   margin-right:-5px;
    background: none;
    cursor:pointer;
  
