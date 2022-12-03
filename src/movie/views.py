@@ -215,7 +215,29 @@ def Movies(request):
     upcoming = Movie.objects.filter(status__status='U',child='Yes')[:4]
     tv_series = Movie.objects.filter(format='TV',child='Yes')[:4]
     ps = Movie.objects.filter(format='PS',child='Yes')[:4]
-    return render(request,"Movies/movies.html",{'avatar':ava, 'movies': movies, 'upcoming':upcoming, 'tv_series':tv_series, 'ps':ps})
+
+    #Số movie mỗi trang
+    movies_per_page = 4
+
+    #Số lượng movie xuất hiện là 4
+    movies_paginator = Paginator(movies,movies_per_page)
+    #Lấy số trang từ request
+    l_num = request.GET.get('l_num')
+    #Chỉ định list trang muốn lấy ở trang nào
+    movies_page = movies_paginator.get_page(l_num)
+
+
+    upcoming_paginator = Paginator(upcoming,movies_per_page)
+    m_num = request.GET.get('m_num')
+    upcoming_page = upcoming_paginator.get_page(m_num)
+
+    tv_series_paginator = Paginator(tv_series,movies_per_page)
+    h_num = request.GET.get('h_num')
+    tv_series_page = tv_series_paginator.get_page(h_num)
+    return render(request,"Movies/movies.html",{'avatar':ava, 'movies': movies, 'upcoming':upcoming, 'tv_series':tv_series, 'ps':ps,
+    'movies_page': movies_page,
+    'upcoming_page': upcoming_page,
+    'tv_series_page': tv_series_page})
 
   else:
     ava = request.user.profile.avatar.url
@@ -223,7 +245,29 @@ def Movies(request):
     upcoming = Movie.objects.filter(status__status='U')[:4]
     tv_series = Movie.objects.filter(format='TV')[:4]
     ps = Movie.objects.filter(format='PS')[:4]
-    return render(request,"Movies/movies.html",{'avatar':ava, 'movies': movies, 'upcoming':upcoming, 'tv_series':tv_series, 'ps':ps})
+    #Số movie mỗi trang
+    movies_per_page = 4
+
+    #Số lượng movie xuất hiện là 4
+    movies_paginator = Paginator(movies,movies_per_page)
+    #Lấy số trang từ request
+    l_num = request.GET.get('l_num')
+    #Chỉ định list trang muốn lấy ở trang nào
+    movies_page = movies_paginator.get_page(l_num)
+
+
+    upcoming_paginator = Paginator(upcoming,movies_per_page)
+    m_num = request.GET.get('m_num')
+    upcoming_page = upcoming_paginator.get_page(m_num)
+
+    tv_series_paginator = Paginator(tv_series,movies_per_page)
+    h_num = request.GET.get('h_num')
+    tv_series_page = tv_series_paginator.get_page(h_num)
+    return render(request,"Movies/movies.html",{'avatar':ava, 'movies': movies, 'upcoming':upcoming, 'tv_series':tv_series, 'ps':ps,
+    'movies_page': movies_page,
+    'upcoming_page': upcoming_page,
+    'tv_series_page': tv_series_page
+    })
 
 
 def Library(request):
@@ -633,137 +677,116 @@ class SeeAll_Trending_Filer(ListView):
     template_name = '.\Home\SeeAll_Trending_Filter.html'
 
 class MovieNational(ListView):
-    model=Movie
-    paginate_by = 10
-    template_name = '.\Home\SeeAll_Trending_Filter.html'
-    if  Choices_User=="CHILD": 
+      model=Movie
+      paginate_by = 10
+      template_name = '.\Home\SeeAll_Trending_Filter.html'           
       def get_queryset(self):
-        self.national=self.kwargs['Nation']   
-        return Movie.objects.filter(national=self.national,child='Yes')
+        if  Choices_User=="CHILD": 
+          self.national=self.kwargs['Nation']   
+          return Movie.objects.filter(national=self.national,child='Yes')
+        else: 
+          self.national=self.kwargs['Nation']   
+          return Movie.objects.filter(national=self.national)
+
       def get_context_data(self, **kwargs):
         context=super(MovieNational , self).get_context_data(**kwargs)
         context['movie_national']=self.national
         return context
-    else:
-      def get_queryset(self):
-        self.national=self.kwargs['Nation']   
-        return Movie.objects.filter(national=self.national,child='Yes')
-      def get_context_data(self, **kwargs):
-        context=super(MovieNational , self).get_context_data(**kwargs)
-        context['movie_national']=self.national
-        return context
+    
 
 
 class MovieFormat(ListView):
-  model=Movie
-  paginate_by = 10
-  template_name = '.\Home\SeeAll_Trending_Filter.html'
-  if  Choices_User=="CHILD": 
+  
+  
+    model=Movie
+    paginate_by = 10
+    template_name = '.\Home\SeeAll_Trending_Filter.html'
     def get_queryset(self):
-      self.format=self.kwargs['for']
-      return Movie.objects.filter(format=self.format,child='Yes')
+      if  Choices_User=="CHILD": 
+        self.format=self.kwargs['for']
+        return Movie.objects.filter(format=self.format,child='Yes')
+      else:
+        self.format=self.kwargs['for']
+        return Movie.objects.filter(format=self.format)
     def get_context_data(self, **kwargs):
       context=super(MovieFormat , self).get_context_data(**kwargs)
       context['movie_format']=self.format
       return context
-  else:
-    def get_queryset(self):
-      self.format=self.kwargs['for']
-      return Movie.objects.filter(format=self.format)
-    def get_context_data(self, **kwargs):
-      context=super(MovieFormat , self).get_context_data(**kwargs)
-      context['movie_format']=self.format
-      return context
-
-
+  
 class MovieSort(ListView):
-  model=Movie
-  paginate_by = 10
-  template_name = '.\Home\SeeAll_Trending_Filter.html'
-  if  Choices_User=="CHILD": 
+  
+  
+    model=Movie
+    paginate_by = 10
+    template_name = '.\Home\SeeAll_Trending_Filter.html'
     def get_queryset(self):
-      self.sort=self.kwargs['so']
-      return Movie.objects.filter(sort=self.sort,child='Yes')
+      if  Choices_User=="CHILD": 
+        self.sort=self.kwargs['so']
+        return Movie.objects.filter(sort=self.sort,child='Yes')
+      else:
+        self.sort=self.kwargs['so']
+        return Movie.objects.filter(sort=self.sort)
+
     def get_context_data(self, **kwargs):
       context=super(MovieSort , self).get_context_data(**kwargs)
       context['movie_sort']=self.sort
       return context
-  else:
-    def get_queryset(self):
-      self.sort=self.kwargs['so']
-      return Movie.objects.filter(sort=self.sort)
-    def get_context_data(self, **kwargs):
-      context=super(MovieSort , self).get_context_data(**kwargs)
-      context['movie_sort']=self.sort
-      return context
-
-
-
+  
 class MovieCondition(ListView):
-  model=Movie
-  paginate_by = 10
-  template_name = '.\Home\SeeAll_Trending_Filter.html'
-  if  Choices_User=="CHILD": 
+  
+  
+    model=Movie
+    paginate_by = 10
+    template_name = '.\Home\SeeAll_Trending_Filter.html'
     def get_queryset(self):
-      self.condition =self.kwargs['condi']
-      return Movie.objects.filter(condition =self.condition,child='Yes')
-    def get_context_data(self, **kwargs):
-      context=super(MovieCondition , self).get_context_data(**kwargs)
-      context['movie_condition']=self.condition
-      return context
-  else:
-    def get_queryset(self):
-      self.condition =self.kwargs['condi']
-      return Movie.objects.filter(condition =self.condition)
-    def get_context_data(self, **kwargs):
-      context=super(MovieCondition , self).get_context_data(**kwargs)
-      context['movie_condition']=self.condition
-      return context
+      if  Choices_User=="CHILD": 
+        self.condition =self.kwargs['condi']
+        return Movie.objects.filter(condition =self.condition,child='Yes')
+      else:
+        self.condition =self.kwargs['condi']
+        return Movie.objects.filter(condition =self.condition)
 
+    def get_context_data(self, **kwargs):
+      context=super(MovieCondition , self).get_context_data(**kwargs)
+      context['movie_condition']=self.condition
+      return context
+  
 
 
 class MovieYear(ListView):
-  model=Movie
-  paginate_by = 10
-  template_name = '.\Home\SeeAll_Trending_Filter.html'
-  if  Choices_User=="CHILD": 
+  
+ 
+    model=Movie
+    paginate_by = 10
+    template_name = '.\Home\SeeAll_Trending_Filter.html'
     def get_queryset(self):
-      self.year=self.kwargs['year']
-      return Movie.objects.filter(year_of_production__contains=self.year,child='Yes')
+      if  Choices_User=="CHILD": 
+        self.year=self.kwargs['year']
+        return Movie.objects.filter(year_of_production__contains=self.year,child='Yes')
+      else:
+        self.year=self.kwargs['year']
+        return Movie.objects.filter(year_of_production__contains=self.year)
+
     def get_context_data(self, **kwargs):
       context=super(MovieYear , self).get_context_data(**kwargs)
       context['movie_year']=self.year
       return context
-  else:
-    def get_queryset(self):
-      self.year=self.kwargs['year']
-      return Movie.objects.filter(year_of_production__contains=self.year)
-    def get_context_data(self, **kwargs):
-      context=super(MovieYear , self).get_context_data(**kwargs)
-      context['movie_year']=self.year
-      return context
-
-
-
+ 
 
 class MovieCategory(ListView):
   model=Movie
   paginate_by = 10
   template_name = '.\Home\SeeAll_Trending_Filter.html'
-  if  Choices_User=="CHILD": 
-    def get_queryset(self):
-      self.category=self.kwargs['cate']
-      return Movie.objects.filter(categories__category=self.category,child='Yes')
-    def get_context_data(self, **kwargs):
+  
+  def get_queryset(self):
+      if  Choices_User=="CHILD": 
+        self.category=self.kwargs['cate']
+        return Movie.objects.filter(categories__category=self.category,child='Yes')
+      else: 
+        self.category=self.kwargs['cate']
+        return Movie.objects.filter(categories__category=self.category)
+  def get_context_data(self, **kwargs):
       context=super(MovieCategory , self).get_context_data(**kwargs)
       context['movie_category']=self.category
       return context
-  else:
-    def get_queryset(self):
-      self.category=self.kwargs['cate']
-      return Movie.objects.filter(categories__category=self.category)
-    def get_context_data(self, **kwargs):
-      context=super(MovieCategory , self).get_context_data(**kwargs)
-      context['movie_category']=self.category
-      return context
-
+  
