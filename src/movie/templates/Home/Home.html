@@ -127,7 +127,7 @@
                                     <div class="grid_heading_play_info">
                                         {% for movie in movies %}
                                         {% if movie.title == 'Moonfall'%} 
-                                        <a class="grid_heading_play_more" href="{% url 'watch' movie.id%}"  style="text-decoration:none;"> 
+                                        <a class="grid_heading_play_more" href="{% url 'watch' movie.id 1 %}"  style="text-decoration:none;"> 
                                                 <i class="fas fa-play"></i>
                                                 Play
                                         </a>
