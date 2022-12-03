@@ -91,7 +91,6 @@
                 </div>
                 <div class="grid__row-4-Body">
                     <div class="Head__Up">History</div>
-                    <!-- <a class="Head__See" href="{% url 'seeall_trending_english' %}">See all</a> -->
                 </div> 
 
                 <div class="grid__row-4">
@@ -198,7 +197,14 @@
             </div>
             <div class="grid__column-2-right">
                 <div class="grid__row-4">
-                    <button class="button__Notifi"type="button" onclick="notify()"><i class="far fa-bell"></i></button>
+                    <form method="post" name="notify">
+                        {% csrf_token %}
+                        {% if not profile.is_need_to_notify %}
+                            <button name="notify" class="button__Notifi"type="submit" onclick="notify()"><i class="far fa-bell"></i></button>
+                        {% else %}
+                            <button name="notify" class="button__Notifi"type="submit" onclick="notify()"><i class="far fa-bell" style="color: aqua;" ></i></button>
+                        {% endif %}
+                    </form>
                     <button class="button__User" type="button" onclick="user()">
                         <a href="{% url 'info'%}">
                             <img src="{{avatar}}">

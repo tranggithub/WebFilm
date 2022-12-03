@@ -150,23 +150,22 @@ def Home(request):
         messages.success(request,"You won't reveive email when we add new movie")
         redirect(url)
     
-
+  profile = Profile.objects.get(user=request.user)
+  ava = request.user.profile.avatar.url
   if Choices_User=="CHILD":
-    ava = request.user.profile.avatar.url
     movies = Movie.objects.filter(child='Yes')
     trending = Movie.objects.filter(status__status='T',child='Yes')[:4]
     upcoming = Movie.objects.filter(status__status='U',child='Yes')[:4]
     tv_series = Movie.objects.filter(format='TV',child='Yes')[:4]
     ps = Movie.objects.filter(format='PS',child='Yes')[:4]
-    return render(request,"Home/Home.html",{'avatar':ava, 'movies': movies,'trending': trending, 'upcoming':upcoming, 'tv_series':tv_series, 'ps':ps})
+    return render(request,"Home/Home.html",{'avatar':ava, 'movies': movies,'trending': trending, 'upcoming':upcoming, 'tv_series':tv_series, 'ps':ps,'profile':profile})
   else:
-    ava = request.user.profile.avatar.url
     movies = Movie.objects.all()
     trending = Movie.objects.filter(status__status='T')[:4]
     upcoming = Movie.objects.filter(status__status='U')[:4]
     tv_series = Movie.objects.filter(format='TV')[:4]
     ps = Movie.objects.filter(format='PS')[:4]
-    return render(request,"Home/Home.html",{'avatar':ava, 'movies': movies,'trending': trending, 'upcoming':upcoming, 'tv_series':tv_series, 'ps':ps})
+    return render(request,"Home/Home.html",{'avatar':ava, 'movies': movies,'trending': trending, 'upcoming':upcoming, 'tv_series':tv_series, 'ps':ps, 'profile':profile})
 
 def UserPacket(request):
   global Choices_User
@@ -228,13 +227,32 @@ def LogOut(request):
 
 
 def Movies(request):
+  if request.method == "POST":
+    url='movies/movies/'
+    if 'notify' in request.POST:
+      if request.user.profile.is_need_to_notify == False:
+        if request.user.email is not None:
+          request.user.profile.is_need_to_notify = True
+          request.user.profile.save()
+          messages.success(request,"You will reveive email if we add new movie")
+          redirect(url)
+        else:
+          messages.error(request,"You don't have an email in your account")
+          redirect(url)
+      else:
+        request.user.profile.is_need_to_notify = False
+        request.user.profile.save()
+        messages.success(request,"You won't reveive email when we add new movie")
+        redirect(url)
+  
+  profile = Profile.objects.get(user=request.user)
   if  Choices_User=="CHILD":
     ava = request.user.profile.avatar.url
     movies = Movie.objects.filter(child='Yes')[:4]
     upcoming = Movie.objects.filter(status__status='U',child='Yes')[:4]
     tv_series = Movie.objects.filter(format='TV',child='Yes')[:4]
     ps = Movie.objects.filter(format='PS',child='Yes')[:4]
-    return render(request,"Movies/movies.html",{'avatar':ava, 'movies': movies, 'upcoming':upcoming, 'tv_series':tv_series, 'ps':ps})
+    return render(request,"Movies/movies.html",{'avatar':ava, 'movies': movies, 'upcoming':upcoming, 'tv_series':tv_series, 'ps':ps, 'profile':profile})
 
   else:
     ava = request.user.profile.avatar.url
@@ -242,11 +260,28 @@ def Movies(request):
     upcoming = Movie.objects.filter(status__status='U')[:4]
     tv_series = Movie.objects.filter(format='TV')[:4]
     ps = Movie.objects.filter(format='PS')[:4]
-    return render(request,"Movies/movies.html",{'avatar':ava, 'movies': movies, 'upcoming':upcoming, 'tv_series':tv_series, 'ps':ps})
+    return render(request,"Movies/movies.html",{'avatar':ava, 'movies': movies, 'upcoming':upcoming, 'tv_series':tv_series, 'ps':ps,'profile':profile})
 
 
 def Library(request):
- 
+  if request.method == "POST":
+    url='movies/movies/'
+    if 'notify' in request.POST:
+      if request.user.profile.is_need_to_notify == False:
+        if request.user.email is not None:
+          request.user.profile.is_need_to_notify = True
+          request.user.profile.save()
+          messages.success(request,"You will reveive email if we add new movie")
+          redirect(url)
+        else:
+          messages.error(request,"You don't have an email in your account")
+          redirect(url)
+      else:
+        request.user.profile.is_need_to_notify = False
+        request.user.profile.save()
+        messages.success(request,"You won't reveive email when we add new movie")
+        redirect(url)
+  profile = Profile.objects.get(user=request.user)
   if Choices_User=="CHILD":
     ava = request.user.profile.avatar.url
   
@@ -278,7 +313,8 @@ def Library(request):
     'movies': movies,
     'love_page': love_page,
     'mark_page': mark_page,
-    'history_page': history_page
+    'history_page': history_page,
+    'profile':profile
     }
     return render(request,".\Trailer_Detail\Library.html",context)
 
@@ -312,7 +348,8 @@ def Library(request):
     'movies': movies,
     'love_page': love_page,
     'mark_page': mark_page,
-    'history_page': history_page
+    'history_page': history_page,
+    'profile':profile
       }
   return render(request,".\Trailer_Detail\Library.html",context)
 

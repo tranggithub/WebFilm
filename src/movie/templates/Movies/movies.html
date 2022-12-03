@@ -6,9 +6,30 @@
  <link rel="stylesheet" href="{% static 'css/Movies/css/style.css' %}" />
  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700&display=swap" rel="stylesheet">
+ {% comment %} Alert JS {% endcomment%}
+        <!-- CSS -->
+        <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css"/>
+        <!-- Default theme -->
+        <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/default.min.css"/>
  <title>Movie | LTWFlix</title>
  </head>
  <body>
+    {% comment %} alertifyjs - Thông báo {% endcomment %}
+        <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
+        <script>
+            alertify.set('notifier','position', 'top-right');
+        </script>
+        {% for msg in messages %}
+            {% if msg.tags == "error" %}
+                <script>
+                    alertify.error('{{msg}}'); 
+                </script>
+            {% else %}
+                <script>
+                    alertify.success('{{msg}}');
+                </script>
+            {% endif %}
+        {% endfor %}
     <div class="app__container">
         <div class="grid">
           <div class="grid__row">
@@ -130,7 +151,14 @@
             </div>
             <div class="grid__column-2-right">
                 <div class="grid__row-4">
-                    <button class="button__Notifi"type="button" onclick="user()"><i class="far fa-bell"></i></button>
+                    <form method="post" name="notify">
+                        {% csrf_token %}
+                        {% if not profile.is_need_to_notify %}
+                            <button name="notify" class="button__Notifi"type="submit" onclick="notify()"><i class="far fa-bell"></i></button>
+                        {% else %}
+                            <button name="notify" class="button__Notifi"type="submit" onclick="notify()"><i class="far fa-bell" style="color: aqua;" ></i></button>
+                        {% endif %}
+                    </form>
                     <button class="button__User" type="button" onclick="user()" style="background-color:#292929">
                         <a href="{% url 'info'%}">
                             <img src="{{avatar}}">
