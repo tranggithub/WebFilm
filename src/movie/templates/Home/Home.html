@@ -147,7 +147,7 @@
                                 </div>
                                 <div class="grid__row-4-Body">
                                     <div class="Head__Up">Trending</div>
-                                    <a class="Head__See" href="{% url 'seeall_trending_english' %}">See all</a>
+                                    <a class="Head__See" href="{% url 'seeall_trending_english' 'T' %}">See all</a>
                                 </div> 
                 
                                 <div class="grid__row-4">
@@ -164,7 +164,7 @@
                                     <div class="Head__Up">
                                         <a name="Upcoming">Upcoming</a>
                                     </div>
-                                    <a class="Head__See" href="{% url 'seeall_trending_english' %}">See all</a>
+                                    <a class="Head__See" href="{% url 'seeall_trending_english' 'U' %}">See all</a>
                                 </div>  
                                 <div class="grid__row-4">
                                     {% for movie in upcoming %}
@@ -180,7 +180,7 @@
                                     <div class="Head__Up">
                                         <a name="TVseries">TV Series</a>
                                     </div>
-                                    <a class="Head__See" href="{% url 'seeall_trending_english' %}">See all</a>
+                                    <a class="Head__See" href="{% url 'seeall_trending_english' 'TV' %}">See all</a>
                                 </div>  
                                 <div class="grid__row-4">
                                     {% for movie in tv_series %}
@@ -195,7 +195,7 @@
                                     <div class="Head__Poplular">
                                         <a name="onSeptember">Popular movies on september</a>
                                     </div>
-                                    <a class="Head__See" href="{% url 'seeall_trending_english' %}">See all</a>
+                                    <a class="Head__See" href="{% url 'seeall_trending_english' 'PS' %}">See all</a>
                                 </div>  
                                 <div class="grid__row-4">
                                     {% for movie in ps %}

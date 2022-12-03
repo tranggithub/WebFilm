@@ -179,15 +179,33 @@ def UserPacket(request):
  
   
  
-def SeeAll_Trending(request):
-  if Choices_User=="CHILD":
-    ava = request.user.profile.avatar.url
-    movies = Movie.objects.filter(status__status='T',child='Yes')
-    return render(request,".\Home\SeeAll_Trending_English.html",{'avatar':ava, 'movies':movies})
-  else: 
-    ava = request.user.profile.avatar.url
-    movies = Movie.objects.filter(status__status='T')
-    return render(request,".\Home\SeeAll_Trending_English.html",{'avatar':ava, 'movies':movies})
+def SeeAll_Trending(request, status_short):
+  if status_short == 'U':
+    title = "Upcomming"
+  elif status_short == 'T':
+    title = "Trending"
+  elif status_short == 'TV':
+    title = "TV Series"
+  else:
+    title = "Popular Movies On September"
+  if status_short == 'U' or status_short =='T':
+    if Choices_User=="CHILD":
+      ava = request.user.profile.avatar.url
+      movies = Movie.objects.filter(status__status=status_short,child='Yes')
+      return render(request,".\Home\SeeAll_Trending_English.html",{'avatar':ava, 'movies':movies, 'title':title})
+    else: 
+      ava = request.user.profile.avatar.url
+      movies = Movie.objects.filter(status__status=status_short)
+      return render(request,".\Home\SeeAll_Trending_English.html",{'avatar':ava, 'movies':movies, 'title':title})
+  else:
+    if Choices_User=="CHILD":
+      ava = request.user.profile.avatar.url
+      movies = Movie.objects.filter(format=status_short,child='Yes')
+      return render(request,".\Home\SeeAll_Trending_English.html",{'avatar':ava, 'movies':movies, 'title':title})
+    else: 
+      ava = request.user.profile.avatar.url
+      movies = Movie.objects.filter(format=status_short)
+      return render(request,".\Home\SeeAll_Trending_English.html",{'avatar':ava, 'movies':movies, 'title':title})
 
 
 
