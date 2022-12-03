@@ -43,20 +43,25 @@
         
 
     </div>
-    <div class="pagination">
-        <span class="step-links">
+    <div class="pagination justify-content-center" style="width:100%;">
+        <span class="step-links" style="display: inline-flex;">
             {% if page_obj.has_previous %}
-                <a href="?page=1">&laquo; first</a>
-                <a href="?page={{ page_obj.previous_page_number }}">previous</a>
+                <li class="page-item"><a class="page-link" href="?page=1">&laquo; first</a></i>
+                <li class="page-item"><a class="page-link" href="?page={{ page_obj.previous_page_number }}">previous</a></i>
+               
             {% endif %}
     
-            <span class="current">
-                Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
-            </span>
+            {% for i in page_obj.paginator.page_range %}
+                {% if page_obj.number == i %}
+                    <li class="page-item"><a class="page-link active" href="?page={{i}}">{{i}}</a></li>
+                {% else %}
+                    <li class="page-item"><a class="page-link" href="?page={{i}}">{{i}}</a></li>
+                {% endif %}
+            {% endfor %}
     
             {% if page_obj.has_next %}
-                <a href="?page={{ page_obj.next_page_number }}">next</a>
-                <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
+                <li class="page-item"><a class="page-link" href="?page={{ page_obj.next_page_number }}">next</a></i>
+                <li class="page-item"><a class="page-link" href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a></i>
             {% endif %}
         </span>
     </div>

@@ -330,13 +330,13 @@ animation: spin 2s linear infinite;
   .navigation ul li a{
           display: block; 
           width: 100%;
-          /* width: 150px; */
+         
           padding-left: 10px;
           color:white; 
           font-size: .9em;
           letter-spacing: 1px;
           text-decoration: none;
-          padding: 7%;
+          padding: 7% 1% 7% 7%;
   }
   
   .navigation ul ul{
@@ -352,14 +352,14 @@ animation: spin 2s linear infinite;
   
   
   .navigation_ul3{
-      width: 320%;
+      width: 310%;
   }
   .navigation_ul3 li {
-      width: 31%;
+      width: 33%;
   }
   .navigation_1{
       position: relative;
-      width: 18%;
+      width: 20%;
   }
   .navigation_ul1
   {
@@ -371,11 +371,11 @@ animation: spin 2s linear infinite;
   }
   .navigation_ul2{
       /* max-width: 50% */
-      width: 210%;
+      width: 250%;
   }
   .navigation_ul2 li{
       /* max-width: 50% */
-      width: 47%;
+      width: 50%;
   }
   .navigation_li1{
       width: 100%;
