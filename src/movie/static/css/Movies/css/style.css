@@ -1,16 +1,7 @@
-<<<<<<< HEAD
-@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&display=swap");
-*{
-    font-family:'Poppins', sans-serif;
-}
-.grid{ 
-    width: 120%;
-=======
 
  .grid{ 
     /* width: 120%; */
     width: 100%;
->>>>>>> 0465a2ed1594259156f7f8d143fe58207cc9c961
     max-width: 120%;
     margin: 0 auto;
     background: #292929;
