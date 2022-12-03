@@ -307,7 +307,7 @@ animation: spin 2s linear infinite;
     color: white;
     font-size: 14px;
   }
-  .navigation ul{
+.navigation ul{
       list-style: none;
       position: relative;
       z-index: 1;
@@ -316,7 +316,7 @@ animation: spin 2s linear infinite;
       display: flex;
       padding-left: 1%;
      
-  }
+}
   
   
   
@@ -330,13 +330,13 @@ animation: spin 2s linear infinite;
   .navigation ul li a{
           display: block; 
           width: 100%;
-          /* width: 150px; */
+         
           padding-left: 10px;
           color:white; 
           font-size: .9em;
           letter-spacing: 1px;
           text-decoration: none;
-          padding: 7%;
+          padding: 7% 1% 7% 7%;
   }
   
   .navigation ul ul{
@@ -352,14 +352,14 @@ animation: spin 2s linear infinite;
   
   
   .navigation_ul3{
-      width: 320%;
+      width: 310%;
   }
   .navigation_ul3 li {
-      width: 31%;
+      width: 33%;
   }
   .navigation_1{
       position: relative;
-      width: 18%;
+      width: 20%;
   }
   .navigation_ul1
   {
@@ -371,11 +371,11 @@ animation: spin 2s linear infinite;
   }
   .navigation_ul2{
       /* max-width: 50% */
-      width: 210%;
+      width: 250%;
   }
   .navigation_ul2 li{
       /* max-width: 50% */
-      width: 47%;
+      width: 50%;
   }
   .navigation_li1{
       width: 100%;
@@ -384,8 +384,92 @@ animation: spin 2s linear infinite;
   .navigation_ul{
       display: flex;
   }
+  body{
+    background-color: #292929
+}
+.index{
+    font-family:'Poppins', sans-serif;
+    background-color: #292929;
+}
+.sidebar{
+    background-color:#212121;
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+}
+.img-brand{
+    background:none;
+}
+#menu{
+    background:none;
+}
+#menu li{
+    background:none;
+}
+#menu a{
+    color:#cccccc;}
+#menu a:hover, .library:hover{
+        /* background-color: #50c5c1a2; */
+        color:#50c5c1a2;
+    }
+    
+#menu span{
+        background:none;
+    }
+.home span, .home_i{
+        color:#50c5c1a2;
+        
+  }
+  .center{
+    overflow-y:auto;
+}
+.bell{
+    border:none;
+    background: none;
+    opacity:50%;
+    border-radius: 30%;
+    background-color:#434141;
+    width:40px;
+}
+.bell i{
+    background:none;
+}
 
+.user{
+    border:none;
+    background: none;
+}
+.keyword{
+    background:#212121;
+    border:none;
+    border-radius: 20px;
+    width:90%;
+    color:#cccccc;
+}
+.search{
+    position:relative;
+}
+.search i{
+    position:absolute;
+    left: -1%;
+}
+/* .top-left{
+    float:right;
+    
+} */
 
+.ms-2{
+    color:white;
+}
+
+.ms-2:hover{
+    color:#50c5c1a2;
+}
+.ibell:hover{ 
+    color:aqua;
+
+}
+
+  
 
   
 

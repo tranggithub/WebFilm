@@ -139,7 +139,7 @@ def Home(request):
         if request.user.email is not None:
           request.user.profile.is_need_to_notify = True
           request.user.profile.save()
-          messages.success(request,"You will reveive email if we add new movie")
+          messages.success(request,"You will reveive emails if we add new movie")
           redirect(url)
         else:
           messages.error(request,"You don't have an email in your account")
@@ -147,7 +147,7 @@ def Home(request):
       else:
         request.user.profile.is_need_to_notify = False
         request.user.profile.save()
-        messages.success(request,"You won't reveive email when we add new movie")
+        messages.success(request,"You won't receive any emails when we add new movie")
         redirect(url)
     
   profile = Profile.objects.get(user=request.user)
@@ -178,6 +178,23 @@ def UserPacket(request):
   
  
 def SeeAll_Trending(request, status_short):
+  if request.method == "POST":
+    url='/movies/home/'
+    if 'notify' in request.POST:
+      if request.user.profile.is_need_to_notify == False:
+        if request.user.email is not None:
+          request.user.profile.is_need_to_notify = True
+          request.user.profile.save()
+          messages.success(request,"You will reveive emails if we add new movie")
+          redirect(url)
+        else:
+          messages.error(request,"You don't have an email in your account")
+          redirect(url)
+      else:
+        request.user.profile.is_need_to_notify = False
+        request.user.profile.save()
+        messages.success(request,"You won't receive any emails when we add new movie")
+        redirect(url)
   if status_short == 'U':
     title = "Upcomming"
   elif status_short == 'T':
@@ -186,25 +203,25 @@ def SeeAll_Trending(request, status_short):
     title = "TV Series"
   else:
     title = "Popular Movies On September"
+  profile=Profile.objects.get(user=request.user) 
   if status_short == 'U' or status_short =='T':
     if Choices_User=="CHILD":
       ava = request.user.profile.avatar.url
       movies = Movie.objects.filter(status__status=status_short,child='Yes')
-      return render(request,".\Home\SeeAll_Trending_English.html",{'avatar':ava, 'movies':movies, 'title':title})
+      return render(request,".\Home\SeeAll_Trending_English.html",{'avatar':ava, 'movies':movies, 'title':title,'profile':profile})
     else: 
       ava = request.user.profile.avatar.url
       movies = Movie.objects.filter(status__status=status_short)
-      return render(request,".\Home\SeeAll_Trending_English.html",{'avatar':ava, 'movies':movies, 'title':title})
+      return render(request,".\Home\SeeAll_Trending_English.html",{'avatar':ava, 'movies':movies, 'title':title,'profile':profile})
   else:
     if Choices_User=="CHILD":
       ava = request.user.profile.avatar.url
       movies = Movie.objects.filter(format=status_short,child='Yes')
-      return render(request,".\Home\SeeAll_Trending_English.html",{'avatar':ava, 'movies':movies, 'title':title})
+      return render(request,".\Home\SeeAll_Trending_English.html",{'avatar':ava, 'movies':movies, 'title':title,'profile':profile})
     else: 
       ava = request.user.profile.avatar.url
       movies = Movie.objects.filter(format=status_short)
-      return render(request,".\Home\SeeAll_Trending_English.html",{'avatar':ava, 'movies':movies, 'title':title})
-
+      return render(request,".\Home\SeeAll_Trending_English.html",{'avatar':ava, 'movies':movies, 'title':title,'profile':profile})
 
 
 
@@ -228,13 +245,13 @@ def LogOut(request):
 
 def Movies(request):
   if request.method == "POST":
-    url='movies/movies/'
+    url='/movies/movies/'
     if 'notify' in request.POST:
       if request.user.profile.is_need_to_notify == False:
         if request.user.email is not None:
           request.user.profile.is_need_to_notify = True
           request.user.profile.save()
-          messages.success(request,"You will reveive email if we add new movie")
+          messages.success(request,"You will reveive emails if we add new movie")
           redirect(url)
         else:
           messages.error(request,"You don't have an email in your account")
@@ -242,17 +259,18 @@ def Movies(request):
       else:
         request.user.profile.is_need_to_notify = False
         request.user.profile.save()
-        messages.success(request,"You won't reveive email when we add new movie")
+        messages.success(request,"You won't receive any emails when we add new movie")
         redirect(url)
-  
-  profile = Profile.objects.get(user=request.user)
+  profile=Profile.objects.get(user=request.user)  
   if  Choices_User=="CHILD":
     ava = request.user.profile.avatar.url
     movies = Movie.objects.filter(child='Yes')[:4]
     upcoming = Movie.objects.filter(status__status='U',child='Yes')[:4]
     tv_series = Movie.objects.filter(format='TV',child='Yes')[:4]
     ps = Movie.objects.filter(format='PS',child='Yes')[:4]
-    return render(request,"Movies/movies.html",{'avatar':ava, 'movies': movies, 'upcoming':upcoming, 'tv_series':tv_series, 'ps':ps, 'profile':profile})
+    
+
+    return render(request,"Movies/movies.html",{'avatar':ava, 'movies': movies, 'upcoming':upcoming, 'tv_series':tv_series, 'ps':ps,'profile':profile})
 
   else:
     ava = request.user.profile.avatar.url
@@ -260,18 +278,20 @@ def Movies(request):
     upcoming = Movie.objects.filter(status__status='U')[:4]
     tv_series = Movie.objects.filter(format='TV')[:4]
     ps = Movie.objects.filter(format='PS')[:4]
+    
     return render(request,"Movies/movies.html",{'avatar':ava, 'movies': movies, 'upcoming':upcoming, 'tv_series':tv_series, 'ps':ps,'profile':profile})
 
 
 def Library(request):
+ 
   if request.method == "POST":
-    url='movies/movies/'
+    url='/movies/library/'
     if 'notify' in request.POST:
       if request.user.profile.is_need_to_notify == False:
         if request.user.email is not None:
           request.user.profile.is_need_to_notify = True
           request.user.profile.save()
-          messages.success(request,"You will reveive email if we add new movie")
+          messages.success(request,"You will reveive emails if we add new movie")
           redirect(url)
         else:
           messages.error(request,"You don't have an email in your account")
@@ -279,9 +299,9 @@ def Library(request):
       else:
         request.user.profile.is_need_to_notify = False
         request.user.profile.save()
-        messages.success(request,"You won't reveive email when we add new movie")
+        messages.success(request,"You won't receive any emails when we add new movie")
         redirect(url)
-  profile = Profile.objects.get(user=request.user)
+  profile=Profile.objects.get(user=request.user)
   if Choices_User=="CHILD":
     ava = request.user.profile.avatar.url
   
@@ -713,141 +733,117 @@ class SeeAll_Trending_Filer(ListView):
     template_name = '.\Home\SeeAll_Trending_Filter.html'
 
 class MovieNational(ListView):
-    model=Movie
-    paginate_by = 10
-    template_name = '.\Home\SeeAll_Trending_Filter.html'
-    def get_success_url(self):
-        return reverse_lazy('.\Home\SeeAll_Trending_Filter.html', kwargs={'avatar': self.request.user.profile.avatar })
-    if  Choices_User=="CHILD": 
+      model=Movie
+      paginate_by = 10
+      template_name = '.\Home\SeeAll_Trending_Filter.html'           
       def get_queryset(self):
-        self.national=self.kwargs['Nation']   
-        return Movie.objects.filter(national=self.national,child='Yes')
+        if  Choices_User=="CHILD": 
+          self.national=self.kwargs['Nation']   
+          return Movie.objects.filter(national=self.national,child='Yes')
+        else: 
+          self.national=self.kwargs['Nation']   
+          return Movie.objects.filter(national=self.national)
+
       def get_context_data(self, **kwargs):
         context=super(MovieNational , self).get_context_data(**kwargs)
         context['movie_national']=self.national
         context['avatar']=self.request.user.profile.avatar.url
         return context
-    else:
-      def get_queryset(self):
-        self.national=self.kwargs['Nation']   
-        return Movie.objects.filter(national=self.national,child='Yes')
-      def get_context_data(self, **kwargs):
-        context=super(MovieNational , self).get_context_data(**kwargs)
-        context['movie_national']=self.national
-        context['avatar']=self.request.user.profile.avatar.url
-        return context
+    
 
 
 class MovieFormat(ListView):
-  model=Movie
-  paginate_by = 10
-  template_name = '.\Home\SeeAll_Trending_Filter.html'
-  if  Choices_User=="CHILD": 
+  
+  
+    model=Movie
+    paginate_by = 10
+    template_name = '.\Home\SeeAll_Trending_Filter.html'
     def get_queryset(self):
-      self.format=self.kwargs['for']
-      return Movie.objects.filter(format=self.format,child='Yes')
+      if  Choices_User=="CHILD": 
+        self.format=self.kwargs['for']
+        return Movie.objects.filter(format=self.format,child='Yes')
+      else:
+        self.format=self.kwargs['for']
+        return Movie.objects.filter(format=self.format)
     def get_context_data(self, **kwargs):
       context=super(MovieFormat , self).get_context_data(**kwargs)
       context['movie_format']=self.format
       return context
-  else:
-    def get_queryset(self):
-      self.format=self.kwargs['for']
-      return Movie.objects.filter(format=self.format)
-    def get_context_data(self, **kwargs):
-      context=super(MovieFormat , self).get_context_data(**kwargs)
-      context['movie_format']=self.format
-      return context
-
-
+  
 class MovieSort(ListView):
-  model=Movie
-  paginate_by = 10
-  template_name = '.\Home\SeeAll_Trending_Filter.html'
-  if  Choices_User=="CHILD": 
+  
+  
+    model=Movie
+    paginate_by = 10
+    template_name = '.\Home\SeeAll_Trending_Filter.html'
     def get_queryset(self):
-      self.sort=self.kwargs['so']
-      return Movie.objects.filter(sort=self.sort,child='Yes')
+      if  Choices_User=="CHILD": 
+        self.sort=self.kwargs['so']
+        return Movie.objects.filter(sort=self.sort,child='Yes')
+      else:
+        self.sort=self.kwargs['so']
+        return Movie.objects.filter(sort=self.sort)
+
     def get_context_data(self, **kwargs):
       context=super(MovieSort , self).get_context_data(**kwargs)
       context['movie_sort']=self.sort
       return context
-  else:
-    def get_queryset(self):
-      self.sort=self.kwargs['so']
-      return Movie.objects.filter(sort=self.sort)
-    def get_context_data(self, **kwargs):
-      context=super(MovieSort , self).get_context_data(**kwargs)
-      context['movie_sort']=self.sort
-      return context
-
-
-
+  
 class MovieCondition(ListView):
-  model=Movie
-  paginate_by = 10
-  template_name = '.\Home\SeeAll_Trending_Filter.html'
-  if  Choices_User=="CHILD": 
+  
+  
+    model=Movie
+    paginate_by = 10
+    template_name = '.\Home\SeeAll_Trending_Filter.html'
     def get_queryset(self):
-      self.condition =self.kwargs['condi']
-      return Movie.objects.filter(condition =self.condition,child='Yes')
-    def get_context_data(self, **kwargs):
-      context=super(MovieCondition , self).get_context_data(**kwargs)
-      context['movie_condition']=self.condition
-      return context
-  else:
-    def get_queryset(self):
-      self.condition =self.kwargs['condi']
-      return Movie.objects.filter(condition =self.condition)
-    def get_context_data(self, **kwargs):
-      context=super(MovieCondition , self).get_context_data(**kwargs)
-      context['movie_condition']=self.condition
-      return context
+      if  Choices_User=="CHILD": 
+        self.condition =self.kwargs['condi']
+        return Movie.objects.filter(condition =self.condition,child='Yes')
+      else:
+        self.condition =self.kwargs['condi']
+        return Movie.objects.filter(condition =self.condition)
 
+    def get_context_data(self, **kwargs):
+      context=super(MovieCondition , self).get_context_data(**kwargs)
+      context['movie_condition']=self.condition
+      return context
+  
 
 
 class MovieYear(ListView):
-  model=Movie
-  paginate_by = 10
-  template_name = '.\Home\SeeAll_Trending_Filter.html'
-  if  Choices_User=="CHILD": 
+  
+ 
+    model=Movie
+    paginate_by = 10
+    template_name = '.\Home\SeeAll_Trending_Filter.html'
     def get_queryset(self):
-      self.year=self.kwargs['year']
-      return Movie.objects.filter(year_of_production__contains=self.year,child='Yes')
+      if  Choices_User=="CHILD": 
+        self.year=self.kwargs['year']
+        return Movie.objects.filter(year_of_production__contains=self.year,child='Yes')
+      else:
+        self.year=self.kwargs['year']
+        return Movie.objects.filter(year_of_production__contains=self.year)
+
     def get_context_data(self, **kwargs):
       context=super(MovieYear , self).get_context_data(**kwargs)
       context['movie_year']=self.year
       return context
-  else:
-    def get_queryset(self):
-      self.year=self.kwargs['year']
-      return Movie.objects.filter(year_of_production__contains=self.year)
-    def get_context_data(self, **kwargs):
-      context=super(MovieYear , self).get_context_data(**kwargs)
-      context['movie_year']=self.year
-      return context
-
-
-
+ 
 
 class MovieCategory(ListView):
   model=Movie
   paginate_by = 10
   template_name = '.\Home\SeeAll_Trending_Filter.html'
-  if  Choices_User=="CHILD": 
-    def get_queryset(self):
-      self.category=self.kwargs['cate']
-      return Movie.objects.filter(categories__category=self.category,child='Yes')
-    def get_context_data(self, **kwargs):
+  
+  def get_queryset(self):
+      if  Choices_User=="CHILD": 
+        self.category=self.kwargs['cate']
+        return Movie.objects.filter(categories__category=self.category,child='Yes')
+      else: 
+        self.category=self.kwargs['cate']
+        return Movie.objects.filter(categories__category=self.category)
+  def get_context_data(self, **kwargs):
       context=super(MovieCategory , self).get_context_data(**kwargs)
       context['movie_category']=self.category
       return context
-  else:
-    def get_queryset(self):
-      self.category=self.kwargs['cate']
-      return Movie.objects.filter(categories__category=self.category)
-    def get_context_data(self, **kwargs):
-      context=super(MovieCategory , self).get_context_data(**kwargs)
-      context['movie_category']=self.category
-      return context
-
+  

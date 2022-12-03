@@ -196,7 +196,7 @@
 }
 .column__movie{   
    border:none;
-   margin-right:8px;
+   margin-right:-5px;
    background: none;
    cursor:pointer;
  
@@ -272,7 +272,13 @@
     box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.25);
     border-radius: 40px;
     margin-right: 12px;
+
 }
+
+.fa-bell:hover{
+    color: yellow;
+}
+
 .fa-bell{
     font-size: 25px;
     background-color: #434141;
@@ -336,24 +342,18 @@
 }
 .container__Check{
    
-    width: 90%;
-    height: 325px;
-    margin-left: 5%;
+    width: 70%;
+    margin-left: 18%;
     margin-top: 5%;
     margin-bottom: 5%;;
-   
-   
-   
-
     background: #212121;
     border-radius: 30px;
 }
 .Check{
-    justify-content: space-between;
-    display:flex;
+ 
+    text-align: center;  
     margin-bottom: 12px;
     margin-right: 16px;
-
     padding-top:3px;
 }
 .text__Check{
@@ -472,7 +472,7 @@
     padding-left: 46%;
     padding-top: 200px;
     padding-bottom: 30px;
-    width: 51.3%;
+    width: 100%;
     
 
 } 
@@ -520,4 +520,97 @@
 .ajs-message
 {
     font-family: 'Montserrat', sans-serif;
+}
+
+body{
+    margin: 0 !important;
+}
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap');
+
+body{
+    background-color: #292929
+}
+.index{
+    font-family:'Poppins', sans-serif;
+    background-color: #292929;
+}
+.sidebar{
+    background-color:#212121;
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+}
+.img-brand{
+    background:none;
+}
+#menu{
+    background:none;
+}
+#menu li{
+    background:none;
+}
+#menu a{
+    color:#cccccc;
+    
+}
+#menu a:hover, .library:hover{
+    /* background-color: #50c5c1a2; */
+    color:#50c5c1a2;
+}
+
+#menu span{
+    background:none;
+}
+.home span, .home_i{
+    color:#50c5c1a2;
+    
+}
+
+.center{
+    overflow-y:auto;
+}
+.bell{
+    border:none;
+    background: none;
+    opacity:50%;
+    border-radius: 30%;
+    background-color:#434141;
+    width:40px;
+}
+.bell i{
+    background:none;
+}
+
+.user{
+    border:none;
+    background: none;
+}
+.keyword{
+    background:#212121;
+    border:none;
+    border-radius: 20px;
+    width:90%;
+    color:#cccccc;
+}
+.search{
+    position:relative;
+}
+.search i{
+    position:absolute;
+    left: -1%;
+}
+/* .top-left{
+    float:right;
+    
+} */
+
+.ms-2{
+    color:white;
+}
+
+.ms-2:hover{
+    color:#50c5c1a2;
+}
+.ibell:hover{ 
+    color:aqua;
+
 }
