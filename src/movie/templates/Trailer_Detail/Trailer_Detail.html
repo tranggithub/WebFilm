@@ -2,315 +2,343 @@
 <html>
     <head>
         {% load static %}
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Trailer_Detail | LTWFlix</title>
-        <link rel="stylesheet" href="{% static 'css/Trailer_Detail/Trailer_Detail.css'%}">
-        <link href="https://vjs.zencdn.net/7.20.3/video-js.css" rel="stylesheet" />
+    <meta charset="UTF-8" />
+    <title>Trailer_Detail | LTWFlix</title>
+    <link rel="stylesheet" href="{% static 'css/Trailer_Detail/Trailer_Detail.css'%}">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
+    <!--search-->  
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous"/>
+    
+    {% comment %} Alert JS {% endcomment%}
+    <!-- CSS -->
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css"/>
+    <!-- Default theme -->
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/default.min.css"/>
     </head>
     <body>
+        {% comment %} alertifyjs - Thông báo  {% endcomment %}
+                <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
+                <script>
+                    alertify.set('notifier','position', 'top-right');
+                </script>
+                {% for msg in messages %}
+                    {% if msg.tags == "error" %}
+                        <script>
+                            alertify.error('{{msg}}'); 
+                        </script>
+                    {% else %}
+                        <script>
+                            alertify.success('{{msg}}');
+                        </script>
+                    {% endif %}
+                {% endfor %}
         {% for movie in movies %}
-        <div class="Container">
-            <div class="left">
-                <img id="brandname" src="{% static 'css/Trailer_Detail/image/icon/BrandNameLogin.png'%}" >
-                <div class="button">
-                    <ul style="    background-color:#212121;">
-                        <li><a href="{% url 'home' %}"><img src="{% static 'css/Trailer_Detail/image/icon/icons8-home-page-48.png'%}" alt="home"><label><b style="background:none;">Home</b></label></a></li>
-                        <li><a id="main" href="{% url 'movies' %}"><img src="{% static 'css/Trailer_Detail/image/icon/icons8-video-call-48.png'%}" alt="movies"><label><b style="background:none;">Movies</b></label></a></li>
-                        <li><a href="{% url 'home'%}#TVseries"><img id="series" src="{% static 'css/Trailer_Detail/image/icon/icons8-tv-48.png'%}" alt="series"><label><b style="background:none;">TV Series</b></label></a></li>
-                        <li><a href="{% url 'home' %}#Upcoming"><img src="{% static 'css/Trailer_Detail/image/icon/icons8-calendar-48.png'%}" alt="upcoming"><label><b style="background:none;">Upcoming</b></label></a></li>
-                        <li><a href="{% url 'library' %}"><img src="{% static 'css/Trailer_Detail/image/icon/icons8-book-shelf-50.png'%}" alt="library"><label><b style="background:none;">Library</b></label></a></li>
-                        <li style="margin-top:30%;"><a href="{% url 'log_out' %}"><img src="{% static 'css/Trailer_Detail/image/icon/icons8-logout-acc-48.png'%}" alt="logout"><label><b style="background:none;">Logout</b></label></a></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="center">
-                <div class="top">
-                    <button class="bell" type="button" onclick="notification()">
-                        <img src="{% static 'css/Trailer_Detail/image/icon/icons8-notification-30.png'%}">
-                    </button>
-                    <button class="user" type="button">
-                        <a href="{% url 'info' %}">
-                            <img src="{{avatar}}">
-                        </a>
-                    </button>
-                    <div class="top_left">
-                        <form method="GET" id="from-search" action="{% url 'search'%}" style="width:auto">
-                            <div class="search">                                
-                                <img src="{% static 'css/Trailer_Detail/image/icon/icons8-search-30 (1).png'%}">
-                                <input class="keyword" type="text" name="keyword" placeholder="Search for movies, TV show,..." value >
-                                
-                            </div>
-                            <div style="display: none;" id="suggestions" class="top-search-box"></div>
-                        </form>
+        <div class="container-fluid overflow-hidden index">
+            <div class="row flex-nowrap vh-100 overflow-auto">
+                <div class="col-auto col-md-3 col-xl-2 px-sm-6 px-0 sticky-top">
+                    <div class="d-flex flex-column  align-items-center align-items-sm-start px-4 pt-2 min-vh-100 sidebar" >
+                      <div class="d-flex pt-3 align-items-center pb-5 mb-md-4 mx-auto me-md-auto img-brand" >
+                        <img class="fs-5 d-none d-sm-inline brand" src="{% static 'css/Trailer_Detail/image/icon/BrandNameLogin.png'%}"></img>
+                      </div>
+                      <ul class="nav nav-pills pt-3 px-3 flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
+                        <li class="nav-item">
+                          <a href="{% url 'home' %}" class="nav-link align-middle p-3 px-0">
+                            <i class="fas fa-home fa-icon"></i>
+                            <span class="ms-2 d-none d-sm-inline">Home</span>
+                          </a>
+                        </li>
+                        <li>
+                          <a href="{% url 'movies' %}" class="nav-link px-0 p-3 align-middle movies">
+                            <i class="fas fa-video fa-icon movies_i"></i>
+                            <span class="ms-2 d-none d-sm-inline">Movies</span>
+                          </a>
+                        </li>
+                        <li>
+                          <a href="{% url 'home'%}#TVseries" class="nav-link px-0 p-3  align-middle">
+                            <i class="fas fa-tv fa-icon"></i>
+                            <span class="ms-2 d-none d-sm-inline">TV Series</span></a >
+                        </li>
+                        <li>
+                          <a href="{% url 'home' %}#Upcoming" class="nav-link px-0 p-3  align-middle">
+                            <i class="fas fa-calendar-alt fa-icon"></i>
+                            <span class="ms-2 d-none d-sm-inline">Upcoming</span></a >
+                        </li>
+                        <li>
+                          <a href="{% url 'library' %}" class="nav-link px-0 p-3  align-middle" >
+                            <i class="fas fa-book-open"></i>
+                            <span class="ms-2 d-none d-sm-inline">Library</span>
+                          </a>
+                        </li>
+                        <li>
+                          <a href="{% url 'log_out' %}" class="nav-link px-0 align-middle mt-5 p-3">
+                            <i class="fas fa-sign-out-alt fa-icon"></i>
+                            <span class="ms-2 d-none d-sm-inline">Log out</span>
+                          </a>
+                        </li>
+                      </ul>
                     </div>
                 </div>
-                <div class="trailer_vid" >
-                    <div class="vid">
-                        <!-- <div class="play">
-                            <video id="vid" height="396px" width="945px"  poster="{{movie.trailer_image.url}}" border-radius="23px;">
-                                <source src="{{movie.trailer_video}}" type="video/mp4">
-                                Your browser doesn't support html video.
-                            </video>
-                            <button id="playbt" onclick="playPause()"  style="margin-top:170px;">
-                                <img src="{% static 'css/Trailer_Detail/image/icon/icons8-play-48.png'%}">
-                            </button>
-                        </div> -->
-                        <iframe width="945" height="400" src="{{movie.trailer_video}}" frameborder="0" allowfullscreen style="margin-bottom:20px; margin-left:10px;"></iframe>
-                    </div>
-                    <!-- <script>
-                        var myVideo=document.getElementById("vid");
-                        const button=document.getElementById("playbt");
-                        button.addEventListener("click",()=>{
-                            button.style.visibility="hidden";
-                            playPause();        
-                        })
-                        function playPause(){
-                            if(myVideo.paused)
-                            {
-                                myVideo.play();
-                                vid.controls="true";
-                            }
-                        }
-                    </script>
-                    <script src="https://vjs.zencdn.net/7.20.3/video.min.js"></script> -->
-                </div>
-                <div class="body_center">
-                    <div class="body_left">
-                        <div class="Detail_movies">
-                            <div class="title_movies">
-                                <h5>
-                                    <ul>
-                                        <li id="first_ele">{{movie.title}}</li> 
-                                        <li>{{movie.year_of_production}}</li>   
-                                        <li>{{movie.time}}</li>
-                                    </ul>
-                                </h5>
-                                <br>
-                                <br>
-                                <h6 style="font-size:10px;color:aliceblue">
-                                    {% for category in categories %}
-                                    <label>
-                                        {{category.category}}
-                                    </label> 
-                                    {% endfor %}
-                               </h6>
-                               <p style="font-size:12px; margin-bottom:10px;">    
-                                   <br>{{movie.description}} 
-                               </p>
-                            </div>
-                            <div class="info">  <!--Thông tin đạo diễn, diễn viên-->
-                                <hr>
-                                <p>Director :  <span style="color:cadetblue">{{movie.director}}</span></p>     <!--{{movie.director}}-->
-                                <hr>
-                                <p>Writers : <span style="color:cadetblue">{{movie.writers}}</span></p>    <!--{{movie.writers}}-->
-                                <hr>
-                                
-                                <p>Stars : 
-                                    {% for c in cast_crew %}
-                                    <span style="color:cadetblue">
-                                        <lable>{{c.name}} .</lable>
-                                    </span>
-                                    {% endfor %}
-                                </p>
-                                <hr>
-                                    <a type="submit" href="{% url 'watch' movie.id 1 %}">Watch movie</a>
-                                
-                                    <button class="rate_button" type="button" onclick="topRate()">Top rated movie #65</button>
-                                    <select>
-                                        <option>Awards {{movie.movie_award.count }} nominations</option>
-                                        {% for award in movie.movie_award.all %}
-                                            <option>{{award.name}}</option>
-                                        {% endfor %}
-                                        <!-- <option>Top 3 Healing movie</option>
-                                        <option>Top 1 Action movie</option> -->
-                                    </select>
-                            </div>
-                            <div class="info_characters">  <!--Thôgn tin chi tiết dv-->
-                                <h4>Top Cast</h4>
-                                <ul>
-                                    {% for c in topcast %}
-                                    <li><img src="{{c.image.url}}" alt="{{c.name}}">
-                                        <b><br>{{c.name}}</b><br>{{c.character}}<br> ({{c.sub_character}})
-                                    </li>
-                                    {% endfor %}
-                                </ul>
-                                <br>
-                            </div>
-                            <div class="info_movies">
-                                <hr>
-                                <button class="accordion"><h4>All cast & crew</h4></button>
-                                <div class="allcast">
-                                    <ul>
-                                        {% for c in cast_crew %}
-                                        <li><img src="{{c.image.url}}" alt="{{c.name}}">
-                                            <b><br>{{c.name}}</b><br>{{c.character}}<br> ({{c.sub_character}})
-                                        </li>
-                                        {% endfor %}
-                                    </ul>
-                                </div>
-                                <!--hiển thị all cast, crew-->
-                                <script>    
-                                    var acc=document.getElementsByClassName("accordion");
-                                    var i;
-
-                                    for (i=0;i<acc.length;i++){
-                                        acc[i].addEventListener("click", function(){
-                                            this.classList.toggle("active");
-                                            var panel=this.nextElementSibling;
-                                            if(panel.style.maxHeight){
-                                                panel.style.maxHeight=null;
-                                            }
-                                            else{
-                                                panel.style.maxHeight=panel.scrollHeight + "px";
-                                            }
-                                        });
-                                    }
-                                </script>
-                                
-                                <hr style="margin-bottom:10px;">
-                                <img src="{{movie.trivia_image.url}}" alt="{{movie.title}}" style="margin-top:15px;">
-                                <h4 style="margin-top:15px; width:290px;">
-                                        '{{movie.title}}' Trivia, Facts, and Figures   
-                                </h4>
-                                <p style="width:290px;">
-                                    {{movie.trivia_summary}}
-                                </p>
-                                <a href="{{movie.trivia_url}}">Learn more</a>
-                            </div>
-                            <div class="similar_movies">
-                                <h4>Other movies</h4>
-                                <a href="{% url 'home' %}">See all</a>
-                                <div class="similar">
-                                    <ul>
-                                        <li>
-                                            {% for movie in another %}
-                                                <button class="movie_button" type="button">
-                                                    <a href="{% url 'detail' movie.id %}">
-                                                        <img class="img-movie" src="{{movie.image.url}}" alt="{{movie.title}}" style="width:130px; height:192px; border-radius: 10px; margin-right:15px;"/>
-                                                    </a>
-                                                </button>
-                                            {% endfor %}
-            
-                                        </li>
-                                    </ul>
+                <div class="col py-3">
+                    <div class="row">
+                        <div class="top">
+                            <div class="container p-2 navbar navbar-expand-xl">
+                                <div class="container-fluid ">
+                                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                                      data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                                      aria-expanded="false" aria-label="Toggle navigation">
+                                      <span class="navbar-toggler-icon"></span>
+                                    </button>
+                                    <div class="collapse navbar-collapse row" id="navbarSupportedContent">
+                                        <div class="search">
+                                            <form class="pt-2" action="{% url 'search' %}" method="GET">
+                                                <i type ="submit" class="px-3 fas fa-search" style="color:#cccccc;"></i>
+                                                <input class=" p-2 px-5 keyword" type="text" name="keyword" placeholder="Search for movies, TV show..." value >
+                                            </form>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex align-items-center mt-2 top-left">
+                                        <div class="p-2">
+                                            <form method="post" name="notify">
+                                             {% csrf_token %}
+                                             {% if not profile.is_need_to_notify %}
+                                                <button name="notify" class="rounded-pill bell " type="submit" onclick="notify()"><i class="pt-2 pb-2 far fa-bell ibell" style="width:28px;"></i></button>
+                                             {% else %}
+                                                <button name="notify" class="rounded-pill bell " type="submit" onclick="notify()"><i class="pt-2 pb-2 far fa-bell ibell" style="width:28px; color: aqua;"></i></button>
+                                             {% endif %}
+                                            </form>
+                                        </div>
+                                    </div>
+                                    <div class=" px-2">
                                     
+                                        <a class="navbar-brand" href="{% url 'info' %}"><img class="rounded-pill" style="width:45px;" src="{{avatar}}"></a>
+                                    </div> 
                                 </div>
-    
                             </div>
                         </div>
-                    </div>
-                    <div class="body_right">
-                        <div class="fav">
-                            <ul>
-                                <form method="post">
-                                    {% csrf_token %}
-                                    <li><button class="favbt" type="submit" name="love" onclick="favMovies()">
-                                        {% if movie.is_love %}
-                                            <img class="heart" src="{% static 'css/Trailer_Detail/image/icon/icons8-heart-red-24.png'%}">
-                                        {% else %}
-                                            <img class="heart" src="{% static 'css/Trailer_Detail/image/icon/icons8-heart-24.png'%}">
-                                        {% endif %}
-                                    </button>
-                                    </li>
-                                    <li>
-                                        <a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u={{request.build_absolute_uri}}">
-                                            <button class="favbt" type="button" onclick="share()">
-                                                <img class="share" src="{% static 'css/Trailer_Detail/image/icon/icons8-share-24.png'%}">
-                                            </button>
-                                        </a>
-                                        
-                                    </li>
-                                    <li>
-                                        <button class="favbt" type="submit" name="mark" onclick="bookmark()">
-                                            {% if movie.is_mark %}
-                                                <img class="bookmark" src="{% static 'css/Trailer_Detail/image/icon/icons8-bookmark-white-24.png'%}">
-                                            {% else %}
-                                                <img class="bookmark"src="{% static 'css/Trailer_Detail/image/icon/icons8-bookmark-24.png'%}">
-                                            {% endif %}
-                                        </button>
-                                    </li>
-                                    <li>
-                                        <button class="favbt" type="button">
-                                            <img src="{% static 'css/Trailer_Detail/image/icon/icons8-star-24.png'%}">
+                        <div class="center mt-3 px-5">
+                            <div class="ratio ratio-21x9">
+                              <iframe src="{{movie.trailer_video}}" allowfullscreen frameborder="0"></iframe>
+                            </div>
+                        </div>
+                        <div class="container-fluid mt-3 bottom ">
+                            <div class="row">
+                                <div class="col-md-8 mx-auto bottom-left">
+                                    <div class="row ms-3">
+                                        <div class="title_movies">
+                                            <h5>
+                                              <ul class="list-inline">
+                                                <li class="list-inline-item">{{movie.title}}</li>
+                                                <li class="list-inline-item">&bull; {{movie.year_of_production}}</li> 
+                                                <li class="list-inline-item">&bull; {{movie.time}}</li>
+                                              </ul>
+                                            </h5>
+                                            <h6 style="font-size:10px">
+                                              {% for category in categories %}
+                                              <label class="p-2 ms-1">
+                                                {{category.category}}
+                                              </label> 
+                                              {% endfor %}
+                                            </h6>
+                                            <p style="font-size:12px;">
+                                              {{movie.description}}
+                                            </p>
+                                          
+                                        </div>
+                                        <div class="mb-2 info">
+                                            <hr>
+                                            <p>
+                                              Director: <span style="color:cadetblue;">{{movie.director}}</span>
+                                            </p>
+                                            <hr>
+                                            <p>
+                                              Writers: <span style="color:cadetblue;">{{movie.writers}}</span>
+                                            </p>
+                                            <hr>
+                                            <p>Stars: 
+                                              {% for c in topcast %}
+                                                <span style="color:cadetblue;">
+                                                  {{c.name}}.
+                                                </span>
+                                                {% endfor %}
+                                            </p>
+                                            <hr>
+                                            <a class="p-2 text-decoration-none watch" type="submit" href="{% url 'watch' movie.id 1%}">Watch movie</a>
+                                            <span>
+                                                <button class="p-2 mx-1 rate_button" type="button" onclick="topRate()">Top rated movie #65</button>
+                                                <select class="p-1 mt-1 award">
+                                                  <option>Awards 1 nominations</option> <!--{{movie.movie_award.count }} -->
+                                                  <!-- {% for award in movie.movie_award.all %} -->
+                                                      <option>{{award.name}}</option>
+                                                  <!-- {% endfor %} -->
+                                              </select>
+                                            </span>
+                                        </div>
+                                        <div class="info_characters">
+                                            <h6>Top Cast</h6>
+                                            <div class="row">
+                                                <ul class="list-inline">
+                                                    {% for c in topcast %}
+                                                    <li class="list-inline-item text-md-center text-center ms-3"><img class="rounded-pill" style="width:100px; height:90px;" src="{{c.image.url}}" alt="{{c.name}}">
+                                                        <b><br>{{c.name}}</b><br>{{c.character}}<br> ({{c.sub_character}})
+                                                    </li>
+                                                    {% endfor %}
+                                                </ul>
+                                            </div>
+                                            <hr>
+                                        </div>
+                                        <div class="allcast">
+                                            <a class="text-decoration-none p-2" href="#all" data-bs-toggle="collapse">All cast & Crew</a>
+                                            <div id="all" class="collapse">
+                                                <div class="row mt-3">
+                                                    <ul class="list-inline">
+                                                        {% for c in cast_crew %}
+                                                        <li class="list-inline-item text-md-center text-center ms-3"><img class="rounded-pill" style="width:100px; height:90px;" src="{{c.image.url}}" alt="{{c.name}}">
+                                                            <b><br>{{c.name}}</b><br>{{c.character}}<br> ({{c.sub_character}})
+                                                        </li>
+                                                        {% endfor %}
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                            <hr>
+                                        </div>
+                                        <div class="info_movie">
+                                            <h5>'{{movie.title}}' Trivia, Facts, and Figures</h5>
+                                            <div class="row">
+                                                <div class="col-md-7">
+                                                    <p style="font-size:13px;">{{movie.trivia_summary}}</p>
+                                                </div>
+                                                <div class="col-md-5">
+                                                    <img src="{{movie.trivia_image.url}}" alt="{{movie.title}}" style="width:100%;">
+                                                </div>
+                                                <a class="text-end text-decoration-none" href="{{movie.trivia_url}}">Learn more</a>
+                                            </div>
+                                        </div>
+                                        <div class="other_movie">
                                             
-                                        </button>
-                                    </li>
-                                    <li>
-                                        <label >{{movie.average_of_star}} | <span style="color:#534d4d;font-size:12px;">{{movie.total_views}}</span></label>
-                                    </li>
-                                </form>
-                            </ul>
+                                            <div class="row">
+                                                <h5>Other movies</h5>
+                                                <a class="text-end text-decoration-none" href="{% url 'home' %}">See all</a>
+                                            </div>
+                                            <div class="row">
+                                                <ul class="list-inline">
+                                                    <li class="list_inline-item">
+                                                        {% for movie in another %}
+                                                        <button class="movie_button" type="button">
+                                                            <a href="{% url 'detail' movie.id %}">
+                                                            <img class="img-movie" src="{{movie.image.url}}" alt="{{movie.title}}" />
+                                                            </a>
+                                                        </button>
+                                                        {% endfor %}
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 mx-auto bottom-right">
+                                    <div class="row ms-2">
+                                        <div class="fav">
+                                            <ul class="list-inline">
+                                                <form method="post">
+                                                    {% csrf_token %}
+                                                    <li class="list-inline-item"><button class="favbt" type="submit" name="love" onclick="favMovies()">
+                                                        {% if movie.is_love %}
+                                                            <img class="heart" src="{% static 'css/Trailer_Detail/image/icon/icons8-heart-red-24.png'%}">
+                                                        {% else %}
+                                                            <img class="heart" src="{% static 'css/Trailer_Detail/image/icon/icons8-heart-24.png'%}">
+                                                        {% endif %}
+                                                    </button>
+                                                    </li>
+                                                    <li class="list-inline-item">
+                                                        <a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u={{request.build_absolute_uri}}">
+                                                            <button class="favbt" type="button" onclick="share()">
+                                                                <img class="share" src="{% static 'css/Trailer_Detail/image/icon/icons8-share-24.png'%}">
+                                                            </button>
+                                                        </a>
+                                                        
+                                                    </li>
+                                                    <li class="list-inline-item">
+                                                        <button class="favbt" type="submit" name="mark" onclick="bookmark()">
+                                                            {% if movie.is_mark %}
+                                                                <img class="bookmark" src="{% static 'css/Trailer_Detail/image/icon/icons8-bookmark-white-24.png'%}">
+                                                            {% else %}
+                                                                <img class="bookmark"src="{% static 'css/Trailer_Detail/image/icon/icons8-bookmark-24.png'%}">
+                                                            {% endif %}
+                                                        </button>
+                                                    </li>
+                                                    <li class="list-inline-item">
+                                                        <button class="favbt" type="button">
+                                                            <img src="{% static 'css/Trailer_Detail/image/icon/icons8-star-24.png'%}">
+                                                            
+                                                        </button>
+                                                    </li>
+                                                    <li class="list-inline-item">
+                                                        <label >{{movie.average_of_star}} | <span style="color:#534d4d;font-size:12px;">{{movie.total_views}}</span></label>
+                                                    </li>
+                                                </form>
+                                            </ul>
+                                        </div>
+                                        <div class="more_options mt-1 row">
+                                            <a class="text-decoration-none p-2 px-3 more" href="{% url 'movies' %}">
+                                                <img src="{% static 'css/Trailer_Detail/image/icon/more_option.png'%}">
+                                                More watch options
+                                            </a>
+                                            <a class="text-decoration-none morebt mt-3" href="{% url 'movies' %}#onSeptember">
+                                                <div class="card card-inverse text-center" style="max-width: 320px;">
+                                                    <!-- Image -->
+                                                    <img class="card-img-top" src="{% static 'css/Trailer_Detail/image/best_movies.jpg'%}" alt="">
+                                                    
+                                                    <!-- Text Overlay -->
+                                                    <div class="card-body morebt_text">Popular movies on September
+                                                    </div>
+                                                </div>
+                                            </a>
+                                            <a class="text-decoration-none news mt-3" href="https://www.gq.com/story/2022-summer-movie-guide-doctor-strange-top-gun-maverick-thor-love-and-thunder#:~:text=Summer%20Movies%202022%3A%2020%20Movies%20Worth%20Watching%20This,8%20Elvis%20%28in%20theaters%20June%2024%29%20More%20items">
+                                                <div class="card card-inverse text-center" style="max-width: 320px;">
+                                                    <!-- Image -->
+                                                    <img class="card-img-top" src="{% static 'css/Trailer_Detail/image/movie.jpg'%}" alt="news movie">
+                                                    
+                                                    <!-- Text Overlay -->
+                                                    <div class="card-body morebt_text">2022 Summer Move Guide
+                                                        <small>Updated 1 month ago</small>
+                                                    </div>
+                                                </div>
+                                            </a>
+                                            <a class="text-decoration-none morebt mt-3" href="{% url 'home' %}#Trending">
+                                                <div class="card card-inverse text-center" style="max-width: 320px;">
+                                                    <!-- Image -->
+                                                    <img class="card-img-top" src="{% static 'css/Trailer_Detail/image/top50.jpg'%}" alt="">
+                                                    
+                                                    <!-- Text Overlay -->
+                                                    <div class="card-body morebt_text">Top Trending
+                                                    </div>
+                                                </div>
+                                            </a>
+                                            <a class="text-decoration-none morebt mt-3" href="{%url 'movies'%}#Upcoming">
+                                                <div class="card card-inverse text-center" style="max-width: 320px;">
+                                                    <!-- Image -->
+                                                    <img class="card-img-top" src="{% static 'css/Trailer_Detail/image/new-upcoming.jpg'%}" alt="">
+                                                    
+                                                    <!-- Text Overlay -->
+                                                    <div class="card-body morebt_text">New & Upcoming Movies
+                                                    </div>
+                                                </div>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                             
                         </div>
-                        <div class="more_options">
-                            <ul>
-                                <li id="more">
-                                    <a  href="{% url 'movies' %}">
-                                        <img src="{% static 'css/Trailer_Detail/image/icon/more_option.png'%}">
-                                        <label>More watch options</label>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a class="morebt" href="{% url 'movies' %}#onSeptember">
-                                        <img class="button_img" src="{% static 'css/Trailer_Detail/image/best_movies.jpg'%}" alt="best movie">
-                                        <div class="best-div">
-                                            <img src="{% static 'css/Trailer_Detail/image/icon/more_option.png'%}">
-                                            <label>The Best Movies in September</label>
-                                        </div>
-                                    </a>
-                                </li>
-                                <li id="news">
-                                    <a href="https://www.imdb.com/list/ls063095038/">
-                                        <div>
-                                            <img src="{% static 'css/Trailer_Detail/image/news.jpg'%}" alt="news" >
-                                            <label>The Billion-Dollar Film Club: 50 Movies to Reach $1 Billion Worldwide</label>
-                                        </div>
-                                        <p>Updated 1 week ago </p>
-                                    </a>
-                                </li>
-                                <li id="news">
-                                    <a href="https://www.gq.com/story/2022-summer-movie-guide-doctor-strange-top-gun-maverick-thor-love-and-thunder#:~:text=Summer%20Movies%202022%3A%2020%20Movies%20Worth%20Watching%20This,8%20Elvis%20%28in%20theaters%20June%2024%29%20More%20items">
-                                        <div>
-                                            <img src="{% static 'css/Trailer_Detail/image/news-movies.jpg'%}" alt="news movie" style="margin-left:55px">
-                                            <label>2022 Summer Move Guide</label>
-                                        </div>
-                                        <p>Updated 1 month ago </p>
-                                    </a>
-                                </li>
-                                <li id="news">
-                                    <a href="https://www.imdb.com/list/ls560301026/">
-                                        <div>
-                                            <img src="{% static 'css/Trailer_Detail/image/upcoming.jpg'%}" alt="upcoming action" style="margin-left:18px;">
-                                            <label>Upcoming Action and Adventure<br> Movies and TV</label>
-                                        </div>
-                                        <p>Updated 3 months ago</p>
-                                    </a>
-                                </li>
-                                <li id="top50">
-                                    <button class="morebt" type="button" onclick="top50()">
-                                        <img class="button_img" src="{% static 'css/Trailer_Detail/image/top50.jpg'%}" alt="Top 50 TV Dramas"">
-                                        <div class="best-div">
-                                            <img src="{% static 'css/Trailer_Detail/image/icon/more_option.png'%}">
-                                            <label>Top 50 TV Dramas</label>
-                                        </div>
-                                    </button>
-                                </li>
-                                <li >
-                                    <a class="morebt" href="{%url 'movies'%}#Upcoming">
-                                        <img class="button_img" src="{% static 'css/Trailer_Detail/image/new-upcoming.jpg'%}" alt="new and upcoming">
-                                        <div class="best-div">
-                                            <img src="{% static 'css/Trailer_Detail/image/icon/more_option.png'%}">
-                                            <label>New & Upcoming Movies</label>
-                                        </div>
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
                     </div>
+                    
                 </div>
             </div>
         </div>
+        
         <div class="loader-wrapper">
             <div class="loader"></div>
         </div>
@@ -321,6 +349,10 @@
             });
         </script>
         {% endfor %}
+        <!--Scripts bootstrap-->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous">
+        </script>
     </body>
 </html>
 

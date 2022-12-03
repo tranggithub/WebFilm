@@ -485,6 +485,7 @@ def WatchFilm(request, movie_id, number_ep):
       rate = myrate.rate
     except:
       rate = 0
+    profile = Profile.objects.get(user=request.user)
     ava = request.user.profile.avatar.url
     movies = Movie.objects.filter(id=movie_id)
     user = request.user
@@ -508,7 +509,8 @@ def WatchFilm(request, movie_id, number_ep):
         'ep': ep,
         'user':user,
         'rate' : rate,
-        'ep': ep
+        'ep': ep,
+        'profile': profile
         })
   else:
     messages.error(request,"Please log in!")
@@ -517,6 +519,24 @@ def WatchFilm(request, movie_id, number_ep):
 
 
 def Detail(request, movie_id):
+  if request.method == "POST":
+    url='movies/movies/'
+    if 'notify' in request.POST:
+      if request.user.profile.is_need_to_notify == False:
+        if request.user.email is not None:
+          request.user.profile.is_need_to_notify = True
+          request.user.profile.save()
+          messages.success(request,"You will reveive email if we add new movie")
+          redirect(url)
+        else:
+          messages.error(request,"You don't have an email in your account")
+          redirect(url)
+      else:
+        request.user.profile.is_need_to_notify = False
+        request.user.profile.save()
+        messages.success(request,"You won't reveive email when we add new movie")
+        redirect(url)
+
   if  Choices_User=="CHILD": 
     #movie = get_object_or_404(Movie,id=movie_id)
     movie = Movie.objects.get(pk=movie_id)
@@ -538,6 +558,7 @@ def Detail(request, movie_id):
           movie.marks.add(request.user)
         url = '/movies/detail/'+ movie_id
         return redirect(url)
+    profile = Profile.objects.get(user=request.user)
     ava = request.user.profile.avatar.url
     another = Movie.objects.filter(child='Yes').exclude(id=movie_id)[:4]
     movies = Movie.objects.filter(id=movie_id,child='Yes')
@@ -550,7 +571,8 @@ def Detail(request, movie_id):
     'movies': movies, 
     'categories': category,
     'topcast': topcast, 
-    'cast_crew': cast_crew})
+    'cast_crew': cast_crew,
+  'profile': profile})
   else:
     #movie = get_object_or_404(Movie,id=movie_id)
     movie = Movie.objects.get(pk=movie_id)
@@ -572,6 +594,7 @@ def Detail(request, movie_id):
           movie.marks.add(request.user)
         url = '/movies/detail/'+ movie_id
         return redirect(url)
+  profile = Profile.objects.get(user=request.user)
   ava = request.user.profile.avatar.url
   another = Movie.objects.all().exclude(id=movie_id)[:4]
   movies = Movie.objects.filter(id=movie_id)
@@ -584,7 +607,8 @@ def Detail(request, movie_id):
   'movies': movies, 
   'categories': category,
   'topcast': topcast, 
-  'cast_crew': cast_crew})
+  'cast_crew': cast_crew,
+  'profile': profile})
 
 
 
