@@ -180,6 +180,23 @@ def UserPacket(request):
   
  
 def SeeAll_Trending(request, status_short):
+  if request.method == "POST":
+    url='/movies/home/'
+    if 'notify' in request.POST:
+      if request.user.profile.is_need_to_notify == False:
+        if request.user.email is not None:
+          request.user.profile.is_need_to_notify = True
+          request.user.profile.save()
+          messages.success(request,"You will reveive emails if we add new movie")
+          redirect(url)
+        else:
+          messages.error(request,"You don't have an email in your account")
+          redirect(url)
+      else:
+        request.user.profile.is_need_to_notify = False
+        request.user.profile.save()
+        messages.success(request,"You won't receive any emails when we add new movie")
+        redirect(url)
   if status_short == 'U':
     title = "Upcomming"
   elif status_short == 'T':
@@ -188,24 +205,25 @@ def SeeAll_Trending(request, status_short):
     title = "TV Series"
   else:
     title = "Popular Movies On September"
+  profile=Profile.objects.get(user=request.user) 
   if status_short == 'U' or status_short =='T':
     if Choices_User=="CHILD":
       ava = request.user.profile.avatar.url
       movies = Movie.objects.filter(status__status=status_short,child='Yes')
-      return render(request,".\Home\SeeAll_Trending_English.html",{'avatar':ava, 'movies':movies, 'title':title})
+      return render(request,".\Home\SeeAll_Trending_English.html",{'avatar':ava, 'movies':movies, 'title':title,'profile':profile})
     else: 
       ava = request.user.profile.avatar.url
       movies = Movie.objects.filter(status__status=status_short)
-      return render(request,".\Home\SeeAll_Trending_English.html",{'avatar':ava, 'movies':movies, 'title':title})
+      return render(request,".\Home\SeeAll_Trending_English.html",{'avatar':ava, 'movies':movies, 'title':title,'profile':profile})
   else:
     if Choices_User=="CHILD":
       ava = request.user.profile.avatar.url
       movies = Movie.objects.filter(format=status_short,child='Yes')
-      return render(request,".\Home\SeeAll_Trending_English.html",{'avatar':ava, 'movies':movies, 'title':title})
+      return render(request,".\Home\SeeAll_Trending_English.html",{'avatar':ava, 'movies':movies, 'title':title,'profile':profile})
     else: 
       ava = request.user.profile.avatar.url
       movies = Movie.objects.filter(format=status_short)
-      return render(request,".\Home\SeeAll_Trending_English.html",{'avatar':ava, 'movies':movies, 'title':title})
+      return render(request,".\Home\SeeAll_Trending_English.html",{'avatar':ava, 'movies':movies, 'title':title,'profile':profile})
 
 
 
