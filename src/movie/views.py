@@ -482,6 +482,22 @@ def WatchFilm(request, movie_id, number_ep):
           myrate = RatingStar.objects.create(user=usr,movie=movie,rate=5)
           myrate.save()
         return redirect(url)
+      elif 'notify' in request.POST:
+        if request.user.profile.is_need_to_notify == False:
+          if request.user.email is not None:
+            request.user.profile.is_need_to_notify = True
+            request.user.profile.save()
+            messages.success(request,"You will reveive emails if we add new movie")
+            redirect(url)
+          else:
+            messages.error(request,"You don't have an email in your account")
+            redirect(url)
+        else:
+          request.user.profile.is_need_to_notify = False
+          request.user.profile.save()
+          messages.success(request,"You won't receive any emails when we add new movie")
+          redirect(url)
+          return redirect(url)
       elif 'subcomment' in request.POST:
         parent_id=request.POST.get('comment_id')
         usr = request.user
@@ -537,10 +553,9 @@ def WatchFilm(request, movie_id, number_ep):
     url=reverse_lazy('log_in')
     redirect(url)
 
-
 def Detail(request, movie_id):
   if request.method == "POST":
-    url='movies/movies/'
+    url='movies/detail/' + movie_id
     if 'notify' in request.POST:
       if request.user.profile.is_need_to_notify == False:
         if request.user.email is not None:
