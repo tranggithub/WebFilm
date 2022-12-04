@@ -127,7 +127,7 @@
                                     <div class="grid_heading_play_info">
                                         {% for movie in movies %}
                                         {% if movie.title == 'Moonfall'%} 
-                                        <a class="grid_heading_play_more" href="{% url 'watch' movie.id%}"  style="text-decoration:none;"> 
+                                        <a class="grid_heading_play_more" href="{% url 'watch' movie.id 1 %}"  style="text-decoration:none;"> 
                                                 <i class="fas fa-play"></i>
                                                 Play
                                         </a>
@@ -154,7 +154,7 @@
                                     {% for movie in trending %}
                                         <button class="column__movie">
                                             <a href="{% url 'detail' movie.id %}">
-                                                <img class="img-movie" src="{{movie.image.url}}" alt="" style="width:160px; height:252px; border-radius: 10px;" />
+                                                <img class="img-movie" src="{{movie.image.url}}" alt="" style="width:140px; height:232px; border-radius: 10px;" />
                                             </a>
                                         </button>
                                     {% endfor %}
@@ -170,7 +170,7 @@
                                     {% for movie in upcoming %}
                                         <button class="column__movie">
                                             <a href="{% url 'detail' movie.id %}">
-                                                <img class="img-movie" src="{{movie.image.url}}" alt="{{movie.title}}" style="width:160px; height:252px; border-radius: 10px;"/>
+                                                <img class="img-movie" src="{{movie.image.url}}" alt="{{movie.title}}" style="width:140px; height:232px; border-radius: 10px;"/>
                                             </a>
                                         </button>
                                     {% endfor %}
@@ -186,7 +186,7 @@
                                     {% for movie in tv_series %}
                                         <button class="column__movie">
                                             <a href="{% url 'detail' movie.id%}">
-                                                <img class="img-movie" src="{{movie.image.url}}" alt="{{movie.title}}" style="width:160px; height:252px; border-radius: 10px;"/>
+                                                <img class="img-movie" src="{{movie.image.url}}" alt="{{movie.title}}" style="width:140px; height:232px; border-radius: 10px;"/>
                                             </a>
                                         </button>
                                     {% endfor %}
@@ -201,7 +201,7 @@
                                     {% for movie in ps %}
                                         <button class="column__movie">
                                             <a href="{% url 'detail' movie.id %}">
-                                                <img class="img-movie" src="{{movie.image.url}}" alt="{{movie.title}}" style="width:160px; height:252px; border-radius: 10px;"/>
+                                                <img class="img-movie" src="{{movie.image.url}}" alt="{{movie.title}}" style="width:140px; height:232px; border-radius: 10px;"/>
                                             </a>
                                         </button>
                                     {% endfor %}

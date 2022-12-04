@@ -76,9 +76,13 @@
                                 </div>
                                 <div class="d-flex align-items-center mt-2 top-left">
                                     <div class="p-2">
-                                        <form method="post" name="notify" >
-                                         {% csrf_token %}
-                                        <button name="notify" class="rounded-pill bell " type="submit" onclick="notify()"><i class="pt-2 pb-2 far fa-bell" style="width:28px; color:grey;"></i></button>
+                                        <form method="post" name="notify">
+                                            {% csrf_token %}
+                                            {% if not profile.is_need_to_notify %}
+                                               <button name="notify" class="rounded-pill bell " type="submit" onclick="notify()"><i class="pt-2 pb-2 far fa-bell ibell" style="width:28px;"></i></button>
+                                            {% else %}
+                                               <button name="notify" class="rounded-pill bell " type="submit" onclick="notify()"><i class="pt-2 pb-2 far fa-bell ibell" style="width:28px; color: aqua;"></i></button>
+                                            {% endif %}
                                         </form>
                                     </div>
                                 </div>
@@ -98,7 +102,7 @@
                                     {% for movie in movies %}                      
                                     <button class="column__movie">                       
                                         <a href="{% url 'detail' movie.id %}">
-                                        <img class="img-movie" src="{{movie.image.url}}" alt="{{movie.title}}" style="width:160px; height:252px; border-radius: 10px;"/></a>
+                                        <img class="img-movie" src="{{movie.image.url}}" alt="{{movie.title}}" style="width:140px; height:232px; border-radius: 10px;"/></a>
                                     {% endfor %}                                                                                                                                  
                                     </button>
                                 </div>
@@ -112,7 +116,7 @@
                                     {% for movie in Toprated %}
                                         <button class="column__movie">
                                             <a href="{% url 'detail' movie.id%}">
-                                                <img class="img-movie" src="{{movie.image.url}}" alt="{{movie.title}}" style="width:160px; height:252px; border-radius: 10px;"/>
+                                                <img class="img-movie" src="{{movie.image.url}}" alt="{{movie.title}}" style="width:140px; height:232px; border-radius: 10px;"/>
                                             </a>
                                         </button>
                                     {% endfor %}
@@ -127,7 +131,7 @@
                                     {% for movie in Mostwatch %}
                                         <button class="column__movie">
                                             <a href="{% url 'detail' movie.id %}">
-                                                <img class="img-movie" src="{{movie.image.url}}" alt="{{movie.title}}" style="width:160px; height:252px; border-radius: 10px;"/>
+                                                <img class="img-movie" src="{{movie.image.url}}" alt="{{movie.title}}" style="width:140px; height:232px; border-radius: 10px;"/>
                                             </a>
                                         </button>
                                     {% endfor %}
@@ -139,7 +143,7 @@
                                 </div>
                                 <div class="container__Check">      
                                     <div class="Check">          
-                                        <div class="text__Check" style="margin -top:5%"> Action</div>                                        
+                                        <div class="text__Check"> Action</div>                                        
                                     </div>                                        
                                     <hr class="hr_h">
                                     <div class="Check">          

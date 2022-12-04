@@ -1,389 +1,138 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap');
 
-*{
-    margin:0;
-    padding:0;
-    box-sizing: border-box;
+body{
     background-color: #292929;
-    font-family:'Poppins', sans-serif ;
-    line-height:22px;
-
 }
-.body{
-    width:100%;
-    display:block;
+.index{
+    font-family:'Poppins', sans-serif;
+    background-color: #292929;
+    color:#cccccc;
 }
-.container{
-    display:block;
-}
-
-.left{
-    position:fixed;
-    top:0;
+.sidebar{
     background-color:#212121;
     border-top-right-radius: 20px;
     border-bottom-right-radius: 20px;
-    height:100%;
-    width:220px;
-    float:left;
 }
-
-#brandname{
-    margin-top: 14%;
-    margin-left:21%;
-    margin-right:20%;
-    width:50%;
-}
-
-.button{
-    margin-top:30%;
-}
-.button li{
-    list-style-type:none;
-}
-.button #main{
-    background-color: #50c5c1a2;
-    border-right: 5px solid #3DD2CC;
-}
-.button a{
-    background-color:#212121;
-    font-size: 15px;
-    color:#CCCCCC;
-    display:flex;
-    text-align: center;
-    padding: 16px 0px 16px 40px;
-    text-decoration: none;
-}
-.button a:hover{  /*ree chuọt*/
-    background-color: #50c5c1a2;
-    color:aliceblue;
-}
-.button label{
-    cursor:pointer;
+.img-brand{
     background:none;
-    padding-left:12px;
 }
-.button img{    /*icon*/
-    width:20px;
-    height:20px;
+#menu{
     background:none;
+}
+#menu li{
+    background:none;
+}
+#menu a{
+    color:#cccccc;
+    
+}
+#menu a:hover{
+    /* background-color: #50c5c1a2; */
+    color:#50c5c1a2;
+}
+#menu span{
+    background:none;
+}
+.movies span, .movies_i{
+    color:#50c5c1a2;
+    
 }
 
 .center{
-    width:83%;
-    overflow-x:auto;
-    color:#cccccc;
-    padding-left:40px;
-    float:right;
-}
-.top{
-    display:inline-block;
-    position:relative;
+    overflow-y:auto;
 }
 .bell{
-    cursor:pointer;
-    /* float:right; */
-    position:absolute;
-    margin-top:24px;
-    margin-left:870px;
-    background-color:#434141;
-    opacity:50%;
-    border-radius: 50%;
     border:none;
-    padding-top:5px;
-    padding-left:6px;
-    padding-right:6px;
+    background: none;
+    opacity:50%;
+    border-radius: 30%;
+    background-color:#434141;
+    width:40px;
 }
-.bell img{
-    width:28px;
-    background:none;
+.ibell {
+    color: grey;
+}
+.ibell:hover{
+    color: aqua;
 }
 .user{
-    cursor:pointer;
-    /* float:right; */
-    position:absolute;
-    margin-top:23px;
-    margin-left:925px;
     border:none;
-}
-.user img{
-    width:45px;
-    height:45px;
-    border-radius: 50%;
-}
-.search{
-    /* display:-ms-flexbox; */
-    position:relative;
-    margin-top:20px;
-    margin-bottom: 18px;
-}
-.search img{ /*icon search*/
-    background:none;
-    position:absolute;
-    width:24px;
-    margin-top: 8px;
-    margin-left:20px;
-    
+    background: none;
 }
 .keyword{
-    background-color:rgb(46, 45, 45);
-    color:#cccccc;
-    border-radius: 25px;
+    background:#212121;
     border:none;
-    padding-left: 70px; /*chữ cách khung*/
-    margin-left: 5px;
-    width:700px;
-    height:45px;
-    font-size: 18px;
-    font-weight:30;
+    border-radius: 20px;
+    width:90%;
+    color:#cccccc;
 }
-
-/*trailer_vid*/
-/* .play{
+.search{
     position:relative;
-    display:flex;
-    margin-left: 5px;
-    margin-bottom:20px;
 }
-#playbt{
-    cursor:pointer;
-    border:none;
+.search i{
     position:absolute;
-    margin-left:460px;
-    background:none;
-    padding-top:8px;
-    padding-left: 10px;
-    padding-right: 5px;
-    border-radius: 50%;
-    background-color:#cccccc;
-    opacity:55%;
-}
-#playbt:hover
-{
-    background:#c0c5c4;
-    opacity: 100%;
-}
-#playbt img{
-    background:none;
-    opacity:100%;
-}
-#vid{
-    border-radius: 23px;
-    margin-left:5px;
-    border:none;
-
-} */
-
-.body_center{
-    display:grid;
-    grid-auto-flow:column;
-}
-.body_left{
-    width:600px;
-    margin-left: 20px;
-    color:#cccccc;
+    top:45%;
 }
 
-.Detail_movies{
-    float:left;
-}
-.title_movies li{
-    font-size: 16px;
+.title_movies h5{
     letter-spacing: 1.5px;
-    float:left;
-    padding-right:28px;
-
-}
-#first_ele{
-    list-style-type:none;
+    font-size:16px;
+    color:#cccccc;
 }
 .title_movies label{
-    color:#cccccc;
-    border-radius: 30px;
+    border-radius:30px;
     border:1.5px solid white;
-    padding:4px 15px;
-    margin-right:5px;
 }
-.title_movies p{
-    margin-left: 10px;
-}
-
-.info{
-    margin-bottom:10px;
-}
-.info p{
-    margin:10px 0px 10px 8px;
-}
-.info a{
+.watch{
     background-color: #5c4289;
-    text-decoration:none;
     color:#cccccc;
-    padding-top:10px;
-    padding-bottom:10px;
-    padding-left: 15px;
-    padding-right:15px;
     border-radius: 10px;
 }
-.info .rate_button{
-    margin-top:10px;
-    margin-right:10px;
-    margin-left:8px;
+.watch:hover, .allcast a:hover{
+    background-color: #3d3749;
+    color:#cccccc;
+}
+.rate_button{
     border-radius: 10px;
-    padding:10px 25px;
     border:none;
     background-color: #3dd2cdc8;
     color:aliceblue;
-    cursor:pointer;
 }
-.info select{
-    cursor:pointer;
-    color:#cccccc;
-    background-color: black;
-    padding:8px 50px 8px 18px;
+.award{
     border:1.4px solid;
     border-radius: 18px;
+    color:#cccccc;
+    background-color: black;
 }
-
-.info_characters, .allcast{
+.info_characters, .allcast li, .other_movie a{
+    font-size:12px;
     color:#cccccc;
 }
-.info_characters h4{
-    margin-bottom:30px;
-    letter-spacing: 1.5px;
+.info_characters li{
+    list-style-type:none;
 }
-.info_characters li, .allcast li{
-    list-style-type: none;
-    text-align: center;
-    float:left;
-    font-size: 12px;
-    margin-right: 20px;
-    margin-bottom:30px;
-    margin-left: 10px;;
-}
-.info_characters li img, .allcast li img{
-    width:95px;
-    height:90px;
-    border-radius: 50%;
-}
-.accordion{
-    background:none;
+.allcast a{
     color:#cccccc;
-    cursor:pointer;
-    width:100%;
-    border:none;
-    text-align: left;
-    outline:none;
-    transition:0.4s;
-    font-size:14px;
-    padding-top:10px;
-    display:flex;
-    border-radius: 5px;
-}
-.accordion h4{
-    background:none;
-}
-.active, .accordion:hover{
-    background-color:cadetblue;
-    color:#212121;
-}
-.accordion:after{
-    content:'\002B';    /*dau cong*/
+    background-color: #5c4289;
     color:#cccccc;
-    margin-left:430px;
-}
-.active:after{
-    content:"\2212"; /*dau tru*/
-    color:#212121;
-}
-.allcast{
-    padding:0 5px;
-    max-height: 0;
-    overflow:hidden;
-    transition:max-height 0.2s ease-out;
-}
-.allcast ul{
-    margin-top:20px;
-}
-
-.info_movies{
-    color:#cccccc;
-}
-.info_movies hr{
-    width:600px;
-}
-.info_movies img{
-    float:right;
     border-radius: 10px;
-    height:190px;
-    width:280px;
-    margin-left: 8px;
 }
-.info_movies h4{
-    margin-left: 8px;
-    margin-bottom:10px;
-    letter-spacing: 1.5px;
-}
-.info_movies p{
-    font-size: 12px;
-    margin-bottom:10px;
-    margin-left: 8px;
-}
-.info_movies a{
-    margin-left: 8px;
-    font-size: 12px;;
-    text-decoration: none;
-    color:#3DD2CC;
-}
-
-.similar_movies{
-    margin-top:20px;
-}
-.similar_movies h4{
-    letter-spacing:1.5px;
-}
-.similar_movies a{
-    float:right;
-    text-decoration:none;
-    color:#434141;
-    font-size: 13px;
-}
-.similar{
-    margin-top:20px;
-    position:relative;
-}
-.similar li{
-    display:block;
-    float:left;
-    list-style-type: none;
-    margin-bottom:20px;
-    text-align: center;
+.info_movie a{
+    color:#cccccc;
+    font-size:13px;
 }
 .movie_button{
-    cursor:pointer;
+    background:none;
     border:none;
-    
 }
 .movie_button img{
-    width:130px;
-    border-radius: 20px;
-}
-
-.body_right{
-    width:auto;
-    margin:0;
-}
-.fav{
-    margin-left:30px;
-    margin-bottom:40px;
+    width:120px;
+    height:180px;
+    border-radius: 10px;
 }
 .favbt{
-    cursor:pointer;
     border:none;
-}
-.fav li{
-    list-style-type: none;
-    margin-left:10px;
-    float:left;
+    background:none;
 }
 .favbt img{
     width:20px;
@@ -397,99 +146,21 @@
 .share:hover{
     content:url("./image/icon/icons8-share-white-24.png");
 }
-
-.more_options li{
-    list-style-type: none;
-    margin-bottom:20px;
-}
-.more_options a{
-    text-decoration:none;
+.more{
     color:#cccccc;
+    background-color: #070707;
+    border-radius: 20px;
 }
-.more_options label{
-    background:none;
-    cursor:pointer;
-}
-.more_options p{
-    line-height: 20px;
-    font-size: 8px;
-    
-}
-
-.more_options #more{
-    background-color:rgb(24, 24, 24);
-    border-radius: 15px;
-    width:280px;
-    height:40px;
-    text-align: center;
-    font-size: 14px;
-}
-#more a{
-    background:none;
-    display:flex;   /*cùng hàng*/
-    padding-top:8px;
-    padding-left:50px;
-    text-align: center;
-}
-#more img, .best-div img{
+.more img{
     width:25px;
     background:none;
 }
-#more label, .best-div label{
-    margin-left:10px;  /*cách hình*/
+.morebt_text{
+    font-size:14px;
 }
-
-.morebt{
-    cursor:pointer;
-    border:none;
-    width:280px;
-    position:relative;
-    display:flex;
-    margin-bottom:20px;
+.morebt_text:hover{
+    color:#3DD2CC;
 }
-.morebt a{
-    display:block;
-}
-.button_img{
-    width:280px;
-    height:200px;
-    border-radius: 10px;
-}
-.best-div{
-    position:absolute;
-    background:#282626;
-    border-radius: 10px;;
-    opacity:0.7;
-    width:280px;
-    /* height:35px; */
-    margin-top:165px;
-    padding-top:8px;
-    padding-left: 5px;
-    color:white;
-    display:inline-flex;
-    text-align: center;
-    font-size: 11px;
-}
-.best-div img{
-    margin-bottom:6px;
-}
-
-#news{ 
-    cursor:pointer;
-    font-size: 11px;
-    display:flex;
-    border:2px solid rgb(96, 93, 93);
-    border-radius: 10px;
-    width:280px;
-    padding: 5px;
-}
-#news img{
-    width:65px;
-    height:85px;
-    border-radius: 10px;
-    float:right;
-}
-
 
 .loader {
 border: 5px solid #f3f3f3;

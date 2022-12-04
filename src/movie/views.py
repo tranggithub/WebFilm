@@ -44,24 +44,24 @@ def SignUp(request):
       try:
         user= User.objects.get(username=usernm)
         messages.error(request,"The username you entered has already been taken. Please try another username.")
-        return redirect('/movies/sign_up')
+        return redirect('sign_up')
       except User.DoesNotExist:
         nm = request.POST.get('name')
         myuser = User.objects.create_user(username=usernm,email=mail,password=passwd1)
         myuser.first_name = nm
         myuser.save()
         messages.success(request,"Your account has been created successfully")
-        return redirect('/movies/log_in')
+        return redirect('log_in')
     else:
       messages.error(request,"Your confirm password and your password are not the same")
-      return redirect('/movies/sign_up')
+      return redirect('sign_up')
   return render(request,".\SignUp_LogIn\SignUpFilm.html")
 
 
 def LogIn(request):
   if request.user.is_authenticated:
     messages.warning(request, "You have already logged in")
-    return redirect('/movies/userpacket')
+    return redirect('userpacket')
   else:
     if request.method == "POST":
       name = request.POST.get('username')
@@ -74,10 +74,10 @@ def LogIn(request):
             request.session.set_expiry(2592000)#30 ngày
         login(request, user)
         messages.success(request,"Log in successfully")
-        return redirect('/movies/userpacket')
+        return redirect('userpacket')
       else:
         messages.error(request,"Invalid Username or Password")
-        return redirect('/movies/log_in')
+        return redirect('log_in')
     
     movie = Movie.objects.all()
 
@@ -120,9 +120,9 @@ def password_reset_request(request):
           messages.success(request, 'A message with reset password instructions has been sent to your inbox.')
           return redirect ("/movies/reset_password/done")
       messages.error(request, 'An invalid email has been entered.')
-      return redirect('/movies/reset_password/')
+      return redirect('reset_password')
     messages.error(request, 'An invalid email has been entered.')
-    return redirect('/movies/reset_password/')
+    return redirect('reset_password')
 
   password_reset_form = PasswordResetForm()
   return render(request, template_name=".\Info\\reset_password.html", context={"form":password_reset_form})
@@ -149,11 +149,10 @@ def Home(request):
         request.user.profile.save()
         messages.success(request,"You won't receive any emails when we add new movie")
         redirect(url)
-  
-  profile=Profile.objects.get(user=request.user)  
-
+    
+  profile = Profile.objects.get(user=request.user)
+  ava = request.user.profile.avatar.url
   if Choices_User=="CHILD":
-    ava = request.user.profile.avatar.url
     movies = Movie.objects.filter(child='Yes')
     trending = Movie.objects.filter(status__status='T',child='Yes')[:4]
     upcoming = Movie.objects.filter(status__status='U',child='Yes')[:4]
@@ -161,13 +160,12 @@ def Home(request):
     ps = Movie.objects.filter(format='PS',child='Yes')[:4]
     return render(request,"Home/Home.html",{'avatar':ava, 'movies': movies,'trending': trending, 'upcoming':upcoming, 'tv_series':tv_series, 'ps':ps,'profile':profile})
   else:
-    ava = request.user.profile.avatar.url
     movies = Movie.objects.all()
     trending = Movie.objects.filter(status__status='T')[:4]
     upcoming = Movie.objects.filter(status__status='U')[:4]
     tv_series = Movie.objects.filter(format='TV')[:4]
     ps = Movie.objects.filter(format='PS')[:4]
-    return render(request,"Home/Home.html",{'avatar':ava, 'movies': movies,'trending': trending, 'upcoming':upcoming, 'tv_series':tv_series, 'ps':ps,'profile':profile})
+    return render(request,"Home/Home.html",{'avatar':ava, 'movies': movies,'trending': trending, 'upcoming':upcoming, 'tv_series':tv_series, 'ps':ps, 'profile':profile})
 
 def UserPacket(request):
   global Choices_User
@@ -484,6 +482,22 @@ def WatchFilm(request, movie_id, number_ep):
           myrate = RatingStar.objects.create(user=usr,movie=movie,rate=5)
           myrate.save()
         return redirect(url)
+      elif 'notify' in request.POST:
+        if request.user.profile.is_need_to_notify == False:
+          if request.user.email is not None:
+            request.user.profile.is_need_to_notify = True
+            request.user.profile.save()
+            messages.success(request,"You will reveive emails if we add new movie")
+            redirect(url)
+          else:
+            messages.error(request,"You don't have an email in your account")
+            redirect(url)
+        else:
+          request.user.profile.is_need_to_notify = False
+          request.user.profile.save()
+          messages.success(request,"You won't receive any emails when we add new movie")
+          redirect(url)
+          return redirect(url)
       elif 'subcomment' in request.POST:
         parent_id=request.POST.get('comment_id')
         usr = request.user
@@ -507,6 +521,7 @@ def WatchFilm(request, movie_id, number_ep):
       rate = myrate.rate
     except:
       rate = 0
+    profile = Profile.objects.get(user=request.user)
     ava = request.user.profile.avatar.url
     movies = Movie.objects.filter(id=movie_id)
     user = request.user
@@ -530,7 +545,8 @@ def WatchFilm(request, movie_id, number_ep):
         'ep': ep,
         'user':user,
         'rate' : rate,
-        'ep': ep
+        'ep': ep,
+        'profile': profile
         })
   else:
     messages.error(request,"Please log in!")
@@ -539,6 +555,24 @@ def WatchFilm(request, movie_id, number_ep):
 
 
 def Detail(request, movie_id):
+  if request.method == "POST":
+    url='movies/movies/'
+    if 'notify' in request.POST:
+      if request.user.profile.is_need_to_notify == False:
+        if request.user.email is not None:
+          request.user.profile.is_need_to_notify = True
+          request.user.profile.save()
+          messages.success(request,"You will reveive email if we add new movie")
+          redirect(url)
+        else:
+          messages.error(request,"You don't have an email in your account")
+          redirect(url)
+      else:
+        request.user.profile.is_need_to_notify = False
+        request.user.profile.save()
+        messages.success(request,"You won't reveive email when we add new movie")
+        redirect(url)
+
   if  Choices_User=="CHILD": 
     #movie = get_object_or_404(Movie,id=movie_id)
     movie = Movie.objects.get(pk=movie_id)
@@ -560,6 +594,7 @@ def Detail(request, movie_id):
           movie.marks.add(request.user)
         url = '/movies/detail/'+ movie_id
         return redirect(url)
+    profile = Profile.objects.get(user=request.user)
     ava = request.user.profile.avatar.url
     another = Movie.objects.filter(child='Yes').exclude(id=movie_id)[:4]
     movies = Movie.objects.filter(id=movie_id,child='Yes')
@@ -572,7 +607,8 @@ def Detail(request, movie_id):
     'movies': movies, 
     'categories': category,
     'topcast': topcast, 
-    'cast_crew': cast_crew})
+    'cast_crew': cast_crew,
+  'profile': profile})
   else:
     #movie = get_object_or_404(Movie,id=movie_id)
     movie = Movie.objects.get(pk=movie_id)
@@ -594,6 +630,7 @@ def Detail(request, movie_id):
           movie.marks.add(request.user)
         url = '/movies/detail/'+ movie_id
         return redirect(url)
+  profile = Profile.objects.get(user=request.user)
   ava = request.user.profile.avatar.url
   another = Movie.objects.all().exclude(id=movie_id)[:4]
   movies = Movie.objects.filter(id=movie_id)
@@ -606,7 +643,8 @@ def Detail(request, movie_id):
   'movies': movies, 
   'categories': category,
   'topcast': topcast, 
-  'cast_crew': cast_crew})
+  'cast_crew': cast_crew,
+  'profile': profile})
 
 
 
@@ -639,7 +677,7 @@ def ChangeInfo(request):
       user_form.save()
       user_profile_form.save()
       messages.success(request,"Change information of your account successfully")
-      return redirect('/movies/info')
+      return redirect('info')
     else:
       messages.error(request,"Invalid value")
   else:
@@ -725,6 +763,7 @@ class MovieNational(ListView):
       def get_context_data(self, **kwargs):
         context=super(MovieNational , self).get_context_data(**kwargs)
         context['movie_national']=self.national
+        context['avatar']=self.request.user.profile.avatar.url
         return context
     
 
