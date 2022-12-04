@@ -311,8 +311,7 @@ animation: spin 2s linear infinite;
       list-style: none;
       position: relative;
       z-index: 1;
-  
-      margin-right: 100px;
+ 
       display: flex;
       padding-left: 1%;
      

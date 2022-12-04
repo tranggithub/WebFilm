@@ -783,6 +783,7 @@ class MovieNational(ListView):
         context=super(MovieNational , self).get_context_data(**kwargs)
         context['movie_national']=self.national
         context['avatar']=self.request.user.profile.avatar.url
+        context['profile']=Profile.objects.get(user=self.request.user)
         return context
     
 
@@ -804,6 +805,7 @@ class MovieFormat(ListView):
       context=super(MovieFormat , self).get_context_data(**kwargs)
       context['movie_format']=self.format
       context['avatar']=self.request.user.profile.avatar.url
+      context['profile']=Profile.objects.get(user=self.request.user)
       return context
   
 class MovieSort(ListView):
@@ -824,6 +826,7 @@ class MovieSort(ListView):
       context=super(MovieSort , self).get_context_data(**kwargs)
       context['movie_sort']=self.sort
       context['avatar']=self.request.user.profile.avatar.url
+      context['profile']=Profile.objects.get(user=self.request.user)
       return context
   
 class MovieCondition(ListView):
@@ -844,6 +847,7 @@ class MovieCondition(ListView):
       context=super(MovieCondition , self).get_context_data(**kwargs)
       context['movie_condition']=self.condition
       context['avatar']=self.request.user.profile.avatar.url
+      context['profile']=Profile.objects.get(user=self.request.user)
       return context
   
 
@@ -866,6 +870,7 @@ class MovieYear(ListView):
       context=super(MovieYear , self).get_context_data(**kwargs)
       context['movie_year']=self.year
       context['avatar']=self.request.user.profile.avatar.url
+      context['profile']=Profile.objects.get(user=self.request.user)
       return context
  
 
@@ -885,5 +890,6 @@ class MovieCategory(ListView):
       context=super(MovieCategory , self).get_context_data(**kwargs)
       context['movie_category']=self.category
       context['avatar']=self.request.user.profile.avatar.url
+      context['profile']=Profile.objects.get(user=self.request.user)
       return context
   
