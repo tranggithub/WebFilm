@@ -179,7 +179,7 @@ def UserPacket(request):
  
 def SeeAll_Trending(request, status_short):
   if request.method == "POST":
-    url='/movies/home/'
+    url='/movies/seeall_trending_english/' + status_short
     if 'notify' in request.POST:
       if request.user.profile.is_need_to_notify == False:
         if request.user.email is not None:
@@ -803,6 +803,7 @@ class MovieFormat(ListView):
     def get_context_data(self, **kwargs):
       context=super(MovieFormat , self).get_context_data(**kwargs)
       context['movie_format']=self.format
+      context['avatar']=self.request.user.profile.avatar.url
       return context
   
 class MovieSort(ListView):
@@ -822,6 +823,7 @@ class MovieSort(ListView):
     def get_context_data(self, **kwargs):
       context=super(MovieSort , self).get_context_data(**kwargs)
       context['movie_sort']=self.sort
+      context['avatar']=self.request.user.profile.avatar.url
       return context
   
 class MovieCondition(ListView):
@@ -841,6 +843,7 @@ class MovieCondition(ListView):
     def get_context_data(self, **kwargs):
       context=super(MovieCondition , self).get_context_data(**kwargs)
       context['movie_condition']=self.condition
+      context['avatar']=self.request.user.profile.avatar.url
       return context
   
 
@@ -862,6 +865,7 @@ class MovieYear(ListView):
     def get_context_data(self, **kwargs):
       context=super(MovieYear , self).get_context_data(**kwargs)
       context['movie_year']=self.year
+      context['avatar']=self.request.user.profile.avatar.url
       return context
  
 
@@ -880,5 +884,6 @@ class MovieCategory(ListView):
   def get_context_data(self, **kwargs):
       context=super(MovieCategory , self).get_context_data(**kwargs)
       context['movie_category']=self.category
+      context['avatar']=self.request.user.profile.avatar.url
       return context
   
