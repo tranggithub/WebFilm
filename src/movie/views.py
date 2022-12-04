@@ -670,20 +670,40 @@ def ChangeInfo(request):
   return render(request,'.\Info\change_info.html',{'u_form':user_form, 'p_form':user_profile_form}) 
 
 def searchBar(request):
+  if request.method == "POST":
+    url='/movies/search/'
+    if 'notify' in request.POST:
+      if request.user.profile.is_need_to_notify == False:
+        if request.user.email is not None:
+          request.user.profile.is_need_to_notify = True
+          request.user.profile.save()
+          messages.success(request,"You will reveive emails if we add new movie")
+          redirect(url)
+        else:
+          messages.error(request,"You don't have an email in your account")
+          redirect(url)
+      else:
+        request.user.profile.is_need_to_notify = False
+        request.user.profile.save()
+        messages.success(request,"You won't receive any emails when we add new movie")
+        redirect(url)
+  profile = Profile.objects.get(user=request.user)  
   if  Choices_User=="CHILD": 
+    # profile=Profile.objects.get(user=request.user)
     keyword=request.GET['keyword']
     ava = request.user.profile.avatar.url 
     movies = Movie.objects.filter(title__contains=keyword,child='Yes')   
     Toprated = Movie.objects.filter(status__status='TR',child='Yes')[:4]
     Mostwatch = Movie.objects.filter(status__status='MW',child='Yes')[:4]
-    return render(request,".\Search\Searchbar.html",{'avatar':ava, 'movies':movies, 'Toprated':Toprated, 'Mostwatch':Mostwatch})
+    return render(request,".\Search\Searchbar.html",{'avatar':ava, 'movies':movies, 'Toprated':Toprated, 'Mostwatch':Mostwatch,'profile': profile})
   else:
+    # profile=Profile.objects.get(user=request.user)
     keyword=request.GET['keyword']
     ava = request.user.profile.avatar.url 
     movies = Movie.objects.filter(title__contains=keyword)   
     Toprated = Movie.objects.filter(status__status='TR')[:4]
     Mostwatch = Movie.objects.filter(status__status='MW')[:4]
-    return render(request,".\Search\Searchbar.html",{'avatar':ava, 'movies':movies, 'Toprated':Toprated, 'Mostwatch':Mostwatch})
+    return render(request,".\Search\Searchbar.html",{'avatar':ava, 'movies':movies, 'Toprated':Toprated, 'Mostwatch':Mostwatch,'profile': profile})
 
 # def searchBar_auto(request):
 #    keyword= request.GET.get('keyword')
