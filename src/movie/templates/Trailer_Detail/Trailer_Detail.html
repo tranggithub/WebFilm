@@ -169,10 +169,10 @@
                                             <span>
                                                 <button class="p-2 mx-1 rate_button" type="button" onclick="topRate()">Top rated movie #65</button>
                                                 <select class="p-1 mt-1 award">
-                                                  <option>Awards 1 nominations</option> <!--{{movie.movie_award.count }} -->
-                                                  <!-- {% for award in movie.movie_award.all %} -->
+                                                  <option>Awards {{movie.movie_award.count }} nominations</option> 
+                                                  {% for award in movie.movie_award.all %}
                                                       <option>{{award.name}}</option>
-                                                  <!-- {% endfor %} -->
+                                                  {% endfor %}
                                               </select>
                                             </span>
                                         </div>
@@ -302,7 +302,7 @@
                                                     <img class="card-img-top" src="{% static 'css/Trailer_Detail/image/movie.jpg'%}" alt="news movie">
                                                     
                                                     <!-- Text Overlay -->
-                                                    <div class="card-body morebt_text">2022 Summer Move Guide
+                                                    <div class="card-body morebt_text">2022 Summer Move Guide<br>
                                                         <small>Updated 1 month ago</small>
                                                     </div>
                                                 </div>
