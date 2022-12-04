@@ -6,6 +6,8 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Watch | LTWFlix</title>
         <link rel="stylesheet" href="{% static 'css/Trailer_Detail/Watch.css'%}">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
+        
         {% comment %} Alert JS {% endcomment%}
         <!-- CSS -->
         <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css"/>
@@ -35,7 +37,7 @@
             <div class="left">
                 <img id="brandname" src="{% static 'css/Trailer_Detail/image/icon/BrandNameLogin.png'%}" >
                 <div class="button">
-                    <ul style="    background-color:#212121;">
+                    <ul style="background-color:#212121;">
                         <li><a href="{% url 'home' %}"><img src="{% static 'css/Trailer_Detail/image/icon/icons8-home-page-48.png'%}" alt="home"><label><b style="background:none;">Home</b></label></a></li>
                         <li><a id="main" href="{% url 'movies' %}"><img src="{% static 'css/Trailer_Detail/image/icon/icons8-video-call-48.png'%}" alt="movies"><label><b style="background:none;">Movies</b></label></a></li>
                         <li><a href="{% url 'home'%}#TVseries"><img id="series" src="{% static 'css/Trailer_Detail/image/icon/icons8-tv-48.png'%}" alt="series"><label><b style="background:none;">TV Series</b></label></a></li>
@@ -47,9 +49,14 @@
             </div>
             <div class="center">
                 <div class="top">
-                    <button class="bell" type="button" onclick="notification()">
-                        <img src="{% static 'css/Trailer_Detail/image/icon/icons8-notification-30.png'%}">
-                    </button>
+                    <form method="post" name="notify">
+                        {% csrf_token %}
+                        {% if not profile.is_need_to_notify %}
+                           <button class="bell" name="notify" type="submit" onclick="notify()"><i class="far fa-bell" style="color: grey;"></i></button>
+                        {% else %}
+                           <button class="bell" name="notify"  type="submit" onclick="notify()"><i class="far fa-bell" style=" color: aqua;"></i></button>
+                        {% endif %}
+                       </form>
                     <button class="user" type="button">
                         <a href="{% url 'info' %}">
                             <img src="{{avatar}}">

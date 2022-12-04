@@ -42,8 +42,7 @@
 
 }
 .button #main{
-    background-color: #50c5c1a2;
-    border-right: 5px solid #3DD2CC;
+    color:#50c5c1a2;
 }
 .button a{
     background-color:#212121;
@@ -55,8 +54,8 @@
     text-decoration: none;
 }
 .button a:hover{  /*ree chuọt*/
-    background-color: #50c5c1a2;
-    color:aliceblue;
+
+    color:#50c5c1a2;
 }
 .button label{
     cursor:pointer;
@@ -90,13 +89,12 @@
     opacity:50%;
     border-radius: 50%;
     border:none;
-    padding-top:5px;
-    padding-left:6px;
-    padding-right:6px;
+    padding:8px 0px;
 }
-.bell img{
-    width:28px;
+.bell i{
     background:none;
+    width:48px;
+    
 }
 .user{
     cursor:pointer;

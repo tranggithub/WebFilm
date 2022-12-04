@@ -135,7 +135,7 @@
                                     {% for movie in history_page.object_list %}
                                         <button class="column__movie">
                                             <a href="{% url 'detail' movie.id %}">
-                                                <img class="img-movie" src="{{movie.image.url}}" alt="" style="width:160px; height:252px; border-radius: 10px;" />
+                                                <img class="img-movie" src="{{movie.image.url}}" alt="" style="width:140px; height:232px; border-radius: 10px;" />
                                             </a>
                                         </button>
                                     {% endfor %}
@@ -167,7 +167,7 @@
                                     {% for movie in love_page.object_list %}
                                         <button class="column__movie">
                                             <a href="{% url 'detail' movie.id %}">
-                                                <img class="img-movie" src="{{movie.image.url}}" alt="{{movie.title}}" style="width:160px; height:252px; border-radius: 10px;"/>
+                                                <img class="img-movie" src="{{movie.image.url}}" alt="{{movie.title}}" style="width:140px; height:232px; border-radius: 10px;"/>
                                             </a>
                                         </button>
                                     {% endfor %}
@@ -201,7 +201,7 @@
                                     {% for movie in mark_page.object_list %}
                                         <button class="column__movie">
                                             <a href="{% url 'detail' movie.id%}">
-                                                <img class="img-movie" src="{{movie.image.url}}" alt="{{movie.title}}" style="width:160px; height:252px; border-radius: 10px;"/>
+                                                <img class="img-movie" src="{{movie.image.url}}" alt="{{movie.title}}" style="width:140px; height:232px; border-radius: 10px;"/>
                                             </a>
                                         </button>
                                     {% endfor %}
