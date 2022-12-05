@@ -819,7 +819,7 @@ class MovieSort(ListView):
   
     model=Movie
     paginate_by = 5
-    template_name = '.\Home\SeeAll_Trending_Filter.html'
+    template_name = './Home/SeeAll_Trending_Filter.html'
     def get_queryset(self):
       if  Choices_User=="CHILD": 
         self.sort=self.kwargs['so']
@@ -840,7 +840,7 @@ class MovieCondition(ListView):
   
     model=Movie
     paginate_by = 5
-    template_name = '.\Home\SeeAll_Trending_Filter.html'
+    template_name = './Home/SeeAll_Trending_Filter.html'
     def get_queryset(self):
       if  Choices_User=="CHILD": 
         self.condition =self.kwargs['condi']
@@ -863,7 +863,7 @@ class MovieYear(ListView):
  
     model=Movie
     paginate_by = 5
-    template_name = '.\Home\SeeAll_Trending_Filter.html'
+    template_name = './Home/SeeAll_Trending_Filter.html'
     def get_queryset(self):
       if  Choices_User=="CHILD": 
         self.year=self.kwargs['year']
@@ -883,7 +883,7 @@ class MovieYear(ListView):
 class MovieCategory(ListView):
   model=Movie
   paginate_by = 5
-  template_name = '.\Home\SeeAll_Trending_Filter.html'
+  template_name = './Home/SeeAll_Trending_Filter.html'
   
   def get_queryset(self):
       if  Choices_User=="CHILD": 
