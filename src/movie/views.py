@@ -55,7 +55,7 @@ def SignUp(request):
     else:
       messages.error(request,"Your confirm password and your password are not the same")
       return redirect('sign_up')
-  return render(request,".\SignUp_LogIn\SignUpFilm.html")
+  return render(request,"./SignUp_LogIn/SignUpFilm.html")
 
 
 def LogIn(request):
@@ -90,7 +90,7 @@ def LogIn(request):
     m_num = request.GET.get('m_num')
     #Chỉ định list trang muốn lấy ở trang nào
     movie_page = movie_paginator.get_page(m_num)
-    return render(request,".\SignUp_LogIn\LogInFilm.html",{'movie_page':movie_page})
+    return render(request,"./SignUp_LogIn/LogInFilm.html",{'movie_page':movie_page})
 
 def password_reset_request(request):
   if request.method == "POST":
@@ -125,12 +125,12 @@ def password_reset_request(request):
     return redirect('reset_password')
 
   password_reset_form = PasswordResetForm()
-  return render(request, template_name=".\Info\\reset_password.html", context={"form":password_reset_form})
+  return render(request, template_name="./Info//reset_password.html", context={"form":password_reset_form})
 
 Choices_User="CHILD"
  
 
-@login_required
+@login_required(login_url='log_in')
 def Home(request):
   if request.method == "POST":
     url='/movies/home/'
@@ -167,16 +167,17 @@ def Home(request):
     ps = Movie.objects.filter(format='PS')[:4]
     return render(request,"Home/Home.html",{'avatar':ava, 'movies': movies,'trending': trending, 'upcoming':upcoming, 'tv_series':tv_series, 'ps':ps, 'profile':profile})
 
+@login_required(login_url='log_in')
 def UserPacket(request):
   global Choices_User
   if request.method=='POST':
     Choices_User=request.POST.get('Child')  
     return redirect ('home')
   else:    
-    return render(request,'UserPacket\Service_pack.html')
+    return render(request,'UserPacket/Service_pack.html')
  
   
- 
+@login_required(login_url='log_in')
 def SeeAll_Trending(request, status_short):
   if request.method == "POST":
     url='/movies/home/'
@@ -208,31 +209,32 @@ def SeeAll_Trending(request, status_short):
     if Choices_User=="CHILD":
       ava = request.user.profile.avatar.url
       movies = Movie.objects.filter(status__status=status_short,child='Yes')
-      return render(request,".\Home\SeeAll_Trending_English.html",{'avatar':ava, 'movies':movies, 'title':title,'profile':profile})
+      return render(request,"./Home/SeeAll_Trending_English.html",{'avatar':ava, 'movies':movies, 'title':title,'profile':profile})
     else: 
       ava = request.user.profile.avatar.url
       movies = Movie.objects.filter(status__status=status_short)
-      return render(request,".\Home\SeeAll_Trending_English.html",{'avatar':ava, 'movies':movies, 'title':title,'profile':profile})
+      return render(request,"./Home/SeeAll_Trending_English.html",{'avatar':ava, 'movies':movies, 'title':title,'profile':profile})
   else:
     if Choices_User=="CHILD":
       ava = request.user.profile.avatar.url
       movies = Movie.objects.filter(format=status_short,child='Yes')
-      return render(request,".\Home\SeeAll_Trending_English.html",{'avatar':ava, 'movies':movies, 'title':title,'profile':profile})
+      return render(request,"./Home/SeeAll_Trending_English.html",{'avatar':ava, 'movies':movies, 'title':title,'profile':profile})
     else: 
       ava = request.user.profile.avatar.url
       movies = Movie.objects.filter(format=status_short)
-      return render(request,".\Home\SeeAll_Trending_English.html",{'avatar':ava, 'movies':movies, 'title':title,'profile':profile})
+      return render(request,"./Home/SeeAll_Trending_English.html",{'avatar':ava, 'movies':movies, 'title':title,'profile':profile})
 
 
 
 def Loading_Circle(request):
-  template = loader.get_template('.\Loading_Screen_Logo\loading_screen.html')
+  template = loader.get_template('./Loading_Screen_Logo/loading_screen.html')
   return HttpResponse(template.render())
 
 def Loading_Logo(request):
-  template = loader.get_template('.\Loading_Screen_Logo\sign_up.html')
+  template = loader.get_template('./Loading_Screen_Logo/sign_up.html')
   return HttpResponse(template.render())
 
+@login_required(login_url='log_in')
 def LogOut(request):
   if request.user.is_authenticated:
     logout(request)
@@ -242,7 +244,7 @@ def LogOut(request):
     messages.error(request,"Log out failed")
     return redirect('/movies/log_in')
 
-
+@login_required(login_url='log_in')
 def Movies(request):
   if request.method == "POST":
     url='/movies/movies/'
@@ -281,7 +283,7 @@ def Movies(request):
     
     return render(request,"Movies/movies.html",{'avatar':ava, 'movies': movies, 'upcoming':upcoming, 'tv_series':tv_series, 'ps':ps,'profile':profile})
 
-
+@login_required(login_url='log_in')
 def Library(request):
  
   if request.method == "POST":
@@ -336,7 +338,7 @@ def Library(request):
     'history_page': history_page,
     'profile':profile
     }
-    return render(request,".\Trailer_Detail\Library.html",context)
+    return render(request,"./Trailer_Detail/Library.html",context)
 
   else: 
     ava = request.user.profile.avatar.url  
@@ -371,8 +373,9 @@ def Library(request):
     'history_page': history_page,
     'profile':profile
       }
-  return render(request,".\Trailer_Detail\Library.html",context)
+  return render(request,"./Trailer_Detail/Library.html",context)
 
+@login_required(login_url='log_in')
 def WatchFilm(request, movie_id, number_ep):
   if request.user.is_authenticated:
     movie = Movie.objects.get(pk=movie_id)
@@ -538,7 +541,7 @@ def WatchFilm(request, movie_id, number_ep):
     # else:
     #   like = False
 
-    return render(request,".\Trailer_Detail\Watch.html",{
+    return render(request,"./Trailer_Detail/Watch.html",{
         'avatar':ava, 
         'movies': movies, 
         'episode': episode, 
@@ -553,7 +556,7 @@ def WatchFilm(request, movie_id, number_ep):
     url=reverse_lazy('log_in')
     redirect(url)
 
-
+@login_required(login_url='log_in')
 def Detail(request, movie_id):
   if request.method == "POST":
     url='movies/movies/'
@@ -601,7 +604,7 @@ def Detail(request, movie_id):
     category = movies.get().categories.all()
     cast_crew = movies.get().cast_and_crew.all()
     topcast = movies.get().cast_and_crew.all()[:4]
-    return render(request,".\Trailer_Detail\Trailer_Detail.html",
+    return render(request,"./Trailer_Detail/Trailer_Detail.html",
     {'avatar':ava, 
     'another': another, 
     'movies': movies, 
@@ -637,7 +640,7 @@ def Detail(request, movie_id):
   category = movies.get().categories.all()
   cast_crew = movies.get().cast_and_crew.all()
   topcast = movies.get().cast_and_crew.all()[:4]
-  return render(request,".\Trailer_Detail\Trailer_Detail.html",
+  return render(request,"./Trailer_Detail/Trailer_Detail.html",
   {'avatar':ava, 
   'another': another, 
   'movies': movies, 
@@ -659,13 +662,14 @@ class ProfileForm(forms.ModelForm):
     model = Profile
     fields = ("avatar","birthday","gender")
 
+@login_required(login_url='log_in')
 def Info(request):
   nm = request.user.first_name
   mail = request.user.email
   sex = request.user.profile.get_gender_display
   ava = request.user.profile.avatar.url
   bd = request.user.profile.birthday
-  return render(request,".\Info\info.html",{'name':nm, 'email':mail, 'gender':sex,'avatar':ava,'birthday':bd})
+  return render(request,"./Info/info.html",{'name':nm, 'email':mail, 'gender':sex,'avatar':ava,'birthday':bd})
 
 #Đồng nhất khi thay đổi dữ liệu
 @transaction.atomic
@@ -683,8 +687,9 @@ def ChangeInfo(request):
   else:
     user_form = UserForm(instance=request.user)
     user_profile_form = ProfileForm(instance=request.user.profile)
-  return render(request,'.\Info\change_info.html',{'u_form':user_form, 'p_form':user_profile_form}) 
+  return render(request,'./Info/change_info.html',{'u_form':user_form, 'p_form':user_profile_form}) 
 
+@login_required(login_url='log_in')
 def searchBar(request):
   if  Choices_User=="CHILD": 
     keyword=request.GET['keyword']
@@ -692,14 +697,14 @@ def searchBar(request):
     movies = Movie.objects.filter(title__contains=keyword,child='Yes')   
     Toprated = Movie.objects.filter(status__status='TR',child='Yes')[:4]
     Mostwatch = Movie.objects.filter(status__status='MW',child='Yes')[:4]
-    return render(request,".\Search\Searchbar.html",{'avatar':ava, 'movies':movies, 'Toprated':Toprated, 'Mostwatch':Mostwatch})
+    return render(request,"./Search/Searchbar.html",{'avatar':ava, 'movies':movies, 'Toprated':Toprated, 'Mostwatch':Mostwatch})
   else:
     keyword=request.GET['keyword']
     ava = request.user.profile.avatar.url 
     movies = Movie.objects.filter(title__contains=keyword)   
     Toprated = Movie.objects.filter(status__status='TR')[:4]
     Mostwatch = Movie.objects.filter(status__status='MW')[:4]
-    return render(request,".\Search\Searchbar.html",{'avatar':ava, 'movies':movies, 'Toprated':Toprated, 'Mostwatch':Mostwatch})
+    return render(request,"./Search/Searchbar.html",{'avatar':ava, 'movies':movies, 'Toprated':Toprated, 'Mostwatch':Mostwatch})
 
 # def searchBar_auto(request):
 #    keyword= request.GET.get('keyword')
@@ -714,7 +719,7 @@ def searchBar(request):
 
 
 # def ChangePassword(request):
-#   template = loader.get_template('.\Info\change_password.html')
+#   template = loader.get_template('./Info/change_password.html')
 #   return HttpResponse(template.render())
 def handler404(request, exception):
     return render(request,'Not_found_404.html')
@@ -746,12 +751,12 @@ def handler404(request, exception):
 
 class SeeAll_Trending_Filer(ListView):
     model = Movie
-    template_name = '.\Home\SeeAll_Trending_Filter.html'
+    template_name = './Home/SeeAll_Trending_Filter.html'
 
 class MovieNational(ListView):
       model=Movie
       paginate_by = 10
-      template_name = '.\Home\SeeAll_Trending_Filter.html'           
+      template_name = './Home/SeeAll_Trending_Filter.html'           
       def get_queryset(self):
         if  Choices_User=="CHILD": 
           self.national=self.kwargs['Nation']   
@@ -773,7 +778,7 @@ class MovieFormat(ListView):
   
     model=Movie
     paginate_by = 10
-    template_name = '.\Home\SeeAll_Trending_Filter.html'
+    template_name = './Home/SeeAll_Trending_Filter.html'
     def get_queryset(self):
       if  Choices_User=="CHILD": 
         self.format=self.kwargs['for']
@@ -791,7 +796,7 @@ class MovieSort(ListView):
   
     model=Movie
     paginate_by = 10
-    template_name = '.\Home\SeeAll_Trending_Filter.html'
+    template_name = './Home/SeeAll_Trending_Filter.html'
     def get_queryset(self):
       if  Choices_User=="CHILD": 
         self.sort=self.kwargs['so']
@@ -810,7 +815,7 @@ class MovieCondition(ListView):
   
     model=Movie
     paginate_by = 10
-    template_name = '.\Home\SeeAll_Trending_Filter.html'
+    template_name = './Home/SeeAll_Trending_Filter.html'
     def get_queryset(self):
       if  Choices_User=="CHILD": 
         self.condition =self.kwargs['condi']
@@ -831,7 +836,7 @@ class MovieYear(ListView):
  
     model=Movie
     paginate_by = 10
-    template_name = '.\Home\SeeAll_Trending_Filter.html'
+    template_name = './Home/SeeAll_Trending_Filter.html'
     def get_queryset(self):
       if  Choices_User=="CHILD": 
         self.year=self.kwargs['year']
@@ -849,7 +854,7 @@ class MovieYear(ListView):
 class MovieCategory(ListView):
   model=Movie
   paginate_by = 10
-  template_name = '.\Home\SeeAll_Trending_Filter.html'
+  template_name = './Home/SeeAll_Trending_Filter.html'
   
   def get_queryset(self):
       if  Choices_User=="CHILD": 
