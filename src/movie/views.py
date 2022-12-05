@@ -180,7 +180,7 @@ def UserPacket(request):
 @login_required(login_url='log_in')
 def SeeAll_Trending(request, status_short):
   if request.method == "POST":
-    url='/movies/home/'
+    url='/movies/seeall_trending_english/' + status_short
     if 'notify' in request.POST:
       if request.user.profile.is_need_to_notify == False:
         if request.user.email is not None:
@@ -559,7 +559,7 @@ def WatchFilm(request, movie_id, number_ep):
 @login_required(login_url='log_in')
 def Detail(request, movie_id):
   if request.method == "POST":
-    url='movies/movies/'
+    url='movies/detail/' + movie_id
     if 'notify' in request.POST:
       if request.user.profile.is_need_to_notify == False:
         if request.user.email is not None:
@@ -691,7 +691,26 @@ def ChangeInfo(request):
 
 @login_required(login_url='log_in')
 def searchBar(request):
+  if request.method == "POST":
+    url='/movies/search/'
+    if 'notify' in request.POST:
+      if request.user.profile.is_need_to_notify == False:
+        if request.user.email is not None:
+          request.user.profile.is_need_to_notify = True
+          request.user.profile.save()
+          messages.success(request,"You will reveive emails if we add new movie")
+          redirect(url)
+        else:
+          messages.error(request,"You don't have an email in your account")
+          redirect(url)
+      else:
+        request.user.profile.is_need_to_notify = False
+        request.user.profile.save()
+        messages.success(request,"You won't receive any emails when we add new movie")
+        redirect(url)
+  profile = Profile.objects.get(user=request.user)  
   if  Choices_User=="CHILD": 
+    # profile=Profile.objects.get(user=request.user)
     keyword=request.GET['keyword']
     ava = request.user.profile.avatar.url 
     movies = Movie.objects.filter(title__contains=keyword,child='Yes')   
@@ -699,6 +718,7 @@ def searchBar(request):
     Mostwatch = Movie.objects.filter(status__status='MW',child='Yes')[:4]
     return render(request,"./Search/Searchbar.html",{'avatar':ava, 'movies':movies, 'Toprated':Toprated, 'Mostwatch':Mostwatch})
   else:
+    # profile=Profile.objects.get(user=request.user)
     keyword=request.GET['keyword']
     ava = request.user.profile.avatar.url 
     movies = Movie.objects.filter(title__contains=keyword)   
@@ -769,6 +789,7 @@ class MovieNational(ListView):
         context=super(MovieNational , self).get_context_data(**kwargs)
         context['movie_national']=self.national
         context['avatar']=self.request.user.profile.avatar.url
+        context['profile']=Profile.objects.get(user=self.request.user)
         return context
     
 
@@ -777,7 +798,7 @@ class MovieFormat(ListView):
   
   
     model=Movie
-    paginate_by = 10
+    paginate_by = 5
     template_name = './Home/SeeAll_Trending_Filter.html'
     def get_queryset(self):
       if  Choices_User=="CHILD": 
@@ -789,14 +810,16 @@ class MovieFormat(ListView):
     def get_context_data(self, **kwargs):
       context=super(MovieFormat , self).get_context_data(**kwargs)
       context['movie_format']=self.format
+      context['avatar']=self.request.user.profile.avatar.url
+      context['profile']=Profile.objects.get(user=self.request.user)
       return context
   
 class MovieSort(ListView):
   
   
     model=Movie
-    paginate_by = 10
-    template_name = './Home/SeeAll_Trending_Filter.html'
+    paginate_by = 5
+    template_name = '.\Home\SeeAll_Trending_Filter.html'
     def get_queryset(self):
       if  Choices_User=="CHILD": 
         self.sort=self.kwargs['so']
@@ -808,14 +831,16 @@ class MovieSort(ListView):
     def get_context_data(self, **kwargs):
       context=super(MovieSort , self).get_context_data(**kwargs)
       context['movie_sort']=self.sort
+      context['avatar']=self.request.user.profile.avatar.url
+      context['profile']=Profile.objects.get(user=self.request.user)
       return context
   
 class MovieCondition(ListView):
   
   
     model=Movie
-    paginate_by = 10
-    template_name = './Home/SeeAll_Trending_Filter.html'
+    paginate_by = 5
+    template_name = '.\Home\SeeAll_Trending_Filter.html'
     def get_queryset(self):
       if  Choices_User=="CHILD": 
         self.condition =self.kwargs['condi']
@@ -827,6 +852,8 @@ class MovieCondition(ListView):
     def get_context_data(self, **kwargs):
       context=super(MovieCondition , self).get_context_data(**kwargs)
       context['movie_condition']=self.condition
+      context['avatar']=self.request.user.profile.avatar.url
+      context['profile']=Profile.objects.get(user=self.request.user)
       return context
   
 
@@ -835,8 +862,8 @@ class MovieYear(ListView):
   
  
     model=Movie
-    paginate_by = 10
-    template_name = './Home/SeeAll_Trending_Filter.html'
+    paginate_by = 5
+    template_name = '.\Home\SeeAll_Trending_Filter.html'
     def get_queryset(self):
       if  Choices_User=="CHILD": 
         self.year=self.kwargs['year']
@@ -848,13 +875,15 @@ class MovieYear(ListView):
     def get_context_data(self, **kwargs):
       context=super(MovieYear , self).get_context_data(**kwargs)
       context['movie_year']=self.year
+      context['avatar']=self.request.user.profile.avatar.url
+      context['profile']=Profile.objects.get(user=self.request.user)
       return context
  
 
 class MovieCategory(ListView):
   model=Movie
-  paginate_by = 10
-  template_name = './Home/SeeAll_Trending_Filter.html'
+  paginate_by = 5
+  template_name = '.\Home\SeeAll_Trending_Filter.html'
   
   def get_queryset(self):
       if  Choices_User=="CHILD": 
@@ -866,5 +895,7 @@ class MovieCategory(ListView):
   def get_context_data(self, **kwargs):
       context=super(MovieCategory , self).get_context_data(**kwargs)
       context['movie_category']=self.category
+      context['avatar']=self.request.user.profile.avatar.url
+      context['profile']=Profile.objects.get(user=self.request.user)
       return context
   
