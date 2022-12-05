@@ -769,7 +769,7 @@ class SeeAll_Trending_Filer(ListView):
 
 class MovieNational(ListView):
       model=Movie
-      paginate_by = 10
+      paginate_by = 5
       template_name = '.\Home\SeeAll_Trending_Filter.html'           
       def get_queryset(self):
         if  Choices_User=="CHILD": 
@@ -792,7 +792,7 @@ class MovieFormat(ListView):
   
   
     model=Movie
-    paginate_by = 10
+    paginate_by = 5
     template_name = '.\Home\SeeAll_Trending_Filter.html'
     def get_queryset(self):
       if  Choices_User=="CHILD": 
@@ -812,7 +812,7 @@ class MovieSort(ListView):
   
   
     model=Movie
-    paginate_by = 10
+    paginate_by = 5
     template_name = '.\Home\SeeAll_Trending_Filter.html'
     def get_queryset(self):
       if  Choices_User=="CHILD": 
@@ -833,7 +833,7 @@ class MovieCondition(ListView):
   
   
     model=Movie
-    paginate_by = 10
+    paginate_by = 5
     template_name = '.\Home\SeeAll_Trending_Filter.html'
     def get_queryset(self):
       if  Choices_User=="CHILD": 
@@ -856,7 +856,7 @@ class MovieYear(ListView):
   
  
     model=Movie
-    paginate_by = 10
+    paginate_by = 5
     template_name = '.\Home\SeeAll_Trending_Filter.html'
     def get_queryset(self):
       if  Choices_User=="CHILD": 
@@ -876,7 +876,7 @@ class MovieYear(ListView):
 
 class MovieCategory(ListView):
   model=Movie
-  paginate_by = 10
+  paginate_by = 5
   template_name = '.\Home\SeeAll_Trending_Filter.html'
   
   def get_queryset(self):
