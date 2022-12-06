@@ -181,7 +181,10 @@
                                             <div class="row">
                                                 <ul class="list-inline">
                                                     {% for c in topcast %}
-                                                    <li class="list-inline-item text-md-center text-center ms-3"><img class="rounded-pill" style="width:100px; height:90px;" src="{{c.image.url}}" alt="{{c.name}}">
+                                                    <li class="list-inline-item text-md-center text-center ms-3">
+                                                        <a href="{% url 'seeall_trending_english' c.name %}">
+                                                            <img class="rounded-pill" style="width:100px; height:90px;" src="{{c.image.url}}" alt="{{c.name}}">
+                                                        </a>
                                                         <b><br>{{c.name}}</b><br>{{c.character}}<br> ({{c.sub_character}})
                                                     </li>
                                                     {% endfor %}
@@ -195,8 +198,11 @@
                                                 <div class="row mt-3">
                                                     <ul class="list-inline">
                                                         {% for c in cast_crew %}
-                                                        <li class="list-inline-item text-md-center text-center ms-3"><img class="rounded-pill" style="width:100px; height:90px;" src="{{c.image.url}}" alt="{{c.name}}">
-                                                            <b><br>{{c.name}}</b><br>{{c.character}}<br> ({{c.sub_character}})
+                                                        <li class="list-inline-item text-md-center text-center ms-3">
+                                                            <a href="{% url 'seeall_trending_english' c.name %}">
+                                                                <img class="rounded-pill" style="width:100px; height:90px;" src="{{c.image.url}}" alt="{{c.name}}">
+                                                            </a>
+                                                                <b><br>{{c.name}}</b><br>{{c.character}}<br> ({{c.sub_character}})
                                                         </li>
                                                         {% endfor %}
                                                     </ul>

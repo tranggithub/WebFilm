@@ -139,7 +139,7 @@ def Home(request):
         if request.user.email is not None:
           request.user.profile.is_need_to_notify = True
           request.user.profile.save()
-          messages.success(request,"You will reveive emails if we add new movie")
+          messages.success(request,"You will receive emails if we add new movie")
           redirect(url)
         else:
           messages.error(request,"You don't have an email in your account")
@@ -186,7 +186,7 @@ def SeeAll_Trending(request, status_short):
         if request.user.email is not None:
           request.user.profile.is_need_to_notify = True
           request.user.profile.save()
-          messages.success(request,"You will reveive emails if we add new movie")
+          messages.success(request,"You will receive emails if we add new movie")
           redirect(url)
         else:
           messages.error(request,"You don't have an email in your account")
@@ -202,27 +202,35 @@ def SeeAll_Trending(request, status_short):
     title = "Trending"
   elif status_short == 'TV':
     title = "TV Series"
-  else:
+  elif status_short=='PS':
     title = "Popular Movies On September"
+  else:
+    title = "Movies played by " + status_short
   profile=Profile.objects.get(user=request.user) 
+  ava = request.user.profile.avatar.url
   if status_short == 'U' or status_short =='T':
     if Choices_User=="CHILD":
-      ava = request.user.profile.avatar.url
       movies = Movie.objects.filter(status__status=status_short,child='Yes')
       return render(request,"./Home/SeeAll_Trending_English.html",{'avatar':ava, 'movies':movies, 'title':title,'profile':profile})
     else: 
-      ava = request.user.profile.avatar.url
       movies = Movie.objects.filter(status__status=status_short)
       return render(request,"./Home/SeeAll_Trending_English.html",{'avatar':ava, 'movies':movies, 'title':title,'profile':profile})
-  else:
+  elif status_short == 'PS' or status_short == 'TV':
     if Choices_User=="CHILD":
-      ava = request.user.profile.avatar.url
       movies = Movie.objects.filter(format=status_short,child='Yes')
       return render(request,"./Home/SeeAll_Trending_English.html",{'avatar':ava, 'movies':movies, 'title':title,'profile':profile})
     else: 
-      ava = request.user.profile.avatar.url
       movies = Movie.objects.filter(format=status_short)
       return render(request,"./Home/SeeAll_Trending_English.html",{'avatar':ava, 'movies':movies, 'title':title,'profile':profile})
+  else:
+    if Choices_User=="CHILD":
+      movies = Movie.objects.filter(cast_and_crew__name=status_short,child='Yes')
+      return render(request,"./Home/SeeAll_Trending_English.html",{'avatar':ava, 'movies':movies, 'title':title,'profile':profile})
+    else: 
+      movies = Movie.objects.filter(cast_and_crew__name=status_short)
+      return render(request,"./Home/SeeAll_Trending_English.html",{'avatar':ava, 'movies':movies, 'title':title,'profile':profile})
+      
+
 
 
 
@@ -253,7 +261,7 @@ def Movies(request):
         if request.user.email is not None:
           request.user.profile.is_need_to_notify = True
           request.user.profile.save()
-          messages.success(request,"You will reveive emails if we add new movie")
+          messages.success(request,"You will receive emails if we add new movie")
           redirect(url)
         else:
           messages.error(request,"You don't have an email in your account")
@@ -293,7 +301,7 @@ def Library(request):
         if request.user.email is not None:
           request.user.profile.is_need_to_notify = True
           request.user.profile.save()
-          messages.success(request,"You will reveive emails if we add new movie")
+          messages.success(request,"You will receive emails if we add new movie")
           redirect(url)
         else:
           messages.error(request,"You don't have an email in your account")
@@ -490,7 +498,7 @@ def WatchFilm(request, movie_id, number_ep):
           if request.user.email is not None:
             request.user.profile.is_need_to_notify = True
             request.user.profile.save()
-            messages.success(request,"You will reveive emails if we add new movie")
+            messages.success(request,"You will receive emails if we add new movie")
             redirect(url)
           else:
             messages.error(request,"You don't have an email in your account")
@@ -565,7 +573,7 @@ def Detail(request, movie_id):
         if request.user.email is not None:
           request.user.profile.is_need_to_notify = True
           request.user.profile.save()
-          messages.success(request,"You will reveive email if we add new movie")
+          messages.success(request,"You will receive emails if we add new movie")
           redirect(url)
         else:
           messages.error(request,"You don't have an email in your account")
@@ -573,7 +581,7 @@ def Detail(request, movie_id):
       else:
         request.user.profile.is_need_to_notify = False
         request.user.profile.save()
-        messages.success(request,"You won't reveive email when we add new movie")
+        messages.success(request,"You won't receive email when we add new movie")
         redirect(url)
 
   if  Choices_User=="CHILD": 
@@ -698,7 +706,7 @@ def searchBar(request):
         if request.user.email is not None:
           request.user.profile.is_need_to_notify = True
           request.user.profile.save()
-          messages.success(request,"You will reveive emails if we add new movie")
+          messages.success(request,"You will receive emails if we add new movie")
           redirect(url)
         else:
           messages.error(request,"You don't have an email in your account")
