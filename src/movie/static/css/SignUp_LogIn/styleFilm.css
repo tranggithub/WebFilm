@@ -1,3 +1,5 @@
+
+
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&display=swap");
 
 *{
@@ -9,20 +11,24 @@
 }
 .Title
 {
-    padding-bottom: 5%;
+    margin-bottom: 70px;
+    font-size: 24px;
+    font-weight: 600;
+    color: #fff;
 }
 .Subtitle
 {
     font-weight: 600;
-    font-size: 80%;
+    font-size: 20px;
     line-height: 48px;
 }
 .Text
 {
     font-weight: 500;
-    font-size: 50%;
+    font-size: 13px;
     line-height: 0;
-    margin-bottom: 30px;
+    margin-bottom: 40px;
+    color: #fff;
 }
 
 /*Sign Up Left*/
@@ -82,6 +88,12 @@
     bottom: 91.44%;
 }
 
+.BrandName{
+    display: flex;
+    align-items: center;
+    margin-bottom: 200px;
+}
+
 /*Sign Up Right*/
 
 .SignUp .Right_SignUp
@@ -116,24 +128,15 @@
     color: #FEFEFE;
 }
 
-.Right_SignUp .Subtitle1
+.Subtitle1
 {
-    /* Let’s get started with your 30 days free trial. */
-    position: absolute;
-    left: 0%;
-    right: 0%;
-    top: 15%;
-    bottom: 74.24%;
-
+    margin-bottom: 30px;
     font-family: 'Poppins';
     font-style: normal;
     font-weight: 500;
     font-size: 90%;
     line-height: 28px;
-    /* identical to box height */
-
     color: rgba(186, 186, 186, 0.7);
-
     text-align: center;
 }
 
@@ -151,6 +154,12 @@
     color: #BABABA;
 }
 
+.Form-title{
+    font-size: 28px;
+    font-weight: 700;
+    color: #fff;
+    text-align: center;
+}
 
 input
 {
@@ -167,23 +176,18 @@ input
     font-size: 80%;
 }
 
-.Right_SignUp .CreateButton
+.CreateButton
 {
-    position: absolute;
-    height: 8%;
-    left: 21%;
-    top: 75%;
-
+    padding: 15px 20px;
     background: rgba(254, 254, 254, 0.96);
     border-radius: 15px;
-
-    width: 60%;
     font-weight: 600;
     font-size: 90%;
+    width: 100%;
 
     object-position: center;
 }
-.Right_SignUp .CreateButton:hover
+.CreateButton:hover
 {
     background-color: black;
     color: white;
@@ -211,21 +215,14 @@ input
     color: black;
     border: 2px solid #4D4B4B;
 }
-.Right_SignUp .Subtitle2
+.Subtitle2
 {
-    /* Already have an account ? Log in */
-    position: absolute;
-    width: fit-content;
-    height: 21px;
-    top: 86%;
-    left: 28%;
-
     font-family: 'Poppins';
     font-style: normal;
     font-weight: 400;
     font-size: 12px;
     line-height: 21px;
-    /* identical to box height */
+    text-align: center;
 }
 
 .Input_box
@@ -234,7 +231,6 @@ input
     border-left: none;
     border-right: none;
     font-family:'Montserrat';
-    margin-bottom: 0.5cm;
     color: #BABABA;
 }
 
@@ -383,9 +379,10 @@ input
     top: 33%;
 }
 
-.Login .Login_Left .bold
+.bold
 {
     color: #BABABA;
+    margin-right: 10px;
 }
 
 .Login .Login_Left .Checkbox_content
@@ -503,13 +500,11 @@ input
     height: 60px;
     left: 1%;
     top: 75%;
-
     font-family: 'Monterrat';
     font-style: normal;
     font-weight: 600;
     font-size: 25px;
     line-height: 60px;
-    /* identical to box height */
 
     color: #FEFEFE;
 
@@ -517,25 +512,16 @@ input
 
 }
 
-.Login .Login_Right .Subtitle
+.Subtitle
 {
-    position: absolute;
-    width: 80%;
-    height: 36px;
-    left: 1%;
-    top: 85%;
-
-    font-family: 'Monterrat';
+    /* font-family: 'Poppins'; */
     font-style: normal;
-    font-weight: 500;
-    font-size: 15px;
-    line-height: 10px;
-    /* identical to box height */
-
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 15px;
     color: #FEFEFE;
-
     text-shadow: 0px 1px 4px rgba(0, 0, 0, 0.25);
-
+    margin-bottom: 30px;
 }
 .Login .Login_Right .star
 {
@@ -555,17 +541,12 @@ input
     height: 27px;
     left: 78%;
     top: 80%;
-
     font-family: Monterrat;
     font-style: normal;
     font-weight: 600;
     font-size: 13px;
     line-height: 27px;
-    /* identical to box height */
-
-
     color: #FEFEFE;
-
     text-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
 }
 .Navigation a, .Navigation a:hover{
@@ -579,9 +560,7 @@ input
     height: 70px;
     left: 75%;
     top: 85%;
-
     cursor: pointer;
-
     background: url(LeftArrow.png);
     filter: drop-shadow(0px 1px 4px rgba(0, 0, 0, 0.25));
     border-color: transparent;
@@ -629,3 +608,39 @@ input
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
 }
+
+
+
+.col-md-8{
+    background: url(avatar.jpg);
+    background-size:cover;
+    background-repeat: no-repeat;
+    backdrop-filter: blur(3px);
+    
+}
+
+.Intro-wrapper{
+    padding: 30px;
+}
+
+.col-md-4{
+    background-color: black;
+    padding: 30px 50px!important;
+}
+
+.Input-field{
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 30px;
+}
+
+.Input{
+    margin-bottom: 70px;
+}
+
+.Button{
+    margin-bottom: 70px;
+}
+
+
+
