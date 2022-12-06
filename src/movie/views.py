@@ -90,7 +90,7 @@ def LogIn(request):
     m_num = request.GET.get('m_num')
     #Chỉ định list trang muốn lấy ở trang nào
     movie_page = movie_paginator.get_page(m_num)
-    return render(request,"./SignUp_LogIn/LogInFilm.html",{'movie_page':movie_page})
+    return render(request,"./SignUp_LogIn/LoginFilm.html",{'movie_page':movie_page})
 
 def password_reset_request(request):
   if request.method == "POST":
