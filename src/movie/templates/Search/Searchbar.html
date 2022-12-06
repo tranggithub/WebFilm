@@ -130,7 +130,7 @@
                                     <div class="Head__Up">
                                         <a name="Toprated">Top Rated</a>
                                     </div>
-                                    <a class="Head__See" href="TVSeries.html">See all</a>
+                                    <a class="Head__See" href="{% url 'seeall_trending_english' 'TR' %}">See all</a>
                                 </div>  
                                 <div class="grid__row-4">
                                     {% for movie in Toprated %}
@@ -143,9 +143,9 @@
                                 </div>   
                                 <div class="grid__row-4-Body">
                                     <div class="Head__Poplular">
-                                        <a name="Mostwatch">Most Watch</a>
+                                        <a name="Mostwatched">Most Watched</a>
                                     </div>
-                                    <a class="Head__See" href="Popular.html">See all</a>
+                                    <a class="Head__See" href="{% url 'seeall_trending_english' 'MW' %}">See all</a>
                                 </div>  
                                 <div class="grid__row-4">
                                     {% for movie in Mostwatch %}

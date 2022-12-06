@@ -200,6 +200,10 @@ def SeeAll_Trending(request, status_short):
     title = "Upcomming"
   elif status_short == 'T':
     title = "Trending"
+  elif status_short == 'TR':
+    title = "Top Rated"
+  elif status_short == 'MW':
+    title = "Most Watched"
   elif status_short == 'TV':
     title = "TV Series"
   elif status_short=='PS':
@@ -208,7 +212,7 @@ def SeeAll_Trending(request, status_short):
     title = "Movies played by " + status_short
   profile=Profile.objects.get(user=request.user) 
   ava = request.user.profile.avatar.url
-  if status_short == 'U' or status_short =='T':
+  if status_short == 'U' or status_short =='T' or status_short == 'TR' or status_short == 'MW':
     if Choices_User=="CHILD":
       movies = Movie.objects.filter(status__status=status_short,child='Yes')
       return render(request,"./Home/SeeAll_Trending_English.html",{'avatar':ava, 'movies':movies, 'title':title,'profile':profile})
