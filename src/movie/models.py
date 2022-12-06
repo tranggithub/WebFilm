@@ -175,7 +175,7 @@ class Movie(models.Model):
             sum = sum + i.rate
         if myrate.count() == 0:
             return 0
-        return sum/(myrate.count())
+        return round(sum/(myrate.count()),2)
     def only_parent_comment(self):
         return Comment.objects.filter(movie=self,parent=None)
     
